@@ -10,6 +10,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("site") || "");
+  const [refresh, setRefresh] = useState(localStorage.getItem("refresh") || "")
   const navigate = useNavigate();
   const loginAction = async (data) => {
     try {
@@ -23,8 +24,10 @@ const AuthProvider = ({ children }) => {
       const res = await response.json();
       if (res.email) {
         setUser({"email": res.email, "username":res.username});
-        setToken(res.access);
+        setToken(res.access)
+        setRefresh(res.refresh)
         localStorage.setItem("site", res.access);
+        localStorage.setItem("refresh", res.refresh);
         navigate("/home");
         return;
       }
@@ -32,6 +35,7 @@ const AuthProvider = ({ children }) => {
     } catch (err) {
         setToken(null)
         setUser(null)
+        setRefresh(null)
         localStorage.setItem("site", '');
       return ToastMessage("error", err.message || "An  error occured")
     }
@@ -46,7 +50,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <div>
-    <AuthContext.Provider value={{ token, user, loginAction, logOut }}>
+    <AuthContext.Provider value={{ token, user, loginAction, logOut, setToken, setRefresh }}>
       {children}
     </AuthContext.Provider>
     </div>

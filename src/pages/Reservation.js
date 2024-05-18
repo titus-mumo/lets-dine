@@ -13,7 +13,7 @@ require('dotenv').config()
 export const Reservation = () => {
 
     const user = useAuth()
-    const {token} = user
+    const {token, refresh, setToken} = user
 
     if(!token) return ToastMessage("error", "You are not autorised to perform this function")
 
@@ -32,7 +32,7 @@ export const Reservation = () => {
                 total_seats: totatSeats,
                 time: time,
             }
-        ApiCall(`reservation/user/`, 'post', token, data)
+        ApiCall(`reservation/user/`, 'post', token, refresh, setToken,data)
         .then(function(response){
             const {status, data} = response
             if(status === 201){
@@ -45,7 +45,7 @@ export const Reservation = () => {
 
     }
     const fetchCuisineInfo = async() => {
-        ApiCall(`cuisines/${params.cuisine_id}/`, 'get', token)
+        ApiCall(`cuisines/${params.cuisine_id}/`, 'get', token, refresh, setToken)
         .then(function(response){
             const {data, status} = response
             if(status === 200){

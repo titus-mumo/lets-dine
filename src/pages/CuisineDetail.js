@@ -3,37 +3,49 @@ import { useParams, Link } from 'react-router-dom'
 import { ToastMessage } from '../utils';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 import { MealCard } from '../components';
+import { useAuth } from '../hooks/AuthProvider';
+import { ApiCall } from '../hooks/ApiCall';
 
 require('dotenv').config()
 
 export const CuisineDetail = () => {
+    const user = useAuth()
+    const {token, refresh, setToken} = user
 
     const [cuisineMenu, setCuisineMenu] = useState([])
     const [cuisineInfo, setCuisineInfo] = useState('')
 
     const {cuisine_id, contact, description,name, time_open} = cuisineInfo
 
+    const fetchCuisineMenu = async() => {
+        ApiCall(`cuisines/${params.cuisine_id}/menu`, 'get', token, refresh, setToken)
+        .then(function(response){
+            const {status, data} = response
+            if(status === 200){
+                setCuisineMenu(data)
+            }
+        })
+        .catch((error) => {
+            return ToastMessage("error", "Something wnt wrong")
+        });
+    }
+    const fetchCuisineInfo = async() => {
+        ApiCall(`cuisines/${params.cuisine_id}/`, 'get', token, refresh, setToken)
+        .then(function(response){
+            const {status, data} = response
+            if (status === 200) {
+                setCuisineInfo(data)
+            }
+        })
+        .catch((error) => {
+            return ToastMessage("error", "Something went wrong")
+        });
+    }
+
 
     const params = useParams();
     useEffect(() => {
-        const fetchCuisineMenu = async() => {
-            try {
-                const response = await axios.get(process.env.BASE_URL + `cuisines/${params.cuisine_id}/menu/`)
-                setCuisineMenu(response.data)
-            } catch (error) {
-                ToastMessage("error", "Something went wrong")
-            }
-        }
-        const fetchCuisineInfo = async() => {
-            try {
-                const response = await axios.get(process.env.BASE_URL + `cuisines/${params.cuisine_id}/`)
-                setCuisineInfo(response.data)
-            } catch (error) {
-                ToastMessage("error", "Something went wrong")
-            }
-        }
         fetchCuisineMenu()
         fetchCuisineInfo()
     }, [params.cuisine_id])

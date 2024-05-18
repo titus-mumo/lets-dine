@@ -3,9 +3,10 @@ import { useState, useEffect} from 'react'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastMessage } from '../utils'
-import axios from 'axios';
 import { CuisineCard } from '../components';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/AuthProvider';
+import { ApiCall } from '../hooks/ApiCall';
 
 require('dotenv').config()
 
@@ -13,16 +14,23 @@ export const Cuisines = () => {
 
     const [cuisines, setCuisines] = useState([]);
 
-    useEffect(() => {
-        const FetchCuisines = async() => {
-            try {
-                const response = await axios.get(process.env.BASE_URL + 'cuisines/')
-                setCuisines(response.data)
-            } catch (error) {
-                return ToastMessage("error", "Something went wrong")
-            }
-        }
+    const user = useAuth()
+    const {token, refresh, setToken} = user
 
+    const FetchCuisines = async() => {
+        ApiCall('cuisines', 'get', token, refresh, setToken)
+        .then(function(response){
+            const { status, data} = response
+            if(status === 200){
+                setCuisines(data)
+            }
+        })
+        .catch((error) => {
+            return ToastMessage("error", "Something went wrong")
+        })
+    }
+
+    useEffect(() => {
         FetchCuisines();
     }, []);
   return (
