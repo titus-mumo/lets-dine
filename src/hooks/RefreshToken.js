@@ -1,4 +1,5 @@
 require('dotenv').config()
+import axios from "axios"
 
 const base_url = process.env.BASE_URL
 
@@ -12,10 +13,11 @@ export const refreshAccessToken = async (refreshToken) => {
     });
 
     try {
-        const response = await api.post('/auth/refresh/', { refresh: refreshToken });
-        return response.data.access;
+        const response = await api.post('token/refresh/', { refresh: refreshToken });
+        console.log(response)
+        return response.data;
     } catch (error) {
-        console.log("Failed to refresh token:", error.message);
+        console.log("Failed to refresh token:", error.response.data.detail || error.message);
         return null;
     }
 };

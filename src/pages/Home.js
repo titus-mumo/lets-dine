@@ -13,10 +13,10 @@ export const Home = () => {
     const [meals, setMeals] = useState([]);
 
     const user = useAuth()
-    const {token, refresh, setToken} = user
+    const {token, refresh, setToken, setRefresh} = user
 
     const fetchMeals = async () => {
-        ApiCall('meals', 'get', token, refresh, setToken)
+        ApiCall('meals', 'get', token, refresh, setToken, setRefresh)
         .then(function(response){
             const {status, data} = response
             if(status === 200){
@@ -33,15 +33,19 @@ export const Home = () => {
     }, []);
 
     return (
-        <section>
+        <section className='flex flex-col justify-center w-full'>
             <ToastContainer />
+            <div className='m-10 flex flex-wrap justify-center'>
+            <Link to='/cuisines' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins '>View Cuisines</Link>
+            <Link to='/reservations' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins '>View Reservations made</Link>
+            </div>
+            <div className='flex flex-wrap mt-15 justify-around'>
             {
         meals.map((item) => (
             <MealCard key={item.meal_id} meal={item} />
         ))
             }
-            <Link to='/cuisines'>View Cuisines</Link>
-            <Link to='/reservations'>View Reservations made</Link>
+            </div>
         </section>
     );
 };

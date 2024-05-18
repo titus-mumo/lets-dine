@@ -5,9 +5,10 @@ import { refreshAccessToken } from "./RefreshToken";
 
 require('dotenv').config();
 
+
 const base_url = process.env.BASE_URL;
 
-export const ApiCall = async (endpoint, method, token, refreshToken, setToken, data = {}, options = {}) => {
+export const ApiCall = async (endpoint, method, token, refreshToken, setToken, setRefresh, data = {}, options = {}) => {
     const headers = {
         ...options.headers,
         "Authorization": `Bearer ${token}`,
@@ -25,22 +26,29 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, d
             res = await api.post(endpoint, data);
         } else if (method === 'get') {
             res = await api.get(endpoint);
+        } else if (method === 'delete'){
+            res = await api.delete(endpoint);
         }
         return res;
     } catch (error) {
         if (error.response && error.response.status === 401) {
             // Token has expired, attempt to refresh it
             try {
-                const newToken = await refreshAccessToken(refreshToken);
-                console.log(newToken)
-                if (newToken) {
-                    setToken(newToken);
+                const response = await refreshAccessToken(refreshToken);
+                const {access,refresh} = response
+
+                console.log('here')
+                if (access) {
+                    setToken(access);
+                    setRefresh(refresh)
                     // Retry the original request with the new token
                     headers["Authorization"] = `Bearer ${newToken}`;
                     if (method === 'post') {
                         res = await api.post(endpoint, data, { headers });
                     } else if (method === 'get') {
                         res = await api.get(endpoint, { headers });
+                    }else if (method === 'delete') {
+                        res = await api.delete(endpoint, { headers });
                     }
                     return res;
                 } else {

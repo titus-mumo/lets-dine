@@ -7,7 +7,7 @@ import AuthProvider from './hooks/AuthProvider';
 
 function App() {
   return (
-    <main className="App">
+    <main className="App w-full">
       <AuthProvider>
         <AllRoutes />
       </AuthProvider>

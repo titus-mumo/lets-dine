@@ -15,10 +15,10 @@ export const Cuisines = () => {
     const [cuisines, setCuisines] = useState([]);
 
     const user = useAuth()
-    const {token, refresh, setToken} = user
+    const {token, refresh, setToken, setRefresh} = user
 
     const FetchCuisines = async() => {
-        ApiCall('cuisines', 'get', token, refresh, setToken)
+        ApiCall('cuisines', 'get', token, refresh, setToken, setRefresh)
         .then(function(response){
             const { status, data} = response
             if(status === 200){
@@ -26,7 +26,7 @@ export const Cuisines = () => {
             }
         })
         .catch((error) => {
-            return ToastMessage("error", "Something went wrong")
+            return console.log("Something went wrong")
         })
     }
 
@@ -34,14 +34,17 @@ export const Cuisines = () => {
         FetchCuisines();
     }, []);
   return (
-    <section>
+    <section className='p-2 md:p-3 lg:p-4'>
         <ToastContainer />
+        <div className='flex flex-rol flex-wrap my-5'>
         {
         cuisines.map((item) => (
             <CuisineCard key={item.cuisine_id} cuisine={item} />
         ))
             }
-            <Link to='/home'>View Main menu</Link>
+        </div>
+        
+            <Link to='/home' className='px-6 w-full py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>View Main menu</Link>
     </section>
   )
 }
