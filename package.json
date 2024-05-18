@@ -6,13 +6,28 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.8",
+    "babel-preset-expo": "^11.0.6",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
+    "dotenv": "^16.4.5",
+    "expo-cli": "^6.3.10",
+    "moment": "^2.30.1",
+    "os": "^0.1.2",
+    "os-browserify": "^0.3.0",
+    "path": "^0.12.7",
+    "path-browserify": "^1.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-notifications": "^1.7.4",
+    "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.3",
+    "universal-cookie": "^7.1.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "GENERATE_SOURCEMAP=false && webpack-dev-server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -34,5 +49,24 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-methods": "^7.18.6",
+    "@babel/plugin-proposal-private-property-in-object": "7.21.11",
+    "@svgr/webpack": "^8.1.0",
+    "favicons": "^7.2.0",
+    "favicons-webpack-plugin": "^6.0.1",
+    "file-loader": "^6.2.0",
+    "tailwindcss": "^3.4.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "overrides": {
+    "@expo/next-adapter": {
+      "expo": "$expo"
+    }
+  },
+  "browser": {
+    "crypto": false
   }
 }

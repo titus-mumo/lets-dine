@@ -1,0 +1,23 @@
+import React from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../hooks/AuthProvider";
+import { ToastContainer } from "react-toastify";
+import { ToastMessage } from "../utils";
+import 'react-toastify/dist/ReactToastify.css';
+
+const PrivateRoute = () => {
+  const user = useAuth();
+  if (!user.token) {
+    ToastMessage("warning", "Please log in first")
+    return <Navigate to="/login" />
+};
+  return (
+    <div>
+    <ToastContainer />
+  <Outlet />
+  </div>
+);
+};
+
+export default PrivateRoute;
+
