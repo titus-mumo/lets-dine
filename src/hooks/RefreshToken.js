@@ -14,9 +14,10 @@ export const refreshAccessToken = async (refreshToken) => {
 
     try {
         const response = await api.post('token/refresh/', { refresh: refreshToken });
-        console.log(response)
-        return response.data;
+        const {data} = response
+        return data;
     } catch (error) {
+        console.log(error)
         console.log("Failed to refresh token:", error.response.data.detail || error.message);
         return null;
     }

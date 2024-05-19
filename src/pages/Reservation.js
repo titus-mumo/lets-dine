@@ -3,12 +3,9 @@ import { useParams, Link } from 'react-router-dom'
 import { ToastMessage } from '../utils'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import axios from'axios'
 import { ApiCall } from '../hooks/ApiCall';
 import { useAuth } from '../hooks/AuthProvider';
 import moment from 'moment'
-
-require('dotenv').config()
 
 export const Reservation = () => {
 
@@ -30,8 +27,6 @@ export const Reservation = () => {
 
     const handleReservation = (e) => {
         e.preventDefault()
-        console.log(date)
-        console.log(time)
         const dateTimeString = `${date} ${time}`;
         const dateTime = moment(dateTimeString, 'YYYY-MM-DD HH:mm').toISOString();
         const data = {
@@ -56,7 +51,6 @@ export const Reservation = () => {
         .then(function(response){
             const {data, status} = response
             if(status === 200){
-                console.log(data)
                 setCuisineInfo(data)
             }
         })
@@ -70,7 +64,7 @@ export const Reservation = () => {
   return (
     <div>
         <ToastContainer />
-        <div className='flex flex-col lg:flex-row justify-around flex-wrap items-center'>
+        <div className='h-screen flex flex-col lg:flex-row justify-around flex-wrap items-center'>
             <div>
                 <p className='poppins'>{name}</p>
                 <p className='poppins'>{description}</p>

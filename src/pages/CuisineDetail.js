@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useLocation } from 'react-router-dom'
 import { ToastMessage } from '../utils';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,9 +7,10 @@ import { MealCard } from '../components';
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
 
-require('dotenv').config()
-
 export const CuisineDetail = () => {
+    const location = useLocation();
+    const params = useParams(location.pathname);
+
     const user = useAuth()
     const {token, refresh, setToken, setRefresh} = user
 
@@ -43,8 +44,6 @@ export const CuisineDetail = () => {
         });
     }
 
-
-    const params = useParams();
     useEffect(() => {
         fetchCuisineMenu()
         fetchCuisineInfo()
@@ -68,8 +67,8 @@ export const CuisineDetail = () => {
             </div>
         </div>
         <div className='mt-10'>
-        <Link to='/cuisine/menu/add' className='px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Item</Link>
-            <Link to='/cuisines' className='px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
+        <Link to={`/cuisine/${cuisine_id}/menu/add`} className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Item</Link>
+            <Link to='/cuisines' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
         </div>
     </div>
   )

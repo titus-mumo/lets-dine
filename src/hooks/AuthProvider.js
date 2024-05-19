@@ -8,7 +8,7 @@ require('dotenv').config()
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")) || "");
   const [token, setToken] = useState(localStorage.getItem("site") || "");
   const [refresh, setRefresh] = useState(localStorage.getItem("refresh") || "")
   const navigate = useNavigate();
@@ -28,15 +28,18 @@ const AuthProvider = ({ children }) => {
         setRefresh(res.refresh)
         localStorage.setItem("site", res.access);
         localStorage.setItem("refresh", res.refresh);
-        navigate("/home");
-        return;
+        localStorage.setItem("user", JSON.stringify({ email: res.email, username: res.username }));
+        ToastMessage("success", "Login successful")
+        const data = {
+          token: res.access,
+          refresh: res.refresh
+        }
+        return data;
       }
-      throw new Error(res.error);
+      else{
+        ToastMessage("error", "Invalid credentials. Please try again")
+      }
     } catch (err) {
-        setToken(null)
-        setUser(null)
-        setRefresh(null)
-        localStorage.setItem("site", '');
       return ToastMessage("error", err.message || "An  error occured")
     }
   };
@@ -44,8 +47,12 @@ const AuthProvider = ({ children }) => {
   const logOut = () => {
     setUser(null);
     setToken("");
+    setRefresh("")
     localStorage.removeItem("site");
-    navigate("/login");
+    localStorage.removeItem("refresh");
+    localStorage.removeItem("user");
+    setTimeout(() => {navigate("/login")}, 2000)
+    
   };
 
   return (

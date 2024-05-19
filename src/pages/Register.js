@@ -13,6 +13,7 @@ export const Register = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [role, setRole] = useState('User')
 
     const navigate = useNavigate();
 
@@ -29,19 +30,38 @@ export const Register = () => {
             return ToastMessage("warning", "Confirm password is different from password")
         }
 
-        axios.post(process.env.BASE_URL + 'auth/register/', {
-            username: username,
-            email: email, 
-            password: password
-        })
-        .then(function(response){
-            ToastMessage("success" , "Account Registration successful")
-            setTimeout(() => navigate('/login'), 3000);
+        if (role === "User"){
 
-        })
-        .catch(function(error){
-            return ToastMessage('error', error.response.data['error'])
-        });
+            axios.post(process.env.BASE_URL + 'auth/register/', {
+                username: username,
+                email: email, 
+                password: password
+            })
+            .then(function(response){
+                ToastMessage("success" , "Account Registration successful")
+                setTimeout(() => navigate('/login'), 3000);
+    
+            })
+            .catch(function(error){
+                return ToastMessage('error', error.response.data['error'])
+            });
+        } else if(role === "Cuisine Owner"){
+            axios.post(process.env.BASE_URL + 'auth/register/', {
+                username: username,
+                email: email, 
+                password: password,
+                role: role
+            })
+            .then(function(response){
+                console.log(response)
+                ToastMessage("success" , "Account Registration successful")
+                setTimeout(() => navigate('/login'), 3000);
+    
+            })
+            .catch(function(error){
+                return ToastMessage('error', error.response.data['error'])
+            });
+        }
     };
 
 
@@ -63,9 +83,25 @@ export const Register = () => {
                       <input type="email" name="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required></input>
                   </div>
                   <div>
-                      <label htmlFor="username" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">   Usernname</label>
+                      <label htmlFor="username" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">   Username</label>
                       <input type="text" name="username" id="username" value={username} onChange={(e) => setUsername(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name" required></input>
                   </div>
+                  <div>
+                    <label htmlFor="role" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                        Role (Create account as: )
+                    </label>
+                    <select
+                        name="role"
+                        id="role"
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required
+                    >
+                        <option value="User">User</option>
+                        <option value="Cuisine Owner">Cuisine Owner</option>
+                    </select>
+                </div>
                   <div>
                       <label htmlFor="password" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                       <input type="password" name="password" id="password" placeholder="••••••••" value={password} onChange={(e) => setPassword(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required></input>

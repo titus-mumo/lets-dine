@@ -1,14 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { Button } from '../components';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios'
 import { useAuth } from '../hooks/AuthProvider';
-
+import { ApiCall } from '../hooks/ApiCall';
 import { useNavigate } from 'react-router-dom';
-
-require('dotenv').config()
 
 import { ToastMessage } from '../utils';
 
@@ -19,15 +15,35 @@ export const Login = () => {
 
     const auth = useAuth()
 
+    const {setToken, setRefresh, logOut} = auth
+
+    useEffect(() => {logOut()}, [])
+
     const navigate = useNavigate();
 
-    const handleLogin = (e) => {
+    const handleLogin = async(e) => {
         e.preventDefault()
         if(password.length < 8){
             return ToastMessage('warning', "Password too short")
         }
         const input = {username: username, password: password}
-        auth.loginAction(input)
+        const grant = await auth.loginAction(input);
+        ApiCall('auth/user/', 'get', grant.token, grant.refresh, setToken, setRefresh)
+        .then(function(response){
+            if(response.status === 200){
+                console.log(response.data)
+                if(response.data.groups[0]){
+                    setTimeout(() => {navigate('/cuisine-owner/home')}, 1500)
+                }else{
+                    setTimeout(() => {navigate('/home')}, 1500)
+                }
+            }else{
+                console.log("Unexpected response")
+            }
+        })
+        .catch((error) => {
+            return console.log("Someting went wrong")
+        })
         return;
     };
   return (
