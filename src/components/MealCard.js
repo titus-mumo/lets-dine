@@ -54,7 +54,7 @@ export const MealCard = ({meal}) => {
               <Link to={`/cuisine/${cuisine_id}/menu`}>{loading ? 'Loading...' : cuisineName}</Link>
             </div>
             <h2 className="text-gray-900 poppins text-2xl font-bold">${price}</h2>
-            <button className="bg-primary text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105" onClick={(e) => handleOrder(e)}>Order Now</button>
+            {/* <button className="bg-primary text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105" onClick={(e) => handleOrder(e)}>Order Now</button> */}
         </div>
     </div>
   )

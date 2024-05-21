@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { ChangePassword, Profile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register } from "../pages";
+import { ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, Profile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register } from "../pages";
 import PrivateRoute from "./protectRoutes";
 
 
@@ -21,6 +21,13 @@ export const AllRoutes = () => {
               <Route path='/cuisine/:cuisine_id/menu/add' element={<AddMenu />} />
               <Route path='/cuisine/:cuisine_id/make_reservation' element={<Reservation />} />
               <Route path='/reservations' element={<ViewReservations />} />
+              {/* Cuisine Owner Pages */}
+              <Route path='/cuisine-owner/home' element={<CuisineHome />} />
+              <Route path='/cuisine-owner/new' element={<NewCuisine />} />
+              <Route path='/cuisine-owner/cuisine/:cuisine_id/menu' element={<CuisineMenu />} />
+              <Route path='/cuisine-owner/:cuisine_id/menu/add' element={<CuisineOwnerMenuAdd />} />
+              <Route path='/cuisine-owner/analytics' element={<CuisineAnalytics />} />
+              <Route path='/cuisine-owner/reservations' element={<ReservationsPage />} />
             </Route>
         </Routes>
     </div>

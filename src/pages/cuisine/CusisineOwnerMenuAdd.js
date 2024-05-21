@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { useAuth } from '../hooks/AuthProvider';
-import { ApiCall } from '../hooks/ApiCall';
+import { useAuth } from '../../hooks/AuthProvider';
+import { ApiCall } from '../../hooks/ApiCall';
 import { ToastContainer } from 'react-toastify';
-import { ToastMessage } from '../utils';
+import { ToastMessage } from '../../utils';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const AddMenu = () => {
+export const CuisineOwnerMenuAdd = () => {
     const params = useParams();
     const [mealName, setMelName] = useState('')
     const [price, setPrice] = useState(1)
@@ -64,7 +64,7 @@ export const AddMenu = () => {
 
         <div className='flex justify-around flex-wrap items-center flex-row'>
         <button type='submit' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Item</button>
-        <Link to={`/cuisine/${params.cuisine_id}/menu`} className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
+        <Link to={`/cuisine-owner/cuisine/${params.cuisine_id}/menu`} className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
         </div>
 
         </form>
