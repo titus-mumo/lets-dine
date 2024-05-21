@@ -1,23 +1,16 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpack = require('webpack')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 //const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
-
-require('dotenv').config({ path: './.env' }); 
+require('dotenv').config({ path: './.env' });
 
 module.exports = {
-    mode: "development",
+  mode: "development",
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-  },
-  resolve: {
-    fallback: {
-      crypto: false,
-      os: false
-    }
   },
   devtool: 'source-map',
   devServer: {
@@ -65,18 +58,20 @@ module.exports = {
       inject: 'body'
     }),
     new webpack.ProvidePlugin({
-        process: 'process/browser',
-      }),
-      new webpack.DefinePlugin({
-        "process.env": JSON.stringify(process.env),
-      }),
-      new webpack.IgnorePlugin({
-        resourceRegExp: /html-entities\/lib\/named-references\.js\.map$/,
-      }),
+      process: 'process/browser',
+    }),
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(process.env),
+    }),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /html-entities\/lib\/named-references\.js\.map$/,
+    }),
   ],
-  resolve : {
-    fallback: { 
+  resolve: {
+    fallback: {
       crypto: require.resolve('crypto-browserify'),
-    },
+      stream: require.resolve('stream-browserify'),
+      os: false
+    }
   },
-}
+};
