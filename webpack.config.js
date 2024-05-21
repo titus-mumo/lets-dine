@@ -73,5 +73,8 @@ module.exports = {
       new webpack.IgnorePlugin({
         resourceRegExp: /html-entities\/lib\/named-references\.js\.map$/,
       }),
-  ]
+  ],
+  resolve : {
+    fallback: { crypto: false},
+  },
 }
