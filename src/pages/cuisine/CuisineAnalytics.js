@@ -26,10 +26,53 @@ ChartJS.register(
 );
 
 export const CuisineAnalytics = () => {
-    const [labels, setLabels] = useState([]);
-    const [data, setData] = useState([]);
+    const [cuisinesData, setCuisinesData] = useState([]);
     const userAuth = useAuth();
     const { token, refresh, setToken, setRefresh } = userAuth;
+
+    const getCuisineIds = () => {
+        ApiCall('cuisines/owner', 'get', token, refresh, setToken, setRefresh)
+            .then(response => {
+                if (response.status === 200) {
+                    const cuisinePromises = response.data.map(cuisine =>
+                        getData(cuisine.cuisine_id).then(data => ({
+                            cuisineId: cuisine.cuisine_id,
+                            cuisineName: cuisine.name, // assuming the name field is available
+                            data
+                        }))
+                    );
+                    Promise.all(cuisinePromises).then(setCuisinesData);
+                }
+            })
+            .catch(error => {
+                console.log("Error occurred", error.response?.data?.message || "getting cuisines ids");
+            });
+    }
+
+    const getData = (id) => {
+        return ApiCall(`reservation/cuisine/${id}/`, 'get', token, refresh, setToken, setRefresh)
+            .then(response => {
+                const reservations = response.data;
+                const counts = reservations.reduce((acc, curr) => {
+                    const date = dayjs(curr.time).format('YYYY-MM-DD');
+                    acc[date] = (acc[date] || 0) + 1;
+                    return acc;
+                }, {});
+                const sortedData = Object.keys(counts)
+                    .sort((a, b) => dayjs(a).diff(dayjs(b)))
+                    .map(date => ({ date, count: counts[date] }));
+                const startDate = dayjs().format('YYYY-MM-DD');
+                return sortedData.filter(d => dayjs(d.date).isAfter(dayjs(startDate).subtract(1, 'day')));
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                window.location.reload()
+            });
+    };
+
+    useEffect(() => {
+        getCuisineIds();
+    }, []);
 
     const predefinedColors = [
         'rgba(255, 99, 132, 0.8)',
@@ -45,49 +88,6 @@ export const CuisineAnalytics = () => {
         'rgba(102, 153, 255, 0.8)',
         'rgba(159, 255, 64, 0.8)'
     ];
-
-    const getData = async () => {
-        ApiCall('reservation/cuisine/3/', 'get', token, refresh, setToken, setRefresh)
-            .then(function (response) {
-                console.log('Fetched data:', response.data);
-                const reservations = response.data;
-                const counts = reservations.reduce((acc, curr) => {
-                    const date = dayjs(curr.time).format('YYYY-MM-DD');
-                    acc[date] = (acc[date] || 0) + 1;
-                    return acc;
-                }, {});
-
-                const sortedData = Object.keys(counts)
-                    .sort((a, b) => dayjs(a).diff(dayjs(b)))
-                    .map(date => ({ date, count: counts[date] }));
-
-                console.log('Processed and sorted data:', sortedData);
-
-                const startDate = dayjs().format('YYYY-MM-DD');
-                const filteredData = sortedData.filter(d => dayjs(d.date).isAfter(dayjs(startDate).subtract(1, 'day')));
-
-                setLabels(filteredData.map(d => d.date));
-                setData(filteredData.map(d => d.count));
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    };
-
-    useEffect(() => {
-        getData();
-    }, []);
-
-    const chartData = {
-        labels: labels,
-        datasets: [{
-            label: 'Number of Reservations',
-            data: data,
-            backgroundColor: predefinedColors,
-            borderColor: predefinedColors.map(color => color.replace('0.8', '1')),
-            borderWidth: 1
-        }]
-    };
 
     const chartOptions = {
         scales: {
@@ -116,11 +116,25 @@ export const CuisineAnalytics = () => {
         <div className="w-full flex justify-around flex-col ">
             <CuisineTabs />
             <p className="text-2xl font-bold mt-4 mb-6">Cuisine Analytics</p>
-            <div className="w-full h-96 flex justify-around flex-wrap">
-                <div className='w-full md:w-3/4 lg:w-1/2 h-96 '>
-                    <Bar data={chartData} options={chartOptions} />
-                </div>
-                
+            <div className="w-full flex justify-around flex-wrap">
+                {cuisinesData.map((cuisine, index) => {
+                    const chartData = {
+                        labels: cuisine.data.map(d => d.date),
+                        datasets: [{
+                            label: `Number of Reservations for ${cuisine.cuisineName}`,
+                            data: cuisine.data.map(d => d.count),
+                            backgroundColor: predefinedColors[index % predefinedColors.length],
+                            borderColor: predefinedColors[index % predefinedColors.length].replace('0.8', '1'),
+                            borderWidth: 1
+                        }]
+                    };
+
+                    return (
+                        <div key={cuisine.cuisineId} className='w-full md:w-3/4 lg:w-1/2 h-96 mb-6'>
+                            <Bar data={chartData} options={chartOptions} />
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );

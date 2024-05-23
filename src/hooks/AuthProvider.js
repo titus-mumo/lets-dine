@@ -22,7 +22,8 @@ const AuthProvider = ({ children }) => {
         body: JSON.stringify(data),
       });
       const res = await response.json();
-      if (res.email) {
+      console.log(res)
+      if (res.access) {
         setUser({"email": res.email, "username":res.username});
         setToken(res.access)
         setRefresh(res.refresh)
@@ -37,7 +38,11 @@ const AuthProvider = ({ children }) => {
         return data;
       }
       else{
-        ToastMessage("error", "Invalid credentials. Please try again")
+        console.log("an error occured")
+        const data = {
+          error: "Invalid credentials"
+        }
+        return data;
       }
     } catch (err) {
       return ToastMessage("error", err.message || "An  error occured")
@@ -51,6 +56,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("site");
     localStorage.removeItem("refresh");
     localStorage.removeItem("user");
+    localStorage.removeItem("role");
     setTimeout(() => {navigate("/login")}, 2000)
     
   };

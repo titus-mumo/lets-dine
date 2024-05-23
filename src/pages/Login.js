@@ -15,9 +15,11 @@ export const Login = () => {
 
     const auth = useAuth()
 
-    const {setToken, setRefresh, logOut} = auth
+    const {setToken, setRefresh, logOut, role} = auth
 
-    useEffect(() => {logOut()}, [])
+    useEffect(() => {
+        if(role) return logOut()
+    }, [])
 
     const navigate = useNavigate();
 
@@ -28,22 +30,31 @@ export const Login = () => {
         }
         const input = {username: username, password: password}
         const grant = await auth.loginAction(input);
-        ApiCall('auth/user/', 'get', grant.token, grant.refresh, setToken, setRefresh)
-        .then(function(response){
-            if(response.status === 200){
-                console.log(response.data)
-                if(response.data.groups[0]){
-                    setTimeout(() => {navigate('/cuisine-owner/home')}, 1500)
+        console.log(grant)
+        if(!grant){
+            return
+        }else if(grant.error){
+            return ToastMessage("error", grant.error)
+        } else {
+            ApiCall('auth/user/', 'get', grant.token, grant.refresh, setToken, setRefresh)
+            .then(function(response){
+                if(response.status === 200){
+                    console.log(response.data)
+                    if(response.data.groups[0]){
+                        localStorage.setItem("role", "owner");
+                        setTimeout(() => {navigate('/cuisine-owner/home')}, 1500)
+                    }else{
+                        localStorage.setItem("role", "user");
+                        setTimeout(() => {navigate('/home')}, 1500)
+                    }
                 }else{
-                    setTimeout(() => {navigate('/home')}, 1500)
+                    console.log("Unexpected response")
                 }
-            }else{
-                console.log("Unexpected response")
-            }
-        })
-        .catch((error) => {
-            return console.log("Someting went wrong")
-        })
+            })
+            .catch((error) => {
+                return console.log("Someting went wrong")
+            })
+        }
         return;
     };
   return (

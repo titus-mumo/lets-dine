@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { ApiCall } from '../hooks/ApiCall'
 import { useAuth } from '../hooks/AuthProvider'
+import { ReservationDetail } from './ReservationDetail'
 
 export const ReservationsSection = ({cuisine_id}) => {
-  console.log(cuisine_id)
   const userAuth = useAuth()
   const {token, refresh, setToken, setRefresh} = userAuth
 
@@ -13,8 +13,13 @@ export const ReservationsSection = ({cuisine_id}) => {
   const handleFetchCuisineSpecificReservations = () => {
     ApiCall(`reservation/cuisine/${cuisine_id}`, 'get', token, refresh, setToken, setRefresh)
     .then(function(response){
-      if(response.status === 200){
-        setReservationList(response.data)
+      if(response.status === 200 && response.data.length > 0){
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const sortedData = response.data
+        .filter(item => new Date(item.time) >= today)
+        .sort((a, b) => new Date(a.time) - new Date(b.time));
+        setReservationList(sortedData)
         setLoading(false)
       }else{
         return console.log("An error occured")
@@ -31,7 +36,7 @@ export const ReservationsSection = ({cuisine_id}) => {
   return (
     <div>
       {
-        loading? 'Loading': reservationList.length === 0? 'Cuisine Reservations will appear here':reservationList.map((item) => <p>{item.total_seats}</p>)
+        loading? 'Loading': reservationList.length === 0? 'Cuisine Reservations made will appear here':reservationList.map((item) => <ReservationDetail key={item.reservation_id} reservation={item}/>)
       }
     </div>
   )

@@ -4,9 +4,9 @@ import { useAuth } from '../hooks/AuthProvider'
 import { useNavigate } from 'react-router-dom'
 
 export const LandingPage = () => {
-  const navigate = useNavigate()
-  const user = useAuth()
-  const {token} = user
+  // const navigate = useNavigate()
+  // const user = useAuth()
+  // const {token} = user
    
   // const checkIfUserIsAuthenticated = () => {
   //   if(token){

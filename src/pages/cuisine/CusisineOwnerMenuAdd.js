@@ -5,12 +5,15 @@ import { ApiCall } from '../../hooks/ApiCall';
 import { ToastContainer } from 'react-toastify';
 import { ToastMessage } from '../../utils';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 export const CuisineOwnerMenuAdd = () => {
     const params = useParams();
     const [mealName, setMelName] = useState('')
     const [price, setPrice] = useState(1)
     const [category, setCategory] = useState('')
+
+    const navigate = useNavigate();
 
     const userAuth = useAuth();
 
@@ -29,7 +32,11 @@ export const CuisineOwnerMenuAdd = () => {
         .then(function(response){
             const {status} = response
             if(status === 201){
-                return ToastMessage("success", "Item added to menu successfully")
+                ToastMessage("success", "Item added to menu successfully")
+                setTimeout(() => {
+                    navigate(`/cuisine-owner/cuisine/${params.cuisine_id}/menu`)
+                }, 1500)
+
             }
 
         })

@@ -7,17 +7,12 @@ export const CuisineCard = ({cuisine}) => {
 
     const navigate = useNavigate()
 
-    const makeReservation = (e) => {
-        e.preventDefault();
-        setTimeout(() => navigate(`/cuisine/${cuisine_id}/make_reservation`))
-    }
-
     const handleViewMenu= (e) => {
         e.preventDefault()
         setTimeout(() => navigate(`/cuisine-owner/cuisine/${cuisine_id}/menu`), 100)
     }
   return (
-    <div className=' flex flex-col w-auto my-3 jusify-around shadow-md p-2 rounded-md'>
+    <div className='flex flex-col w-auto my-3 justify-around shadow-md p-2 rounded-md'>
         <img src={restaurantImage} alt='cuisine image' className='m-auto h-auto w-65 rounded-md'></img>
         <div>
         <p className='poppins'>{contact}</p>
@@ -26,7 +21,9 @@ export const CuisineCard = ({cuisine}) => {
         <p className='poppins'>{time_open}</p>
         </div>
         {/* <button className='mx-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins' onClick={(e) => makeReservation(e)}>Make Reservation</button> */}
-        <button className= 'mx-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins' onClick={(e) => handleViewMenu(e)}>View Menu</button>
+        <div>
+          <button className= 'mx-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins' onClick={(e) => handleViewMenu(e)}>View Menu</button>
+        </div>
     </div>
   )
 }

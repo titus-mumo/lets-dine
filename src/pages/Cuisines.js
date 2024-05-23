@@ -36,6 +36,9 @@ export const Cuisines = () => {
   return (
     <section className='p-2 md:p-3 lg:p-4'>
         <ToastContainer />
+        <div className='mt-5'>
+            <Link to='/home' className='px-6 w-full py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>View Main menu</Link>
+        </div>
         <div className='flex flex-rol flex-wrap my-5'>
         {
         cuisines.map((item) => (
@@ -44,7 +47,7 @@ export const Cuisines = () => {
             }
         </div>
         
-            <Link to='/home' className='px-6 w-full py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>View Main menu</Link>
+
     </section>
   )
 }

@@ -3,9 +3,10 @@ import { useParams, Link, useLocation } from 'react-router-dom'
 import { ToastMessage } from '../../utils';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { MealCard } from '../../components';
+import { MealCard } from '../../cuisineownercomponents';
 import { useAuth } from '../../hooks/AuthProvider';
 import { ApiCall } from '../../hooks/ApiCall';
+import { ReviewCard } from '../../cuisineownercomponents';
 
 export const CuisineMenu = () => {
     const location = useLocation();
@@ -40,7 +41,7 @@ export const CuisineMenu = () => {
             }
         })
         .catch((error) => {
-            return ToastMessage("error", "Something went wrong")
+            return []
         });
     }
 
@@ -52,24 +53,27 @@ export const CuisineMenu = () => {
     <div>
         <ToastContainer />
         <div className='mb-10'>
-            <p className='poppins'>Cuisine Info</p>
             <p className='pppins font-bold text-3xl'>{name}</p>
             <p className='poppins'>{description}</p>
             <p className='popins'>{contact}</p>
             <p className='poppins'>{time_open}</p>
         </div>
+        <div className='mt-10'>
+        <Link to={`/cuisine-owner/${cuisine_id}/menu/add`} className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Item</Link>
+            <Link to='/cuisine-owner/home' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
+        </div>
         <div>
-            <p>Menu</p>
+            <p className='my-5'>Menu</p>
             <div className='flex flex-wrap justify-around'>
             {
                 cuisineMenu.map(item => <MealCard key={item.meal_id} meal={item}/>)
             }
             </div>
         </div>
-        <div className='mt-10'>
-        <Link to={`/cuisine-owner/${cuisine_id}/menu/add`} className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Item</Link>
-            <Link to='/cuisine-owner/home' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
+        <div>
+            <ReviewCard cuisine_id={params.cuisine_id}/>
         </div>
+
     </div>
   )
 }

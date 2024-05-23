@@ -10,6 +10,7 @@ export const ReservationsPage = () => {
     const [currentId, setCurrentId] = useState('');
     const userAuth = useAuth();
     const { token, refresh, setToken, setRefresh } = userAuth;
+    const [active, setActive] = useState('')
 
     const fetchSideBarNames = async () => {
         try {
@@ -19,6 +20,8 @@ export const ReservationsPage = () => {
                 const ids = response.data.map(item => item.cuisine_id);
                 setCuisineIds(ids);
                 setSideBarNames(names);
+                setCurrentId(ids.length > 0? ids[0]: '')
+                setActive(ids.length > 0? 0: '')
                 setLoading(false);
             }
         } catch (error) {
@@ -30,8 +33,9 @@ export const ReservationsPage = () => {
         fetchSideBarNames();
     }, []);
 
-    const handleClick = (cuisineId) => {
+    const handleClick = (cuisineId, index) => {
         setCurrentId(cuisineId); // Update currentId state correctly
+        setActive(index)
     };
 
     return (
@@ -42,13 +46,13 @@ export const ReservationsPage = () => {
             <div className='flex flex-row w-full justify-around'>
                 <div className='basis-1/5'>
                     {loading ? 'Loading...' : sideBarNames.map((item, index) => (
-                        <p key={index} onClick={() => handleClick(cuisineIds[index])}>
+                        <p key={index} onClick={() => handleClick(cuisineIds[index], index)} className={active === index? 'poppins text-lg font-bold':'poppins'}>
                             {item}
                         </p>
                     ))}
                 </div>
                 <div className='basis-4/5'>
-                    <p>ReservationsPage</p>
+                    <p>Reservations for {sideBarNames[active]}</p>
                     <ReservationsSection cuisine_id={currentId} /> {/* Pass updated currentId */}
                 </div>
             </div>
