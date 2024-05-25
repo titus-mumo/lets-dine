@@ -38,6 +38,7 @@ export const ReservatinDetail = ({reservation}) => {
 
 
     const handleDeleteReservation = (e)=> {
+        //TODO: Include cnfirmation pop-up
         e.preventDefault()
         ApiCall(`reservation/delete/${reservation_id}/`, 'delete', token, refresh, setToken, setRefresh)
         .then(function(response){
@@ -55,6 +56,7 @@ export const ReservatinDetail = ({reservation}) => {
 
     const handleEditReservation = (e) => {
         e.preventDefault()
+        //TODO: Review edit function
 
     }
   return (
@@ -64,9 +66,13 @@ export const ReservatinDetail = ({reservation}) => {
             <p className='poppins'>{standardTime}</p>
             <p className='poppins'>Reserved seats: {total_seats}</p>
         </div>
-        <div className='basis-1/3 m-auto flex flex-col justify-start m-auto'>
-        <button onClick={(e) => handleEditReservation(e)} className='m-2 px-2 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Edit Reservation</button>
-        <button onClick={(e) => handleDeleteReservation(e)} className='m-2 px-2 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Delete Reservation</button>
+        <div className='basis-1/3 flex flex-col justify-start m-auto'>
+            <div className='w-full flex justify-center'>
+            <button onClick={(e) => handleEditReservation(e)} className='w-full lg:w-2/3 m-2 px-1 py-3 bg-green-600 text-white ring-green-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins text-sm'>Edit Reservation</button>
+            </div>
+            <div className='w-full'>
+            <button onClick={(e) => handleDeleteReservation(e)} className='w-full lg:w-2/3  m-2 px-1 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins text-sm'>Delete Reservation</button>
+            </div>
         </div>
     </div>
   )

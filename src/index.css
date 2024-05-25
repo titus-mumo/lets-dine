@@ -5,9 +5,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,9 +15,9 @@ code {
     monospace;
 }
 
-.poppins {
+/* .poppins {
   font-family: 'Poppins', sans-serif;
-}
+} */
 .bg-primary {
   background: #f91944;
 }
@@ -44,9 +42,9 @@ code {
 
 @layer components {
   .menu_tab {
-    @apply text-gray-800 cursor-pointer select-none;
+    @apply text-gray-800 cursor-pointer select-none text-center m-auto;
   }
   .active_menu_tab {
-    @apply rounded-full px-4 py-2 text-white select-none;
+    @apply rounded-md text-white select-none text-center m-auto;
   }
 }

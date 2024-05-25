@@ -1,11 +1,11 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const ToastMessage = (type, message) => {
+export const ToastMessage = (type, message, time = 0) => {
     const duration = 2000;
 
     const toastOptions = {
-        autoClose: duration
+        autoClose: time !== 0? time : duration
     }
     switch (type) {
         case 'success':

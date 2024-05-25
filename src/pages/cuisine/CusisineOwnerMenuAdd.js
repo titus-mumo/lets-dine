@@ -47,9 +47,9 @@ export const CuisineOwnerMenuAdd = () => {
 
     }
   return (
-    <div className='flex flex-col justify-center flex-wrap'>
+    <div className='flex flex-col justify-center flex-wrap w-full h-full mt-10 lg:mt-0'>
         <ToastContainer />
-        <p className='poppins my-6'>AddMenu</p>
+        <p className='poppins my-6 text-center'>AddMenu</p>
         <div className="m-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="m-auto p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 className="poppins text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

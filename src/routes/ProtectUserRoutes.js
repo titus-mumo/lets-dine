@@ -6,6 +6,7 @@ import { ApiCall } from '../hooks/ApiCall'
 const ProtectUserRoutes = () => {
   const userAuth = useAuth()
   const {token, refresh, setToken, setRefresh} = userAuth;
+  
 
   // ApiCall('auth/user/', 'get', token, refresh, setToken, setRefresh)
   // .then(function(response){

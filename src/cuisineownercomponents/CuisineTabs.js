@@ -27,11 +27,11 @@ export const CuisineTabs = () => {
   return (
     <div className="w-full flex items-center justify-around space-x-6 my-4 flex-col">
         <NavBar />
-        <div className='flex items-center justify-center space-x-6 my-4'>
+        {/* <div className='w-full flex items-center justify-center space-x-6 my-4'>
         <p className={menuTab === 'cuisines' ? "active_menu_tab poppins bg-primary" : "menu_tab poppins"} onClick={() => handleMenuTabs('cuisines')}>Cuisines</p>
         <p className={menuTab === 'reservations' ? "active_menu_tab poppins bg-primary" : "menu_tab poppins"} onClick={() => handleMenuTabs('reservations')}>Reservations</p>
         <p className={menuTab === 'analytics' ? "active_menu_tab poppins bg-primary" : "menu_tab poppins"} onClick={() => handleMenuTabs('analytics')}>Analytics</p>
-        </div>
+        </div> */}
     </div>
   )
 }

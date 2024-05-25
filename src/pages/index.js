@@ -10,9 +10,16 @@ export {AddMenu} from './AddMenu'
 export {AddReview} from './AddReview'
 export {Profile} from './Profile'
 export {ChangePassword} from './ChangePassword'
+
+export {GeneralForums} from './GeneralForums'
+
+
 export {CuisineHome} from './cuisine/CuisineHome'
 export {NewCuisine} from './cuisine/NewCuisine'
 export {CuisineMenu} from './cuisine/CuisineMenu'
 export {CuisineOwnerMenuAdd} from './cuisine/CusisineOwnerMenuAdd'
 export {CuisineAnalytics} from './cuisine/CuisineAnalytics'
 export {ReservationsPage} from './cuisine/ReservationsPage'
+export {Map} from './cuisine/Map'
+export {PageNotFound} from './cuisine/404Page'
+export {Account} from './cuisine/Account'

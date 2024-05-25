@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { ToastMessage } from '../utils'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,7 +8,7 @@ import { useAuth } from '../hooks/AuthProvider';
 import moment from 'moment'
 
 export const Reservation = () => {
-
+    const navigate = useNavigate();
     const user = useAuth()
     const {token, refresh, setToken, setRefresh} = user
 
@@ -34,7 +34,7 @@ export const Reservation = () => {
                 total_seats: totatSeats,
                 time: dateTime,
             }
-        ApiCall(`reservation/user/`, 'post', token, refresh, setToken, setRefresh, data)
+        ApiCall(`reservation/user/`, 'post', token, refresh, setToken, setRefresh, data, navigate)
         .then(function(response){
             const {status, data} = response
             if(status === 201){

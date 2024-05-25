@@ -33,7 +33,7 @@ export const NewCuisine = () => {
         }
         ApiCall('cuisines/', 'post', token, refresh, setToken, setRefresh, data)
         .then(function(response){
-            if(response.status === 201){
+            if(response && response.status === 201){
                 ToastMessage("success", "Cuisine uploaded successfully")
                 setTimeout(() => {navigate('/cuisine-owner/home')}, 2000)
             }else{

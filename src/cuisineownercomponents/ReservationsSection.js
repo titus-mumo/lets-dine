@@ -20,10 +20,10 @@ export const ReservationsSection = ({cuisine_id}) => {
         .filter(item => new Date(item.time) >= today)
         .sort((a, b) => new Date(a.time) - new Date(b.time));
         setReservationList(sortedData)
-        setLoading(false)
       }else{
-        return console.log("An error occured")
+        console.log("An error occured")
       }
+      setLoading(false)
     })
     .catch((error) => {
       return console.log("An error occured")
@@ -34,7 +34,7 @@ export const ReservationsSection = ({cuisine_id}) => {
     handleFetchCuisineSpecificReservations()
   }, [cuisine_id])
   return (
-    <div>
+    <div className='block overflow-x-hidden p-2 m-2'>
       {
         loading? 'Loading': reservationList.length === 0? 'Cuisine Reservations made will appear here':reservationList.map((item) => <ReservationDetail key={item.reservation_id} reservation={item}/>)
       }

@@ -113,9 +113,11 @@ export const CuisineAnalytics = () => {
     };
 
     return (
-        <div className="w-full flex justify-around flex-col ">
+        <div className="w-full h-full flex justify-around flex-col">
             <CuisineTabs />
-            <p className="text-2xl font-bold mt-4 mb-6">Cuisine Analytics</p>
+            <div className='flex justify-center w-full'>
+            <p className="text-2xl font-bold mt-4 mb-6">Reservation Analytics</p>
+            </div>
             <div className="w-full flex justify-around flex-wrap">
                 {cuisinesData.map((cuisine, index) => {
                     const chartData = {

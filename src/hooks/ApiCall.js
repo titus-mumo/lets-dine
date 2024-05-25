@@ -2,14 +2,12 @@ import React from "react";
 import { ToastMessage } from "../utils";
 import axios from "axios";
 import { refreshAccessToken } from "./RefreshToken";
-import { useNavigate } from "react-router-dom";
 
 require('dotenv').config();
 
-
 const base_url = process.env.BASE_URL;
 
-export const ApiCall = async (endpoint, method, token, refreshToken, setToken, setRefresh, data = {}, options = {}) => {
+export const ApiCall = async (endpoint, method, token, refreshToken, setToken, setRefresh, data = {}, options = {}, navigate='') => {
     const headers = {
         ...options.headers,
         "Authorization": `Bearer ${token}`,
@@ -21,7 +19,7 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
         headers: headers
     });
 
-    //const navigate = useNavigate()
+    
     try {
         let res;
         if (method === 'post') {
@@ -61,6 +59,7 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
             } catch (refreshError) {
                 console.log("Failed to refresh token:", refreshError.message);
                 ToastMessage("error", "Session expired. Please login again")
+                navigate? navigate('/login'): ''
             }
         } else {
             console.log(error.message);

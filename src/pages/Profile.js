@@ -62,7 +62,7 @@ export const Profile = () => {
 
 
   return (
-    <div className='w-auto flex flex-col justify-around'>
+    <div className='w-auto flex flex-col justify-around h-full'>
         <ToastContainer />
         <p>My Account</p>
         <p>Email: {loading? 'Loading..': email}</p>

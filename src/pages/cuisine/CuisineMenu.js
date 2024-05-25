@@ -9,6 +9,7 @@ import { ApiCall } from '../../hooks/ApiCall';
 import { ReviewCard } from '../../cuisineownercomponents';
 
 export const CuisineMenu = () => {
+    
     const location = useLocation();
     const params = useParams(location.pathname);
 
@@ -29,7 +30,7 @@ export const CuisineMenu = () => {
             }
         })
         .catch((error) => {
-            return ToastMessage("error", "Something wnt wrong")
+            return ToastMessage("error", "Something went wrong")
         });
     }
     const fetchCuisineInfo = async() => {
@@ -50,27 +51,26 @@ export const CuisineMenu = () => {
         fetchCuisineInfo()
     }, [params.cuisine_id])
   return (
-    <div>
+    <div className='flex flex-col justify-around w-full mt-9'>
         <ToastContainer />
-        <div className='mb-10'>
-            <p className='pppins font-bold text-3xl'>{name}</p>
-            <p className='poppins'>{description}</p>
-            <p className='popins'>{contact}</p>
-            <p className='poppins'>{time_open}</p>
+        <div className='mb-10 flex justify-center w-full flex-col'>
+            <p className='pppins font-bold text-3xl text-center'>{name}</p>
+            <p className='poppins text-center'>{description}</p>
+            <p className='popins text-center'>{contact}</p>
+            <p className='poppins text-center'>{time_open}</p>
         </div>
-        <div className='mt-10'>
+        <div className='mt-10 flex justify-center w-full flex-row'>
         <Link to={`/cuisine-owner/${cuisine_id}/menu/add`} className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Item</Link>
             <Link to='/cuisine-owner/home' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
         </div>
-        <div>
-            <p className='my-5'>Menu</p>
+        <div className='flex justify-around w-full flex-col'>
             <div className='flex flex-wrap justify-around'>
             {
-                cuisineMenu.map(item => <MealCard key={item.meal_id} meal={item}/>)
+                cuisineMenu.length === 0? "No menu for this cuisine yet" : cuisineMenu.map(item => <MealCard key={item.meal_id} meal={item}/>)
             }
             </div>
         </div>
-        <div>
+        <div className='flex justify-around w-full flex-col'>
             <ReviewCard cuisine_id={params.cuisine_id}/>
         </div>
 

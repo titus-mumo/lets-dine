@@ -89,7 +89,11 @@ export const Login = () => {
                       </div>
                       <a href="/" className=" poppins text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                   </div>
+                  <div className='flex items-center flex-col justify around m-auto'>
                   <button type="submit" className="w-full py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins ">Sign in</button>
+                  <a href='/' className='poppins text-white text-sm mt-3'>Go back to homepage</a>
+                  </div>
+                 
                   <p className="text-base text-primary text-center my-6 poppins ">
                       Don’t have an account yet? <a href="/register" className="poppins font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
                   </p>
