@@ -10,6 +10,7 @@ export {AddMenu} from './AddMenu'
 export {AddReview} from './AddReview'
 export {Profile} from './Profile'
 export {ChangePassword} from './ChangePassword'
+export {MapUser} from './Map'
 
 export {GeneralForums} from './GeneralForums'
 

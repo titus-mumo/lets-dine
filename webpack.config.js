@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const JavaScriptObfuscator = require('webpack-obfuscator');
+// const JavaScriptObfuscator = require('webpack-obfuscator');
 
 //const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
@@ -68,9 +68,9 @@ module.exports = {
     new webpack.IgnorePlugin({
       resourceRegExp: /html-entities\/lib\/named-references\.js\.map$/,
     }),
-    new JavaScriptObfuscator({
-      rotateStringArray: true
-    }, ['bundle.js'])
+    // new JavaScriptObfuscator({
+    //   rotateStringArray: true
+    // }, ['bundle.js'])
   ],
   resolve: {
     fallback: {

@@ -1,67 +1,10 @@
 import React, { useState } from 'react'
-import HomeIcon from '@mui/icons-material/Home';
 import { useAuth } from '../hooks/AuthProvider';
 import { ToastMessage } from '../utils';
 import { useLocation, useNavigate } from 'react-router-dom';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import EventSeatIcon from '@mui/icons-material/EventSeat';
-import StorefrontIcon from '@mui/icons-material/Storefront';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import ForumIcon from '@mui/icons-material/Forum';
 
-
-const CuisineOwner = [
-  {
-    title: "Home",
-    link: "/cuisine-owner/home",
-    icon: <HomeIcon />
-  },
-  {
-    title: "Cuisines",
-    link: "/cuisine-owner/home",
-    icon: <StorefrontIcon />
-    //TODO: Make a cuisine page
-  },
-
-  {
-    title: "Reservations",
-    link: "/cuisine-owner/reservations",
-    icon: <EventSeatIcon />
-  },
-  {
-    title: "Forums",
-    link: "/cuisine-owner/forums",
-    icon: <ForumIcon/>
-  },
-  {
-    title: "Map",
-    link: "/cuisine-owner/map",
-    icon: <LocationOnIcon />
-  },
-  {
-    title: "Analytics",
-    link: "/cuisine-owner/analytics",
-    icon: <AssessmentIcon />
-  },
-  {
-    title: "Profile",
-    link: "/cuisine-owner/account",
-    icon: <AccountBoxIcon />
-  }
-]
-const User = [
-  {
-    title: "Home",
-    link: "/home",
-    icon: <HomeIcon />
-  }
-]
-
-export const UniversalSideBar = ({showMenu}) => {
+export const UniversalSideBar = ({showMenu, sidebarItems}) => {
   console.log(showMenu)
-  const [sidebarItems, setSidebarItems] = useState(CuisineOwner)
-  const role = localStorage.getItem("role")
   // if(role){
   //   if(role === 'user'){
   //     setSidebarItems(User)
