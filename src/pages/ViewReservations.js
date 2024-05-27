@@ -38,7 +38,7 @@ export const ViewReservations = () => {
         <div className='flex flex-col justify-center self-start w-full h-screen mt-9 lg:mt-0'>
             <div className='flex flex-col justify-center items-center w-full'>
                 <p className='font-bold text-3xl poppins text-center'>Reservations Made</p>
-                <div className='overflow-y-auto overflow-x-hidden w-6/7 md:w-5/6 lg:h-600px lg:w-700px text-center'>
+                <div className='overflow-y-auto overflow-x-hidden w-full md:w-5/6 lg:h-600px lg:w-700px text-center'>
                     {userReservations.length > 0 ? (
                         userReservations.map((item) => 
                             <ReservatinDetail key={item.reservation_id} reservation={item} />

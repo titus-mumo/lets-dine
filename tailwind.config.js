@@ -17,6 +17,7 @@ module.exports = {
       },
       height: {
         '600px': '600px',
+        '700px': '700px',
       },
       zIndex:{
         '10000':'100000',

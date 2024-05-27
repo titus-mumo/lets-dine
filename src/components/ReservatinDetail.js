@@ -67,11 +67,11 @@ export const ReservatinDetail = ({reservation}) => {
             <p className='poppins'>Reserved seats: {total_seats}</p>
         </div>
         <div className='basis-1/3 flex flex-col justify-start m-auto'>
-            <div className='w-full flex justify-center'>
-            <button onClick={(e) => handleEditReservation(e)} className='w-full lg:w-2/3 m-2 px-1 py-3 bg-green-600 text-white ring-green-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins text-sm'>Edit Reservation</button>
+            <div className='w-2/3 flex justify-center'>
+            <button onClick={(e) => handleEditReservation(e)} className='w-full lg:w-2/3 m-2 px-1 py-3 bg-green-600 text-white ring-green-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins text-sm'>Edit</button>
             </div>
-            <div className='w-full'>
-            <button onClick={(e) => handleDeleteReservation(e)} className='w-full lg:w-2/3  m-2 px-1 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins text-sm'>Delete Reservation</button>
+            <div className='w-2/3'>
+            <button onClick={(e) => handleDeleteReservation(e)} className='w-full lg:w-2/3  m-2 px-1 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins text-sm'>Delete</button>
             </div>
         </div>
     </div>

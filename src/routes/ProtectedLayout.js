@@ -100,7 +100,7 @@ export const UserLayout = () => {
   return (
     <div className="flex h-screen w-100vh lg:items-start flex-row">
       <UniversalSideBar showMenu={showMenu} sidebarItems={UserSidebarItems}/>
-      <div className='w-full h-full lg:ml-255px lg:mr-5px'>
+      <div className='w-full h-100vh lg:ml-255px lg:mr-5px'>
         <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu}/>
         <Outlet/>
         </div>
@@ -113,7 +113,7 @@ export const CuisineLayout = () => {
 return (
   <div className="flex h-screen w-100vh lg:items-start flex-row">
     <UniversalSideBar showMenu={showMenu} sidebarItems={CuisineOwnerSidebarItems}/>
-    <div className='w-full h-full lg:ml-255px lg:mr-5px'>
+    <div className='w-full h-100vh lg:ml-255px lg:mr-5px'>
       <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu}/>
       <Outlet/>
       </div>

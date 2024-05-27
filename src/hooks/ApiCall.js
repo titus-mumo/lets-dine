@@ -58,7 +58,7 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
                 }
             } catch (refreshError) {
                 console.log("Failed to refresh token:", refreshError.message);
-                ToastMessage("error", "Session expired. Please login again")
+                // ToastMessage("error", "Session expired. Please login again")
                 navigate? navigate('/login'): ''
             }
         } else {
