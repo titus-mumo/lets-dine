@@ -6,6 +6,7 @@ import { ApiCall } from '../hooks/ApiCall';
 import { useAuth } from '../hooks/AuthProvider';
 import { ReservatinDetail } from '../components/ReservatinDetail';
 import { Link } from 'react-router-dom';
+import { CuisineTabs } from '../cuisineownercomponents';
 
 export const ViewReservations = () => {
 
@@ -35,7 +36,8 @@ export const ViewReservations = () => {
     }, [])
 
   return (
-        <div className='flex flex-col justify-center self-start w-full h-screen mt-9 lg:mt-0'>
+        <div className='flex flex-col justify-center self-start w-full mt-10 lg:mt-0 pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 '>
+            <CuisineTabs />
             <div className='flex flex-col justify-center items-center w-full'>
                 <p className='font-bold text-3xl poppins text-center'>Reservations Made</p>
                 <div className='overflow-y-auto overflow-x-hidden w-full md:w-5/6 lg:h-600px lg:w-700px text-center'>

@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { CuisineTabs } from '../cuisineownercomponents';
 
 
 export const Profile = () => {
@@ -62,8 +63,9 @@ export const Profile = () => {
 
 
   return (
-    <div className='w-auto flex flex-col justify-around h-full'>
+    <div className='w-auto flex flex-col justify-around h-full pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4'>
         <ToastContainer />
+        <CuisineTabs />
         <p>My Account</p>
         <p>Email: {loading? 'Loading..': email}</p>
         <p>Username: {loading? 'Loading..': userName}</p>

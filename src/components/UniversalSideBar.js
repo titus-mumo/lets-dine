@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/AuthProvider';
 import { ToastMessage } from '../utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export const UniversalSideBar = ({showMenu, sidebarItems}) => {
+export const UniversalSideBar = ({showMenu, setShowMenu, sidebarItems}) => {
   console.log(showMenu)
   // if(role){
   //   if(role === 'user'){
@@ -35,7 +35,7 @@ const ReturnItems = ({ item }) => {
   return (
     <div
       onClick={() => { navigate(item.link); }}
-      className={`flex justify-center items-center w-full text-center py-2 my-0.5 hover:cursor-pointer rounded-lg ${location.pathname === item.link ? "back" : ""}`}
+      className={`flex justify-center items-center w-full text-center py-2 my-0.5 hover:cursor-pointer rounded-lg ${location.pathname === item.link ? "bg-slate-900" : "hover:bg-slate-700 hover:transition-smooth"}`}
     >
       <p className='basis-1/3 text-right pr-2'>{item.icon}</p>
       <p className='basis-2/3 text-left'>{item.title}</p>

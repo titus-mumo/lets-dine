@@ -11,6 +11,7 @@ export {AddReview} from './AddReview'
 export {Profile} from './Profile'
 export {ChangePassword} from './ChangePassword'
 export {MapUser} from './Map'
+export {Reccomendations} from './Reccomendations'
 
 export {GeneralForums} from './GeneralForums'
 

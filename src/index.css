@@ -42,9 +42,44 @@ code {
 
 @layer components {
   .menu_tab {
-    @apply text-gray-800 cursor-pointer select-none text-center m-auto;
+    @apply text-gray-800 cursor-pointer select-none text-center m-auto text-white;
   }
   .active_menu_tab {
     @apply rounded-md text-white select-none text-center m-auto;
   }
 }
+
+.header{
+  background-color: RGB(31, 31, 31);
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+.rotate {
+  animation: spin 10s linear infinite;
+}
+
+
+.testimonial-card-container {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.testimonial-card-content {
+  background-color: #2f3e4e;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 220px; /* Adjust height as needed */
+}
+
+.testimonial-card-container:not(:first-child) {
+  opacity: 0;
+}
+

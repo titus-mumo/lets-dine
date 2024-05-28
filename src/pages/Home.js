@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { CuisineTabs } from '../cuisineownercomponents';
 
 require('dotenv').config();
 
@@ -39,27 +40,26 @@ export const Home = () => {
     }, []);
 
     return (
-        <section className='flex flex-col justify-center w-full mt-9 lg:mt-0'>
+        <section className='flex flex-col justify-center w-full mt-2 lg:mt-0  pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 '>
             <ToastContainer />
             {/* lg:fixed left-70 z-100000 top-1 right-1  */}
             {/* TODO: Add fix position to header */}
-            <div className='hidden w-full lg:flex flex-row justify-between px-3 shadow-md mt-2 lg:mt-0 mx-1 py-3 items-center rounded-md bg-gray-600 text-white'>
+            {/* <div className='hidden w-full lg:flex flex-row justify-between px-3 shadow-md mt-2 lg:mt-0 mx-1 py-3 items-center rounded-md bg-gray-600 text-white'>
                 <p className='poppins'>Welcome {user.username}</p>
                 <div className='hover:cursor-pointer' onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
                     <LogoutIcon />
                 </div>
-            </div>
-            {/* <div className=' flex flex-wrap justify-around w-full '>
-            <Link to='/cuisines' className='px-3 py-2 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins '>View Cuisines</Link>
-            <Link to='/reservations' className=' px-3 py-2 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins '>View Reservations made</Link>
             </div> */}
-            <div className="z-10000 bg-white fixed lg:relative flex items-center justify-center pt-4 w-full mx-3 top-10 lg:top-0">
+            <CuisineTabs />
+            <div className=' w-full justify-around flex'>
+            <div className="z-10000 fixed lg:relative flex items-center justify-center py-2 w-full lg:w-2/3 top-10 lg:top-0 rounded-md bg-slate-900">
                 <p className={menuTab === '' ? "active_menu_tab poppins bg-primary px-2 py-1" : "menu_tab px-2 py-1 poppins "} onClick={() => handleMenuTabs('')}>All</p>
                 <p className={menuTab === 'bakeries' ? "active_menu_tab poppins bg-primary px-2 py-1" : "menu_tab px-2 py-1 poppins "} onClick={() => handleMenuTabs('bakeries')}>Bakeries</p>
                 <p className={menuTab === 'groceries' ? "active_menu_tab poppins bg-primary px-2 py-1" : "menu_tab px-2 py-1 poppins"} onClick={() => handleMenuTabs('groceries')}>Groceries</p>
                 <p className={menuTab === 'diningout' ? "active_menu_tab poppins bg-primary px-2 py-1" : "menu_tab px-2 py-1 poppins"} onClick={() => handleMenuTabs('diningout')}>Dining Out</p>
             </div>
-            <div className='flex flex-wrap mt-30px lg:mt-12 justify-around w-full'>
+            </div>
+            <div className='flex flex-wrap mt-12 lg:mt-12 justify-around w-full'>
             {
         meals.filter((item) => menuTab !== ''? menuTab === item.category: item).map((item) => (
             <MealCard key={item.meal_id} meal={item} />

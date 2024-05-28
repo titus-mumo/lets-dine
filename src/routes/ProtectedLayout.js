@@ -11,6 +11,7 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ForumIcon from '@mui/icons-material/Forum';
+import RecommendIcon from '@mui/icons-material/Recommend';
 
 
 const CuisineOwnerSidebarItems = [
@@ -25,7 +26,7 @@ const CuisineOwnerSidebarItems = [
     icon: <StorefrontIcon />
     //TODO: Make a cuisine page
   },
-
+  
   {
     title: "Reservations",
     link: "/cuisine-owner/reservations",
@@ -69,6 +70,11 @@ const UserSidebarItems = [
     icon: <EventSeatIcon />
   },
   {
+    title: "Recommendations",
+    link: "/recommendations",
+    icon: <RecommendIcon />
+  },
+  {
     title: "Forums",
     link: "/forums",
     icon: <ForumIcon/>
@@ -99,7 +105,7 @@ export const UserLayout = () => {
     const [showMenu, setShowMenu] = useState(false)
   return (
     <div className="flex h-screen w-100vh lg:items-start flex-row">
-      <UniversalSideBar showMenu={showMenu} sidebarItems={UserSidebarItems}/>
+      <UniversalSideBar showMenu={showMenu} setShowMenu={setShowMenu} sidebarItems={UserSidebarItems}/>
       <div className='w-full h-100vh lg:ml-255px lg:mr-5px'>
         <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu}/>
         <Outlet/>
@@ -112,7 +118,7 @@ export const CuisineLayout = () => {
   const [showMenu, setShowMenu] = useState(false)
 return (
   <div className="flex h-screen w-100vh lg:items-start flex-row">
-    <UniversalSideBar showMenu={showMenu} sidebarItems={CuisineOwnerSidebarItems}/>
+    <UniversalSideBar showMenu={showMenu} setShowMenu={setShowMenu} sidebarItems={CuisineOwnerSidebarItems}/>
     <div className='w-full h-100vh lg:ml-255px lg:mr-5px'>
       <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu}/>
       <Outlet/>

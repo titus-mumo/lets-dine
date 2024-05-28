@@ -51,26 +51,26 @@ export const CuisineDetail = () => {
         fetchCuisineInfo()
     }, [params.cuisine_id])
   return (
-    <div>
+    <div className='mt-10 lg:mt-0 flex flex-col justify-center w-full'>
         <ToastContainer />
-        <div className='mb-10'>
-            <p className='pppins font-bold text-3xl'>{name}</p>
-            <p className='poppins'>{description}</p>
-            <p className='popins'>{contact}</p>
-            <p className='poppins'>{time_open}</p>
+        <div className='mb-1 flex flex-col justify-center w-full'>
+            <p className='pppins font-bold text-3xl text-center'>{name}</p>
+            <p className='poppins text-center'>{description}</p>
+            <p className='popins text-center'>{contact}</p>
+            <p className='poppins text-center'>{time_open}</p>
         </div>
-        <div className=''>
-        <Link to={`/cuisine/${cuisine_id}/menu/add`} className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Item</Link>
-            <Link to='/cuisines' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
+        <div className='flex justify-around w-full'>
+        <Link to={`/cuisine/${cuisine_id}/menu/add`} className='mx-1 px-3 py-1 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300 poppins'>Add Item</Link>
+            <Link to='/cuisines' className='mx-1 px-3 py-1 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300 poppins'>Back</Link>
         </div>
-        <div className='mt-10'>
+        <div className='mt-3'>
             <div className='flex flex-wrap justify-around'>
             {
                 cuisineMenu.map(item => <MealCard key={item.meal_id} meal={item}/>)
             }
             </div>
         </div>
-        <div className='my-10'>
+        <div className='my-2'>
             <SeeReviewCard cuisine_id = {cuisine_id}/>
         </div>
     </div>

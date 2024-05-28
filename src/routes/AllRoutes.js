@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { GeneralForums, Account, PageNotFound, Map, AddReview, ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, Profile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register, MapUser } from "../pages";
+import { Reccomendations, GeneralForums, Account, PageNotFound, Map, AddReview, ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, Profile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register, MapUser } from "../pages";
 import PrivateRoute from "./protectRoutes";
 import ProtectUserRoutes from "./ProtectUserRoutes";
 import ProtectCuisineOwnerRoutes from "./ProtectCuisineOwnerRoutes";
@@ -29,6 +29,7 @@ export const AllRoutes = () => {
             <Route path='/cuisine/:cuisine_id/add-review' element={<AddReview />} />
             <Route path='/forums' element={<GeneralForums />} />
             <Route path='/map' element={<MapUser />} />
+            <Route path='/recommendations' element={<Reccomendations />} />
             <Route path='/account' element={<Account />} />
             <Route path='*' element={<PageNotFound />} />
           </Route>

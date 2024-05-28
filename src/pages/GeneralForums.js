@@ -100,7 +100,7 @@ export const GeneralForums = () => {
       scrollToBottom();
     }, [groupedMessages]);
   return (
-    <div className='w-full h-screen flex justify-around flex-col mt-10 lg:mt-0 content-start pt-2 lg:pt-0 lg:pl-6 items-start'>
+    <div className='w-full h-screen flex justify-around flex-col mt-10 lg:mt-0 content-start pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4  items-start'>
       <CuisineTabs />
         <div className='mx-2 lg:mx-3 h-90vh md:flex lg:w-2/3  w-full h-full'>
           <div className={`${chatOpen? 'hidden': 'flex flex-col'} md:flex flex-col md:basis-1/3`}>
@@ -111,6 +111,7 @@ export const GeneralForums = () => {
                 ))}
             </ul>
             <input
+            className='w-64 border-1 border-gray-900 py-1 rounded-lg px-1 mt-4'
                 type="text"
                 placeholder="Create a new room"
                 onKeyDown={(e) => {
@@ -121,9 +122,9 @@ export const GeneralForums = () => {
                 }}
             />
             </div>
-              <div className={` ${chatOpen? 'flex': 'hidden'} w-full h-8/10 md:flex flex-col md:basis-3/5 lg:basis-2/3 rounded-md`}>
+              <div className={` ${chatOpen? 'flex': 'hidden'} w-full h-full md:h-8/10 md:flex flex-col md:basis-3/5 lg:basis-2/3 rounded-md`}>
               {currentRoom? (
-                <div className='w-full h-5/6 flex flex-col justify-between pb-4 px-2'>
+                <div className='w-full h-full md:h-5/6 flex flex-col justify-between pb-4 px-2'>
                   <div className='flex flex-start bg-slate-900 mr-2 rounded-lg text-white items-center w-full py-2 '>
                     <div className='mr-2 ml-1 md:hidden' onClick={() => {
                       setChatOpen(false) 
@@ -155,7 +156,7 @@ export const GeneralForums = () => {
                         <div ref={messagesEndRef} />
                       </div>
                       </div>
-                      <div className='flex w-full mb-2'>
+                      <div className='flex w-full mb-2 mx-1'>
                         <input
                             className='basis-4/5 border-1 border-gray-900 py-1 rounded-lg px-1'
                             type="text"
@@ -163,7 +164,7 @@ export const GeneralForums = () => {
                             onChange={e => setMessage(e.target.value)}
                             placeholder="Type a message..."
                         />
-                        <button className='basis-1/5 bg-slate-900 text-white py-2 px-3 rounded-lg shadow-md' onClick={sendMessage}>Send</button>
+                        <button className=' mr-2 basis-1/5 bg-slate-900 text-white py-2 px-3 rounded-lg shadow-md' onClick={sendMessage}>Send</button>
                       </div>
                     </div>
                     </div> 

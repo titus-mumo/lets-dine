@@ -35,7 +35,7 @@ export const CuisineHome = () => {
         getCuisineOwnedByCuisineOwner()
     }, [])
   return (
-    <div className='w-full flex justify-around flex-col '>
+    <div className='w-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6'>
         <CuisineTabs />
         <div className='w-auto my-4 flex w-full justify-center'>
             <Link to='/cuisine-owner/new' className='m-2 mb-0 poppins px-3 py-2 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300'>Add another Cuisine</Link>

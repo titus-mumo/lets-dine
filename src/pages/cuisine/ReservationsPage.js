@@ -17,7 +17,7 @@ export const ReservationsPage = () => {
 
     const fetchSideBarNames = async () => {
         try {
-            const response = await ApiCall('cuisines/owner/', 'get', token, refresh, setToken, setRefresh, navigate);
+            const response = await ApiCall('cuisines/owner/', 'get', token, refresh, setToken, setRefresh);
             if (response && response.status === 200) {
                 const names = response.data.map(item => item.name);
                 const ids = response.data.map(item => item.cuisine_id);
@@ -45,9 +45,9 @@ export const ReservationsPage = () => {
     };
 
     return (
-        <div className='w-full'>{
+        <div className='w-full h-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6'>{
             loading? 'Loading':(  
-            <div className='flex w-full flex-col mt-3'>
+            <div className='flex w-full flex-col'>
             <CuisineTabs />
             <div className='flex flex-row w-full justify-around mx-2'>
                 <div className='basis-1/5'>

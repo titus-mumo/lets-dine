@@ -7,6 +7,7 @@ import { CuisineCard } from '../components';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
+import { CuisineTabs } from '../cuisineownercomponents';
 
 require('dotenv').config()
 
@@ -34,11 +35,9 @@ export const Cuisines = () => {
         FetchCuisines();
     }, []);
   return (
-    <section className='px-2 md:px-3 lg:px-4 flex flex-col justify-center w-full mt-10 lg:mt-0'>
+    <section className='px-2 w-full md:px-3 lg:px-4 flex flex-col justify-center w-full mt-10 lg:mt-0 pt-2 lg:pt-0'>
         <ToastContainer />
-        <div className=' mt-1 lg:mt-5 w-full flex justify-center'>
-            <Link to='/home' className='px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300 poppins'>View Main menu</Link>
-        </div>
+        <CuisineTabs />
         <div className='flex flex-rol flex-wrap my-2 justify-center'>
         {
         cuisines.map((item) => (

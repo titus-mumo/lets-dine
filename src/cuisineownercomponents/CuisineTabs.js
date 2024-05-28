@@ -11,19 +11,19 @@ export const CuisineTabs = () => {
 
     const [menuTab, setMenuTab] = useState(location.pathname === '/cuisine-owner/home' ? 'cuisines': location.pathname === '/cuisine-owner/analytics' ? 'analytics' : 'reservations')
 
-    const handleMenuTabs = (link) => {
-        setMenuTab(link)
-        setTimeout(() => {
-            if(link === 'cuisines'){
-                navigate('/cuisine-owner/home')
-            }else if(link === 'analytics'){
-                navigate('/cuisine-owner/analytics')
-            }else if(link === 'reservations'){
-                navigate('/cuisine-owner/reservations')
-            }
+    // const handleMenuTabs = (link) => {
+    //     setMenuTab(link)
+    //     setTimeout(() => {
+    //         if(link === 'cuisines'){
+    //             navigate('/cuisine-owner/home')
+    //         }else if(link === 'analytics'){
+    //             navigate('/cuisine-owner/analytics')
+    //         }else if(link === 'reservations'){
+    //             navigate('/cuisine-owner/reservations')
+    //         }
 
-        }, 100) 
-    }
+    //     }, 100) 
+    // }
   return (
     <div className="w-full flex items-center justify-around space-x-6 my-4 flex-col">
         <NavBar />
