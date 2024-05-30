@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const PrivateRoute = () => {
   const user = useAuth();
   if (!user.token) {
-    ToastMessage("warning", "Please log in first")
+    ToastMessage("warning", "Please login first")
     return <Navigate to="/login" />
 };
   return (

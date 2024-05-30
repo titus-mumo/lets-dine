@@ -3,6 +3,7 @@ import { CuisineTabs, ReservationsSection } from '../../cuisineownercomponents';
 import { useAuth } from '../../hooks/AuthProvider';
 import { ApiCall } from '../../hooks/ApiCall';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '../LandingPage';
 
 export const ReservationsPage = () => {
     const [sideBarNames, setSideBarNames] = useState([]);
@@ -44,6 +45,8 @@ export const ReservationsPage = () => {
         setActive(index)
     };
 
+    
+
     return (
         <div className='w-full h-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6'>{
             loading? 'Loading':(  
@@ -51,7 +54,7 @@ export const ReservationsPage = () => {
             <CuisineTabs />
             <div className='flex flex-row w-full justify-around mx-2'>
                 <div className='basis-1/5'>
-                    {loading ? 'Loading...' : sideBarNames.map((item, index) => (
+                    {loading ? <LoadingSpinner /> : sideBarNames.map((item, index) => (
                         <p key={index} onClick={() => handleClick(cuisineIds[index], index)} className={active === index? 'poppins text-blue-500 hover:cursor-pointer':'hover:cursor-pointer poppins'}>
                             {item}
                         </p>

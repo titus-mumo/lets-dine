@@ -8,6 +8,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { CuisineTabs } from '../cuisineownercomponents';
+import LoadingSpinner from './LandingPage';
 
 
 export const Profile = () => {
@@ -35,10 +36,19 @@ export const Profile = () => {
         })
         ToastMessage("success", "Logout Successful")
         setTimeout(() => {
-            navigate('/login')
             setTimeout(() => {logOut()}, 1000)
         }, 2000)
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000)
+      }, [])
+    
+      if (loading){
+        return <LoadingSpinner />
+      }
 
 
     const fetchUserInfo = () => {

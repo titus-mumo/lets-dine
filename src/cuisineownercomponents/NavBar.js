@@ -29,8 +29,7 @@ export const NavBar = () => {
       })
       ToastMessage("success", "Logout Successful")
       setTimeout(() => {
-          navigate('/login')
-          setTimeout(() => {logOut()}, 1000)
+          logOut()
       }, 2000)
   }
   return (

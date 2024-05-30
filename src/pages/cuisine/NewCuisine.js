@@ -41,7 +41,9 @@ export const NewCuisine = () => {
             }
         })
         .catch((error) => {
-            return console.log("An error occured, new cuisine")
+          console.group(error)
+            console.log("An error occured, new cuisine")
+            ToastMessage("error", error.message || error.response.error.detail)
         });
     }
 

@@ -5,6 +5,7 @@ import { ApiCall } from '../../hooks/ApiCall'
 import { CuisineCard } from '../../cuisineownercomponents'
 import { Link, useNavigate } from 'react-router-dom'
 import { CuisineTabs } from '../../cuisineownercomponents'
+import LoadingSpinner from '../LandingPage'
 
 
 export const CuisineHome = () => {
@@ -34,6 +35,16 @@ export const CuisineHome = () => {
     useEffect(() => {
         getCuisineOwnedByCuisineOwner()
     }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000)
+      }, [])
+    
+      if (loading){
+        return <LoadingSpinner />
+      }
   return (
     <div className='w-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6'>
         <CuisineTabs />

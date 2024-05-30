@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("refresh");
     localStorage.removeItem("user");
     localStorage.removeItem("role");
-    setTimeout(() => {navigate("/login")}, 2000)
+    navigate('/')
     
   };
 

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { CuisineTabs } from '../../cuisineownercomponents';
 import { Bar } from 'react-chartjs-2';
-import { useState, useEffect } from 'react';
 import { ApiCall } from '../../hooks/ApiCall';
 import { useAuth } from '../../hooks/AuthProvider';
+import LoadingSpinner from '../LandingPage';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -15,7 +15,7 @@ import {
 } from 'chart.js';
 import dayjs from 'dayjs';
 
-// Register the necessary components
+// Register the necessary components for ChartJS
 ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -28,98 +28,91 @@ ChartJS.register(
 export const CuisineAnalytics = () => {
     const [cuisinesData, setCuisinesData] = useState([]);
     const [reviewsData, setReviewsData] = useState([]);
-    const userAuth = useAuth();
-    const { token, refresh, setToken, setRefresh } = userAuth;
+    const [loading, setLoading] = useState(true);
+    const { token, refresh, setToken, setRefresh } = useAuth();
 
-    const reviewLables = ['negative', 'neutral', 'positive']
+    const reviewLabels = ['negative', 'neutral', 'positive'];
 
-    const getCuisineIds = () => {
-        ApiCall('cuisines/owner', 'get', token, refresh, setToken, setRefresh)
-            .then(response => {
+    useEffect(() => {
+        const fetchCuisineData = async () => {
+            try {
+                const response = await ApiCall('cuisines/owner', 'get', token, refresh, setToken, setRefresh);
                 if (response.status === 200) {
                     const cuisinePromises = response.data.map(cuisine =>
-                        getData(cuisine.cuisine_id).then(data => ({
-                            cuisineId: cuisine.cuisine_id,
-                            cuisineName: cuisine.name, // assuming the name field is available
-                            data
-                        }))
+                        fetchCuisineDetails(cuisine.cuisine_id, cuisine.name)
                     );
-    
+
                     const reviewPromises = response.data.map(cuisine =>
-                        getReviews(cuisine.cuisine_id).then(data => ({
-                            cuisineId: cuisine.cuisine_id,
-                            cuisineName: cuisine.name,
-                            data
-                        }))
+                        fetchCuisineReviews(cuisine.cuisine_id, cuisine.name)
                     );
-    
-                    Promise.all(cuisinePromises).then(setCuisinesData);
-                    Promise.all(reviewPromises).then(setReviewsData);
+
+                    const cuisines = await Promise.all(cuisinePromises);
+                    const reviews = await Promise.all(reviewPromises);
+
+                    setCuisinesData(cuisines);
+                    setReviewsData(reviews);
                 }
-            })
-            .catch(error => {
-                console.log("Error occurred", error.response?.data?.message || "getting cuisines ids");
-            });
+            } catch (error) {
+                console.error("Error occurred:", error.response?.data?.message || "getting cuisines ids");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCuisineData();
+    }, [token, refresh, setToken, setRefresh]);
+
+    const fetchCuisineDetails = async (id, name) => {
+        try {
+            const response = await ApiCall(`reservation/cuisine/${id}/`, 'get', token, refresh, setToken, setRefresh);
+            const reservations = response.data;
+
+            const counts = reservations.reduce((acc, curr) => {
+                const date = dayjs(curr.time).format('YYYY-MM-DD');
+                acc[date] = (acc[date] || 0) + 1;
+                return acc;
+            }, {});
+
+            const sortedData = Object.keys(counts)
+                .sort((a, b) => dayjs(a).diff(dayjs(b)))
+                .map(date => ({ date, count: counts[date] }));
+
+            const startDate = dayjs().format('YYYY-MM-DD');
+            const filteredData = sortedData.filter(d => dayjs(d.date).isAfter(dayjs(startDate).subtract(1, 'day')));
+
+            return { cuisineId: id, cuisineName: name, data: filteredData };
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            window.location.reload();
+        }
+    };
+
+    const fetchCuisineReviews = async (id, name) => {
+        try {
+            const response = await ApiCall(`reviews/${id}/`, 'get', token, refresh, setToken, setRefresh);
+            const reviews = response.data;
+
+            const categorizedReviews = reviews.reduce((acc, review) => {
+                if (review.score > 0.3) {
+                    acc.positive++;
+                } else if (review.score < -0.3) {
+                    acc.negative++;
+                } else {
+                    acc.neutral++;
+                }
+                return acc;
+            }, { negative: 0, neutral: 0, positive: 0 });
+
+            return { cuisineId: id, cuisineName: name, data: categorizedReviews };
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+            window.location.reload();
+        }
+    };
+
+    if (loading) {
+        return <LoadingSpinner />;
     }
-
-    const getData = (id) => {
-        return ApiCall(`reservation/cuisine/${id}/`, 'get', token, refresh, setToken, setRefresh)
-            .then(response => {
-                const reservations = response.data;
-                const counts = reservations.reduce((acc, curr) => {
-                    const date = dayjs(curr.time).format('YYYY-MM-DD');
-                    acc[date] = (acc[date] || 0) + 1;
-                    return acc;
-                }, {});
-                const sortedData = Object.keys(counts)
-                    .sort((a, b) => dayjs(a).diff(dayjs(b)))
-                    .map(date => ({ date, count: counts[date] }));
-                const startDate = dayjs().format('YYYY-MM-DD');
-                return sortedData.filter(d => dayjs(d.date).isAfter(dayjs(startDate).subtract(1, 'day')));
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                window.location.reload()
-            });
-    };
-
-    const getReviews = (id) => {
-        return ApiCall(`reviews/${id}/`, 'get', token, refresh, setToken, setRefresh)
-            .then(response => {
-                const reviews = response.data;
-    
-                // Initialize counters for each category
-                let positiveCount = 0;
-                let negativeCount = 0;
-                let neutralCount = 0;
-    
-                // Categorize each review
-                reviews.forEach(review => {
-                    if (review.score > 0.3) {
-                        positiveCount++;
-                    } else if (review.score < -0.3) {
-                        negativeCount++;
-                    } else {
-                        neutralCount++;
-                    }
-                });
-    
-                // Return categorized data
-                return {
-                    negative: negativeCount,
-                    neutral: neutralCount,
-                    positive: positiveCount
-                };
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-                window.location.reload();
-            });
-    };
-    
-    useEffect(() => {
-        getCuisineIds();
-    }, []);
 
     const predefinedColors = [
         'rgba(255, 99, 132, 0.8)',
@@ -214,7 +207,7 @@ export const CuisineAnalytics = () => {
             <div className="w-full flex justify-around flex-wrap">
                 {reviewsData.map((cuisine, index) => {
                     const chartData = {
-                        labels: reviewLables.map(label => label),
+                        labels: reviewLabels.map(label => label),
                         datasets: [{
                             label: `Reviews for ${cuisine.cuisineName}`,
                             data: cuisine.data,

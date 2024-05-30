@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { ToastMessage } from '../utils';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from './LandingPage';
 
 export const AddReview = () => {
     const params = useParams();
@@ -28,6 +29,16 @@ export const AddReview = () => {
             window.location.reload()
         })
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+          setLoading(false)
+        }, 2000)
+      }, [])
+    
+      if (loading){
+        return <LoadingSpinner />
+      }
 
     const handleAddReview = (e) => {26
         e.preventDefault()

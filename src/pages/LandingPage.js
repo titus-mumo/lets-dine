@@ -11,9 +11,26 @@ import { Call } from '@mui/icons-material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import moment from 'moment/moment'
+import HomeImage from '../assets/BOSQ.jpg'
+import axios from 'axios'
+import { ToastMessage } from '../utils'
+
+require('dotenv').config()
 
 
 export const LandingPage = () => {
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000)
+  }, [])
+
+  if (loading){
+    return <LoadingSpinner />
+  }
+
   return (
     <div className='flex flex-col w-screen justify-center'>
       <NavBar />
@@ -31,14 +48,17 @@ export const LandingPage = () => {
 
 const Home = () => {
   return(
-    <div className='home flex flex-col lg:flex-row justify-between items-center w-full bg-gradient-to-r from-zinc-800 to-sky-900 py-64'>
-      <div className='w-full flex justify-center'>
-        <div className='flex flex-col justify-center w-full'>
+    <div className='home flex flex-col lg:flex-row justify-between items-center w-full bg-gradient-to-r from-zinc-800 to-sky-900 py-10 md:py-16 lg:py-36'>
+      <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row'>
+        <div className='flex flex-col justify-center w-full basis-3/5'>
           <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center text-white'>EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.</h2>
           <p className='text-lg lg:text-xl mb-6 text-center text-white'>Enjoy authentic dishes from around the globe. Discover new flavors and savor the richness of different cultures.</p>
           <div className='flex justify-center'>
-            <Link to='/register' className="font-medium w-auto px-6 py-3 text-white rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700">GET STARTED</Link>
+            <Link to='/register' className="font-medium w-auto px-6 py-3 text-white rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105">GET STARTED</Link>
           </div>
+        </div>
+        <div className='self-center basis-2/5 px-5 py-10 md:px-20 md:pb-5 md:pt-0 lg:p-16'>
+          <img src={HomeImage} className='rounded-lg transition-transformation transformation-transition lg:hover:scale-105 hover:shadow-lg ease-in-out duration-1000 hover:shadow-gray-600'></img>
         </div>
       </div>
     </div>
@@ -79,8 +99,39 @@ const AboutUs = () => {
 
 
 const Contact = () => {
+  const base_url = process.env.BASE_URL
+
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [subject, setSubject] = useState('')
+  const [message, setMessage] = useState('')
+
+
   const handleContactForm = (e) => {
     e.preventDefault()
+    const data = {
+      name, 
+      email,
+      subject,
+      message
+    }
+
+    axios.post(base_url + 'talk_to_us/', data)
+    .then(function(response){
+      if(response.status === 201){
+        setMessage('')
+        setSubject('')
+        setEmail('')
+        setName('')
+        ToastMessage("success", "Message received. We will get back to you shortly.")
+      }
+    })
+    .catch((error) => {
+      ToastMessage("error", "Something went wrong")
+    });
+
+
+    
   }
   return(
     <div className='contact w-full py-5 md:py-20 lg:py-24  bg-gradient-to-b from-stone-700 to-teal-800'>
@@ -91,11 +142,11 @@ const Contact = () => {
           <p className='my-2'>Fill the form below, and we will get back to you as soon as possible</p>
           <form onSubmit={(e) => handleContactForm(e)} className='w-full lg:w-2/3'>
             <div className='flex flex-col lg:flex-row lg:space-x-2 w-full'>
-              <input placeholder='Name' type='text' className='mt-3 basis-1/2 p-2 border rounded-lg' required />
-              <input placeholder='Email' type='email' className='mt-3 basis-1/2 p-2 border rounded-lg' required />
+              <input placeholder='Name*' type='text' className='mt-3 basis-1/2 p-2 border rounded-lg' value={name} onChange={(e) => setName(e.target.value)} required />
+              <input placeholder='Email*' type='email' className='mt-3 basis-1/2 p-2 border rounded-lg' value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
-            <input placeholder='Subject' type='text' className='mt-3 p-2 border rounded-lg w-full floating-input' required /><br />
-            <textarea placeholder='Message' className='mt-3 p-2 border rounded-lg h-32 w-full' required></textarea><br />
+            <input placeholder='Subject*' type='text' className='mt-3 p-2 border rounded-lg w-full floating-input' value={subject} onChange={(e) => setSubject(e.target.value)} required /><br />
+            <textarea placeholder='Message*' className='mt-3 p-2 border rounded-lg h-32 w-full' value={message} onChange={(e) => setMessage(e.target.value)} required></textarea><br />
             <div className='w-full flex justify-center'>
               <button type='submit' className='text-center bg-slate-900 py-2 text-white rounded-md shadow-md px-3 my-2'>Send Message</button>
             </div>
@@ -261,11 +312,13 @@ const WhyUs = () => {
     startInterval();
   };
 
+  
+
   return (
-    <div className='whyus flex justify-center w-full py-6 md:py-10 lg:py-14 bg-stone-700'>
+    <div className='whyus flex justify-center w-full pb-6 md:py-10 lg:py-14 bg-stone-700 px-4 md:pb-16 lg:pb-20'>
     <div className='flex flex-col justify-around w-full self-center'>
     <h1 className='text-center text-2xl font-bold my-4 text-white'>WHY CHOOSE US</h1>
-      <div className='w-2/3 lg:w-700px flex justify-center self-center '>
+      <div className='w-8/9 md:w-2/3 lg:w-700px flex justify-center self-center '>
       <TestimonialCard testimonial={testimonials[activeIndex]} />
       </div>
       <div className="flex justify-center mt-4">
@@ -359,3 +412,13 @@ const Footer = () => {
     </div>
   )
 }
+
+const LoadingSpinner = () => {
+  return (
+    <div className="flex justify-center items-center h-screen">
+      <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+    </div>
+  )
+}
+
+export default LoadingSpinner;

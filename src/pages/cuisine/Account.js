@@ -27,7 +27,6 @@ export const Account = () => {
       })
       ToastMessage("success", "Logout Successful")
       setTimeout(() => {
-          navigate('/login')
           setTimeout(() => {logOut()}, 1000)
       }, 2000)
   }
