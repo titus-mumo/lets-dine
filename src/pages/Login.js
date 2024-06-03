@@ -87,7 +87,7 @@ export const Login = () => {
                             <label htmlFor="remember" className="poppins text-gray-500 dark:text-gray-300 poppins ">Remember me</label>
                           </div>
                       </div>
-                      <a href="/" className=" poppins text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                      <a href="/forgot-password" className=" poppins text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                   </div>
                   <div className='flex items-center flex-col justify around m-auto'>
                   <button type="submit" className="w-full py-2 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins ">Sign in</button>

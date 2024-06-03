@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Reccomendations, GeneralForums, Account, PageNotFound, Map, AddReview, ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, Profile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register, MapUser } from "../pages";
+import { ForgotPassword, Reccomendations, GeneralForums, Account, PageNotFound, Map, AddReview, ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, Profile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register, MapUser } from "../pages";
 import PrivateRoute from "./protectRoutes";
 import ProtectUserRoutes from "./ProtectUserRoutes";
 import ProtectCuisineOwnerRoutes from "./ProtectCuisineOwnerRoutes";
@@ -12,9 +12,10 @@ import { CuisineLayout } from "./ProtectedLayout";
 export const AllRoutes = () => {
   return (
     <Routes>
-          <Route path='/' element={<LandingPage />} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
       <Route element={<PrivateRoute />} >
         <Route element={<UserLayout />}>
           <Route element={<ProtectUserRoutes />} >
