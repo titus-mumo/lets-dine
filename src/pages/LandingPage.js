@@ -20,6 +20,7 @@ require('dotenv').config()
 
 export const LandingPage = () => {
   const [loading, setLoading] = useState(true)
+  const divRefs = useRef({})
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,20 +34,22 @@ export const LandingPage = () => {
 
   return (
     <div className='flex flex-col w-screen justify-center'>
-      <NavBar />
-      <Home />
-      <AboutUs />
-      <FAQs />
-      <WhyUs />
-      <Contact />
-      <Footer />
+      <NavBar divRefs={divRefs} />
+      <div className='flex flex-col w-screen justify-center mt-80px'>
+        <Home divRefs={divRefs} />
+        <AboutUs divRefs={divRefs} />
+        <FAQs divRefs={divRefs} />
+        <Pricing divRefs={divRefs} />
+        <WhyUs divRefs={divRefs} />
+        <Contact divRefs={divRefs} />
+        <Footer />
+      </div>
     </div>
-
   )
 }
 
 
-const Home = () => {
+const Home = ({divRefs}) => {
   return(
     <div className='home flex flex-col lg:flex-row justify-between items-center w-full bg-gradient-to-r from-zinc-800 to-sky-900 py-10 md:py-16 lg:py-36'>
       <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row'>
@@ -65,9 +68,9 @@ const Home = () => {
   )
 }
 
-const AboutUs = () => {
+const AboutUs = ({divRefs}) => {
   return(
-    <div className='about-us w-full p-3 lg:py-20 bg-gradient-to-b from-zinc-900 to-zinc-700'>
+    <div ref={(el) => (divRefs.current['about-us'] = el)} id='about-us' className='about-us w-full p-3 py-5 md:py-20 lg:py-24 bg-gradient-to-b from-zinc-900 to-zinc-700'>
       <h1 className='w-full text-center text-2xl font-bold mt-4 mb-2 text-white'>ABOUT US</h1>
       <p className='w-full text-center text-lg font-medium mb-4 text-white'>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p>
       <div className='flex justify-center items-center lg:justify-around flex-col md:flex-row'>
@@ -98,7 +101,7 @@ const AboutUs = () => {
 }
 
 
-const Contact = () => {
+const Contact = ({divRefs}) => {
   const base_url = process.env.BASE_URL
 
   const [name, setName] = useState('')
@@ -134,7 +137,7 @@ const Contact = () => {
     
   }
   return(
-    <div className='contact w-full py-5 md:py-20 lg:py-24  bg-gradient-to-b from-stone-700 to-teal-800'>
+    <div ref={(el) => (divRefs.current['contact'] = el)} id='contact' className='contact w-full py-5 md:py-20 lg:py-24  bg-gradient-to-b from-teal-400 to-teal-900'>
       <h1 className='text-center text-2xl font-bold my-4'>CONTACT</h1>
       <div className='flex flex-col lg:flex-row-reverse w-full justify-center items-start lg:items-center'>
         <div className='basis-full lg:basis-1/2 self-center p-4'>
@@ -211,7 +214,7 @@ const ethnicEatsData = [
     }
   ]
 
-const FAQs = () => {
+const FAQs = ({divRefs}) => {
   const [active, setActive] = useState('')
   const handleClick = (index) => {
       if(index === active){
@@ -223,7 +226,7 @@ const FAQs = () => {
       console.log('clicked')
   }
   return(
-    <div className='faqs w-full flex justify-center self-center items-center bg-gradient-to-b from-zinc-700 to-stone-700'>
+    <div ref={(el) => (divRefs.current['faqs'] = el)} id='faqs' className='faqs w-full flex justify-center self-center items-center bg-gradient-to-b from-zinc-700 to-stone-700 py-5 md:py-20 lg:py-24'>
     <div className='overflow-x-hidden overflow-y-hidden w-700px h-800px p-2'>
     <div className='w-full flex flex-col justify-center self-center'>
       <h1 className='text-center text-2xl font-bold my-4 text-white'>FAQs</h1>
@@ -280,7 +283,7 @@ const testimonials = [
 ];
 
 
-const WhyUs = () => {
+const WhyUs = ({divRefs}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const intervalRef = useRef(null);
 
@@ -315,9 +318,9 @@ const WhyUs = () => {
   
 
   return (
-    <div className='whyus flex justify-center w-full pb-6 md:py-10 lg:py-14 bg-stone-700 px-4 md:pb-16 lg:pb-20'>
+    <div ref={(el) => (divRefs.current['whyus'] = el)} id='whyus' className='whyus flex justify-center w-full pb-6 md:py-10 lg:py-14 bg-gradient-to-b from-teal-300 to-teal-400 px-4 md:pb-16 lg:pb-20'>
     <div className='flex flex-col justify-around w-full self-center'>
-    <h1 className='text-center text-2xl font-bold my-4 text-white'>WHY CHOOSE US</h1>
+    <h1 className='text-center text-2xl font-bold my-4'>WHY CHOOSE US</h1>
       <div className='w-8/9 md:w-2/3 lg:w-700px flex justify-center self-center '>
       <TestimonialCard testimonial={testimonials[activeIndex]} />
       </div>
@@ -422,3 +425,80 @@ const LoadingSpinner = () => {
 }
 
 export default LoadingSpinner;
+
+
+
+const Pricing = ({divRefs}) => {
+  const [role, setRole] = useState('User');
+
+  return (
+    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing h-450px flex flex-col py-3 bg-gradient-to-b from-stone-700 to-stone-500 py-5 md:py-20 lg:py-24">
+      <h1 className='text-center text-2xl font-bold my-4'>OUR PACKAGES</h1>
+      <div className="flex justify-center ml-2 mb-10">
+        <select
+          name="role"
+          id="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          required
+          style={{ width: '150px'}} // Add this line for width adjustment
+        >
+          <option value="User" className='p-1 rounded-md'>User</option>
+          <option value="Cuisine Owner" className='p-1 rounded-md'>Cuisine Owner</option>
+        </select>
+      </div>
+      <div>
+        {role === 'User' ? <UserPricing /> : <CuisineOwnerPricing />}
+      </div>
+    </div>
+  );
+};
+
+const UserPricing = () => {
+
+  return(
+    <div className='flex flex-row flex-wrap justify-around'>
+        <PricingComponent name='Basic' price='0' features={['Add Menu', 'Forums', 'Add Reservations', 'Navigation', 'With Adds']}/>
+        <PricingComponent link='https://buy.stripe.com/test_aEUdRq1N4gzB4Xm5kk' name='Standard' price='9.99' features={['Add Cuisine', 'Forums', 'Add Menu','Recommend Meals', 'Recommend Cuisines']}/>
+    </div>
+  )
+
+}
+
+const CuisineOwnerPricing = () => {
+
+  return(
+    <div className='flex flex-row flex-wrap justify-around'>
+        <PricingComponent link='https://buy.stripe.com/test_aEUdRq1N4gzB4Xm5kk' name='Standard' price='9.99' features={['Add Cuisine', 'Add Menu']}/>
+        <PricingComponent link='https://buy.stripe.com/test_bIYeVu8bs6Z175u3cd' name='Professional' price='14.99' features={['Add Cuisine', 'Add Menu',' Data Analytics']}/>
+        <PricingComponent link='https://buy.stripe.com/test_7sI00A77ofvx2Pe3ce' name='Elite' price='20.99' features={['Add Cuisine', 'Add Menu', 'Data Analytics', 'Free Adverts']}/>
+    </div>
+  )
+}
+
+const PricingComponent = ({link, name, price, features}) => {
+  
+  return(
+    <div className=''>
+      <div className='w-300px h-400px border-2 border-slate-900 rounded-lg shadow-md tansition:transformation duration-500 hover:scale-105 hover:cursor-pointer hover:bg-slate-900 hover:text-white p-3 my-4'>
+        <p className='font-semibold text-md'>{name}</p>
+        <p>
+          <span className='font-bold text-3xl'>£ {price}</span><br></br>
+          <span className='text-gray-700'>per month</span>
+        </p>
+        <div>
+          <p className='font-medium text-md'>Featues</p>
+          <ul className='pl-5'>
+            {
+              features.map((feature, index) => <li key={index} className='list-disc'>{feature}</li>)
+            }
+          </ul>
+        </div>
+        {
+          link?  <a href={link} className='text-blue-800'>Proceed</a>: <Link to='/login' className='text-blue-800' >Proceed</Link>
+        }
+      </div>
+    </div>
+  )
+}

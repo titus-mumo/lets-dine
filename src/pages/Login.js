@@ -30,7 +30,6 @@ export const Login = () => {
         }
         const input = {username: username, password: password}
         const grant = await auth.loginAction(input);
-        console.log(grant)
         if(!grant){
             return
         }else if(grant.error){
@@ -39,7 +38,6 @@ export const Login = () => {
             ApiCall('auth/user/', 'get', grant.token, grant.refresh, setToken, setRefresh)
             .then(function(response){
                 if(response.status === 200){
-                    console.log(response.data)
                     if(response.data.groups[0]){
                         localStorage.setItem("role", "owner");
                         setTimeout(() => {navigate('/cuisine-owner/home')}, 1500)
@@ -52,7 +50,7 @@ export const Login = () => {
                 }
             })
             .catch((error) => {
-                return console.log("Someting went wrong")
+                return console.log("Something went wrong")
             })
         }
         return;

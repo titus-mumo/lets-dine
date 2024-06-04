@@ -6,6 +6,7 @@ module.exports = {
       width: {
         '200px': '200px',
         '250px': '250px',
+        '300px':'300px',
         '500px': '500px',
         '600px': '600px',
         '700px': '700px',
@@ -16,6 +17,8 @@ module.exports = {
         "30px":"7rem",
       },
       height: {
+        '300px':'300px',
+        '400px':'400px',
         '600px': '600px',
         '700px': '700px',
         '800px':'800px',

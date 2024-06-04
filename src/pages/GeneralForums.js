@@ -56,7 +56,7 @@ export const GeneralForums = () => {
       }
   
       // Create a new WebSocket connection
-      ws.current = new WebSocket(`ws://localhost:8000/ws/chat/${room}/`);
+      ws.current = new WebSocket(`ws://localhost:10000/ws/chat/${room}/`);
   
       // Define the WebSocket message event handler
       ws.current.onmessage = (e) => {

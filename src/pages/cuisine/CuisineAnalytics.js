@@ -77,19 +77,20 @@ export const CuisineAnalytics = () => {
                 .sort((a, b) => dayjs(a).diff(dayjs(b)))
                 .map(date => ({ date, count: counts[date] }));
 
+
             const startDate = dayjs().format('YYYY-MM-DD');
             const filteredData = sortedData.filter(d => dayjs(d.date).isAfter(dayjs(startDate).subtract(1, 'day')));
 
             return { cuisineId: id, cuisineName: name, data: filteredData };
         } catch (error) {
-            console.error('Error fetching data:', error);
-            window.location.reload();
+            console.error('Error fetching data:', error)
         }
     };
 
     const fetchCuisineReviews = async (id, name) => {
         try {
             const response = await ApiCall(`reviews/${id}/`, 'get', token, refresh, setToken, setRefresh);
+            
             const reviews = response.data;
 
             const categorizedReviews = reviews.reduce((acc, review) => {
@@ -106,13 +107,12 @@ export const CuisineAnalytics = () => {
             return { cuisineId: id, cuisineName: name, data: categorizedReviews };
         } catch (error) {
             console.error('Error fetching reviews:', error);
-            window.location.reload();
         }
     };
 
-    if (loading) {
-        return <LoadingSpinner />;
-    }
+    // if (loading) {
+    //     return <LoadingSpinner />;
+    // }
 
     const predefinedColors = [
         'rgba(255, 99, 132, 0.8)',
@@ -186,7 +186,7 @@ export const CuisineAnalytics = () => {
                     const chartData = {
                         labels: cuisine.data.map(d => d.date),
                         datasets: [{
-                            label: `Number of Reservations for ${cuisine.cuisineName}`,
+                            label: `Number of Reservations for Cusisne ${cuisine.cuisineName}`,
                             data: cuisine.data.map(d => d.count),
                             backgroundColor: cuisine.data.map((_, i) => predefinedColors[i % predefinedColors.length]),
                             borderColor: predefinedColors[index % predefinedColors.length].replace('0.8', '1'),

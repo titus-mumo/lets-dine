@@ -18,7 +18,6 @@ export const CuisineHome = () => {
     const getCuisineOwnedByCuisineOwner = async() => {
         ApiCall('cuisines/owner/', 'get', token, refresh, setToken, setRefresh)
         .then(function(response){
-            console.log(response)
             if(response.status === 200 && response.data.length > 0){
                 setOwnedCusine(response.data)
                 setLoading(false)

@@ -4,16 +4,6 @@ import { ToastMessage } from '../utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export const UniversalSideBar = ({showMenu, setShowMenu, sidebarItems}) => {
-  console.log(showMenu)
-  // if(role){
-  //   if(role === 'user'){
-  //     setSidebarItems(User)
-  //   } else if(role === 'owner'){
-  //     setSidebarItems(CuisineOwner)
-  //   } else{
-  //     return ToastMessage("error", "Something went wrong")
-  //   }
-  // }
 
   return (
     <div className={`z-100000 ${showMenu === false? 'hidden': 'block top-9 w-200px'} lg:block lg:w-250px bg-gray-800 text-white flex items-start rounded-lg fixed lg:top-0.5 left-0.5`}>

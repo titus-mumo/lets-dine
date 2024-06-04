@@ -17,7 +17,7 @@ export const ReservationsSection = ({cuisine_id}) => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const sortedData = response.data
-        .filter(item => new Date(item.time) >= today)
+        //.filter(item => new Date(item.time) >= today)
         .sort((a, b) => new Date(a.time) - new Date(b.time));
         setReservationList(sortedData)
       }else{
