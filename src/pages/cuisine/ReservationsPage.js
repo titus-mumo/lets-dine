@@ -51,7 +51,6 @@ export const ReservationsPage = () => {
         <div className='w-full h-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6'>{
             loading? 'Loading':(  
             <div className='flex w-full flex-col'>
-            <CuisineTabs />
             <div className='flex flex-row w-full justify-around mx-2'>
                 <div className='basis-1/5'>
                     {loading ? <LoadingSpinner /> : sideBarNames.map((item, index) => (

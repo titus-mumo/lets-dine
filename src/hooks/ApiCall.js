@@ -11,7 +11,7 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
     const headers = {
         ...options.headers,
         "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
+        "Content-Type": endpoint === 'meals/' || endpoint === 'cuisines/'? 'multipart/form-data':"application/json"
     };
 
     const api = axios.create({

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { ToastMessage } from '../utils'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,7 +8,6 @@ import { useAuth } from '../hooks/AuthProvider';
 import moment from 'moment'
 
 export const Reservation = () => {
-    const navigate = useNavigate();
     const user = useAuth()
     const {token, refresh, setToken, setRefresh} = user
 
@@ -34,7 +33,7 @@ export const Reservation = () => {
                 total_seats: totatSeats,
                 time: dateTime,
             }
-        ApiCall(`reservation/user/`, 'post', token, refresh, setToken, setRefresh, data, navigate)
+        ApiCall(`reservation/user/`, 'post', token, refresh, setToken, setRefresh, data)
         .then(function(response){
             const {status, data} = response
             if(status === 201){
@@ -62,9 +61,9 @@ export const Reservation = () => {
         fetchCuisineInfo();
     }, [])
   return (
-    <div>
+    <div className='w-full flex flex-col justify-center'>
         <ToastContainer />
-        <div className='h-screen flex flex-col lg:flex-row justify-around flex-wrap items-center'>
+        <div className='flex flex-col lg:flex-row mt-10 justify-around lg:mt-0 flex-wrap items-center w-full lg:w-800px self-center'>
             <div>
                 <p className='poppins'>{name}</p>
                 <p className='poppins'>{description}</p>

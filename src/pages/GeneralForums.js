@@ -101,7 +101,6 @@ export const GeneralForums = () => {
     }, [groupedMessages]);
   return (
     <div className='w-full h-screen flex justify-around flex-col mt-10 lg:mt-0 content-start pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4  items-start'>
-      <CuisineTabs />
         <div className='mx-2 lg:mx-3 h-90vh md:flex lg:w-2/3  w-full h-full'>
           <div className={`${chatOpen? 'hidden': 'flex flex-col'} md:flex flex-col md:basis-1/3`}>
             <h1>Chat Rooms</h1>

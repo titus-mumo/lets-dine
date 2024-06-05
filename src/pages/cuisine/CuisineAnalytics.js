@@ -177,7 +177,6 @@ export const CuisineAnalytics = () => {
 
     return (
         <div className="w-full h-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6">
-            <CuisineTabs />
             <div className='flex justify-center w-full'>
             <p className="text-2xl font-bold mt-4 mb-6">Reservation Analytics</p>
             </div>

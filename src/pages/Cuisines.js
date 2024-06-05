@@ -37,7 +37,6 @@ export const Cuisines = () => {
   return (
     <section className='px-2 w-full md:px-3 lg:px-4 flex flex-col justify-center w-full mt-10 lg:mt-0 pt-2 lg:pt-0'>
         <ToastContainer />
-        <CuisineTabs />
         <div className='flex flex-rol flex-wrap my-2 justify-center'>
         {
         cuisines.map((item) => (

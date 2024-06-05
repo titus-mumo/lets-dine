@@ -12,6 +12,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import ForumIcon from '@mui/icons-material/Forum';
 import RecommendIcon from '@mui/icons-material/Recommend';
+import { CuisineTabs } from '../cuisineownercomponents';
 
 
 const CuisineOwnerSidebarItems = [
@@ -107,6 +108,7 @@ export const UserLayout = () => {
     <div className="flex h-screen w-100vh lg:items-start flex-row">
       <UniversalSideBar showMenu={showMenu} setShowMenu={setShowMenu} sidebarItems={UserSidebarItems}/>
       <div className='w-full h-100vh lg:ml-255px lg:mr-5px'>
+        <CuisineTabs />
         <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu}/>
         <Outlet/>
         </div>
@@ -120,6 +122,7 @@ return (
   <div className="flex h-screen w-100vh lg:items-start flex-row">
     <UniversalSideBar showMenu={showMenu} setShowMenu={setShowMenu} sidebarItems={CuisineOwnerSidebarItems}/>
     <div className='w-full h-100vh lg:ml-255px lg:mr-5px'>
+      <CuisineTabs />
       <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu}/>
       <Outlet/>
       </div>

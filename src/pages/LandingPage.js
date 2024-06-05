@@ -226,7 +226,7 @@ const FAQs = ({divRefs}) => {
       console.log('clicked')
   }
   return(
-    <div ref={(el) => (divRefs.current['faqs'] = el)} id='faqs' className='faqs w-full flex justify-center self-center items-center bg-gradient-to-b from-zinc-700 to-stone-700 py-5 md:py-20 lg:py-24'>
+    <div ref={(el) => (divRefs.current['faqs'] = el)} id='faqs' className='faqs w-full flex justify-center self-center items-center bg-gradient-to-b from-zinc-700 to-stone-700 pt-10 pb-13 md:py-20 lg:py-24'>
     <div className='overflow-x-hidden overflow-y-hidden w-700px h-800px p-2'>
     <div className='w-full flex flex-col justify-center self-center'>
       <h1 className='text-center text-2xl font-bold my-4 text-white'>FAQs</h1>
@@ -235,7 +235,7 @@ const FAQs = ({divRefs}) => {
       {ethnicEatsData.map((qa, index) => (
         <div key={index} className={`w-full flex flex-col my-2 p-4 border-2 transition-transformation duration-1000 rounded ${active === index? 'border-pink-700': ''}`}>
           <div className='flex justify-between items-center'>
-            <p className='break-words w-11/12 text-white'>{qa.question}</p>
+            <p className='break-words w-11/12 text-white text-sm md:text-base'>{qa.question}</p>
             <div onClick={() => handleClick(index)} className='hover:cursor-pointer transition-transform duration-1000'>
               {active === index ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </div>
@@ -243,7 +243,7 @@ const FAQs = ({divRefs}) => {
           <div
             className={`overflow-hidden  transition-max-height duration-1000 ease-in-out ${active === index ? 'max-h-40' : 'max-h-0'}`}
           >
-            <p className='mt-2 break-words w-full text-left text-white'>{qa.answer}</p>
+            <p className='mt-2 break-words w-full text-left text-white text-sm md:text-base'>{qa.answer}</p>
           </div>
         </div>
       ))}
@@ -340,10 +340,10 @@ const WhyUs = ({divRefs}) => {
 
 const TestimonialCard = ({ testimonial }) => {
   return (
-    <div className="testimonial-card-container bg-slate-900 p-4 rounded-md shadow-md h-48 py-5">
+    <div className="testimonial-card-container bg-slate-900 p-4 rounded-md shadow-md h-52 py-5">
       <div className='testimonial-card-content'>
-      <div className='h-28'>
-        <p className="text-lg text-center text-white">{testimonial.testimonial}</p>
+      <div className='h-32'>
+        <p className="md:text-lg text-center text-white">{testimonial.testimonial}</p>
       </div>
       <p className="text-sm text-gray-600 mt-2 text-center text-white">{testimonial.names}</p>
       <p className="text-xs text-gray-100 uppercase text-center font-md text-md">{testimonial.location.toUpperCase()}, UK</p>
@@ -358,11 +358,11 @@ const Footer = () => {
   return(
     <div className='bg-slate-900 w-full flex flex-col justify-center pb-5'>
       <div className='w-full h-full flex justify-center items-center bg-gray-900 text-white py-10'>
-        <div className='w-full flex justify-around'>
+        <div className='w-full flex justify-around flex-col md:flex-row'>
           <div className='basis-1/3 self-center'>
 
           <div>
-            <h1 className='text-xl font-bold mb-2'>GET STARTED</h1>
+            <h1 className='text-xl font-bold mb-2 text-center'>GET STARTED</h1>
             <div>
               <p className='mb-1'>Features</p>
               <p className='mb-1'>Pricing</p>
@@ -371,13 +371,13 @@ const Footer = () => {
             </div>
           </div>
           <div>
-            <h1 className='text-xl font-bold mb-2'>ABOUT US</h1>
+            <h1 className='text-xl font-bold mb-2 text-center'>ABOUT US</h1>
             <p>Interested in a face-to-face discussion? We welcome you to schedule a meeting with us. Please email or phone to arrange a convenient time to visit our office.</p>
           </div>
           </div>
           <div>
           <div>
-            <h1 className='text-xl font-bold mb-2'>LEGAL</h1>
+            <h1 className='text-xl font-bold mb-2 text-center'>LEGAL</h1>
             <div className='flex flex-col space-y-1'>
               <Link to='terms_and_conditions'>Terms and conditions</Link>
               <Link to='privacy_policy'>Privacy Policy</Link>

@@ -35,7 +35,7 @@ export const SeeReviewCard = ({cuisine_id}) => {
   return (
     <div className='flex-flex-col justify-center'>
         <p className='text-lg font-semibold poppins text-center'>Reviews</p>
-        <div className='poppins w-full flex flex-col justify-center'>
+        <div className='poppins w-full flex flex-col justify-start'>
         {
             loading? <p className='poppins text-center'>Loading...</p> : reviews.length === 0 ? <p className='poppins text-center'>Reviews will appear here</p>: reviews.map((review, index) => <p key={index} className='poppins text-center'>{review}</p>)
         }

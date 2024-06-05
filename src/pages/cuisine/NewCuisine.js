@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { ApiCall } from '../../hooks/ApiCall'
 import { useAuth } from '../../hooks/AuthProvider'
 import { ToastMessage } from '../../utils'
@@ -15,23 +15,64 @@ export const NewCuisine = () => {
     const [contact, setContact] = useState('')
     const [website, setWebsite] = useState('')
     const [timeOpen, setTimeOpen] = useState('')
+    const [image, setImage] = useState(null)
+ 
+    const [locationGeometry, setLocationGeometry] = useState({
+      latitude: null,
+      longitude: null
+    })
+
+    const [location, setLocation] = useState('')
+    const locationInputRef = useRef(null);
 
     const userAuth = useAuth()
 
     const {token, refresh, setToken, setRefresh} = userAuth
 
+    const handleImageChange = (e) => {
+
+      console.log(e.target.files)
+      setImage(e.target.files[0]);
+    };
+
+
+    useEffect(() => {
+      if (window.google) {
+          const autocomplete = new window.google.maps.places.Autocomplete(locationInputRef.current, {
+              types: ['address'],
+              componentRestrictions: { country: 'uk' }, // restrict to specific country if needed
+          });
+
+          autocomplete.addListener('place_changed', () => {
+              const place = autocomplete.getPlace();
+              if (place.geometry) {
+                  setLocation(place.formatted_address);
+                  setLocationGeometry({
+                    latitude: place.geometry.location.lat(),
+                    longitude: place.geometry.location.lng()
+                  })
+              }
+          });
+      }
+  }, []);
+
     const handleUploadCuisine = (e) => {
         e.preventDefault()
 
-        const data = {
-            name: name,
-            description: description,
-            address: address,
-            contact: contact,
-            website: website,
-            time_open: timeOpen
-        }
-        ApiCall('cuisines/', 'post', token, refresh, setToken, setRefresh, data)
+        console.log(locationGeometry)
+
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('description', description)
+        formData.append('location', location)
+        formData.append('address', address)
+        formData.append('contact', contact)
+        formData.append('website', website)
+        formData.append('time_open', timeOpen)
+        formData.append('location_geometry', JSON.stringify(locationGeometry))
+        formData.append('cuisine_pic', image)
+
+        ApiCall('cuisines/', 'post', token, refresh, setToken, setRefresh, formData)
         .then(function(response){
             if(response && response.status === 201){
                 ToastMessage("success", "Cuisine uploaded successfully")
@@ -56,29 +97,47 @@ export const NewCuisine = () => {
         </h1>
               <form className='space-y-4 md:space-y-6' onSubmit={(e) => handleUploadCuisine(e)}>
               <div>
-                <label htmlFor="name" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Name of the cuisine</label>
-                <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name" required></input>
+                {/* <label htmlFor="name" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Name of the cuisine</label> */}
+                <input type="text" name="name" id="name" value={name} onChange={(e) => setName(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="cuisine name" required></input>
               </div>
               <div>
-                <label htmlFor="desciption" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Description</label>
+                {/* <label htmlFor="desciption" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Description</label> */}
                 <input type="text" name="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="description" required></input>
               </div>
               <div>
-                <label htmlFor="address" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                {/* <label htmlFor="location" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Location</label> */}
+                <input ref={locationInputRef} type="text" name="location" id="location" value={location} onChange={(e) => setLocation(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="location" required></input>
+              </div>
+              <div>
+                {/* <label htmlFor="address" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label> */}
                 <input type="text" name="addess" id="address" value={address} onChange={(e) => setAddress(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="address" required></input>
               </div>
               <div>
-                <label htmlFor="contact" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact</label>
-                <input type="mobile" name="contact" id="contact" value={contact} onChange={(e) => setContact(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="+ 254 701 901 186" required></input>
+                {/* <label htmlFor="contact" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact</label> */}
+                <input type="mobile" name="contact" id="contact" value={contact} onChange={(e) => setContact(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="phone number" required></input>
               </div>
               <div>
-                <label htmlFor="website" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Website</label>
-                <input type="text" name="website" id="website" value={website} onChange={(e) => setWebsite(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="www.ethniceats.com" required></input>
+                {/* <label htmlFor="website" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Website</label> */}
+                <input type="text" name="website" id="website" value={website} onChange={(e) => setWebsite(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="cuisine website" required></input>
               </div>
               <div>
-                <label htmlFor="time-open" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Open</label>
-                <input type="text" name="time-open" id="time-open" value={timeOpen} onChange={(e) => setTimeOpen(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="6:00am - 10:00pm" required></input>
+                {/* <label htmlFor="time-open" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time Open</label> */}
+                <input type="text" name="time-open" id="time-open" value={timeOpen} onChange={(e) => setTimeOpen(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Time e.g.(6:00am - 10:00pm)" required></input>
               </div>
+              <div>
+                <label htmlFor="image" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Cuisine Image
+                </label>
+                <input
+                type="file"
+                name="image"
+                id="image"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+                />
+            </div>
               <div className='flex flex-col md:flex-row justify-around'>
             <div className='flex jsutify-around flex-wrap items-center'>
               <button type='submit' className='m-4 poppins px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300'>Add Cuisine</button>

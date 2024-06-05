@@ -36,7 +36,6 @@ export const ViewReservations = () => {
 
   return (
         <div className='flex flex-col justify-center self-start w-full mt-10 lg:mt-0 pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 '>
-            <CuisineTabs />
             <div className='flex flex-col justify-center items-center w-full'>
                 <p className='font-bold text-3xl poppins text-center'>Reservations Made</p>
                 <div className='overflow-y-auto overflow-x-hidden w-full md:w-5/6 lg:h-600px lg:w-700px text-center'>

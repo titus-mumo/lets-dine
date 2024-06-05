@@ -35,6 +35,7 @@ export const NavBar = () => {
   return (
     <div className='hidden lg:flex w-full flex-row justify-between px-3 shadow-md mt-0.5 mx-2 py-2.5 items-center rounded-md bg-gray-600 text-white'>
         <p className='poppins hover:cursor-pointer' onClick={() => {navigate('/home')}}>EthnicEats</p>
+        <input placeholder='Search' className=' text-gray-900 px-3 py-1 rounded-xl border-slate-700'></input>
         <div className='hover:cursor-pointer relative mr-7' onClick={(e) => handleLogout(e)} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
           <LogoutIcon />
           {isHovered && (

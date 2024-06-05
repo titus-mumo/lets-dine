@@ -36,9 +36,9 @@ export const AddReview = () => {
         }, 2000)
       }, [])
     
-      if (loading){
-        return <LoadingSpinner />
-      }
+    //   if (loading){
+    //     return <LoadingSpinner />
+    //   }
 
     const handleAddReview = (e) => {26
         e.preventDefault()
