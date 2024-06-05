@@ -33,7 +33,7 @@ export const LandingPage = () => {
   }
 
   return (
-    <div className='flex flex-col w-screen justify-center'>
+    <div className='relative flex flex-col w-screen justify-center'>
       <NavBar divRefs={divRefs} />
       <div className='flex flex-col w-screen justify-center mt-80px'>
         <Home divRefs={divRefs} />
