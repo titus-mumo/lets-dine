@@ -52,23 +52,23 @@ export const MealCard = ({meal}) => {
 
 
   return (
-    <div className="hover:cursor-pointer bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl p-1 rounded-lg relative flex flex-col mb-1">
-        <span className="bg-red-100 border border-red-500 rounded-full text-primary text-sm poppins px-4 py-1 inline-block m-auto mb-2 ">{foodType}</span>
-        <img className="w-48 lg:w-64 mx-auto transform transition duration-300" src={meal.meal_pic?  url: burger} alt="" />
-        <div className="flex flex-col items-center my-1 space-y-2">
-            <h1 className="text-gray-900 poppins text-lg">{meal_name}</h1>
-            <div className='w-full flex justify-around'>
-              
-              <div className='flex flex-row items-center'>
-                <p className="text-gray-500 poppins text-sm text-center mr-2">Cuisine: </p>
-                <Link to={`/cuisine/${cuisine}/menu`} className='hover:text-blue-400'>{loading ? 'Loading...' : cuisineName}</Link>
+      <div className="hover:cursor-pointer bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl p-1 rounded-lg relative flex flex-col mb-1 w-40 items-start justify-start">
+          <span className="bg-red-100 border border-red-500 rounded-full text-primary text-sm poppins px-4 md:py-1  inline-block self-center mb-2">{foodType}</span>
+          <div className="flex-grow flex justify-center">
+              <img className="w-40 lg:w-64 mx-auto transform transition duration-300" src={meal.meal_pic ? url : burger} alt="" />
+          </div>
+          <div className="w-full flex flex-col items-center mt-auto space-y-2">
+              <h1 className="text-gray-900 poppins text-sm text-center">{meal_name}</h1>
+              <div className="w-full flex justify-between items-center px-2">
+                  <div className="flex flex-row items-center">
+                      {/* <p className="text-gray-500 poppins text-xs text-center mr-2">Cuisine: </p> */}
+                      <Link to={`/cuisine/${cuisine}/menu`} className="text-blue-400 text-sm">
+                          {loading ? 'Loading...' : cuisineName.includes(' ') ? `${cuisineName.split(' ')[0]}.. ` : cuisineName.length > 10 ? `${cuisineName.slice(0, 9)}..` : cuisineName}
+                      </Link>
+                  </div>
+                  <h2 className="text-gray-900 poppins text-md font-bold text-end">£{price}</h2>
               </div>
-              <h2 className="text-gray-900 poppins text-lg font-bold">£{price}</h2>
-            </div>
-            <div></div>
-
-            {/* <button className="bg-primary text-white px-8 py-2 focus:outline-none poppins rounded-full mt-24 transform transition duration-300 hover:scale-105" onClick={(e) => handleOrder(e)}>Order Now</button> */}
-        </div>
-    </div>
+          </div>
+      </div>
   )
 }

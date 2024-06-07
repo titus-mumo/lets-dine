@@ -12,31 +12,33 @@ const MapContainer = (props) => {
   console.log(locations)
 
   return (
-    <Map
-      google={props.google}
-      zoom={8}
-      initialCenter={{ lat: 51.5074, lng: -0.1278 }}
-      center={location ? { lat: location.latitude, lng: location.longitude } : undefined}
-      containerStyle={{ width: '100%', height: '780px' }}
-    >
-      {location && (
-        <Marker
-          position={{ lat: location.latitude, lng: location.longitude }}
-          title={"Your current location"}
-        />
-      )}
-            {locations &&
-        locations.map((location, index) => (
+    <div className=''>
+      <Map
+        google={props.google}
+        zoom={8}
+        initialCenter={{ lat: 51.5074, lng: -0.1278 }}
+        center={location ? { lat: location.latitude, lng: location.longitude } : undefined}
+        containerStyle={{ width: '100%', height: '780px' }}
+      >
+        {location && (
           <Marker
-            key={index}
             position={{ lat: location.latitude, lng: location.longitude }}
-            title={location.address}
-            icon={{
-              url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-            }}
+            title={"Your current location"}
           />
-        ))}
-    </Map>
+        )}
+              {locations &&
+          locations.map((location, index) => (
+            <Marker
+              key={index}
+              position={{ lat: location.latitude, lng: location.longitude }}
+              title={location.address}
+              icon={{
+                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+              }}
+            />
+          ))}
+      </Map>
+    </div>
   );
 };
 

@@ -1,11 +1,12 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastMessage } from '../utils'
 import  axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from './LandingPage';
 
 require('dotenv').config()
 
@@ -16,6 +17,7 @@ export const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [role, setRole] = useState('User')
     const [checkTerms, setCheckTerms] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate();
 
@@ -35,9 +37,10 @@ export const Register = () => {
         if(!checkTerms){
             return ToastMessage("warning", "Accept the terms and conditions")
         }
+        
+        setLoading(true)
 
         if (role === "User"){
-
             axios.post(process.env.BASE_URL + 'auth/register/', {
                 username: username,
                 email: email, 
@@ -67,51 +70,61 @@ export const Register = () => {
             .catch(function(error){
                 return ToastMessage('error', error.response.data['error'])
             });
+
         }
+        setLoading(false)
     };
+
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 1500)
+    }, [])
 
 
   return (
-        <section className="h-screen w-full bg-gradient-to-r from-slate-600 to-slate-300">
+        <section className="h-full w-full">
             <ToastContainer />
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
-                <a href="/" className="flex items-center mb-6 text-2xl font-semibold text-black poppins">
+            {
+                loading? <LoadingSpinner /> : 
+                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                <a href="/" className="flex items-center mb-4 text-lg md:text-xl font-semibold text-black poppins">
                     EthnicEats  
                 </a>
                 <div className="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white poppins">
+                    <div className="p-3 space-y-2 md:space-y-4 sm:p-4">
+                        <h1 className="text-sm font-bold leading-tight tracking-tight text-gray-900 md:text-lg dark:text-white poppins">
                             Create an account
                         </h1>
-                        <form className="space-y-4 md:space-y-6" onSubmit={(e) => handleRegister(e)}>
+                        <form className="space-y-2 md:space-y-3" onSubmit={(e) => handleRegister(e)}>
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white poppins">Your email</label>
+                                <label htmlFor="email" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white poppins">Your email</label>
                                 <input 
                                     type="email" 
                                     name="email" 
                                     id="email" 
                                     value={email} 
                                     onChange={(e) => setEmail(e.target.value)} 
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
-                                    placeholder="name@company.com" 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
+                                    placeholder="example@gmail.com" 
                                     required
                                 />
                             </div>
                             <div>
-                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white poppins">Username</label>
+                                <label htmlFor="username" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white poppins">Username</label>
                                 <input 
                                     type="text" 
                                     name="username" 
                                     id="username" 
                                     value={username} 
                                     onChange={(e) => setUsername(e.target.value)} 
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
-                                    placeholder="name" 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
+                                    placeholder="Username" 
                                     required
                                 />
                             </div>
                             <div>
-                                <label htmlFor="role" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white poppins">
+                                <label htmlFor="role" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white poppins">
                                     Role (Create account as: )
                                 </label>
                                 <select
@@ -119,7 +132,7 @@ export const Register = () => {
                                     id="role"
                                     value={role}
                                     onChange={(e) => setRole(e.target.value)}
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins"
                                     required
                                 >
                                     <option value="User">User</option>
@@ -127,7 +140,7 @@ export const Register = () => {
                                 </select>
                             </div>
                             <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white poppins">Password</label>
+                                <label htmlFor="password" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white poppins">Password</label>
                                 <input 
                                     type="password" 
                                     name="password" 
@@ -135,12 +148,12 @@ export const Register = () => {
                                     placeholder="••••••••" 
                                     value={password} 
                                     onChange={(e) => setPassword(e.target.value)} 
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
                                     required
                                 />
                             </div>
                             <div>
-                                <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white poppins">Confirm password</label>
+                                <label htmlFor="confirm-password" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white poppins">Confirm password</label>
                                 <input 
                                     type="password" 
                                     name="confirm-password" 
@@ -148,7 +161,7 @@ export const Register = () => {
                                     placeholder="••••••••"  
                                     value={confirmPassword} 
                                     onChange={(e) => setConfirmPassword(e.target.value)} 
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
                                     required
                                 />
                             </div>
@@ -172,17 +185,21 @@ export const Register = () => {
                             </div>
                             <button 
                                 type="submit" 
-                                className="w-full py-2.5 bg-blue-600 text-white font-medium rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-300 mt-4 poppins"
+                                className="w-full py-2 bg-blue-600 text-sm text-white font-medium rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-300 mt-4 poppins"
                             >
                                 Create an account
                             </button>
-                            <p className="text-base text-gray-500 text-center my-4 dark:text-gray-400 poppins">
+                            <p className="text-sm text-gray-500 text-center my-4 dark:text-gray-400 poppins">
                                 Already have an account? <Link to="/login" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Login here</Link>
                             </p>
+                            <a href="/" className="block mt-3 text-center text-sm text-gray-500 dark:text-gray-400">Go back to homepage</a>
                         </form>
                     </div>
                 </div>
             </div>
+            }
+            
+
         </section>
 
   )

@@ -72,26 +72,30 @@ export const Reservation = () => {
             </div>
             <div>
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="poppins text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+          <div className="p-3 space-y-3 md:space-y-6 sm:p-8">
+          <h1 className="poppins text-md md:text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Make reservation here
               </h1>
                     <form className='space-y-4 md:space-y-6' onSubmit={(e) => handleReservation(e)}>
                     <div>
-                      <label htmlFor="seats" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Total seats to be reserved</label>
-                      <input type="number" name="seats" id="seats" value={totatSeats} onChange={(e) => setTotalSeats(e.target.value >= 1? e.target.value: totatSeats)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Total seats" required></input>
+                      <label htmlFor="seats" className="poppins block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"> Total seats to be reserved</label>
+                      <input type="number" name="seats" id="seats" value={totatSeats} onChange={(e) => setTotalSeats(e.target.value >= 1? e.target.value: totatSeats)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Total seats" required></input>
                     </div>
                     <div>
-                      <label htmlFor="date" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Date</label>
-                      <input type="date" name="date" id="date" value={date} onChange={(e) => setDate(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="8:00 pm" required></input>
+                      <label htmlFor="date" className="poppins block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white"> Date</label>
+                      <input type="date" name="date" id="date" value={date} onChange={(e) => setDate(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="8:00 pm" required></input>
                     </div>
                     <div>
-                      <label htmlFor="time" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Time</label>
-                      <input type="time" name="time" id="time" value={time} onChange={(e) => setTime(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="8:00 pm" required></input>
+                      <label htmlFor="time" className="poppins block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white">Time</label>
+                      <input type="time" name="time" id="time" value={time} onChange={(e) => setTime(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="8:00 pm" required></input>
                     </div>
-                    <div className='flex flex-col md:flex-row justify-around'>
-                    <button className='m-4 poppins px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300'>Make reservation</button>
-                    <Link to='/cuisines' className='poppins m-4 px-4 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300'>Go Back</Link>
+                    <div className='flex flex-row justify-around'>
+                        <div className='flex flex-center m-auto'>
+                            <button className='m-2 poppins px-2 py-2 bg-blue-500 text-white text-sm ring-blue-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300'>Make reservation</button>
+                        </div>
+                        <div className='flex flex-center m-auto'>
+                        <Link to='/cuisines' className='poppins m-2 px-2 py-2 bg-blue-500 text-sm  text-white ring-blue-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 text-center'>Go Back</Link>
+                        </div>
                 </div>
                     </form>
                 </div>

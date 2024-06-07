@@ -7,17 +7,22 @@ import { ApiCall } from '../hooks/ApiCall';
 import { useNavigate } from 'react-router-dom';
 
 import { ToastMessage } from '../utils';
+import LoadingSpinner from './LandingPage';
 
 export const Login = () => {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(true)
 
     const auth = useAuth()
 
     const {setToken, setRefresh, logOut, role} = auth
 
     useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 1500)
         if(role) return logOut()
     }, [])
 
@@ -35,6 +40,8 @@ export const Login = () => {
         }else if(grant.error){
             return ToastMessage("error", grant.error)
         } else {
+            setPassword('')
+            setUsername('')
             ApiCall('auth/user/', 'get', grant.token, grant.refresh, setToken, setRefresh)
             .then(function(response){
                 if(response.status === 200){
@@ -58,23 +65,26 @@ export const Login = () => {
   return (
         <section className="h-screen w-full">
             <ToastContainer />
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0 bg-gradient-to-r from-slate-600 to-slate-300">
-                <a href="/" className="flex text-black items-center mb-6 text-2xl font-semibold">
+
+            {
+                loading? <LoadingSpinner />:
+                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                <a href="/" className="flex text-black items-center mb-3 text-lg md:text-xl  font-semibold">
                     EthnicEats   
                 </a>
                 <div className="w-full bg-white rounded-lg shadow dark:border sm:max-w-xs md:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    <div className="p-3 space-y-2 md:space-y-4 sm:p-4">
+                        <h1 className="text-sm font-bold leading-tight tracking-tight text-gray-900 md:text-lg dark:text-white">
                             Sign in to your account
                         </h1>
-                        <form className="space-y-4 md:space-y-6" onSubmit={(e) => handleLogin(e)}>
+                        <form className="space-y-3 md:space-y-5" onSubmit={(e) => handleLogin(e)}>
                             <div>
-                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
-                                <input onChange={(e) => setUsername(e.target.value)} value={username} type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name" required />
+                                <label htmlFor="username" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white">Your Username</label>
+                                <input onChange={(e) => setUsername(e.target.value)} value={username} type="text" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Username" required />
                             </div>
                             <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                                <label htmlFor="password" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                             </div>
                             <div className="flex items-center justify-between">
                                 <div className="flex items-start">
@@ -96,6 +106,8 @@ export const Login = () => {
                     </div>
                 </div>
             </div>
+            }
+
         </section>
   )
 }

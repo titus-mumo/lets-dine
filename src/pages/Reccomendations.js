@@ -5,6 +5,7 @@ import { ApiCall } from '../hooks/ApiCall'
 import { useAuth } from '../hooks/AuthProvider'
 import { Api } from '@mui/icons-material'
 import RestaurantImage from '../assets/restaurant1.jpeg'
+import LoadingSpinner from './LandingPage'
 require('dotenv').config()
 
 export const Reccomendations = () => {
@@ -12,6 +13,7 @@ export const Reccomendations = () => {
   const [reviews, setReviews] = useState([])
   const userAuth = useAuth()
   const {token, refresh, setRefresh, setToken} = userAuth
+  const [loading, setLoading] = useState(true)
 
   const fetchReviews = async (token, refresh, setToken, setRefresh) => {
     try {
@@ -89,23 +91,29 @@ export const Reccomendations = () => {
       handleRecommendCuisinesByReviews(token, refresh, setToken, setRefresh, setReviews);
     }, []);
 
+    useEffect(() => {
+      reviews.length === 0? setLoading(false): ''
+    }, [reviews])
+
 
   return (
     <div className="w-full h-full flex justify-around flex-col mt-20 lg:mt-0 pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 ">
-    <div className=' w-full justify-around flex flex-col self-center'>
-      <div className="z-10000 fixed lg:relative flex items-center justify-center py-2 w-full lg:w-2/3 top-10 lg:top-0 rounded-md bg-stone-700 self-center">
-          <p className={recommedationTab === 'cuisines' ? "active_menu_tab poppins text-sm md:text-base bg-blue-500 py-0.5 px-2" : "menu_tab text-xs md:text-sm px-2 py-1 poppins "} onClick={() => setRecommendationTab('cuisines')}>Cuisines</p>
-          <p className={recommedationTab === 'dishes' ? "active_menu_tab poppins text-sm md:text-base bg-blue-500 py-0.5 px-2" : "menu_tab text-xs md:text-sm px-2 py-1 poppins "} onClick={() => setRecommendationTab('dishes')}>Dishes</p>
-      </div>
-      <div>
-        <p className='text-center'>Recommendations</p>
-        <div className='flex flex-wrap w-full self-center justify-center'>
-          {
-            reviews.map((review, index) => <RecommendedCuisine cuisineProp={review} tag='Reviews' key={index} />)
-          }
+      {
+        loading? <LoadingSpinner />:
+        <div className=' w-full justify-around flex flex-col self-center'>
+        <div className="z-10000 fixed lg:relative flex items-center justify-center py-2 w-full lg:w-2/3 top-10 lg:top-0 rounded-md bg-stone-700 self-center">
+            <p className={recommedationTab === 'cuisines' ? "active_menu_tab poppins text-sm md:text-base bg-blue-500 py-0.5 px-2" : "menu_tab text-xs md:text-sm px-2 py-1 poppins "} onClick={() => setRecommendationTab('cuisines')}>Cuisines</p>
+            <p className={recommedationTab === 'dishes' ? "active_menu_tab poppins text-sm md:text-base bg-blue-500 py-0.5 px-2" : "menu_tab text-xs md:text-sm px-2 py-1 poppins "} onClick={() => setRecommendationTab('dishes')}>Dishes</p>
+        </div>
+        <div>
+          <div className='flex flex-wrap w-full self-center justify-center'>
+            {
+              reviews.map((review, index) => <RecommendedCuisine cuisineProp={review} tag='Reviews' key={index} />)
+            }
+          </div>
         </div>
       </div>
-    </div>
+      }
   </div>
   )
 }
@@ -113,6 +121,7 @@ export const Reccomendations = () => {
 const RecommendedCuisine = ({cuisineProp, tag}) => {
   const [cuisineInfo, setCuisineInfo] = useState({})
   const [open, setOpen] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const time_open = cuisineInfo?.time_open;
@@ -142,6 +151,7 @@ const RecommendedCuisine = ({cuisineProp, tag}) => {
     } else {
         setOpen(false); // Opening and closing times not provided
     }
+    setLoading(false)
   }, [cuisineInfo])
 
   const userAuth = useAuth()
@@ -169,7 +179,7 @@ const RecommendedCuisine = ({cuisineProp, tag}) => {
   return(
     <div className='self-center w-500px flex flex-col justify-center rounded-lg shadow-md m-2 py-2 hover:cursor-pointer bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl relative'>
         {
-          cuisineInfo? 
+          cuisineInfo? loading? <LoadingSpinner />:
           <div className='flex flex-col justify-center w-full'>
           <div className='flex justify-between w-full items-center'>
           <h1 className="text-gray-900 poppins text-lg ml-3">{cuisineName}</h1>
@@ -181,7 +191,7 @@ const RecommendedCuisine = ({cuisineProp, tag}) => {
             <p>{cuisineInfo.location}</p>
             <p>{cuisineInfo.contact}</p>
           </div>
-          </div> :<p>Fetching data..</p>
+          </div> :<LoadingSpinner />
         }
     </div>
   )

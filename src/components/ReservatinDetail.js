@@ -60,18 +60,18 @@ export const ReservatinDetail = ({reservation}) => {
 
     }
   return (
-    <div className='flex w-full items-center justify-around shadow-md p-2 m-2 rounded-md'>
-        <div className='basis-2/3 m-auto'>
-            <p className='poppins text-lg font-semibold'>{cuisineName}</p>
-            <p className='poppins'>{standardTime}</p>
-            <p className='poppins'>Reserved seats: {total_seats}</p>
+    <div className='flex w-full items-center justify-between shadow-md p-2 m-2 rounded-md'>
+        <div className='basis-2/3 m-auto flex flex-col justify-start ml-2 '>
+            <p className='poppins text-left md:text-lg md:font-semibold text-md font-medium'>{cuisineName}</p>
+            <p className='poppins text-left  text-sm md:text-base'>{standardTime}</p>
+            <p className='poppins text-left text-sm md:text-base'>Reserved seats: {total_seats}</p>
         </div>
-        <div className='basis-1/3 flex flex-col justify-start m-auto'>
-            <div className='w-2/3 flex justify-center'>
-            <button onClick={(e) => handleEditReservation(e)} className='w-full lg:w-2/3 px-1 py-3 bg-green-600 text-white ring-green-400 focus:outline-none focus:ring-4 mt-2 rounded-lg transition duration-300 poppins text-sm'>Edit</button>
+        <div className='basis-1/3 flex justify-between  m-auto'>
+            <div className='flex items-center justify-center m-auto'>
+            <button onClick={(e) => handleEditReservation(e)} className='w-full px-3 py-2 bg-green-600 text-white ring-green-400 focus:outline-none focus:ring-4 mt-2 rounded-lg transition duration-300 poppins text-xs md:text-sm'>Edit</button>
             </div>
-            <div className='w-2/3'>
-            <button onClick={(e) => handleDeleteReservation(e)} className='w-full lg:w-2/3 px-1 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-2 rounded-lg transition duration-300 poppins text-sm'>Delete</button>
+            <div className=' flex justify-center items-center m-auto'>
+            <button onClick={(e) => handleDeleteReservation(e)} className='w-full px-3 py-2 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-2 rounded-lg transition duration-300 poppins md:text-sm text-xs'>Delete</button>
             </div>
         </div>
     </div>

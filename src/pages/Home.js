@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { CuisineTabs } from '../cuisineownercomponents';
+import LoadingSpinner from './LandingPage';
 
 require('dotenv').config();
 
@@ -15,6 +16,7 @@ export const Home = () => {
     const [meals, setMeals] = useState([]);
     const [menuTab, setMenuTab] = useState('Appetizers')
     const [isHovered, setIsHovered] = useState(true)
+    const [loading, setLoading] = useState(true)
     const handleMenuTabs = (type) => {
         setMenuTab(type)
     }
@@ -36,8 +38,12 @@ export const Home = () => {
     };
 
     useEffect(() => {
-        fetchMeals();
+        fetchMeals()
     }, []);
+
+    useEffect(() => {
+        meals?setLoading(false):''
+    }, [meals])
 
     return (
         <section className='flex flex-col justify-center w-full mt-2 lg:mt-0  pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 '>
@@ -50,22 +56,28 @@ export const Home = () => {
                     <LogoutIcon />
                 </div>
             </div> */}
-            <div className=' w-full justify-around flex'>
-            <div className="z-10000 fixed lg:relative flex items-center justify-center py-2 w-full lg:w-2/3 top-10 lg:top-0 rounded-md bg-stone-700">
-                <p className={menuTab === 'Appetizers' ? "active_menu_tab text-sm md:text-base poppins bg-blue-500 px-2 py-1" : "menu_tab text-xs md:text-sm px-2 py-1 poppins "} onClick={() => handleMenuTabs('Appetizers')}>Appetizers</p>
-                <p className={menuTab === 'Main Courses' ? "active_menu_tab text-sm md:text-base poppins bg-blue-500 px-2 py-1" : "menu_tab text-xs md:text-sm px-2 py-1 poppins "} onClick={() => handleMenuTabs('Main Courses')}>Main Courses</p>
-                <p className={menuTab === 'Side Dishes' ? "active_menu_tab poppins text-sm md:text-base bg-blue-500 px-2 py-1" : "menu_tab text-xs md:text-sm px-2 py-1 poppins"} onClick={() => handleMenuTabs('Side Dishes')}>Side Dishes</p>
-                <p className={menuTab === 'Desserts' ? "active_menu_tab poppins text-sm md:text-base bg-blue-500 px-2 py-1" : "menu_tab text-xs md:text-sm px-2 py-1 poppins"} onClick={() => handleMenuTabs('Desserts')}>Desserts</p>
-                <p className={menuTab === 'Beverages' ? "active_menu_tab poppins text-sm md:text-base bg-blue-500 px-2 py-1" : "menu_tab text-xs md:text-sm px-2 py-1 poppins"} onClick={() => handleMenuTabs('Beverages')}>Beverages</p>
-            </div>
-            </div>
-            <div className='flex flex-wrap mt-12 lg:mt-12 justify-around w-full'>
             {
-        meals.filter((item) => menuTab !== ''? menuTab === item.category: item).map((item) => (
-            <MealCard key={item.meal_id} meal={item} />
-        ))
-            }
+                loading? <LoadingSpinner />: 
+            <div className='w-full h-full'>
+                <div className=' w-full justify-around flex'>
+                <div className="z-10000 fixed lg:relative flex items-center justify-center py-1 md:py-2 w-full lg:w-2/3 top-10 lg:top-0 rounded-md bg-stone-700">
+                    <p className={menuTab === 'Appetizers' ? "active_menu_tab text-xs md:text-base poppins bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins "} onClick={() => handleMenuTabs('Appetizers')}>Appetizers</p>
+                    <p className={menuTab === 'Main Courses' ? "active_menu_tab text-xs md:text-base poppins bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins "} onClick={() => handleMenuTabs('Main Courses')}>Main Courses</p>
+                    <p className={menuTab === 'Side Dishes' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Side Dishes')}>Side Dishes</p>
+                    <p className={menuTab === 'Desserts' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Desserts')}>Desserts</p>
+                    <p className={menuTab === 'Beverages' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Beverages')}>Beverages</p>
+                </div>
+                </div>
+                <div className='flex flex-wrap mt-12 lg:mt-12 justify-around w-full'>
+                {
+            meals.filter((item) => menuTab !== ''? menuTab === item.category: item).map((item) => (
+                <MealCard key={item.meal_id} meal={item} />
+            ))
+                }
+                </div>
             </div>
+
+            }
         </section>
     );
 };
