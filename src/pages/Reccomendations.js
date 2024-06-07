@@ -99,7 +99,7 @@ export const Reccomendations = () => {
       </div>
       <div>
         <p className='text-center'>Recommendations</p>
-        <div>
+        <div className='flex flex-wrap w-full self-center justify-center'>
           {
             reviews.map((review, index) => <RecommendedCuisine cuisineProp={review} tag='Reviews' key={index} />)
           }
@@ -111,9 +111,38 @@ export const Reccomendations = () => {
 }
 
 const RecommendedCuisine = ({cuisineProp, tag}) => {
-
-  console.log(cuisineProp)
   const [cuisineInfo, setCuisineInfo] = useState({})
+  const [open, setOpen] = useState(true)
+
+  useEffect(() => {
+    const time_open = cuisineInfo?.time_open;
+    const time_close = cuisineInfo?.time_close;
+
+    if (time_open && time_close) {
+        const currentTime = new Date();
+        const currentHours = currentTime.getHours();
+        const currentMinutes = currentTime.getMinutes();
+        
+        const [openHours, openMinutes] = time_open.split(':').map(Number);
+        let [closeHours, closeMinutes] = time_close.split(':').map(Number);
+
+        // Handle closing time after midnight
+        if (closeHours < openHours || (closeHours === openHours && closeMinutes < openMinutes)) {
+            closeHours += 24; // Add 24 hours to closing time
+        }
+
+        if (
+            (currentHours > openHours || (currentHours === openHours && currentMinutes >= openMinutes)) &&
+            (currentHours < closeHours || (currentHours === closeHours && currentMinutes < closeMinutes))
+        ) {
+            setOpen(true); // Open
+        } else {
+            setOpen(false); // Closed
+        }
+    } else {
+        setOpen(false); // Opening and closing times not provided
+    }
+  }, [cuisineInfo])
 
   const userAuth = useAuth()
 
@@ -136,17 +165,24 @@ const RecommendedCuisine = ({cuisineProp, tag}) => {
   useEffect(() => {
     fetchCuisineInfo()
   }, [])
+
   return(
-    <div>
+    <div className='self-center w-500px flex flex-col justify-center rounded-lg shadow-md m-2 py-2 hover:cursor-pointer bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl relative'>
         {
-          cuisineInfo? <div>
-            <img className="h-300px mx-auto transform transition duration-300" src={cuisineInfo.cuisine_pic? process.env.BASE_IMAGES + cuisineInfo.cuisine_pic : RestaurantImage}></img>
-            <div>
-            <h1 className="text-gray-900 poppins text-lg">{cuisineName}</h1>
-            </div>
+          cuisineInfo? 
+          <div className='flex flex-col justify-center w-full'>
+          <div className='flex justify-between w-full items-center'>
+          <h1 className="text-gray-900 poppins text-lg ml-3">{cuisineName}</h1>
+          <p className={`${open? 'bg-green-200  border border-green-500 rounded-full text-green-900' : 'bg-red-100 border border-red-500 rounded-full text-primary'} text-sm poppins px-4 py-1 inline-block mb-2 mr-3 `}>{open? 'Open': 'Closed'}</p>
+          <p className={`bg-blue-100 border border-blue-600 rounded-full text-blue-800 text-sm poppins px-4 py-1 inline-block mb-2 mr-3 `}>{tag}</p>
+          </div>
+            <img className="h-250px mx-auto transform transition duration-300" src={cuisineInfo.cuisine_pic? process.env.BASE_IMAGES + cuisineInfo.cuisine_pic : RestaurantImage}></img>
+          <div>
+            <p>{cuisineInfo.location}</p>
+            <p>{cuisineInfo.contact}</p>
+          </div>
           </div> :<p>Fetching data..</p>
         }
     </div>
   )
-  
 }

@@ -56,7 +56,7 @@ export const GeneralForums = () => {
       }
   
       // Create a new WebSocket connection
-      ws.current = new WebSocket(`ws://localhost:10000/ws/chat/${room}/`);
+      ws.current = new WebSocket(`ws://34.16.129.197:10000/ws/chat/${room}/`);
   
       // Define the WebSocket message event handler
       ws.current.onmessage = (e) => {
@@ -100,7 +100,7 @@ export const GeneralForums = () => {
       scrollToBottom();
     }, [groupedMessages]);
   return (
-    <div className='w-full h-screen flex justify-around flex-col mt-10 lg:mt-0 content-start pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4  items-start'>
+    <div className='w-full h-full flex justify-around flex-col mt-10 lg:mt-0 content-start pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4  items-start'>
         <div className='mx-2 lg:mx-3 h-90vh md:flex lg:w-2/3  w-full h-full'>
           <div className={`${chatOpen? 'hidden': 'flex flex-col'} md:flex flex-col md:basis-1/3`}>
             <h1>Chat Rooms</h1>
@@ -121,7 +121,7 @@ export const GeneralForums = () => {
                 }}
             />
             </div>
-              <div className={` ${chatOpen? 'flex': 'hidden'} w-full h-full md:h-8/10 md:flex flex-col md:basis-3/5 lg:basis-2/3 rounded-md`}>
+              <div className={` ${chatOpen? 'flex': 'hidden'} w-full h-full md:h-7/10 md:flex flex-col md:basis-3/5 lg:basis-2/3 rounded-md items-start`}>
               {currentRoom? (
                 <div className='w-full h-full md:h-5/6 flex flex-col justify-between pb-4 px-2'>
                   <div className='flex flex-start bg-slate-900 mr-2 rounded-lg text-white items-center w-full py-2 '>
@@ -133,7 +133,7 @@ export const GeneralForums = () => {
                     </div>
                     <h2 className='text-md font-medium py-1 pl-2'>{currentRoom}</h2>
                   </div>
-                  <div className='flex w-full flex-col mx-1'>
+                  <div className='flex w-full flex-col mx-1 h-96vh '>
                   <div className='overflow-y-auto h-700px overflow-x-hidden'>
                     <div className='flex w-full flex-col mx-1'>
                         {Object.keys(groupedMessages).map((date) => (

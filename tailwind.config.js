@@ -20,6 +20,7 @@ module.exports = {
         "30px":"7rem",
       },
       height: {
+        '250px': '250px',
         '300px':'300px',
         '400px':'400px',
         '600px': '600px',

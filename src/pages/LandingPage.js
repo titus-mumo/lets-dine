@@ -72,27 +72,29 @@ const AboutUs = ({divRefs}) => {
   return(
     <div ref={(el) => (divRefs.current['about-us'] = el)} id='about-us' className='about-us w-full p-3 py-5 md:py-20 lg:py-24 bg-gradient-to-b from-zinc-900 to-zinc-700'>
       <h1 className='w-full text-center text-2xl font-bold mt-4 mb-2 text-white'>ABOUT US</h1>
-      <p className='w-full text-center text-lg font-medium mb-4 text-white'>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p>
+      <p className='w-full text-center text-md md:text-lg font-medium mb-4 text-white'>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p>
       <div className='flex justify-center items-center lg:justify-around flex-col md:flex-row'>
       <div className='lg:basis-1/5 items-center h-full mb-3 md:mb-0'>
-        <img src={AboutSectionImage} alt='about image' className='w-full rotate'></img>
+        <div className='w-full h-full self-center flex justify-center'>
+          <img src={AboutSectionImage} alt='about image' className='w-2/3 md:w-full rotate self-center'></img>
+        </div>
       </div>
       <div className='flex flex-col lg:grid lg:grid-cols-2 w-full justify-around lg:w-2/3 lg:ml-3'>
           <div className='w-full md:w-2/3 self-center mb-2'>
             <h1 className='text-center text-white text-md font-semibold'>Personalised Recommendations</h1>
-            <p className='text-center text-white'>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
+            <p className='text-sm text-base text-center text-white'>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
           </div>
           <div className='w-full md:w-2/3 self-center mb-2'>
             <h1 className='text-center text-white mb-2 text-md font-semibold'>Social Media Integration</h1>
-            <p className='text-center text-white'>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
+            <p className='text-sm text-base text-center text-white'>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
           </div>
           <div className='w-full md:w-2/3 self-center mb-2'>
             <h1 className='text-center text-white text-md font-semibold'>User Reviews and Ratings</h1>
-            <p  className='text-center text-white'>Our platform aggregates and analyzes reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
+            <p  className='text-sm text-base text-center text-white'>Our platform aggregates and analyzes reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
           </div>
           <div className='w-full md:w-2/3 self-center mb-2'>
             <h1  className='text-center text-white text-md font-semibold'>Community Engagement</h1>
-            <p  className='text-center text-white'>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
+            <p  className='text-sm text-base text-center text-white'>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
           </div>
         </div>
         </div>
