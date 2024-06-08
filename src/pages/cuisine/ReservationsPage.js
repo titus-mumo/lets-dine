@@ -13,9 +13,6 @@ export const ReservationsPage = () => {
     const userAuth = useAuth();
     const { token, refresh, setToken, setRefresh } = userAuth;
     const [active, setActive] = useState('')
-
-    const navigate = useNavigate()
-
     const fetchSideBarNames = async () => {
         try {
             const response = await ApiCall('cuisines/owner/', 'get', token, refresh, setToken, setRefresh);
@@ -29,7 +26,7 @@ export const ReservationsPage = () => {
                 setLoading(false);
             }
             else{
-                navigate('/login')
+                pass
             }
         } catch (error) {
             console.error('Error fetching sidebar names:', error);
@@ -49,13 +46,13 @@ export const ReservationsPage = () => {
 
     return (
         <div className='w-full h-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6'>{
-            loading? 'Loading':(  
+            loading? <LoadingSpinner />:(  
             <div className='flex w-full flex-col'>
             <div className='flex flex-row w-full justify-around mx-2'>
                 <div className='basis-1/5'>
-                    {loading ? <LoadingSpinner /> : sideBarNames.map((item, index) => (
+                    {loading ? <LoadingSpinner /> : sideBarNames.map((cuisineName, index) => (
                         <p key={index} onClick={() => handleClick(cuisineIds[index], index)} className={active === index? 'poppins text-blue-500 hover:cursor-pointer':'hover:cursor-pointer poppins'}>
-                            {item}
+                            {cuisineName.includes(' ') ? `${cuisineName.split(' ')[0]}.. ` : cuisineName.length > 10 ? `${cuisineName.slice(0, 9)}..` : cuisineName}
                         </p>
                     ))}
                 </div>

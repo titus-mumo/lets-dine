@@ -1,63 +1,66 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { ApiCall } from '../hooks/ApiCall';
 import { useAuth } from '../hooks/AuthProvider';
 import { ToastContainer } from 'react-toastify';
 import { ToastMessage } from '../utils';
 import 'react-toastify/dist/ReactToastify.css';
-import moment from 'moment';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { CuisineTabs } from '../cuisineownercomponents';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import moment from 'moment';
 import LoadingSpinner from './LandingPage';
 
-
-export const Profile = () => {
-    const navigate = useNavigate()
-    const userAuth = useAuth()
-    const {token, refresh, setToken, setRefresh, logOut} = userAuth
-    const [userName, setUserName] = useState('')
+export const Account = () => {
+    const userAuth = useAuth();
+    const { token, refresh, setToken, setRefresh, logOut } = userAuth;
+    const [seePreferences, setSeePreferences] = useState(false);
+    const [seeAccountInfo, setSeeAccountInfo] = useState(false)
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [dateJoined, setDateJoined] = useState('')
     const [loading, setLoading] = useState(true)
-
+  
+    const navigate = useNavigate();
+  
     const handleLogout = (e) => {
-        e.preventDefault();
-        const data = {
-            refresh_token: refresh
-        }
-        ApiCall('auth/logout/', 'post', token, refresh, setToken, setRefresh, data)
-        .then(function(response){
-            if (response.status === 205) {
-                console.log("Token blacklisted")
-            }
+      e.preventDefault();
+      const data = {
+        refresh_token: refresh,
+      };
+      ApiCall('auth/logout/', 'post', token, refresh, setToken, setRefresh, data)
+        .then(function (response) {
+          if (response.status === 205) {
+            console.log('Token blacklisted');
+          }
         })
         .catch((error) => {
-            return console.log("An error occured logut")
+          console.log('An error occurred during logout');
         })
-        ToastMessage("success", "Logout Successful")
-        setTimeout(() => {
-            setTimeout(() => {logOut()}, 1000)
-        }, 2000)
+        .finally(() => {
+          ToastMessage('success', 'Logout Successful');
+          setTimeout(() => {
+            logOut();
+          }, 2000);
+        });
+    };
+
+    const handleSeePreferences = () => {
+        setSeePreferences((seePreferences) => !seePreferences)
+        setSeeAccountInfo(false)
     }
 
-    useEffect(() => {
-        setTimeout(() => {
-          setLoading(false)
-        }, 2000)
-      }, [])
-    
-      if (loading){
-        return <LoadingSpinner />
-      }
-
+    const handleSeeAccountInfo = () => {
+        setSeeAccountInfo((seeAccountInfo) => !seeAccountInfo)
+        setSeePreferences(false)
+    }
 
     const fetchUserInfo = () => {
         ApiCall('auth/user/', 'get', token, refresh, setToken, setRefresh)
         .then(function(response){
             if(response.status === 200){
                 setEmail(response.data.email)
-                setDateJoined(moment.utc(response.data.date_joined).local().format('YYYY-MM-DD HH:mm:ss Z'));
-                setUserName(response.data.username)
+                setDateJoined(moment.utc(response.data.date_joined).local().format('YYYY-MM-DD'));
+                setUsername(response.data.username)
                 setLoading(false)
             }
             else{
@@ -65,22 +68,84 @@ export const Profile = () => {
             }
         })
         .catch((error) => {
-            return console.log("Someting went wrong")
+            return console.log("Something went wrong", error)
         })
     }
 
     useEffect(() => {fetchUserInfo()}, [])
+  
+    return (
+      <div className='account-container'> 
+      {
+        loading? <LoadingSpinner /> : 
+        <div className='account-content'>
+        <p className='text-center text-md font-medium'>Profile</p>
+        <div className='preferences-section'>
+          <div className='preferences-header'>
+            <p>User Preferences</p>
+            <div
+              onClick={() => handleSeePreferences()}
+              className='toggle-icon'
+            >
+              {seePreferences ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </div>
+          </div>
+          <div className={`preferences-content ${seePreferences ? 'show' : 'hide'} ml-3`}>
+            {UserPreferences.map((category, index) => (
+              <DisplayPreference category={category} key={index} />
+            ))}
+          </div>
+        </div>
+        <div>
+        <div className='prefrences-section'>
+          <div className='preferences-header'>
+            <p>Account</p>
+            <div
+              onClick={() => handleSeeAccountInfo()}
+              className='toggle-icon'
+            >
+              {seeAccountInfo ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </div>
+            </div>
+            <div className={`flex flex-col w-300px ml-3 preferences-content ${seeAccountInfo ? 'show' : 'hide'}`}>
+              <div className='flex justify-between preference-item'>
+                  <p className='text-sm'>Email:</p>
+                  <p className='text-end text-sm'>{email}</p>
+              </div>
+              <div className='flex justify-between preference-item'>
+                  <p className='text-sm'>Username:</p>
+                  <p className='text-end text-sm'>{username}</p>
+              </div>
+              <div className='flex justify-between preference-item'>
+                  <p className='text-sm'>Date joined:</p>
+                  <p className='text-end text-sm'>{dateJoined}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button className='logout-button' onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+      }
 
-
-  return (
-    <div className='w-auto flex flex-col justify-around h-full pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4'>
-        <ToastContainer />
-        <p>My Account</p>
-        <p>Email: {loading? 'Loading..': email}</p>
-        <p>Username: {loading? 'Loading..': userName}</p>
-        <p>Date Joined: {loading? 'Loading..': dateJoined}</p>
-        <Link to='/change-password' className='m-auto px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Change Password</Link>
-        <button onClick={(e) => handleLogout(e)}>Log Out</button>
-    </div>
-  )
-}
+      </div>
+    );
+  };
+  
+  const UserPreferences = ['Appetizers', 'Main Courses', 'Side Dishes', 'Desserts', 'Beverages'];
+  
+  const DisplayPreference = ({ category }) => {
+    const [check, setCheck] = useState(true);
+  
+    const handleCheckboxChange = () => {
+      setCheck((prevCheck) => !prevCheck);
+    };
+  
+    return (
+      <div className='preference-item'>
+        <p className='text-sm'>{category}</p>
+        <input type='checkbox' checked={check} onChange={handleCheckboxChange} />
+      </div>
+    );
+  };

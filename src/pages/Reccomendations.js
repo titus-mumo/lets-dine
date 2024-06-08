@@ -85,15 +85,16 @@ export const Reccomendations = () => {
     const reviewsWithCuisineNames = combineCuisineNamesWithReviews(sortedCuisines, cuisineNames);
     const displayCuisines = reviewsWithCuisineNames.sort((a, b) => b.meanScore - a.meanScore).filter((cuisine) => cuisine.meanScore > 0.3).slice(0, 10)
     setReviews(displayCuisines)
+    setLoading(false)
   };
 
     useEffect(() => {
       handleRecommendCuisinesByReviews(token, refresh, setToken, setRefresh, setReviews);
     }, []);
 
-    useEffect(() => {
-      reviews.length === 0? setLoading(false): ''
-    }, [reviews])
+    // useEffect(() => {
+    //   reviews.length === 0? setLoading(false): ''
+    // }, [reviews])
 
 
   return (
@@ -121,6 +122,7 @@ export const Reccomendations = () => {
 const RecommendedCuisine = ({cuisineProp, tag}) => {
   const [cuisineInfo, setCuisineInfo] = useState({})
   const [open, setOpen] = useState(true)
+
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -151,7 +153,6 @@ const RecommendedCuisine = ({cuisineProp, tag}) => {
     } else {
         setOpen(false); // Opening and closing times not provided
     }
-    setLoading(false)
   }, [cuisineInfo])
 
   const userAuth = useAuth()
@@ -165,6 +166,7 @@ const RecommendedCuisine = ({cuisineProp, tag}) => {
     .then(function(response){
       if(response.status === 200){
         setCuisineInfo(response.data)
+        setLoading(false)
       }
     })
     .catch((error) => {
@@ -177,22 +179,24 @@ const RecommendedCuisine = ({cuisineProp, tag}) => {
   }, [])
 
   return(
-    <div className='self-center w-500px flex flex-col justify-center rounded-lg shadow-md m-2 py-2 hover:cursor-pointer bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl relative'>
-        {
-          cuisineInfo? loading? <LoadingSpinner />:
-          <div className='flex flex-col justify-center w-full'>
-          <div className='flex justify-between w-full items-center'>
-          <h1 className="text-gray-900 poppins text-lg ml-3">{cuisineName}</h1>
-          <p className={`${open? 'bg-green-200  border border-green-500 rounded-full text-green-900' : 'bg-red-100 border border-red-500 rounded-full text-primary'} text-sm poppins px-4 py-1 inline-block mb-2 mr-3 `}>{open? 'Open': 'Closed'}</p>
-          <p className={`bg-blue-100 border border-blue-600 rounded-full text-blue-800 text-sm poppins px-4 py-1 inline-block mb-2 mr-3 `}>{tag}</p>
-          </div>
-            <img className="h-250px mx-auto transform transition duration-300" src={cuisineInfo.cuisine_pic? process.env.BASE_IMAGES + cuisineInfo.cuisine_pic : RestaurantImage}></img>
-          <div>
-            <p>{cuisineInfo.location}</p>
-            <p>{cuisineInfo.contact}</p>
-          </div>
-          </div> :<LoadingSpinner />
-        }
+    <div className='h-400px self-center w-500px flex flex-col justify-center rounded-lg shadow-md m-2 py-2 hover:cursor-pointer bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl relative'>
+      <div className='flex flex-col justify-center w-full'>
+          {
+            !loading? 
+            <>
+            <div className='flex justify-between w-full items-center'>
+            <h1 className="text-gray-900 poppins text-lg ml-3">{cuisineName}</h1>
+            <p className={`${open? 'bg-green-200  border border-green-500 rounded-full text-green-900' : 'bg-red-100 border border-red-500 rounded-full text-primary'} text-sm poppins px-4 py-1 inline-block mb-2 mr-3 `}>{open? 'Open': 'Closed'}</p>
+            <p className={`bg-blue-100 border border-blue-600 rounded-full text-blue-800 text-sm poppins px-4 py-1 inline-block mb-2 mr-3 `}>{tag}</p>
+            </div>
+              <img className="h-250px mx-auto transform transition duration-300" src={cuisineInfo.cuisine_pic? process.env.BASE_IMAGES + cuisineInfo.cuisine_pic : RestaurantImage}></img>
+            <div>
+              <p>{cuisineInfo.location}</p>
+              <p>{cuisineInfo.contact}</p>
+            
+            </div> </>:<LoadingSpinner />
+          }
+         </div>
     </div>
   )
 }

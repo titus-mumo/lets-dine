@@ -6,11 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { MealCard, SeeReviewCard } from '../components';
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
+import { AddReview } from './AddReview';
+import LoadingSpinner from './LandingPage';
 
 export const CuisineDetail = () => {
-    const navigate = useNavigate()
     const location = useLocation();
     const params = useParams(location.pathname);
+    const [addReview, setAddReview] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     const user = useAuth()
     const {token, refresh, setToken, setRefresh} = user
@@ -38,6 +41,7 @@ export const CuisineDetail = () => {
             const {status, data} = response
             if (status === 200) {
                 setCuisineInfo(data)
+                setLoading(false)
             }
         })
         .catch((error) => {
@@ -49,10 +53,16 @@ export const CuisineDetail = () => {
         fetchCuisineMenu()
         fetchCuisineInfo()
     }, [params.cuisine_id])
+
+    const handleAddReview = (e) => {
+        e.preventDefault()
+        setAddReview(true)
+    }
   return (
     <div className='mt-10 lg:mt-0 flex flex-col justify-center w-full self-center'>
-        <div className='flex flex-col justify-center w-full lg:w-900px self-center'>
-            <ToastContainer />
+        {
+            loading? <LoadingSpinner />:
+            <div className='flex flex-col justify-center w-full lg:w-900px self-center'>
             <div className='mb-1 flex flex-col justify-center w-full'>
                 <p className='pppins font-bold text-3xl text-center'>{name}</p>
                 <p className='poppins text-center'>{description}</p>
@@ -73,7 +83,15 @@ export const CuisineDetail = () => {
             <div className='my-2'>
                 <SeeReviewCard cuisine_id = {cuisine_id}/>
             </div>
+            <div className='my-3 w-full flex justify-center'>
+                {
+                    addReview? <AddReview name={name} setAddReview={setAddReview}/>:
+                    <button onClick={(e)=> handleAddReview(e)} className='m-1 px-3 py-1 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-2 mt-2 rounded-lg transition duration-300 poppins'>Add Review</button>
+
+                }
+            </div>
         </div>
+        }
     </div>
   )
 }

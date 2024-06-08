@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 const ReturnName = ({ name }) => {
+    
     return <p>{name}</p>
 }
 

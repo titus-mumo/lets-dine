@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ApiCall } from '../hooks/ApiCall'
 import { useAuth } from '../hooks/AuthProvider'
 import { ReservationDetail } from './ReservationDetail'
+import LoadingSpinner from '../pages/LandingPage'
 
 export const ReservationsSection = ({cuisine_id}) => {
   const userAuth = useAuth()
@@ -20,23 +21,25 @@ export const ReservationsSection = ({cuisine_id}) => {
         //.filter(item => new Date(item.time) >= today)
         .sort((a, b) => new Date(a.time) - new Date(b.time));
         setReservationList(sortedData)
-      }else{
+        setLoading(false)
+      }else if (response.status === 200 && response.data.length === 0){
+        setLoading(false)
+      } else{
         console.log("An error occured")
       }
-      setLoading(false)
     })
     .catch((error) => {
       return console.log("An error occured")
-    })
+    });
   }
 
   useEffect(() => {
     handleFetchCuisineSpecificReservations()
   }, [cuisine_id])
   return (
-    <div className='block overflow-x-hidden p-2 m-2'>
+    <div className={`${reservationList? 'block overflow-x-hidden': ''}  p-2 m-2`}>
       {
-        loading? 'Loading': reservationList.length === 0? 'Cuisine Reservations made will appear here':reservationList.map((item) => <ReservationDetail key={item.reservation_id} reservation={item}/>)
+        loading? <LoadingSpinner />: reservationList.length === 0? 'Cuisine Reservations made will appear here':reservationList.map((item) => <ReservationDetail key={item.reservation_id} reservation={item}/>)
       }
     </div>
   )

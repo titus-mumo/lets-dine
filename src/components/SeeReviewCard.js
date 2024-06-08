@@ -40,9 +40,6 @@ export const SeeReviewCard = ({cuisine_id}) => {
             loading? <p className='poppins text-center'>Loading...</p> : reviews.length === 0 ? <p className='poppins text-center'>Reviews will appear here</p>: reviews.map((review, index) => <p key={index} className='poppins text-center'>{review}</p>)
         }
         </div>
-        <div className='my-3 w-full flex justify-center'>
-            <Link to={`/cuisine/${cuisine_id}/add-review`} className='px-3 text-center py-2 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Review</Link>
-        </div>
     </div>
   )
 }

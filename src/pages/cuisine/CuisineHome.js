@@ -23,7 +23,10 @@ export const CuisineHome = () => {
                 setLoading(false)
                 return;
             }else{
-                setTimeout(() => {navigate('/cuisine-owner/new')}, 50)
+                setTimeout(() => {
+                    navigate('/cuisine-owner/new')
+                    setLoading(false)
+                }, 50)
             }
         })
         .catch((error) => {
@@ -34,12 +37,6 @@ export const CuisineHome = () => {
     useEffect(() => {
         getCuisineOwnedByCuisineOwner()
     }, [])
-
-    useEffect(() => {
-        setTimeout(() => {
-          setLoading(false)
-        }, 2000)
-      }, [])
     
       if (loading){
         return <LoadingSpinner />
@@ -49,9 +46,9 @@ export const CuisineHome = () => {
         <div className='w-auto my-4 flex w-full justify-center'>
             <Link to='/cuisine-owner/new' className='m-2 mb-0 poppins px-3 py-2 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300'>Add another Cuisine</Link>
         </div>
-        <div className='w-full flex justify-around flex-wrap'>
+        <div className= 'flex flex-rol flex-wrap my-2 justify-center'>
             {
-                ownedCuisine.map((item) => <CuisineCard key={item.cuisine_id} cuisine={item}/>)
+                ownedCuisine.map((item, index) => <CuisineCard key={item.cuisine_id} cuisine={item}  />)
             }
         </div>
     </div>

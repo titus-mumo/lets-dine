@@ -91,7 +91,7 @@ export const NewCuisine = () => {
     }
 
   return (
-    <div className='w-full flex justify-center h-screen items-center'>
+    <div className='w-full flex justify-center h-full items-center mt-10 lg-0'>
     <div className="w-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
     <div className="p-4 space-y-2 md:space-y-4 sm:p-6">
     <h1 className="poppins text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

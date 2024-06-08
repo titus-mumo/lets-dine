@@ -51,11 +51,10 @@ export const CuisineAnalytics = () => {
 
                     setCuisinesData(cuisines);
                     setReviewsData(reviews);
+                    setLoading(false)
                 }
             } catch (error) {
                 console.error("Error occurred:", error.response?.data?.message || "getting cuisines ids");
-            } finally {
-                setLoading(false);
             }
         };
 
@@ -177,52 +176,57 @@ export const CuisineAnalytics = () => {
 
     return (
         <div className="w-full h-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6">
-            <div className='flex justify-center w-full'>
-            <p className="text-2xl font-bold mt-4 mb-6">Reservation Analytics</p>
-            </div>
-            <div className="w-full flex justify-around flex-wrap">
-                {cuisinesData.map((cuisine, index) => {
-                    const chartData = {
-                        labels: cuisine.data.map(d => d.date),
-                        datasets: [{
-                            label: `Number of Reservations for Cusisne ${cuisine.cuisineName}`,
-                            data: cuisine.data.map(d => d.count),
-                            backgroundColor: cuisine.data.map((_, i) => predefinedColors[i % predefinedColors.length]),
-                            borderColor: predefinedColors[index % predefinedColors.length].replace('0.8', '1'),
-                            borderWidth: 1
-                        }]
-                    };
-
-                    return (
-                        <div key={cuisine.cuisineId} className='w-full md:w-3/4 lg:w-1/2 h-96 mb-6'>
-                            <Bar data={chartData} options={chartOptions} />
-                        </div>
-                    );
-                })}
-            </div>
-            <div className='flex justify-center w-full'>
-            <p className="text-2xl font-bold mt-4 mb-6">Reviews Analytics</p>
-            </div>
-            <div className="w-full flex justify-around flex-wrap">
-                {reviewsData.map((cuisine, index) => {
-                    const chartData = {
-                        labels: reviewLabels.map(label => label),
-                        datasets: [{
-                            label: `Reviews for ${cuisine.cuisineName}`,
-                            data: cuisine.data,
-                            backgroundColor: predefinedColors[index],
-                            borderColor: predefinedColors[index % predefinedColors.length].replace('0.8', '1'),
-                            borderWidth: 1
-                        }]
-                    };
-
-                    return (
-                        <div key={cuisine.cuisineId} className='w-full md:w-3/4 lg:w-1/2 h-96 mb-6'>
-                            <Bar data={chartData} options={chartOptionsReviews} />
-                        </div>
-                    );
-                })}
-            </div>
+            {
+                loading? <LoadingSpinner /> : 
+                <>
+                <div className='flex justify-center w-full'>
+                <p className="text-2xl font-bold mt-4 mb-6">Reservation Analytics</p>
+                </div>
+                <div className="w-full flex justify-around flex-wrap">
+                    {cuisinesData.map((cuisine, index) => {
+                        const chartData = {
+                            labels: cuisine.data.map(d => d.date),
+                            datasets: [{
+                                label: `Number of Reservations for Cusisne ${cuisine.cuisineName}`,
+                                data: cuisine.data.map(d => d.count),
+                                backgroundColor: cuisine.data.map((_, i) => predefinedColors[i % predefinedColors.length]),
+                                borderColor: predefinedColors[index % predefinedColors.length].replace('0.8', '1'),
+                                borderWidth: 1
+                            }]
+                        };
+    
+                        return (
+                            <div key={cuisine.cuisineId} className='w-full md:w-3/4 lg:w-1/2 h-96 mb-6'>
+                                <Bar data={chartData} options={chartOptions} />
+                            </div>
+                        );
+                    })}
+                </div>
+                <div className='flex justify-center w-full'>
+                <p className="text-2xl font-bold mt-4 mb-6">Reviews Analytics</p>
+                </div>
+                <div className="w-full flex justify-around flex-wrap">
+                    {reviewsData.map((cuisine, index) => {
+                        const chartData = {
+                            labels: reviewLabels.map(label => label),
+                            datasets: [{
+                                label: `Reviews for ${cuisine.cuisineName}`,
+                                data: cuisine.data,
+                                backgroundColor: predefinedColors[index],
+                                borderColor: predefinedColors[index % predefinedColors.length].replace('0.8', '1'),
+                                borderWidth: 1
+                            }]
+                        };
+    
+                        return (
+                            <div key={cuisine.cuisineId} className='w-full md:w-3/4 lg:w-1/2 h-96 mb-6'>
+                                <Bar data={chartData} options={chartOptionsReviews} />
+                            </div>
+                        );
+                    })}
+                </div>
+                </>
+            }
         </div>
     );
 };

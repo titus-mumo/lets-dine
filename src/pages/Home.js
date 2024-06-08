@@ -30,6 +30,7 @@ export const Home = () => {
             const {status, data} = response
             if(status === 200){
                 setMeals(data)
+                setLoading(false)
             }
         })
         .catch((error) => {
@@ -40,10 +41,6 @@ export const Home = () => {
     useEffect(() => {
         fetchMeals()
     }, []);
-
-    useEffect(() => {
-        meals?setLoading(false):''
-    }, [meals])
 
     return (
         <section className='flex flex-col justify-center w-full mt-2 lg:mt-0  pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 '>

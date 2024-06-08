@@ -22,8 +22,8 @@ const CuisineOwnerSidebarItems = [
     icon: <HomeIcon />
   },
   {
-    title: "Cuisines",
-    link: "/cuisine-owner/home",
+    title: "My Cuisines",
+    link: "/cuisine-owner/cuisines",
     icon: <StorefrontIcon />
     //TODO: Make a cuisine page
   },
@@ -39,7 +39,7 @@ const CuisineOwnerSidebarItems = [
     icon: <ForumIcon/>
   },
   {
-    title: "Map",
+    title: "Culinary Map",
     link: "/cuisine-owner/map",
     icon: <LocationOnIcon />
   },
@@ -81,7 +81,7 @@ const UserSidebarItems = [
     icon: <ForumIcon/>
   },
   {
-    title: "Map",
+    title: "Culinary Map",
     link: "/map",
     icon: <LocationOnIcon />
   },

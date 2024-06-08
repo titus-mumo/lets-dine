@@ -171,7 +171,7 @@ const Contact = ({divRefs}) => {
             <Email className='mr-2' />
             <div>
               <h2 className='text-lg font-semibold'>Email</h2>
-              <a href="mailto:hello@ethniceats.co.uk" className='text-blue-500'>hello@ethniceats.co.uk</a>
+              <a href="mailto:hello@ethniceats.co.uk" className='text-gray-800'>hello@ethniceats.co.uk</a>
             </div>
           </div>
           <div className='flex items-center my-2'>
@@ -434,7 +434,7 @@ const Pricing = ({divRefs}) => {
   const [role, setRole] = useState('User');
 
   return (
-    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing h-450px flex flex-col py-3 bg-gradient-to-b from-stone-700 to-stone-500 py-5 md:py-20 lg:py-24">
+    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing h-450px flex flex-col py-3 bg-gradient-to-b from-cyan-300 to-cyan-500 py-5 md:py-20 lg:py-24">
       <h1 className='text-center text-2xl font-bold my-4'>OUR PACKAGES</h1>
       <div className="flex justify-center ml-2 mb-10">
         <select
@@ -483,7 +483,7 @@ const PricingComponent = ({link, name, price, features}) => {
   
   return(
     <div className=''>
-      <div className='w-300px h-400px border-2 border-slate-900 rounded-lg shadow-md tansition:transformation duration-500 hover:scale-105 hover:cursor-pointer hover:bg-slate-900 hover:text-white p-3 my-4'>
+      <div className='w-300px h-400px bg-white border-2 border-slate-900 rounded-lg shadow-md tansition:transformation duration-1000 hover:scale-105 hover:cursor-pointer hover:bg-slate-900 hover:text-white p-3 my-4'>
         <p className='font-semibold text-md'>{name}</p>
         <p>
           <span className='font-bold text-3xl'>£ {price}</span><br></br>

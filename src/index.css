@@ -97,3 +97,84 @@ code {
     transform: rotate(360deg);
   }
 }
+
+.account-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  transition: all 0.5s ease;
+}
+
+.account-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  width: 400px;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.preferences-section {
+  display: flex;
+  flex-direction: column;
+  transition: all 1.5s ease;
+}
+
+.preferences-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 1.5s ease;
+}
+
+.toggle-icon {
+  transition: all 1.5s ease;
+}
+
+.preferences-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 1.5s ease;
+}
+
+.preferences-content.show {
+  max-height: 500px; /* Adjust based on content */
+}
+
+.preference-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 0;
+  transition: all 1.5s ease;
+}
+
+.logout-button {
+  margin: 1.5rem 0;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+.logout-button:hover {
+  background-color: #ff3333;
+  color: white;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .account-container {
+    padding-top: 0;
+  }
+}
