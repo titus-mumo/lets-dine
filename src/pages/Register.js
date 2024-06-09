@@ -87,11 +87,11 @@ export const Register = () => {
             <ToastContainer />
             {
                 loading? <LoadingSpinner /> : 
-                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                <div className="flex flex-col items-center justify-center px-3 py-4 mx-auto md:h-screen lg:py-0">
                 <a href="/" className="flex items-center mb-4 text-lg md:text-xl font-semibold text-black poppins">
                     EthnicEats  
                 </a>
-                <div className="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div className="w-300px bg-white rounded-lg shadow dark:border xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-3 space-y-2 md:space-y-4 sm:p-4">
                         <h1 className="text-sm font-bold leading-tight tracking-tight text-gray-900 md:text-lg dark:text-white poppins">
                             Create an account

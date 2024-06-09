@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 export const NavBar = ({divRefs}) => {
 
@@ -21,7 +22,7 @@ export const NavBar = ({divRefs}) => {
   return (
     <header className='z-10 fixed top-0 left-0 flex flex-row justify-between shadow-md p-2 header w-full items-center pb-3' >
       <div className='flex justify-start basis-3/6'>
-        <p className='poppins text-3xl font-bold text-white hover:cursor-pointer hover:text-blue-500'>EthnicEats</p>
+        <Link to='/' className='poppins text-lg md:text-2xl font-bold text-white hover:cursor-pointer hover:text-blue-500'>EthnicEats</Link>
       </div>
       <div className='flex justify-end lg:justify-between flex-row items-center basis-4/6'>
         <div className='hidden md:flex justify-around basis-2/3'>

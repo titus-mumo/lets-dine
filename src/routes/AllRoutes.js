@@ -6,6 +6,9 @@ import ProtectCuisineOwnerRoutes from "./ProtectCuisineOwnerRoutes";
 import React from 'react'
 import { UserLayout } from "./ProtectedLayout";
 import { CuisineLayout } from "./ProtectedLayout";
+import TermsAndConditions from "../pages/TermsAndPolicy";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
+import AcceptableUseNotice from "../pages/AcceptableUseNotice";
 
 
 
@@ -17,6 +20,9 @@ export const AllRoutes = () => {
         <Route path='/register' element={<Register />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password/:uid/:token' element={<ResetPassword />} />
+        <Route path='/terms_and_conditions' element={<TermsAndConditions />}/>
+        <Route path="/privacy_policy" element={<PrivacyPolicy />} />
+        <Route path="/acceptable_use_notice" element={<AcceptableUseNotice />} />
       <Route element={<PrivateRoute />} >
         <Route element={<UserLayout />}>
           <Route element={<ProtectUserRoutes />} >

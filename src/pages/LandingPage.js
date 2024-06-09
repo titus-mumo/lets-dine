@@ -1,9 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { NavBar } from '../components'
-import { useAuth } from '../hooks/AuthProvider'
-import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
-import LandingPageImage from '../assets/bg.jpg'
 import AboutSectionImage from '../assets/about-modified.png'
 import { LocationOn } from '@mui/icons-material'
 import { Email } from '@mui/icons-material'
@@ -42,7 +39,7 @@ export const LandingPage = () => {
         <Pricing divRefs={divRefs} />
         <WhyUs divRefs={divRefs} />
         <Contact divRefs={divRefs} />
-        <Footer />
+        <Footer divRefs={divRefs}/>
       </div>
     </div>
   )
@@ -355,7 +352,18 @@ const TestimonialCard = ({ testimonial }) => {
 };
 
 
-const Footer = () => {
+const Footer = ({divRefs}) => {
+
+  const handleScrollClick = (targetDivId) => {
+      const targetDiv = divRefs.current[targetDivId];
+      if (targetDiv) {
+        targetDiv.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.error(`Div with ID "${targetDivId}" not found!`);
+      }
+
+  }
+
   let year = moment(new Date()).format('YYYY')
   return(
     <div className='bg-slate-900 w-full flex flex-col justify-center pb-5 pl-3'>
@@ -366,10 +374,10 @@ const Footer = () => {
           <div>
             <h1 className='text-xl font-bold mb-2 text-center'>GET STARTED</h1>
             <div>
-              <p className='mb-1'>Features</p>
-              <p className='mb-1'>Pricing</p>
+              <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('about-us')}>Features</p>
+              <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('pricing')}>Pricing</p>
               <Link to='/register' className='mb-1'>Sign Up</Link>
-              <p>FAQs</p>
+              <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('faqs')}>FAQs</p>
             </div>
           </div>
           <div>
@@ -383,7 +391,7 @@ const Footer = () => {
             <div className='flex flex-col space-y-1'>
               <Link to='terms_and_conditions'>Terms and conditions</Link>
               <Link to='privacy_policy'>Privacy Policy</Link>
-              <Link to='acceptable_use_policy'>Acceptable Use Notice</Link>
+              <Link to='acceptable_use_notice'>Acceptable Use Notice</Link>
             </div>
           </div>
           <div className='basis-1/3 self-center'>

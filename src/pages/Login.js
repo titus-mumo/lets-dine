@@ -71,7 +71,7 @@ export const Login = () => {
                 <a href="/" className="flex text-black items-center mb-3 text-lg md:text-xl  font-semibold">
                     EthnicEats   
                 </a>
-                <div className="w-full bg-white rounded-lg shadow dark:border sm:max-w-xs md:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div className="w-300px bg-white rounded-lg shadow dark:border sm:max-w-xs md:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                     <div className="p-3 space-y-2 md:space-y-4 sm:p-4">
                         <h1 className="text-sm font-bold leading-tight tracking-tight text-gray-900 md:text-lg dark:text-white">
                             Sign in to your account
