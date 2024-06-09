@@ -15,7 +15,7 @@ export const CuisineCard = ({cuisine}) => {
         setTimeout(() => navigate(`/cuisine-owner/cuisine/${cuisine_id}/menu`), 100)
     }
   return (
-    <div className='flex flex-col w-400px m-1 justify-around shadow-md p-1 rounded-md h-500px hover:cursor-pointer hover:shadow-lg hover:bg-gray-200 transition-transformation duration-300'>
+    <div className='flex flex-col w-400px m-1 justify-around shadow-md p-0.5 rounded-md h-500px hover:cursor-pointer hover:shadow-lg hover:bg-gray-200 transition-transformation duration-300'>
         <img src={url? url : restaurantImage} alt='cuisine image' className='m-auto h-56 rounded-md'></img>
         <div >
           <p className='poppins text-sm font-medium'>{name}</p>

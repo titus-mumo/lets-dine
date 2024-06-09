@@ -358,7 +358,7 @@ const TestimonialCard = ({ testimonial }) => {
 const Footer = () => {
   let year = moment(new Date()).format('YYYY')
   return(
-    <div className='bg-slate-900 w-full flex flex-col justify-center pb-5'>
+    <div className='bg-slate-900 w-full flex flex-col justify-center pb-5 pl-3'>
       <div className='w-full h-full flex justify-center items-center bg-gray-900 text-white py-10'>
         <div className='w-full flex justify-around flex-col md:flex-row'>
           <div className='basis-1/3 self-center'>

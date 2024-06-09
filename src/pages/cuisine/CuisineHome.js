@@ -43,10 +43,10 @@ export const CuisineHome = () => {
       }
   return (
     <div className='w-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6'>
-        <div className='w-auto my-4 flex w-full justify-center'>
-            <Link to='/cuisine-owner/new' className='m-2 mb-0 poppins px-3 py-2 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300'>Add another Cuisine</Link>
+        <div className='w-auto my-1 flex w-full justify-center'>
+            <Link to='/cuisine-owner/new' className='m-1 mb-0 poppins px-3 py-2 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-2 rounded-lg transition duration-300'>Add another Cuisine</Link>
         </div>
-        <div className= 'flex flex-rol flex-wrap my-2 justify-center'>
+        <div className= 'flex flex-rol flex-wrap my-1 justify-center'>
             {
                 ownedCuisine.map((item, index) => <CuisineCard key={item.cuisine_id} cuisine={item}  />)
             }

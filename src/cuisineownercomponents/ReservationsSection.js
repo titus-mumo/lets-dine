@@ -39,7 +39,7 @@ export const ReservationsSection = ({cuisine_id}) => {
   return (
     <div className={`${reservationList? 'block overflow-x-hidden': ''}  p-2 m-2`}>
       {
-        loading? <LoadingSpinner />: reservationList.length === 0? 'Cuisine Reservations made will appear here':reservationList.map((item) => <ReservationDetail key={item.reservation_id} reservation={item}/>)
+        loading? <LoadingSpinner />: reservationList.length === 0?<p className='text-sm'>Cuisine reservations made will appear here</p> :reservationList.map((item) => <ReservationDetail key={item.reservation_id} reservation={item}/>)
       }
     </div>
   )

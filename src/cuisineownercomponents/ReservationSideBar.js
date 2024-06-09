@@ -7,7 +7,7 @@ const ReturnName = ({ name }) => {
 
 export const ReservationSideBar = ({sideBarNames}) => {
     return (
-        <div>
+        <div className='mt-10'>
             <p>My Cuisines</p>
             <div>
                 {sideBarNames.map((item, index) => <ReturnName key={index} name={item} />)}

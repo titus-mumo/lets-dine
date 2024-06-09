@@ -103,9 +103,10 @@ code {
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  padding-top: 2rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
   transition: all 0.5s ease;
 }
 
@@ -114,7 +115,6 @@ code {
   justify-content: center;
   flex-direction: column;
   margin: auto;
-  width: 400px;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);

@@ -7,11 +7,11 @@ require('dotenv').config();
 
 const base_url = process.env.BASE_URL;
 
-export const ApiCall = async (endpoint, method, token, refreshToken, setToken, setRefresh, data = {}, options = {}, navigate='') => {
+export const ApiCall = async (endpoint, method, token, refreshToken, setToken, setRefresh, data = {}, options = {}, form = {}) => {
     const headers = {
         ...options.headers,
         "Authorization": `Bearer ${token}`,
-        "Content-Type": endpoint === 'meals/' || endpoint === 'cuisines/'? 'multipart/form-data':"application/json"
+        "Content-Type": form && form === true?'multipart/form-data':"application/json"
     };
 
     const api = axios.create({
@@ -28,16 +28,19 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
             res = await api.get(endpoint);
         } else if (method === 'delete'){
             res = await api.delete(endpoint);
+        } else if(method === 'put'){
+            res = await api.put(endpoint, data)
         }
         return res;
     } catch (error) {
         if (error.response && error.response.status === 401) {
             // Token has expired, attempt to refresh it
             try {
-                const response = await refreshAccessToken(refreshToken);
+                let response = await refreshAccessToken(refreshToken);
                 
-                const {access,refresh} = response
-                let res;
+                response.access? '': response = await refreshAccessToken(refreshToken);
+
+                const {access, refresh} = response
                 if (access) {
                     setToken(access);
                     setRefresh(refresh);
@@ -51,6 +54,8 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
                         res = await api.get(endpoint, { headers });
                     }else if (method === 'delete') {
                         res = await api.delete(endpoint, { headers });
+                    }else if (method === 'delete'){
+                        res = await api.put(endpoint, data, { headers });
                     }
                     return res;
                 } else {
@@ -59,7 +64,6 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
             } catch (refreshError) {
                 console.log("Failed to refresh token:", refreshError.message);
                 // ToastMessage("error", "Session expired. Please login again")
-                navigate? navigate('/login'): ''
             }
         } else {
             console.log(error.message);

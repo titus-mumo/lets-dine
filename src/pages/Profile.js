@@ -78,7 +78,7 @@ export const Account = () => {
       <div className='account-container'> 
       {
         loading? <LoadingSpinner /> : 
-        <div className='account-content'>
+        <div className='account-content w-300px'>
         <p className='text-center text-md font-medium'>Profile</p>
         <div className='preferences-section'>
           <div className='preferences-header'>
@@ -107,7 +107,7 @@ export const Account = () => {
               {seeAccountInfo ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </div>
             </div>
-            <div className={`flex flex-col w-300px ml-3 preferences-content ${seeAccountInfo ? 'show' : 'hide'}`}>
+            <div className={`flex flex-col w-full ml-3 preferences-content ${seeAccountInfo ? 'show' : 'hide'}`}>
               <div className='flex justify-between preference-item'>
                   <p className='text-sm'>Email:</p>
                   <p className='text-end text-sm'>{email}</p>

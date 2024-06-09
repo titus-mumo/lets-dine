@@ -33,11 +33,13 @@ export const ReviewCard = ({cuisine_id}) => {
 
   return (
     <div className='flex justify-around w-full flex-col'>
-        <p className='text-lg font-semibold poppins text-center'>Reviews</p>
-        <div className='poppins flex justify-around w-full flex-col'>
+        <p className='text-md font-medium poppins text-left'>Reviews</p>
+        <div className='poppins flex justify-around w-full flex-col justify-start'>
+        <ul>
         {
-            loading? <LoadingSpinner /> : reviews.length === 0 ? <p className='poppins text-center'>Reviews will appear here</p>: reviews.map((review, index) => <p key={index} className='poppins text-center'>{review}</p>)
+            loading? <LoadingSpinner /> : reviews.length === 0 ? <p className='poppins text-left text-sm'>Reviews will appear here</p>: reviews.map((review, index) => <li key={index} className='poppins text-left text-sm'>{review}</li>)
         }
+        </ul>
         </div>
     </div>
   )

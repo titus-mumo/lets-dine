@@ -129,9 +129,9 @@ export const GeneralForums = () => {
               }}
           />
           </div>
-            <div className={` ${chatOpen? 'flex': 'hidden'} w-full h-full md:h-7/10 md:flex flex-col md:basis-3/5 lg:basis-2/3 rounded-md items-start`}>
+            <div className={` ${chatOpen? 'flex overflow-y-hidden': 'hidden'} w-full h-80vh md:h-7/10 md:flex flex-col md:basis-3/5 lg:basis-2/3 rounded-md items-start`}>
             {currentRoom? (
-              <div className='w-full h-full md:h-5/6 flex flex-col justify-between pb-4 px-2'>
+              <div className='w-full h-5/6 flex flex-col justify-between pb-4 px-2 mt-8 md:mt-0'>
                 <div className='flex flex-start bg-slate-900 mr-2 rounded-lg text-white items-center w-full py-2 '>
                   <div className='mr-2 ml-1 md:hidden' onClick={() => {
                     setChatOpen(false) 
@@ -141,20 +141,22 @@ export const GeneralForums = () => {
                   </div>
                   <h2 className='text-md font-medium py-1 pl-2'>{currentRoom}</h2>
                 </div>
-                <div className='flex w-full flex-col mx-1 h-96vh '>
-                <div className='overflow-y-auto h-700px overflow-x-hidden'>
+                <div className='flex w-full flex-col mx-1 h-80vh '>
+                <div className='overflow-y-auto h-500px md:h-700px overflow-x-hidden'>
                   <div className='flex w-full flex-col mx-1'>
                       {Object.keys(groupedMessages).map((date) => (
                         <div key={date} className='my-1'>
-                          <div className='text-md font-semibold text-center mb-1'>{date}</div>
-                          <div className={`flex flex-col w-full `}>
+                          <div className='text-md font-medium text-center mb-0.5'>{date}</div>
+                          <div className={`flex flex-col w-full`}>
                           {groupedMessages[date].map((msg, index) => (
-                            <div key={index} className={`flex flex-col p-1 mx-2 mt-1 rounded-lg w-fit max-w-80 ${msg.user === user.username? 'self-end bg-blue-500': 'self-start bg-gray-200'}`}>
-                              <p className={`${msg.user === user.username? 'hidden': ''}`}>{msg.user}</p>
-                              <div className='flex items-end p-1 mx-2 w-full'>
-                              <p className='text-lg break-words whitespace-normal w-2/3 mr-2'>{msg.message}</p>
+                            <div className={`${msg.user === user.username? 'self-end justify-end pl-6': 'self-end justify-start pr-6'} m-auto flex w-full`}>
+                            <div key={index} className={`flex flex-col w-auto ${msg.user === user.username? 'bg-blue-500': 'bg-gray-200'} p-0.5 mx-1 mt-1 rounded-lg w-2/3`}>
+                              <p className={`${msg.user === user.username? 'hidden': 'text-xs'}`}>{msg.user}</p>
+                              <div className='flex items-end p-0.5 md:p-1 mx-2'>
+                              <p className='text-sm md:text-md break-normal whitespace-normal mr-1 max-basis-2/3'>{msg.message}</p>
                               <span className='text-xs text-right w-fit whitespace-nowrap mr-1'>{moment(msg.timestamp).format('h:mm a')}</span>
                               </div>
+                            </div>
                             </div>
                           ))}
                         </div>
@@ -164,14 +166,14 @@ export const GeneralForums = () => {
                     </div>
                     </div>
                     <div className='flex w-full mb-2 mx-1'>
-                      <input
-                          className='basis-4/5 border-1 border-gray-900 py-1 rounded-lg px-1'
-                          type="text"
-                          value={message}
-                          onChange={e => setMessage(e.target.value)}
-                          placeholder="Type a message..."
-                      />
-                      <button className=' mr-2 basis-1/5 bg-slate-900 text-white py-2 px-3 rounded-lg shadow-md' onClick={sendMessage}>Send</button>
+                    <input
+                        className='basis-4/5 break-all border-1 border-gray-900 py-1 rounded-lg px-1 text-sm break-words'
+                        type="text"
+                        value={message}
+                        onChange={e => setMessage(e.target.value)}
+                        placeholder="Type a message..."
+                    />
+                      <button className=' mr-2 basis-1/5 md:basis-1/6 bg-slate-900 text-white py-1 md:py-2 px-3 rounded-lg shadow-md text-sm' onClick={sendMessage}>Send</button>
                     </div>
                   </div>
                   </div> 

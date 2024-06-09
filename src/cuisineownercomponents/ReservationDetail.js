@@ -61,8 +61,8 @@ export const ReservationDetail = ({reservation}) => {
     <div className='flex w-full items-center justify-around shadow-md p-2 m-2 rounded-md'>
         <div className='m-auto'>
             {/* <p className='poppins text-lg font-semibold'>{cuisineName}</p> */}
-            <p className='poppins'>{standardTime}</p>
-            <p className='poppins'>Reserved seats: {total_seats}</p>
+            <p className='poppins text-sm'>{standardTime}</p>
+            <p className='poppins text-sm'>Reserved seats: {total_seats}</p>
         </div>
         {/* <div className='basis-1/3 m-auto flex flex-col justify-start m-auto'>
         <button onClick={(e) => handleEditReservation(e)} className='m-2 px-2 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Edit Reservation</button>

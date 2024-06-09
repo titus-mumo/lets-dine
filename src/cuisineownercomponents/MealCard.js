@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import burger from '../assets/burger.jpeg'
 import { useAuth } from '../hooks/AuthProvider'
 import { ApiCall } from '../hooks/ApiCall'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 require('dotenv').config()
 
-export const MealCard = ({meal, edit, setEdit, id}) => {
+export const MealCard = ({meal, confirmDelete, setConfirmDelete, id, deleteMealName, setDeleteMealName, setDeleteMealId}) => {
     const {cuisine, meal_id, meal_name, category} = meal
     let url;
     if(meal.meal_pic) {
@@ -31,43 +31,40 @@ export const MealCard = ({meal, edit, setEdit, id}) => {
         
       })
       .catch((error) => {
-        return console.log("SOmething went wrong")
+        return console.log("Something went wrong")
       });
 
     }
 
     useEffect(() => {getCuisineName()}, [cuisine])
 
-    const handleEdit = (e) => {
-      e.preventDefault()
-      if(edit !== id){
-        setEdit(meal_id)
-      }else if(edit === id && editName === meal_name && price === editPrice){
-        setEdit('')
-      }else{
-        setEdit('')
-        //TODO: Edit meal
-      }
+    const navigate = useNavigate()
+
+    const handleEdit = () => {
+      //e.preventDefault()
+      console.log(`/cuisine-owner/${cuisine}/edit`)
+      navigate(`/cuisine-owner/cuisine/${cuisine}/edit`, {state: {meal : meal, cuisine_id : cuisine}} )
     }
 
-    const [editName, setEditName] = useState(meal_name)
-    const [editPrice, setEditPrice] = useState(price)
+    const handleDelete = (e, id) => {
+      setConfirmDelete(true)
+      if(id === meal_id){
+        setDeleteMealName(meal_name)
+        setDeleteMealId(meal_id)
+      }
+    }
 
 
 
 
   return (
-      <div className={`hover:cursor-pointer border border-gray-100 transition transform duration-700 hover:shadow-xl p-1 rounded-lg relative flex flex-col mb-1 w-40 items-start justify-start ${edit === id?'scale-125 bg-gray-300': ''}`}>
+      <div className="hover:cursor-pointer bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl p-1 rounded-lg relative flex flex-col mb-1 w-40 items-start justify-start">
           <span className="bg-red-100 border border-red-500 rounded-full text-primary text-sm poppins px-4 md:py-1  inline-block self-center mb-2">{foodType}</span>
-          <div className="flex-grow flex justify-center mb-2">
+          <div className="flex-grow flex justify-center">
               <img className="w-40 lg:w-64 mx-auto transform transition duration-300" src={meal.meal_pic ? url : burger} alt="" />
           </div>
           <div className="w-full flex flex-col items-center mt-auto space-y-2">
-            {
-              edit === id ? <input value={editName} onChange={(e) => setEditName(e.target.value)} type='text' className='w-full text-xs'></input> :
-                          <h1 className="text-gray-900 poppins text-sm text-center">{meal_name}</h1>
-            }
-              
+              <h1 className="text-gray-900 poppins text-sm text-center">{meal_name}</h1>
               <div className="w-full flex justify-between items-center px-2">
                   <div className="flex flex-row items-center">
                       {/* <p className="text-gray-500 poppins text-xs text-center mr-2">Cuisine: </p> */}
@@ -75,22 +72,15 @@ export const MealCard = ({meal, edit, setEdit, id}) => {
                           {loading ? 'Loading...' : cuisineName.includes(' ') ? `${cuisineName.split(' ')[0]}.. ` : cuisineName.length > 10 ? `${cuisineName.slice(0, 9)}..` : cuisineName}
                       </Link>
                   </div>
-                  
-                  {
-                    edit === id ? <input value={editPrice} type='number' onChange={(e) => setEditPrice(e.target.value)} className='w-10 border-1 border-gray-900'></input> :<h2 className="text-gray-900 poppins text-md font-bold text-end">£{price}</h2>
-                  }
+                  <h2 className="text-gray-900 poppins text-md font-bold text-end">£{price}</h2>
               </div>
           </div>
-          <div className='flex justify-between items-center w-full'>
-            <p className={`${edit === id? 'text-green-700 text-sm font-medium p-1': 'text-green-500 text-sm p-1'}  hover:cursor-pointer transition duration-300`} onClick={(e) => handleEdit(e)}>
-              {
-                'Edit'
-              }
-            </p>
-            <p onClick={() => setEdit('')} className={`${edit === id? '': 'hidden'} text-red-500 text-sm hover:cursor-pointer transition duration-300`}>Discard</p>
-            <p className={`${edit === id? 'hidden': ''} text-red-500 text-sm hover:cursor-pointer transition duration-300`}>Delete</p>
+          <div className='flex justify-between w-full'>
+            <p className='p-1 text-green-700 text-sm hover:cursor-pointer transition duration-300' onClick={() => handleEdit()}>Edit</p>
+            <p className='p-1 text-red-500 text-sm hover:cursor-pointer transition duration-300' onClick={(e) => handleDelete(e, id)}>Delete</p>
           </div>
       </div>
   )
 }
+
 

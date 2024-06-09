@@ -35,7 +35,7 @@ export const AddMenu = () => {
         formData.append('meal_pic', image);
 
 
-        ApiCall('meals/', 'post', token, refresh, setToken, setRefresh, formData)
+        ApiCall('meals/', 'post', token, refresh, setToken, setRefresh, formData, {}, true)
         .then(function(response){
             const {status} = response
             if(status === 201){
@@ -61,11 +61,11 @@ export const AddMenu = () => {
         <form className='space-y-4 md:space-y-6' onSubmit={(e) => handleAddItemToMenu(e)} encType="multipart/form-data">
         <div>
             <label htmlFor="mealname" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">Meal name</label>
-            <input type="text" name="mealname" id="mealname" value={mealName} onChange={(e) => setMelName(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="meal name" required></input>
+            <input type="text" name="mealname" id="mealname" value={mealName} onChange={(e) => setMelName(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="meal name" required></input>
         </div>
         <div>
             <label htmlFor="price" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Price (£)</label>
-            <input type="number" name="price" id="price" value={price} onChange={(e) => setPrice(e.target.value)} className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="price" required></input>
+            <input type="number" name="price" id="price" value={price} onChange={(e) => setPrice(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="price" required></input>
         </div>
         <div>
             <label htmlFor="category" className="poppins block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -76,7 +76,7 @@ export const AddMenu = () => {
                 id="category"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required
             >
                 <option value="" disabled>Select a category</option>
@@ -97,14 +97,14 @@ export const AddMenu = () => {
             id="image"
             accept="image/*"
             onChange={handleImageChange}
-            className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
             />
         </div>
 
         <div className='flex justify-around flex-wrap items-center flex-row'>
-        <button type='submit' className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Add Item</button>
-        <Link to={`/cuisine/${params.cuisine_id}/menu`} className='m-4 px-6 py-3 bg-primary text-white ring-red-400 focus:outline-none focus:ring-4 mt-6 rounded-lg transition duration-300 poppins'>Back</Link>
+        <button type='submit' className='m-2 px-4 py-2 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-2 mt-2 rounded-lg transition duration-300 poppins text-sm'>Add Item</button>
+      <Link to={`/cuisine/${params.cuisine_id}/menu`} className='m-2 px-4 py-2 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-2 mt-2 rounded-lg transition duration-300 poppins text-sm'>Back</Link>
         </div>
 
         </form>
