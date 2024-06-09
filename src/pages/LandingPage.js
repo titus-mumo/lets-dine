@@ -57,7 +57,7 @@ const Home = ({divRefs}) => {
           <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center text-white'>EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.</h2>
           <p className='text-lg lg:text-xl mb-6 text-center text-white'>Enjoy authentic dishes from around the globe. Discover new flavors and savor the richness of different cultures.</p>
           <div className='flex justify-center'>
-            <Link to='/register' className="font-medium w-auto px-6 py-3 text-white rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105">GET STARTED</Link>
+            <Link to='/login' className="font-medium w-auto px-6 py-3 text-white rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105">GET STARTED</Link>
           </div>
         </div>
         <div className='self-center basis-2/5 px-5 py-10 md:px-20 md:pb-5 md:pt-0 lg:p-16'>

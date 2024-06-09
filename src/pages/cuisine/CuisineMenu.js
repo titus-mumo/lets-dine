@@ -75,7 +75,7 @@ export const CuisineMenu = () => {
             </div>
             <DeletePopUp confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} deleteMealName={deleteMealName} setDeleteMealName={setDeleteMealName} deleteMealId={deleteMealId} />
             <div className='mt-3'>
-                <div className='flex flex-wrap justify-around'>
+                <div className='flex flex-wrap md:justify-around justify-start'>
                 {
                     cuisineMenu.length > 0?cuisineMenu.map((item) => <MealCard key={item.meal_id} id={item.meal_id} meal={item} confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} setDeleteMealName={setDeleteMealName} setDeleteMealId={setDeleteMealId}/>): <p className='text-sm text-center'>No items on the menu yet</p>
                 }
@@ -116,11 +116,11 @@ const DeletePopUp = ({confirmDelete, setConfirmDelete, deleteMealName, setDelete
 
     return(
         <div className={`${confirmDelete ? 'flex blur-none' : 'hidden'} z-10000 fixed inset-0 justify-center items-center`}>
-            <div className='p-2 bg-white rounded shadow-md'>
-                <p>Do you want to delete {deleteMealName} ?</p>
-                <div className='flex justify-around mt-2'>
-                    <button onClick={(e) => handleDelete(e)} >Yes</button>
-                    <button onClick={() => setConfirmDelete(false)}>No</button>
+            <div className='p-2 bg-slate-900 rounded shadow-md'>
+                <p className='text-sm md:text-md text-white'>Do you want to delete {deleteMealName} ?</p>
+                <div className='flex justify-around mt-1'>
+                    <button onClick={(e) => handleDelete(e)} className='text-md text-white'>Yes</button>
+                    <button onClick={() => setConfirmDelete(false)} className='text-md text-white'>No</button>
                 </div>
             </div>
         </div>

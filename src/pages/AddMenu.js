@@ -50,12 +50,11 @@ export const AddMenu = () => {
 
     }
   return (
-    <div className='w-full h-full flex justify-around flex-col mt-10'>
+    <div className='w-full h-full flex justify-around flex-col mt-10 lg:mt-0 items-center'>
         <ToastContainer />
-        <p className='poppins text-center w-full'>AddMenu</p>
         <div className="m-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="m-auto p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="poppins text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+          <div className=" p-3 space-y-4 md:space-y-3 sm:p-4 self-center">
+          <h1 className="poppins text-md md:text-lg font-medium leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Add an item to menu
               </h1>
         <form className='space-y-4 md:space-y-6' onSubmit={(e) => handleAddItemToMenu(e)} encType="multipart/form-data">

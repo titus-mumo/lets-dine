@@ -72,7 +72,9 @@ export const Account = () => {
         })
     }
 
-    useEffect(() => {fetchUserInfo()}, [])
+    useEffect(() => {
+      fetchUserInfo()
+    }, [])
   
     return (
       <div className='account-container'> 

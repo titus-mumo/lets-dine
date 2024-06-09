@@ -1,7 +1,7 @@
 import React from "react";
 import { ToastMessage } from "../utils";
 import axios from "axios";
-import { refreshAccessToken } from "./RefreshToken";
+import { refreshAccessToken } from "./RefreshToken.js";
 
 require('dotenv').config();
 

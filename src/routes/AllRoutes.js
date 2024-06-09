@@ -24,6 +24,7 @@ export const AllRoutes = () => {
             <Route path='/home' element={<Home />} />
             <Route path='/cuisines' element={<Cuisines />} />
             <Route path='/cuisine/:cuisine_id/menu' element={<CuisineDetail />} />
+            <Route path='/cuisine/:cuisine_id/menu/add' element={<AddMenu />} />
             <Route path='/cuisine/:cuisine_id/make_reservation' element={<Reservation />} />
             <Route path='/reservations' element={<ViewReservations />} />
             <Route path='/cuisine/:cuisine_id/add-review' element={<AddReview />} />
