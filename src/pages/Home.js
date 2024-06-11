@@ -29,6 +29,7 @@ export const Home = () => {
         .then(function(response){
             const {status, data} = response
             if(status === 200){
+                console.log(data)
                 setMeals(data)
                 setLoading(false)
             }

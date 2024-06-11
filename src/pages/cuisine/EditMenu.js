@@ -41,7 +41,7 @@ export const EditMenu = () => {
       formData.append('cuisine_id', cuisine_id)
       formData.append('meal_name', editMealName);
       formData.append('price', editPrice);
-      formData.append('category', editMealName);
+      formData.append('category', editCategory);
       if(image !== null){
         formData.append('meal_pic', image);
       }

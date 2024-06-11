@@ -201,3 +201,12 @@ code {
   margin-left: 20px;
 }
 
+
+.centered-div{
+  left: 50%;
+}
+
+.beauty-stars{
+  font-size: 24px; 
+  color: #ffcc00;
+}

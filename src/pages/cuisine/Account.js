@@ -9,6 +9,7 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import moment from 'moment';
 import LoadingSpinner from '../LandingPage';
+import { usePreferenceList } from '../../hooks/UserPreferenceProvider';
 
 export const Account = () => {
     const userAuth = useAuth();
@@ -21,6 +22,7 @@ export const Account = () => {
     const [loading, setLoading] = useState(true)
   
     const navigate = useNavigate();
+    
   
     const handleLogout = (e) => {
       e.preventDefault();
@@ -80,7 +82,7 @@ export const Account = () => {
       <div className='account-container'> 
       {
         loading? <LoadingSpinner /> : 
-        <div className='account-content'>
+        <div className='account-content w-300px'>
         <p className='text-center text-md font-medium'>Profile</p>
         <div className='preferences-section'>
           <div className='preferences-header'>
@@ -93,8 +95,8 @@ export const Account = () => {
             </div>
           </div>
           <div className={`preferences-content ${seePreferences ? 'show' : 'hide'} ml-3`}>
-            {UserPreferences.map((category, index) => (
-              <DisplayPreference category={category} key={index} />
+            {preferenceList.map((category, index) => (
+              <DisplayPreference category={category} key={index} id={index} />
             ))}
           </div>
         </div>
@@ -109,7 +111,7 @@ export const Account = () => {
               {seeAccountInfo ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </div>
             </div>
-            <div className={`flex flex-col w-300px ml-3 preferences-content ${seeAccountInfo ? 'show' : 'hide'}`}>
+            <div className={`flex flex-col w-full ml-3 preferences-content ${seeAccountInfo ? 'show' : 'hide'}`}>
               <div className='flex justify-between preference-item'>
                   <p className='text-sm'>Email:</p>
                   <p className='text-end text-sm'>{email}</p>
@@ -135,19 +137,38 @@ export const Account = () => {
     );
   };
   
-  const UserPreferences = ['Appetizers', 'Main Courses', 'Side Dishes', 'Desserts', 'Beverages'];
+  const preferenceList = ['Appetizers', 'Main Courses', 'Side Dishes', 'Desserts', 'Beverages'];
+
   
-  const DisplayPreference = ({ category }) => {
+  const DisplayPreference = ({ category, id }) => {
     const [check, setCheck] = useState(true);
+
+    const usePreferences = usePreferenceList()
+
+    const {
+      appetizers,
+      setAppetizers,
+      mainCourses,
+      setMainCourses,
+      sideDishes,
+      setSideDishes,
+      desserts,
+      setDesserts,
+      beverages,
+      setBeverages
+    } = usePreferences
+
+    const dishes = [appetizers, mainCourses, sideDishes, desserts, beverages]
+    const setDishes = [setAppetizers, setMainCourses, setSideDishes, setDesserts, setBeverages]
   
-    const handleCheckboxChange = () => {
-      setCheck((prevCheck) => !prevCheck);
+    const handleCheckboxChange = (id) => {
+      setDishes[id]((prevCheck) => !prevCheck);
     };
   
     return (
       <div className='preference-item'>
         <p className='text-sm'>{category}</p>
-        <input type='checkbox' checked={check} onChange={handleCheckboxChange} />
+        <input type='checkbox' checked={dishes[id]} onChange={() => handleCheckboxChange(id)} />
       </div>
     );
   };
