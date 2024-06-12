@@ -63,7 +63,7 @@ export const Login = () => {
         return;
     };
   return (
-        <section className="h-full w-full bg-gray-900">
+        <section className="h-lvh md:h-full w-full bg-gray-900">
             <ToastContainer />
             {
                 loading? <LoadingSpinner />:
