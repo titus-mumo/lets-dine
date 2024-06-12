@@ -25,22 +25,25 @@ export const LandingPage = () => {
     }, 2000)
   }, [])
 
-  if (loading){
-    return <LoadingSpinner />
-  }
-
   return (
-    <div className='relative flex flex-col w-screen justify-center'>
-      <NavBar divRefs={divRefs} />
-      <div className='flex flex-col w-screen justify-center mt-80px'>
-        <Home divRefs={divRefs} />
-        <AboutUs divRefs={divRefs} />
-        <FAQs divRefs={divRefs} />
-        <Pricing divRefs={divRefs} />
-        <WhyUs divRefs={divRefs} />
-        <Contact divRefs={divRefs} />
-        <Footer divRefs={divRefs}/>
-      </div>
+    <div className='relative flex flex-col w-screen justify-center h-full bg-gray-900'>
+      {
+        loading? <LoadingSpinner /> :
+        <>
+          <NavBar divRefs={divRefs} />
+          <div className='flex flex-col w-screen justify-center mt-80px'>
+            <Home divRefs={divRefs} />
+            <AboutUs divRefs={divRefs} />
+            <FAQs divRefs={divRefs} />
+            <Pricing divRefs={divRefs} />
+            <WhyUs divRefs={divRefs} />
+            <Contact divRefs={divRefs} />
+            <Footer divRefs={divRefs}/>
+          </div>
+        </>
+
+      }
+
     </div>
   )
 }
@@ -442,8 +445,8 @@ const Pricing = ({divRefs}) => {
   const [role, setRole] = useState('User');
 
   return (
-    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing h-450px flex flex-col py-3 bg-gradient-to-b from-cyan-300 to-cyan-500 py-5 md:py-20 lg:py-24">
-      <h1 className='text-center text-2xl font-bold my-4'>OUR PACKAGES</h1>
+    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing h-450px flex flex-col py-3 bg-gradient-to-b from-stone-700 to-stine-700 py-5 md:py-20 lg:py-24">
+      <h1 className='text-center txt-white text-2xl font-bold my-4'>OUR PACKAGES</h1>
       <div className="flex justify-center ml-2 mb-10">
         <select
           name="role"

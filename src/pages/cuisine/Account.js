@@ -82,9 +82,9 @@ export const Account = () => {
       <div className='account-container'> 
       {
         loading? <LoadingSpinner /> : 
-        <div className='account-content w-300px'>
+        <div className='account-content w-300px bg-white'>
         <p className='text-center text-md font-medium'>Profile</p>
-        <div className='preferences-section'>
+        {/* <div className='preferences-section'>
           <div className='preferences-header'>
             <p>User Preferences</p>
             <div
@@ -99,7 +99,7 @@ export const Account = () => {
               <DisplayPreference category={category} key={index} id={index} />
             ))}
           </div>
-        </div>
+        </div> */}
         <div>
         <div className='prefrences-section'>
           <div className='preferences-header'>

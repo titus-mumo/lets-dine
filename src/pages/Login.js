@@ -63,12 +63,12 @@ export const Login = () => {
         return;
     };
   return (
-        <section className="h-screen w-full">
+        <section className="h-full w-full bg-gray-900">
             <ToastContainer />
             {
                 loading? <LoadingSpinner />:
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <a href="/" className="flex text-black items-center mb-3 text-lg md:text-xl  font-semibold">
+                <a href="/" className="flex text-white items-center mb-3 text-lg md:text-xl  font-semibold">
                     EthnicEats   
                 </a>
                 <div className="w-300px bg-white rounded-lg shadow dark:border sm:max-w-xs md:max-w-sm xl:p-0 dark:bg-gray-800 dark:border-gray-700">

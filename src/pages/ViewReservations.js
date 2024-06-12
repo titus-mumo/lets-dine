@@ -14,6 +14,11 @@ export const ViewReservations = () => {
     const [userReservations, setUserReservations] = useState([])
     const [loading, setLoading] = useState(true)
 
+    const [confirmDelete, setConfirmDelete] = useState(false)
+    const [deleteReservationName, setDeleteReservationName] =useState('')
+
+    const [reservationId, setReservationId] = useState('')
+
     const user = useAuth()
     const {token, refresh, setToken, setRefresh} = user
 
@@ -46,12 +51,13 @@ export const ViewReservations = () => {
                 <div className='overflow-y-auto overflow-x-hidden w-full md:w-5/6 lg:h-600px lg:w-700px text-center'>
                     {userReservations.length > 0 ? (
                         userReservations.map((item) => 
-                            <ReservatinDetail key={item.reservation_id} reservation={item} />
+                            <ReservatinDetail key={item.reservation_id} reservation={item} setReservationId={setReservationId} setConfirmDelete={setConfirmDelete} reservationId={reservationId}/>
                         )
                     ) : (
                         <p className='poppins my-20'>Reservations made will appear here</p>
                     )}
                 </div>
+                <DeletePopUp confirmDelete={confirmDelete} setConfirmDelete={setConfirmDelete} deleteReservationId={reservationId} />
                 <Link to='/home' className='m-auto px-3 py-1.5 md:py-2 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-1 mt-3 rounded-lg transition duration-300 poppins'>Go back home</Link>
             </div>
 
@@ -60,4 +66,41 @@ export const ViewReservations = () => {
         </div>
 
   )
+}
+
+
+
+const DeletePopUp = ({confirmDelete, setConfirmDelete, deleteReservationId}) => {
+
+    const userAuth = useAuth()
+    const {token, refresh, setToken, setRefresh} = userAuth
+
+    const handleDeleteReservation = (e)=> {
+        e.preventDefault()
+        ApiCall(`reservation/${deleteReservationId}/`, 'delete', token, refresh, setToken, setRefresh)
+        .then(function(response){
+            const {status, data} = response
+            if(status === 200){
+                ToastMessage("success", data.message)
+                setConfirmDelete(false)
+                setTimeout(() => {window.location.reload()}, 1000)
+                return;
+            }
+        })
+        .catch((error) => {
+            return ToastMessage("error", error.response.data["message"] || "Something went wrong")
+        })
+    }
+
+    return(
+        <div className={`${confirmDelete ? 'flex blur-none' : 'hidden'} z-10000 fixed inset-0 justify-center items-center`}>
+            <div className='p-2 bg-slate-900 rounded shadow-md'>
+                <p className='text-sm md:text-md text-white'>Do you want to delete this reservation?</p>
+                <div className='flex justify-around mt-1'>
+                    <button onClick={(e) => handleDeleteReservation(e)} className='text-md text-white'>Yes</button>
+                    <button onClick={() => setConfirmDelete(false)} className='text-md text-white'>No</button>
+                </div>
+            </div>
+        </div>
+    )
 }

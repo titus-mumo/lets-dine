@@ -8,6 +8,9 @@ import { useAuth } from '../../hooks/AuthProvider';
 import { ApiCall } from '../../hooks/ApiCall';
 import LoadingSpinner from '../LandingPage';
 import { ReviewCard } from '../../cuisineownercomponents';
+import { LockClock } from '@mui/icons-material';
+import { Call, LocationOnOutlined } from '@mui/icons-material';
+import moment from 'moment';
 
 export const CuisineMenu = () => {
     const location = useLocation();
@@ -25,7 +28,7 @@ export const CuisineMenu = () => {
 
     const [deleteMealId, setDeleteMealId] = useState('')
 
-    const {cuisine_id, contact, description,name, time_open} = cuisineInfo
+    const {cuisine_id, contact, description,name, time_open, time_close} = cuisineInfo
 
     const fetchCuisineMenu = async() => {
         ApiCall(`cuisines/${params.cuisine_id}/menu`, 'get', token, refresh, setToken, setRefresh)
@@ -64,10 +67,23 @@ export const CuisineMenu = () => {
             loading? <LoadingSpinner />:
             <div className='flex flex-col justify-center w-full lg:w-900px self-center mt-2 lg:mt-0'>
             <div className='mb-1 flex flex-col justify-center w-full'>
-                <p className='poppins font-semibold text-lg text-center'>{name}</p>
-                <p className='poppins text-center text-sm'>{description}</p>
-                <p className='popins text-center'>{contact}</p>
-                <p className='poppins text-center'>{time_open}</p>
+                <p className='poppins font-medium text-md md:text-lg text-center'>{name}</p>
+                <p className='poppins text-left text-sm md:text-md'>{description}</p>
+                <div className='flex flex-col justify-start self-center w-250px md:w-300px'>
+                    <div className='flex items-center'>
+                        <LocationOnOutlined />
+                        <p className='popins text-center ml-3 text-sm'>{cuisineInfo.location}</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <Call />
+                        <p className='popins text-center ml-3 text-sm'>{contact}</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <LockClock />
+                        <p className='poppins text-center ml-3 text-sm'>{moment(time_open, "HH:mm:ss").format("HH:mm")} - {moment(time_close, "HH:mm:ss").format("HH:mm")}</p>
+                    </div>
+                </div>
+
             </div>
             <div className='flex justify-around w-full'>
             <Link to={`/cuisine-owner/cuisine/${cuisine_id}/menu/add`} className='mx-1 px-3 py-1 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-2 rounded-lg transition duration-300 poppins'>Add Item</Link>

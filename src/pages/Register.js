@@ -83,12 +83,12 @@ export const Register = () => {
 
 
   return (
-        <section className="h-full w-full">
+        <section className="h-full w-full bg-gray-900">
             <ToastContainer />
             {
                 loading? <LoadingSpinner /> : 
                 <div className="flex flex-col items-center justify-center px-3 py-4 mx-auto md:h-screen lg:py-0">
-                <a href="/" className="flex items-center mb-4 text-lg md:text-xl font-semibold text-black poppins">
+                <a href="/" className="flex items-center mb-4 text-lg md:text-xl font-semibold text-white poppins">
                     EthnicEats  
                 </a>
                 <div className="w-300px bg-white rounded-lg shadow dark:border xl:p-0 dark:bg-gray-800 dark:border-gray-700">

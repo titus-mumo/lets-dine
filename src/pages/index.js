@@ -16,6 +16,7 @@ export {ChangePassword} from './ChangePassword'
 export {MapUser} from './Map'
 export {Reccomendations} from './Reccomendations'
 export {ViewCuisineMap} from './ViewCuisineMap'
+export {EditReservation} from './EditReservation'
 
 export {GeneralForums} from './GeneralForums'
 

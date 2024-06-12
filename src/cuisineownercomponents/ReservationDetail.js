@@ -39,7 +39,7 @@ export const ReservationDetail = ({reservation}) => {
 
     const handleDeleteReservation = (e)=> {
         e.preventDefault()
-        ApiCall(`reservation/delete/${reservation_id}/`, 'delete', token, refresh, setToken, setRefresh)
+        ApiCall(`reservation/${reservation_id}/`, 'delete', token, refresh, setToken, setRefresh)
         .then(function(response){
             const {status, data} = response
             if(status === 200){

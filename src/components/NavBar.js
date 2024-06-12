@@ -33,8 +33,8 @@ export const NavBar = ({divRefs}) => {
           <p onClick={() => handleScrollClick('whyus')}  to="whyus"  className='text-white text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Testimonials</p>
         </div>
         <div className="flex items-center justify-end space-x-6 pr-2">
-            <button className="px-3 lg:px-4 py-1 lg:py-2 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-sky-800 border-2" onClick={() => navigate('/login')}>Login</button>
-            <button className=" bg-primary px-4 py-2 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-emerald-700 hidden lg:block" onClick={() => navigate('/register')}>Sign Up</button>
+            <button className="px-3 lg:px-4 py-0.5 lg:py-1 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-pink-700 hover:border-pink-700 border-2" onClick={() => navigate('/login')}>Login</button>
+            <button className=" bg-primary px-4 py-1 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-emerald-700 hidden lg:block" onClick={() => navigate('/register')}>Sign Up</button>
         </div>
       </div>
     </header>
