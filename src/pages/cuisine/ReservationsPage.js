@@ -33,7 +33,13 @@ export const ReservationsPage = () => {
         }
     };
 
+    const cuisines = localStorage.getItem("cuisines")
+    const navigate = useNavigate()
+
     useEffect(() => {
+        if(cuisines === "false"){
+            navigate('/cuisine-owner/new', {state: {cuisines: 0}})
+        }
         fetchSideBarNames();
     }, []);
 

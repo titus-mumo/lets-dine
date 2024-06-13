@@ -14,6 +14,7 @@ import {
     Legend,
 } from 'chart.js';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
 
 // Register the necessary components for ChartJS
 ChartJS.register(
@@ -32,8 +33,13 @@ export const CuisineAnalytics = () => {
     const { token, refresh, setToken, setRefresh } = useAuth();
 
     const reviewLabels = ['negative', 'neutral', 'positive'];
-
+    const cuisines = localStorage.getItem("cuisines")
+    const navigate = useNavigate()
     useEffect(() => {
+        console.log(cuisines)
+        if(cuisines === "false") {
+            return navigate('/cuisine-owner/new', {state: {cuisines: 0}})
+        }
         const fetchCuisineData = async () => {
             try {
                 const response = await ApiCall('cuisines/owner', 'get', token, refresh, setToken, setRefresh);
@@ -109,9 +115,6 @@ export const CuisineAnalytics = () => {
         }
     };
 
-    // if (loading) {
-    //     return <LoadingSpinner />;
-    // }
 
     const predefinedColors = [
         'rgba(255, 99, 132, 0.8)',

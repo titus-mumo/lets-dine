@@ -95,7 +95,7 @@ const UserSidebarItems = [
 
 const MobileHeader = ({showMenu, setShowMenu}) => {
     return(
-        <div className='block lg:hidden flex justify-around w-full fixed top-0  bg-gray-400 rounded-b-lg pt-2 pb-1.5 z-10000'>
+        <div className='block lg:hidden flex justify-around w-full fixed top-0  bg-gray-400 pt-2 pb-1.5 z-10000'>
             <p className='basis-1/2 text-left pl-2 hover:cursor-pointer' onClick={() => setShowMenu(!showMenu)}>{showMenu === false? <MenuIcon />: <CloseIcon />}</p>
             <p className='basis-1/2 text-right pr-2'>EthnicEats</p>
         </div>

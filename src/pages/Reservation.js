@@ -65,6 +65,7 @@ export const Reservation = () => {
             return console.log(error)
         })
     }
+
     useEffect(() => {
         fetchCuisineInfo();
     }, [])

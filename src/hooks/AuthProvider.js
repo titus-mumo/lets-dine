@@ -57,6 +57,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("refresh");
     localStorage.removeItem("user");
     localStorage.removeItem("role");
+    localStorage.removeItem("cuisines");
     navigate('/')
     
   };

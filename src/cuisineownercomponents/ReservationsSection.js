@@ -18,11 +18,12 @@ export const ReservationsSection = ({cuisine_id}) => {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const sortedData = response.data
-        //.filter(item => new Date(item.time) >= today)
+        .filter(item => new Date(item.time) >= today)
         .sort((a, b) => new Date(a.time) - new Date(b.time));
         setReservationList(sortedData)
         setLoading(false)
       }else if (response.status === 200 && response.data.length === 0){
+        setReservationList([])
         setLoading(false)
       } else{
         console.log("An error occured")
@@ -34,6 +35,7 @@ export const ReservationsSection = ({cuisine_id}) => {
   }
 
   useEffect(() => {
+    console.log(cuisine_id)
     handleFetchCuisineSpecificReservations()
   }, [cuisine_id])
   return (

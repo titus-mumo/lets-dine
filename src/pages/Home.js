@@ -58,7 +58,7 @@ export const Home = () => {
                 loading? <LoadingSpinner />: 
             <div className='w-full h-full'>
                 <div className=' w-full justify-around flex'>
-                <div className="z-10000 fixed lg:relative flex items-center justify-center py-1 md:py-2 w-full lg:w-2/3 top-10 lg:top-0 rounded-md bg-stone-700">
+                <div className="z-10000 fixed lg:relative flex items-center justify-center py-1 md:py-2 w-full lg:w-2/3 top-10 lg:top-0 md:rounded-md bg-stone-700">
                     <p className={menuTab === 'Appetizers' ? "active_menu_tab text-xs md:text-base poppins bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins "} onClick={() => handleMenuTabs('Appetizers')}>Appetizers</p>
                     <p className={menuTab === 'Main Courses' ? "active_menu_tab text-xs md:text-base poppins bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins "} onClick={() => handleMenuTabs('Main Courses')}>Main Courses</p>
                     <p className={menuTab === 'Side Dishes' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Side Dishes')}>Side Dishes</p>

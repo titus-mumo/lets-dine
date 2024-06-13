@@ -20,11 +20,13 @@ export const CuisineHome = () => {
         .then(function(response){
             if(response.status === 200 && response.data.length > 0){
                 setOwnedCusine(response.data)
+                localStorage.setItem("cuisines", true)
                 setLoading(false)
                 return;
             }else{
+                localStorage.setItem("cuisines", false)
                 setTimeout(() => {
-                    navigate('/cuisine-owner/new')
+                    navigate('/cuisine-owner/new', {state: {cuisines: 0}})
                     setLoading(false)
                 }, 50)
             }
