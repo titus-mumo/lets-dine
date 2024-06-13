@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function AcceptableUseNotice() {
   return (
-    <div className="terms-container flex flex-col min-h-screen justify-between items-stretch min-w-screen">
+    <div className="terms-container flex flex-col h-lvh justify-between items-stretch min-w-screen">
     
     <div>
     <Header />
@@ -78,8 +78,8 @@ export const Header = () => {
           <Link to='/' className='poppins text-xl md:text-2xl font-bold text-white hover:cursor-pointer hover:text-blue-500'>EthnicEats</Link>
         </div>
         <div className="flex items-center justify-end space-x-6 pr-2">
-            <button className="px-3 lg:px-4 py-1 lg:py-2 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-sky-800 border-2" onClick={() => navigate('/login')}>Login</button>
-            <button className=" bg-primary px-4 py-2 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-emerald-700 hidden lg:block" onClick={() => navigate('/register')}>Sign Up</button>
+          <button className="px-3 lg:px-4 py-0.5 lg:py-1 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-pink-700 hover:border-pink-700 border-2" onClick={() => navigate('/login')}>Login</button>
+          <button className=" bg-primary px-4 py-1 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-emerald-700 hidden lg:block" onClick={() => navigate('/register')}>Sign Up</button>
         </div>
       </header>
     )

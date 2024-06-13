@@ -14,6 +14,8 @@ import {
     Legend,
 } from 'chart.js';
 import dayjs from 'dayjs';
+import { CuisineList } from '../../hooks/CuisineNumber';
+import { useNavigate } from 'react-router-dom';
 
 // Register the necessary components for ChartJS
 ChartJS.register(
@@ -33,7 +35,14 @@ export const CuisineAnalytics = () => {
 
     const reviewLabels = ['negative', 'neutral', 'positive'];
 
+    const cuisines = CuisineList()
+    const navigate = useNavigate()
+
     useEffect(() => {
+        if(cuisines === 0){
+            return navigate('/cuisine-owner/new', {state: {cuisines: 0}})
+          }
+
         const fetchCuisineData = async () => {
             try {
                 const response = await ApiCall('cuisines/owner', 'get', token, refresh, setToken, setRefresh);

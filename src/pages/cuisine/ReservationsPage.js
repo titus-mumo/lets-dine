@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/AuthProvider';
 import { ApiCall } from '../../hooks/ApiCall';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LandingPage';
+import { CuisineList } from '../../hooks/CuisineNumber';
 
 export const ReservationsPage = () => {
     const [sideBarNames, setSideBarNames] = useState([]);
@@ -33,7 +34,12 @@ export const ReservationsPage = () => {
         }
     };
 
+    const cuisines = localStorage.getItem("cuisines")
+
     useEffect(() => {
+        if(cuisines === 0){
+            return navigate('/cuisine-owner/new', {state: {cuisines: 0}})
+          }
         fetchSideBarNames();
     }, []);
 

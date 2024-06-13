@@ -7,15 +7,18 @@ import AuthProvider from './hooks/AuthProvider';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserPreferenceProvider from './hooks/UserPreferenceProvider';
+import UserCuisineProvider from './hooks/CuisineNumber';
 
 function App() {
   return (
     <main className="App w-full scroll-smooth overflow-x-hidden">
       <AuthProvider>
-        <UserPreferenceProvider>
-          <ToastContainer />
-          <AllRoutes />
-        </UserPreferenceProvider>
+        <UserCuisineProvider>
+          <UserPreferenceProvider>
+            <ToastContainer />
+            <AllRoutes />
+          </UserPreferenceProvider>
+        </UserCuisineProvider>
       </AuthProvider>
     </main>
   );

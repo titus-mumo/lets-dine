@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const TermsAndConditions = () => {
   return (
-    <div className="terms-container flex flex-col min-h-screen justify-between items-stretch min-w-screen">
+    <div className="terms-container flex flex-col justify-between items-stretch min-w-screen">
         <div>
         <Header />
       <h1>Terms and Conditions</h1>

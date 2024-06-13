@@ -24,7 +24,7 @@ export const CuisineHome = () => {
                 return;
             }else{
                 setTimeout(() => {
-                    navigate('/cuisine-owner/new')
+                    navigate('/cuisine-owner/new', {state: {cuisines: 0}})
                     setLoading(false)
                 }, 50)
             }

@@ -10,6 +10,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import moment from 'moment';
 import LoadingSpinner from '../LandingPage';
 import { usePreferenceList } from '../../hooks/UserPreferenceProvider';
+import { CuisineList } from '../../hooks/CuisineNumber';
 
 export const Account = () => {
     const userAuth = useAuth();
@@ -46,10 +47,6 @@ export const Account = () => {
         });
     };
 
-    const handleSeePreferences = () => {
-        setSeePreferences((seePreferences) => !seePreferences)
-        setSeeAccountInfo(false)
-    }
 
     const handleSeeAccountInfo = () => {
         setSeeAccountInfo((seeAccountInfo) => !seeAccountInfo)
@@ -74,8 +71,14 @@ export const Account = () => {
         })
     }
 
+    cuisines = localStorage.getItem("cuisines")
+
     useEffect(() => {
+      if(cuisines === 0 && cuisines !== undefined){
+         return navigate('/cuisine-owner/new', {state: {cuisines: 0}})
+       }
       fetchUserInfo()
+      window.location.reload()
     }, [])
   
     return (

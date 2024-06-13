@@ -3,7 +3,7 @@ import { Footer, Header } from './AcceptableUseNotice';
 
 function PrivacyPolicy() {
   return (
-    <div className="terms-container flex flex-col min-h-screen justify-between items-stretch min-w-screen">
+    <div className="terms-container flex flex-col h-lvh justify-between items-stretch min-w-screen">
         <div>
             <Header />
       <h1>Privacy Policy</h1>

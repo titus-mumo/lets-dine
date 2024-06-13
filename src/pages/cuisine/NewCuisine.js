@@ -2,12 +2,21 @@ import React, { useState, useRef, useEffect } from 'react'
 import { ApiCall } from '../../hooks/ApiCall'
 import { useAuth } from '../../hooks/AuthProvider'
 import { ToastMessage } from '../../utils'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 
 export const NewCuisine = () => {
 
     const navigate = useNavigate()
+    const trace = useLocation()
+
+    useEffect(() => {
+      if (trace.state && trace.state.cuisines !== undefined) {
+        if (trace.state.cuisines === 0) {
+          ToastMessage("info", "Fill your cuisine info to continue");
+        }
+      }
+    }, [trace])
 
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -78,6 +87,7 @@ export const NewCuisine = () => {
         .then(function(response){
             if(response && response.status === 201){
                 ToastMessage("success", "Cuisine uploaded successfully")
+                localStorage.setItem("cuisines", 1)
                 setTimeout(() => {navigate('/cuisine-owner/home')}, 2000)
             }else{
                 throw new Error(response)
