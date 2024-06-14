@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ToastMessage } from '../utils';
 import { MealCard } from '../components';
-import { ToastContainer } from 'react-toastify';
+  ;
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthProvider';
@@ -45,7 +45,7 @@ export const Home = () => {
 
     return (
         <section className='flex flex-col justify-center w-full mt-2 lg:mt-0  pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 '>
-            <ToastContainer />
+               
             {/* lg:fixed left-70 z-100000 top-1 right-1  */}
             {/* TODO: Add fix position to header */}
             {/* <div className='hidden w-full lg:flex flex-row justify-between px-3 shadow-md mt-2 lg:mt-0 mx-1 py-3 items-center rounded-md bg-gray-600 text-white'>
@@ -68,6 +68,7 @@ export const Home = () => {
                 </div>
                 <div className='flex flex-wrap mt-12 lg:mt-12 justify-around w-full'>
                 {
+            meals.filter((item) => menuTab !== ''? menuTab === item.category: item).length === 0? "No items under this category yet":
             meals.filter((item) => menuTab !== ''? menuTab === item.category: item).map((item) => (
                 <MealCard key={item.meal_id} meal={item} />
             ))

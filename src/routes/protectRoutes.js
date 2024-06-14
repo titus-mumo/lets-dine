@@ -1,7 +1,6 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/AuthProvider";
-import { ToastContainer } from "react-toastify";
 import { ToastMessage } from "../utils";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,7 +12,6 @@ const PrivateRoute = () => {
 };
   return (
     <div>
-    <ToastContainer />
   <Outlet />
   </div>
 );

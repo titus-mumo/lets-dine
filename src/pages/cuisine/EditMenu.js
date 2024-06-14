@@ -46,8 +46,6 @@ export const EditMenu = () => {
         formData.append('meal_pic', image);
       }
       
-
-      //TODO: Put API call
       ApiCall(`meal/${meal_id}/`, 'put', token, refresh, setToken, setRefresh, formData, {}, image !== null?true:false)
       .then(function(response){
           const {status} = response

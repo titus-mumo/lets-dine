@@ -8,6 +8,7 @@ import { CuisineTabs } from '../cuisineownercomponents'
 import moment from 'moment'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import LoadingSpinner from './LandingPage'
+import { ToastMessage } from '../utils'
 
 export const GeneralForums = () => {
     const base_url = process.env.BASE_URL
@@ -37,6 +38,9 @@ export const GeneralForums = () => {
                   setChatRooms(response.data);
                   setLoading(false)
                 }
+            })
+            .catch((error) => {
+              return ToastMessage("error", "An error occured fetching forums")
             })
     }, []);
 

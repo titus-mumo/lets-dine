@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
-import { ToastContainer } from 'react-toastify';
 import { ToastMessage } from '../utils';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -51,7 +50,6 @@ export const AddMenu = () => {
     }
   return (
     <div className='w-full h-full flex justify-around flex-col mt-10 lg:mt-0 items-center'>
-        <ToastContainer />
         <div className="m-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className=" p-3 space-y-4 md:space-y-3 sm:p-4 self-center">
           <h1 className="poppins text-md md:text-lg font-medium leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

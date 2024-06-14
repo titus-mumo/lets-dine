@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect} from 'react'
-import { ToastContainer } from 'react-toastify';
+  ;
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastMessage } from '../utils'
 import { CuisineCard } from '../components';
@@ -39,12 +39,12 @@ export const Cuisines = () => {
     }, []);
   return (
     <section className='px-2 w-full md:px-3 lg:px-4 flex flex-col justify-center w-full mt-5 md:mt-10 lg:mt-0 pt-2 lg:pt-0'>
-        <ToastContainer />
+           
         {
             loading? <LoadingSpinner />:
             <div className='flex flex-rol flex-wrap my-2 justify-center'>
             {
-            cuisines.map((item) => (
+            cuisines.length === 0 ? "Featured cuisines will appear here":cuisines.map((item) => (
                 <CuisineCard key={item.cuisine_id} cuisine={item} />
             ))
                 }

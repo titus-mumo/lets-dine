@@ -110,7 +110,9 @@ export const UserLayout = () => {
       <div className='w-full h-100vh lg:ml-255px lg:mr-5px'>
         <CuisineTabs />
         <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu}/>
-        <Outlet/>
+        <div className='lg:mt-14'>
+          <Outlet />
+        </div>
         </div>
     </div>
   );
@@ -124,8 +126,10 @@ return (
     <div className='w-full h-100vh lg:ml-255px lg:mr-5px'>
       <CuisineTabs />
       <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu}/>
-      <Outlet/>
+      <div className='lg:mt-14'>
+        <Outlet />
       </div>
+    </div>
   </div>
 );
 };

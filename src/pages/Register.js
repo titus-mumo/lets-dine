@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { ToastContainer } from 'react-toastify';
+  ;
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastMessage } from '../utils'
 import  axios from 'axios'
@@ -52,7 +52,7 @@ export const Register = () => {
     
             })
             .catch(function(error){
-                return ToastMessage('error', error.response.data['error'])
+                return ToastMessage('error', error.response? error.response.data['error'] : "An error occured")
             });
         } else if(role === "Cuisine Owner"){
             axios.post(process.env.BASE_URL + 'auth/register/', {
@@ -68,7 +68,8 @@ export const Register = () => {
     
             })
             .catch(function(error){
-                return ToastMessage('error', error.response.data['error'])
+                console.log(error)
+                return ToastMessage('error', error.response? error.response.data['error'] : "An error occured" )
             });
 
         }
@@ -84,7 +85,7 @@ export const Register = () => {
 
   return (
         <section className="h-lvh md:h-full w-full bg-gray-900">
-            <ToastContainer />
+               
             {
                 loading? <LoadingSpinner /> : 
                 <div className="flex flex-col items-center justify-center px-3 py-4 mx-auto md:h-screen lg:py-0">

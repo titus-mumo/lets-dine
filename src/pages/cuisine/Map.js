@@ -12,7 +12,7 @@ const MapContainer = (props) => {
   console.log(locations)
 
   return (
-    <div className=''>
+    <div className='w-full'>
       <MP
         google={props.google}
         zoom={8}

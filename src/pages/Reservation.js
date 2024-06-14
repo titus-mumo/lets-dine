@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { ToastMessage } from '../utils'
-import { ToastContainer } from 'react-toastify'
+  
 import 'react-toastify/dist/ReactToastify.css';
 import { ApiCall } from '../hooks/ApiCall';
 import { useAuth } from '../hooks/AuthProvider';
@@ -71,7 +71,7 @@ export const Reservation = () => {
     }, [])
   return (
     <div className='w-full flex flex-col justify-center lg:mt-0'>
-        <ToastContainer />
+           
         {
             loading? <LoadingSpinner /> :
             <div className='flex flex-col lg:flex-row mt-6 justify-around lg:mt-0 flex-wrap items-center w-full md:w-600px self-center px-2'>

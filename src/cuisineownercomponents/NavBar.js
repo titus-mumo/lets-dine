@@ -88,7 +88,7 @@ export const NavBar = () => {
       }, 2000)
   }
   return (
-    <div className='hidden lg:flex w-full flex-row justify-between px-3 shadow-md mt-0.5 mx-2 py-2.5 items-center rounded-md bg-gray-600 text-white'>
+    <div className='hidden fixed lg:flex flex-row justify-between px-3 shadow-md top-2 left-64 right-2 py-2.5 items-center rounded-md bg-gray-600 text-white'>
         <p className='poppins hover:cursor-pointer' onClick={() => {navigate('/home')}}>EthnicEats</p>
         <input placeholder='Search' value={searchQuery} onChange={(e) => handleSearchQuery(e.target.value)} className=' text-gray-900 px-3 py-1 rounded-xl border-slate-700'></input>
         <FilteredContainer filteredCuisines={filteredCuisines} />

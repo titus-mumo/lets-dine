@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
-import { ToastContainer } from 'react-toastify';
+  ;
 import { ToastMessage } from '../utils';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -50,7 +50,6 @@ export const AddReview = ({name, setAddReview}) => {
     }
   return (
     <div className='flex flex-col justify-center flex-wrap'>
-        <ToastContainer />
         <div className="m-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="m-auto p-2 space-y-2 md:space-y-3 sm:p-3">
           <h1 className="poppins text-sm text-md font-medium leading-tight tracking-tight text-gray-900 dark:text-white">

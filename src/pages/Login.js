@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
-import { ToastContainer } from 'react-toastify';
+  ;
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
@@ -64,7 +64,6 @@ export const Login = () => {
     };
   return (
         <section className="h-lvh md:h-full w-full bg-gray-900">
-            <ToastContainer />
             {
                 loading? <LoadingSpinner />:
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

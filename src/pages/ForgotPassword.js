@@ -1,6 +1,7 @@
 // PasswordResetRequest.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 require('dotenv').config()
 
 export const ForgotPassword = () => {
@@ -38,6 +39,11 @@ export const ForgotPassword = () => {
       >
         Send Reset Link
       </button>
+      <Link to='/login'
+        className='w-full bg-blue-500 text-white mt-3 p-2 text-center rounded'
+      >
+        Go back
+      </Link>
     </form>
     {message && <p className='text-center text-green-500 mt-4'>{message}</p>}
   </div>
