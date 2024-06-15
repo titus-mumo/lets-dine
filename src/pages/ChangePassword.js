@@ -53,16 +53,13 @@ export const ChangePassword = () => {
                     navigate('/login')
                     setTimeout(() => {logOut()}, 1000)
                 }, 2500)
-                
-
             }else{
-                throw new Error(response)
+                throw new Error(response.data.error)
             }
 
         })
         .catch((error) => {
-            console.log(error.response.data.error || "An error occured, chnage password")
-            return;
+            console.log(error.message? error.message : "An error occured, can't change password")
         });
 
     }

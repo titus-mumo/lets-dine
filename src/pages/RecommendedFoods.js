@@ -3,6 +3,7 @@ import burger from '../assets/burger.jpeg'
 import { useAuth } from '../hooks/AuthProvider'
 import { ApiCall } from '../hooks/ApiCall'
 import { Link } from 'react-router-dom'
+import { ToastMessage } from "../utils"
 
 export const RecommendedFoods = ({setItem}) => {
     const [trendingFoods, setTrendingFoods] = useState([])
@@ -20,7 +21,7 @@ export const RecommendedFoods = ({setItem}) => {
             setItem(1)
         })
         .catch((error) => {
-            console.log("Error feching trending foods", error)
+            ToastMessage("error", "Error fetching trending foods")
         })
         
     }, [])
@@ -94,11 +95,12 @@ const FoodContainer = ({meal}) => {
           setCuisineName(data.name)
           setLoading(false)
           return;
+        }else{
+          throw new Error(response.data.error)
         }
-        
       })
       .catch((error) => {
-        return console.log("SOmething went wrong")
+        ToastMessage("error", "An error occured")
       });
 
     }

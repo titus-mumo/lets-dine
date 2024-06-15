@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useAuth } from '../hooks/AuthProvider'
 import { ApiCall } from '../hooks/ApiCall'
+import { ToastMessage } from '../utils'
 
 export const SeeReviewCard = ({cuisine_id}) => {
     const [reviews, setReviews] = useState([])
@@ -19,12 +20,14 @@ export const SeeReviewCard = ({cuisine_id}) => {
                 console.log(reviewsData)
                 setReviews(reviewsData)
                 setLoading(false)
+                return 
              } else if(response.status === 200 && response.data.length === 0){
-                setLoading(false)
+                return setLoading(false)
              }
+             throw new Error(response.data.error)
         })
         .catch((error) => {
-            console.log("An error occured, fetching reviews", error)
+            return ToastMessage("error", error.message? error.message : "An error occured, fetching reviews")
         });
     }
 

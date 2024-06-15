@@ -31,14 +31,17 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
         } else if(method === 'put'){
             res = await api.put(endpoint, data)
         }
+        console.log(res)
         return res;
     } catch (error) {
         if (error.response && error.response.status === 401) {
             // Token has expired, attempt to refresh it
             try {
-                let response = await refreshAccessToken(refreshToken);
+                const refreshLocal = localStorage.getItem("refresh")
+                console.log(refreshLocal)
+                let response = await refreshAccessToken(refreshLocal);
                 
-                response.access? '': response = await refreshAccessToken(refreshToken);
+                response.access? '': response = await refreshAccessToken(refreshLocal);
 
                 const {access, refresh} = response
                 if (access) {
@@ -63,10 +66,11 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
                 }
             } catch (refreshError) {
                 console.log("Failed to refresh token:", refreshError.message);
-                // ToastMessage("error", "Session expired. Please login again")
+                //TODO
+                ToastMessage("error", "Session expired. Please login again")
             }
         } else {
-            console.log(error.message);
+            return error.response
 
         }
     }

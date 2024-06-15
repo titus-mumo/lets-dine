@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import { useState } from 'react'
 import { ToastMessage } from '../utils'
 import axios from 'axios'
@@ -42,14 +42,21 @@ export const ResetPassword = () => {
             setConfirmPassword('')
             setNewPassword('')
             if(response.status === 200){
-                return ToastMessage('success', 'Password has been changed successfully')
+                ToastMessage('success', 'Password has been changed successfully')
+                navigate('/login')
+            }else{
+                throw new Error(response.data.error)
             }
-
-            throw new Error(response.error)
         })
         .catch((error) => {
-            return console.log("Something went wrong")
+            return ToastMessage("error", error.message? error.message: "An error occured")
         })
+    }
+
+    const handleNavigateToLogin = (e) => {
+        e.preventDefault()
+        navigate('/login')
+
     }
 
 
@@ -87,6 +94,12 @@ export const ResetPassword = () => {
                         className='w-full bg-blue-500 text-white p-2 rounded mt-4'
                     >
                         Reset Password
+                    </button>
+                    <button
+                    onClick={(e) => handleNavigateToLogin(e)}
+                        className='w-full bg-blue-500 text-white p-2 rounded mt-4'
+                    >
+                        Go to login
                     </button>
                 </form>
             </div>

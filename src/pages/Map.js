@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react';
 import { ApiCall } from '../hooks/ApiCall';
 import { useAuth } from '../hooks/AuthProvider';
 import { BorderAllRounded } from '@mui/icons-material';
+import { ToastMessage } from '../utils';
 
 require('dotenv').config();
 
 const MapContainer = (props) => {
   const { location, locations } = props;
-  console.log(locations);
 
   return (
     <div className="w-full h-full">
@@ -57,7 +57,7 @@ const CurrentLocation = ({ setLocation }) => {
           });
         },
         (error) => {
-          console.error("Error getting location:", error);
+          ToastMessage("error", "Error getting location")
         }
       );
     };
@@ -90,7 +90,7 @@ export const MapUser = () => {
         }
       })
       .catch((error) => {
-        console.error('Error fetching location data:', error);
+        ToastMessage("error", "Error fetching location data")
       });
   }, [token, refresh, setToken, setRefresh]);
 

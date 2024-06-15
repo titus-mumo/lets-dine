@@ -26,8 +26,6 @@ const UserPreferenceProvider = ({children}) => {
 
 
     useEffect(() => {
-        // This effect runs whenever any of the preferences change
-        console.log('Preferences updated:', preferences);
     }, [appetizers, mainCourses, sideDishes, desserts, beverages]);
 
     return(

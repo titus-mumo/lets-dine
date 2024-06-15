@@ -36,7 +36,7 @@ export const Account = () => {
           }
         })
         .catch((error) => {
-          console.log('An error occurred during logout');
+          
         })
         .finally(() => {
           ToastMessage('success', 'Logout Successful');
@@ -66,11 +66,13 @@ export const Account = () => {
                 setLoading(false)
             }
             else{
-                console.log(response)
+                ToastMessage("error", "An error occured")
+                return
             }
         })
         .catch((error) => {
-            return console.log("Something went wrong", error)
+          return  ToastMessage("error", "An error occured")
+            
         })
     }
 

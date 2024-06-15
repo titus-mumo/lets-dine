@@ -3,6 +3,7 @@ import { ApiCall } from '../hooks/ApiCall'
 import { useAuth } from '../hooks/AuthProvider'
 import { ReservationDetail } from './ReservationDetail'
 import LoadingSpinner from '../pages/LandingPage'
+import { ToastMessage } from '../utils'
 
 export const ReservationsSection = ({cuisine_id}) => {
   const userAuth = useAuth()
@@ -22,15 +23,17 @@ export const ReservationsSection = ({cuisine_id}) => {
         .sort((a, b) => new Date(a.time) - new Date(b.time));
         setReservationList(sortedData)
         setLoading(false)
+        return
       }else if (response.status === 200 && response.data.length === 0){
         setReservationList([])
         setLoading(false)
-      } else{
-        console.log("An error occured")
-      }
+        return
+      } 
+      throw new Error(response.data.error)
+
     })
     .catch((error) => {
-      return console.log("An error occured")
+      return ToastMessage("error", error.message? error.message || "Something went wrong": "something went wrong")
     });
   }
 

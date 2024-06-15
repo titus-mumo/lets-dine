@@ -35,12 +35,13 @@ export const CuisineOwnerMenuAdd = () => {
                 setTimeout(() => {
                     navigate(`/cuisine-owner/cuisine/${params.cuisine_id}/menu`)
                 }, 1500)
-
+                return
             }
+            throw new Error(response.data.error)
 
         })
         .catch((error) => {
-            return ToastMessage("error", "Something went wrong")
+            return ToastMessage("error", error.message? error.message: "Something went wrong")
         })
 
 

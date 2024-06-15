@@ -35,10 +35,13 @@ export const AddReview = ({name, setAddReview}) => {
                 setTimeout(() => {
                     navigate(`/cuisine/${params.cuisine_id}/menu`)
                 }, 2000)
+            } else{
+                throw new Error(response.data.error)
             }
         })
         .catch((error) => {
             console.log(error)
+            ToastMessage("error", error.message? error.message : "An error occured")
         }
         )
         .finally(() => {

@@ -18,12 +18,15 @@ export const ReviewCard = ({cuisine_id}) => {
                 console.log(reviewsData)
                 setReviews(reviewsData)
                 setLoading(false)
+                return
              } else if(response.status === 200 && response.data.length === 0){
                 setLoading(false)
+                return
              }
+             throw new Error(response.data.error)
         })
         .catch((error) => {
-            console.log("An error occured, fetching reviews", error)
+            return ToastMessage("error", error.message? error.message || "Something went wrong": "An error occured fetching reviews")
         });
     }
 

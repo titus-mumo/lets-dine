@@ -56,7 +56,7 @@ export const GeneralForums = () => {
               
           })
           .catch(error => {
-              console.error("Error fetching messages:", error);
+              ToastMessage("error", "Error fetching messages")
           });
   
       // Close existing WebSocket connection if there is one

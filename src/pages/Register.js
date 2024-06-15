@@ -52,7 +52,7 @@ export const Register = () => {
     
             })
             .catch(function(error){
-                return ToastMessage('error', error.response? error.response.data['error'] : "An error occured")
+                return ToastMessage('error', error.message? error.response.data['error'] : "An error occured")
             });
         } else if(role === "Cuisine Owner"){
             axios.post(process.env.BASE_URL + 'auth/register/', {
@@ -69,7 +69,7 @@ export const Register = () => {
             })
             .catch(function(error){
                 console.log(error)
-                return ToastMessage('error', error.response? error.response.data['error'] : "An error occured" )
+                return ToastMessage('error', error.message? error.response.data['error'] : "An error occured" )
             });
 
         }

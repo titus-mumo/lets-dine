@@ -14,7 +14,8 @@ export const refreshAccessToken = async (refreshToken) => {
 
     try {
         const response = await api.post('token/refresh/', { refresh: refreshToken });
-        const {data} = response
+        //localStorage.setItem(())
+        console.log(response)
         return data;
     } catch (error) {
         console.log(error)

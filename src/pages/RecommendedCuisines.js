@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/AuthProvider'
 import React from 'react'
 import { useState, useEffect } from 'react'
 import LoadingSpinner from './LandingPage'
+import { ToastMessage } from '../utils'
 
 export const RecommendedCuisines = ({setItem}) => {
     const [reviews, setReviews] = useState([])
@@ -19,7 +20,7 @@ export const RecommendedCuisines = ({setItem}) => {
           throw new Error('Failed to fetch reviews');
         }
       } catch (error) {
-        console.error('Error fetching reviews:', error);
+        ToastMessage("error", "An eror occured")
         return [];
       }
     };
@@ -59,7 +60,7 @@ export const RecommendedCuisines = ({setItem}) => {
         );
         return cuisineNames;
       } catch (error) {
-        console.error('Error fetching cuisine names:', error);
+        ToastMessage("error", 'Error fetching cuisine names');
         return [];
       }
     };
@@ -151,7 +152,7 @@ const RecommendedCuisine = ({cuisineProp, tag}) => {
         }
       })
       .catch((error) => {
-        console.log("An error occured fetching cuisine info", error)
+        ToastMessage("error", "Error fetching recommendations")
       })
     }
   

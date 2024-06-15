@@ -26,10 +26,11 @@ export const ReservatinDetail = ({reservation, setReservationId, setConfirmDelet
                 return;
             }
 
-            throw new Error(response)
+            throw new Error(response.data.error)
+
         })
         .catch((error) => {
-            return console.log(error)
+            return ToastMessage("error", error.message? error.message : "An error occured")
         })
     }
 

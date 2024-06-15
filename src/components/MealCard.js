@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/AuthProvider'
 import { ApiCall } from '../hooks/ApiCall'
 import { Link } from 'react-router-dom'
 import { Rating } from 'flowbite-react'
+import { ToastMessage } from '../utils'
 
 require('dotenv').config()
 
@@ -38,10 +39,15 @@ export const MealCard = ({meal}) => {
           setLoading(false)
           return;
         }
+
+        throw new Error(response.data.error)
+
+        
         
       })
       .catch((error) => {
-        return console.log("SOmething went wrong")
+        //T0D0
+        return ToastMessage("error", error.message? error.message : "An error occured")
       });
 
     }

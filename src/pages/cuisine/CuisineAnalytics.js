@@ -15,6 +15,7 @@ import {
 } from 'chart.js';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
+import { ToastMessage } from '../../utils';
 
 // Register the necessary components for ChartJS
 ChartJS.register(
@@ -60,7 +61,8 @@ export const CuisineAnalytics = () => {
                     setLoading(false)
                 }
             } catch (error) {
-                console.error("Error occurred:", error.response?.data?.message || "getting cuisines ids");
+                console.error("Error occurred:", error.message?.data?.message || "getting cuisines ids");
+                //TODO
             }
         };
 
@@ -88,7 +90,7 @@ export const CuisineAnalytics = () => {
 
             return { cuisineId: id, cuisineName: name, data: filteredData };
         } catch (error) {
-            console.error('Error fetching data:', error)
+            return ToastMessage("error", error.message? error.message || "Something went wrong": "An error occured fetching analytics")
         }
     };
 
@@ -111,7 +113,7 @@ export const CuisineAnalytics = () => {
 
             return { cuisineId: id, cuisineName: name, data: categorizedReviews };
         } catch (error) {
-            console.error('Error fetching reviews:', error);
+            return ToastMessage("error", error.message? error.message || "Something went wrong": "An error occured fetching analytics")
         }
     };
 

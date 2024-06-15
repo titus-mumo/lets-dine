@@ -68,7 +68,7 @@ export const EditReservation = () => {
             return
         })
         .catch((error) => {
-            return console.log(error)
+            ToastMessage(error.message? error.message: "An error occured")
         })
 
     }
@@ -79,10 +79,12 @@ export const EditReservation = () => {
             if(status === 200){
                 setCuisineInfo(data)
                 setLoading(false)
+            }else{
+                throw new Error(response.data.error)
             }
         })
         .catch((error) => {
-            return console.log(error)
+            ToastMessage(error.message? error.message: "An error occured")
         })
     }
     useEffect(() => {

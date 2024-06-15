@@ -4,6 +4,7 @@ import { CuisineTabs } from '../../cuisineownercomponents';
 import { useState, useEffect } from 'react';
 import { ApiCall } from '../../hooks/ApiCall';
 import { useAuth } from '../../hooks/AuthProvider';
+import { ToastMessage } from '../../utils';
 
 require('dotenv').config();
 
@@ -57,7 +58,7 @@ const CurrentLocation = ({ setLocation }) => {
           });
         },
         (error) => {
-          console.error("Error getting location:", error);
+          ToastMessage("error", "Error getting location");
         }
       );
     };
@@ -87,10 +88,12 @@ export const Map = () => {
     .then(function(response){
       if(response.status === 200){
         setLocations(response.data)
+        return
       }
+      throw new Error(response.data.error)
     })
     .catch((error) => {
-      console.error('Error fetching location data:', error);
+      return ToastMessage("error", error.message? error.message: "Can't fetch location data")
     })
   }, [])
 

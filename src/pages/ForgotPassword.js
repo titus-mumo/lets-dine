@@ -1,23 +1,33 @@
-// PasswordResetRequest.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 require('dotenv').config()
+import LoadingSpinner from './LandingPage';
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const url = window.location.href;
+  const base_url = url.split(window.location.pathname)[0];
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    console.log(base_url)
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post(process.env.BASE_URL + 'reset-request/', { email })
+    setLoading(true)
+    axios.post(process.env.BASE_URL + 'reset-request/', { email, base_url })
     .then(function(response){
       setMessage(response.data.success);
       setEmail('')
     })
     .catch((error) => {
-      console.log(error)
+      ToastMessage(error.message? error.message: "An error occured")
     })
+    .finally(
+      setLoading(false)
+    )
   };
 
   return (
@@ -32,13 +42,16 @@ export const ForgotPassword = () => {
         placeholder="Enter your email"
         required
         className='p-2 border border-gray-300 rounded mb-4'
-      />
-      <button
+      />{
+        loading?<LoadingSpinner/>:
+        <button
         type="submit"
         className='w-full bg-blue-500 text-white p-2 rounded'
       >
         Send Reset Link
       </button>
+      }
+
       <Link to='/login'
         className='w-full bg-blue-500 text-white mt-3 p-2 text-center rounded'
       >

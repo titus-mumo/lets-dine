@@ -4,6 +4,7 @@ import { useAuth } from '../../hooks/AuthProvider';
 import { ApiCall } from '../../hooks/ApiCall';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../LandingPage';
+import { ToastMessage } from '../../utils';
 
 export const ReservationsPage = () => {
     const [sideBarNames, setSideBarNames] = useState([]);
@@ -26,10 +27,10 @@ export const ReservationsPage = () => {
                 setLoading(false);
             }
             else{
-                pass
+                throw new Error(response.data.error)
             }
         } catch (error) {
-            console.error('Error fetching sidebar names:', error);
+            return ToastMessage("error", 'Error fetching sidebar names');
         }
     };
 

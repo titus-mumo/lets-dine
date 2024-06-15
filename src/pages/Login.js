@@ -53,11 +53,11 @@ export const Login = () => {
                         setTimeout(() => {navigate('/home')}, 1500)
                     }
                 }else{
-                    console.log("Unexpected response")
+                    ToastMessage("error", "An error occured")
                 }
             })
             .catch((error) => {
-                return console.log("Something went wrong", error)
+                ToastMessage(error.message? error.message: "An error occured")
             })
         }
         return;

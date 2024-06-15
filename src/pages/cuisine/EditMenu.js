@@ -45,7 +45,7 @@ export const EditMenu = () => {
       if(image !== null){
         formData.append('meal_pic', image);
       }
-      
+
       ApiCall(`meal/${meal_id}/`, 'put', token, refresh, setToken, setRefresh, formData, {}, image !== null?true:false)
       .then(function(response){
           const {status} = response
@@ -54,12 +54,13 @@ export const EditMenu = () => {
               setTimeout(() => {
                 navigate(`/cuisine-owner/cuisine/${cuisine_id}/menu`)
               }, 1000)
-              
+              return
           }
+          throw new Error(response.data.error)
 
       })
       .catch((error) => {
-          return ToastMessage("error", "Something went wrong")
+          return ToastMessage("error", error.message? error.message: "Something went wrong")
       })
 
 

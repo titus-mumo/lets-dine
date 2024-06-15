@@ -35,18 +35,17 @@ export const AddMenu = () => {
 
 
         ApiCall('meals/', 'post', token, refresh, setToken, setRefresh, formData, {}, true)
-        .then(function(response){
-            const {status} = response
-            if(status === 201){
-                return ToastMessage("success", "Item added to menu successfully")
+        .then((response) => {
+            console.log(response)
+            if(response.status === 201){
+                return ToastMessage("success", "Item added successfully")
+            } else{
+                throw new Error(response.data.error)
             }
-
         })
         .catch((error) => {
-            return ToastMessage("error", "Something went wrong")
+            return ToastMessage("error", error.message? error.message: "Something went wrong")
         })
-
-
     }
   return (
     <div className='w-full h-full flex justify-around flex-col mt-10 lg:mt-0 items-center'>

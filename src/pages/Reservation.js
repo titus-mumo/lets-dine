@@ -48,7 +48,7 @@ export const Reservation = () => {
             }
         })
         .catch((error) => {
-            return console.log(error)
+            return ToastMessage("error", error.message? error.message: "An error occured")
         })
 
     }
@@ -62,7 +62,7 @@ export const Reservation = () => {
             }
         })
         .catch((error) => {
-            return console.log(error)
+            return ToastMessage("error", "Error fetching cuisine info")
         })
     }
 

@@ -3,6 +3,7 @@ import burger from '../assets/burger.jpeg'
 import { useAuth } from '../hooks/AuthProvider'
 import { ApiCall } from '../hooks/ApiCall'
 import { Link, useNavigate } from 'react-router-dom'
+import { ToastMessage } from '../utils'
 
 require('dotenv').config()
 
@@ -31,7 +32,7 @@ export const MealCard = ({meal, confirmDelete, setConfirmDelete, id, deleteMealN
         
       })
       .catch((error) => {
-        return console.log("Something went wrong")
+        return ToastMessage("error", "Ooops! Can't fetch cuisine names")
       });
 
     }

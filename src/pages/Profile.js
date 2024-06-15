@@ -70,7 +70,7 @@ export const Account = () => {
             }
         })
         .catch((error) => {
-            return console.log("Something went wrong", error)
+            ToastMessage("error", "An error occured")
         })
     }
 

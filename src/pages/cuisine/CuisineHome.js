@@ -4,8 +4,8 @@ import { useAuth } from '../../hooks/AuthProvider'
 import { ApiCall } from '../../hooks/ApiCall'
 import { CuisineCard } from '../../cuisineownercomponents'
 import { Link, useNavigate } from 'react-router-dom'
-import { CuisineTabs } from '../../cuisineownercomponents'
 import LoadingSpinner from '../LandingPage'
+import { ToastMessage } from '../../utils'
 
 
 export const CuisineHome = () => {
@@ -32,7 +32,7 @@ export const CuisineHome = () => {
             }
         })
         .catch((error) => {
-            return console.log("An error occured")
+            return ToastMessage("error", "An error occured")
         })
     }
 

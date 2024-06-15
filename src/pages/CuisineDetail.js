@@ -32,10 +32,12 @@ export const CuisineDetail = () => {
             const {status, data} = response
             if(status === 200){
                 setCuisineMenu(data)
+            }else{
+                throw new Error(response.data.error)
             }
         })
         .catch((error) => {
-            console.log('error')
+            ToastMessage(error.message? error.message: "An error occured")
         });
     }
     const fetchCuisineInfo = async() => {
@@ -48,7 +50,7 @@ export const CuisineDetail = () => {
             }
         })
         .catch((error) => {
-            
+            ToastMessage(error.message? error.message: "An error occured")
         });
     }
 

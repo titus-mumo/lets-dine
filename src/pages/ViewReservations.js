@@ -15,7 +15,6 @@ export const ViewReservations = () => {
     const [loading, setLoading] = useState(true)
 
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const [deleteReservationName, setDeleteReservationName] =useState('')
 
     const [reservationId, setReservationId] = useState('')
 
@@ -29,12 +28,13 @@ export const ViewReservations = () => {
         .then(function(response){
             const {status, data} = response
             if(status === 200){
+                console.log(data)
                 setUserReservations(data)
                 setLoading(false)
             }
         })
         .catch((error) => {
-            return console.log(error.message)
+            return (error.message? error.message: "An error occured")
         })
     }
 
@@ -51,7 +51,7 @@ export const ViewReservations = () => {
                 <div className='overflow-y-auto overflow-x-hidden w-full md:w-5/6 lg:h-600px lg:w-700px text-center'>
                     {userReservations.length > 0 ? (
                         userReservations.map((item) => 
-                            <ReservatinDetail key={item.reservation_id} reservation={item} setReservationId={setReservationId} setConfirmDelete={setConfirmDelete} reservationId={reservationId}/>
+                            <ReservatinDetail key={item.reservation_id} reservation={item} setReservationId={setReservationId} setConfirmDelete={setConfirmDelete} reservationId={reservationId} />
                         )
                     ) : (
                         <p className='poppins my-20'>Reservations made will appear here</p>
@@ -85,10 +85,12 @@ const DeletePopUp = ({confirmDelete, setConfirmDelete, deleteReservationId}) => 
                 setConfirmDelete(false)
                 setTimeout(() => {window.location.reload()}, 1000)
                 return;
+            }else{
+                throw new Error(response.data.error)
             }
         })
         .catch((error) => {
-            return ToastMessage("error", error.response.data["message"] || "Something went wrong")
+            return ToastMessage("error", error.message || "Something went wrong")
         })
     }
 

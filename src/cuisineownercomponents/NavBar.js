@@ -77,10 +77,11 @@ export const NavBar = () => {
       .then(function(response){
           if (response.status === 205) {
               console.log("Token blacklisted")
+              return
           }
       })
       .catch((error) => {
-          return console.log("An error occured logut")
+        
       })
       ToastMessage("success", "Logout Successful")
       setTimeout(() => {

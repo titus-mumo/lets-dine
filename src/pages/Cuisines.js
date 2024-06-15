@@ -27,10 +27,12 @@ export const Cuisines = () => {
             if(status === 200){
                 setCuisines(data)
                 setLoading(false)
+            }else{
+                throw new Error(response.data.error)
             }
         })
         .catch((error) => {
-            return console.log("Something went wrong")
+            ToastMessage(error.message? error.message: "An error occured")
         })
     }
 

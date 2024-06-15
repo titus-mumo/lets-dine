@@ -36,10 +36,12 @@ export const CuisineMenu = () => {
             const {status, data} = response
             if(status === 200){
                 setCuisineMenu(data)
+                return
             }
+            throw new Error(response.data.error)
         })
         .catch((error) => {
-            console.log('error')
+            return ToastMessage("error", error.message? error.message || "Something went wrong": "Can't fetch cuisine menu")
         });
     }
     const fetchCuisineInfo = async() => {
@@ -52,6 +54,7 @@ export const CuisineMenu = () => {
             }
         })
         .catch((error) => {
+            return ToastMessage("error", error.message? error.message || "Something went wrong": "Can't fetch cuisine info")
             
         });
     }
