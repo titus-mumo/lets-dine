@@ -11,7 +11,6 @@ import PrivacyPolicy from "../pages/PrivacyPolicy";
 import AcceptableUseNotice from "../pages/AcceptableUseNotice";
 
 
-
 export const AllRoutes = () => {
   return (
     <Routes>

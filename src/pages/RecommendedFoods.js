@@ -54,7 +54,7 @@ export const RecommendedFoods = ({setItem}) => {
       </div>
       <div>
         {
-            trendingFoods.length === 0? <p>Trending foods will appear here</p> : trendingFoods.filter((meal) => meal.length > 0).map((meal, index) => <p key={index}>{meal}</p>)
+            trendingFoods.length === 0? <p>Trending foods will appear here</p> : trendingFoods.map((meal, index) => <p key={index}>{meal}</p>)
         }
       </div>
       <div>

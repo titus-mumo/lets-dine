@@ -5,6 +5,7 @@ const base_url = process.env.BASE_URL
 
 
 export const refreshAccessToken = async (refreshToken) => {
+    let data;
     const api = axios.create({
         baseURL: base_url,
         headers: {
@@ -14,8 +15,7 @@ export const refreshAccessToken = async (refreshToken) => {
 
     try {
         const response = await api.post('token/refresh/', { refresh: refreshToken });
-        //localStorage.setItem(())
-        console.log(response)
+        data = response.data
         return data;
     } catch (error) {
         console.log(error)
