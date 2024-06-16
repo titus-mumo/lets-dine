@@ -224,8 +224,6 @@ const FAQs = ({divRefs}) => {
       } else{
         setActive(index)
       }
-
-      console.log('clicked')
   }
   return(
     <div ref={(el) => (divRefs.current['faqs'] = el)} id='faqs' className='faqs w-full flex justify-center self-center items-center bg-gradient-to-b from-zinc-700 to-stone-700 pt-10 pb-13 md:py-20 lg:py-24'>
@@ -362,7 +360,7 @@ const Footer = ({divRefs}) => {
       if (targetDiv) {
         targetDiv.scrollIntoView({ behavior: 'smooth' });
       } else {
-        console.error(`Div with ID "${targetDivId}" not found!`);
+        //console.error(`Div with ID "${targetDivId}" not found!`);
       }
 
   }

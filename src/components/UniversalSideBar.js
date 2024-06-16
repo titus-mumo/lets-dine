@@ -27,8 +27,8 @@ const ReturnItems = ({ item }) => {
       onClick={() => { navigate(item.link); }}
       className={`flex justify-center items-center w-full text-center py-2 my-0.5 hover:cursor-pointer rounded-lg ${location.pathname === item.link ? "bg-slate-900" : "hover:bg-slate-700 hover:transition-smooth"}`}
     >
-      <p className='basis-1/3 text-right pr-2'>{item.icon}</p>
-      <p className='basis-2/3 text-left'>{item.title}</p>
+      <p className='basis-1/4 text-right pr-2'>{item.icon}</p>
+      <p className='basis-3/4 text-left'>{item.title}</p>
     </div>
   );
 };

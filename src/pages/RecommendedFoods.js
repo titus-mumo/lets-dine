@@ -16,7 +16,6 @@ export const RecommendedFoods = ({setItem}) => {
       fetchHighlyRatedFoods();
         ApiCall('gemini/trending-foods/', 'get', token, refresh, setToken, setRefresh)
         .then((response) => {
-            console.log(response.data)
             setTrendingFoods(response.data)
             setItem(1)
         })
@@ -26,13 +25,16 @@ export const RecommendedFoods = ({setItem}) => {
         
     }, [])
 
+
+    //TODO
+
     const fetchHighlyRatedFoods = () => {
       ApiCall('rated-foods/', 'get', token, refresh, setToken, setRefresh)
       .then((response) => {
         response.status === 200? setRatedFoods(response.data) : '';
       })
       .catch((error) => {
-        console.log("An error occured")
+        
       })
     }
     const data = [

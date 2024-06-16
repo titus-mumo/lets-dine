@@ -16,6 +16,7 @@ export const NavBar = () => {
   const [filteredCuisines, setFilteredCuisines] = useState([]);
 
   const socketRef = useRef(null);
+  //TODO
 
   useEffect(() => {
       // Function to initialize the WebSocket connection
@@ -31,11 +32,10 @@ export const NavBar = () => {
           };
 
           socketRef.current.onerror = (error) => {
-              console.error('WebSocket error:', error);
+              //console.error('WebSocket error:', error);
           };
 
           socketRef.current.onclose = () => {
-              console.log('WebSocket connection closed. Reconnecting...');
               setTimeout(initializeWebSocket, 1000); 
           };
       };
@@ -54,7 +54,6 @@ export const NavBar = () => {
       if(query.length === 0){
         return setFilteredCuisines([])
       }
-      console.log(JSON.stringify({ search_query: query }));
       // Send the search query over the WebSocket connection
       if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
           socketRef.current.send(JSON.stringify({ search_query: query }));
@@ -63,7 +62,6 @@ export const NavBar = () => {
 
 
     useEffect(() => {
-      console.log(filteredCuisines)
     }, [filteredCuisines])
 
     const userAuth = useAuth()
@@ -76,7 +74,6 @@ export const NavBar = () => {
       ApiCall('auth/logout/', 'post', token, refresh, setToken, setRefresh, data)
       .then(function(response){
           if (response.status === 205) {
-              console.log("Token blacklisted")
               return
           }
       })
@@ -89,7 +86,7 @@ export const NavBar = () => {
       }, 2000)
   }
   return (
-    <div className='hidden fixed lg:flex flex-row justify-between px-3 shadow-md top-2 left-64 right-2 py-2.5 items-center rounded-md bg-gray-600 text-white'>
+    <div className='hidden fixed lg:flex flex-row justify-between px-3 shadow-md top-2 left-64 right-2 py-2.5 items-center rounded-md bg-gray-600 text-white z-10000000'>
         <p className='poppins hover:cursor-pointer' onClick={() => {navigate('/home')}}>EthnicEats</p>
         <input placeholder='Search' value={searchQuery} onChange={(e) => handleSearchQuery(e.target.value)} className=' text-gray-900 px-3 py-1 rounded-xl border-slate-700'></input>
         <FilteredContainer filteredCuisines={filteredCuisines} />

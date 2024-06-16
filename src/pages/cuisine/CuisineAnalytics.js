@@ -37,7 +37,6 @@ export const CuisineAnalytics = () => {
     const cuisines = localStorage.getItem("cuisines")
     const navigate = useNavigate()
     useEffect(() => {
-        console.log(cuisines)
         if(cuisines === "false") {
             return navigate('/cuisine-owner/new', {state: {cuisines: 0}})
         }
@@ -61,7 +60,7 @@ export const CuisineAnalytics = () => {
                     setLoading(false)
                 }
             } catch (error) {
-                console.error("Error occurred:", error.message?.data?.message || "getting cuisines ids");
+                //console.error("Error occurred:", error.message?.data?.message || "getting cuisines ids");
                 //TODO
             }
         };

@@ -15,7 +15,6 @@ export const ReviewCard = ({cuisine_id}) => {
         .then(function(response){
             if(response.status === 200 && response.data.length > 0){
                 const reviewsData = response.data.map((item) => item.review)
-                console.log(reviewsData)
                 setReviews(reviewsData)
                 setLoading(false)
                 return

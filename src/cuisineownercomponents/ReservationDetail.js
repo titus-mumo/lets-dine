@@ -26,6 +26,7 @@ export const ReservationDetail = ({reservation}) => {
             }
         })
         .catch((error) => {
+            //TODO
             return console.log("An error occured")
         })
     }

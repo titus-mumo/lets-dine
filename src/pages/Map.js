@@ -64,14 +64,6 @@ const CurrentLocation = ({ setLocation }) => {
 
     getLocation();
 
-    // Logging the location after 3 seconds
-    const timeoutId = setTimeout(() => {
-      console.log(location);
-    }, 3000);
-
-    // Clear timeout if the component unmounts
-    return () => clearTimeout(timeoutId);
-
   }, [setLocation]);
 };
 

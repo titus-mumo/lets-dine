@@ -41,7 +41,6 @@ export const NewCuisine = () => {
 
     const handleImageChange = (e) => {
 
-      console.log(e.target.files)
       setImage(e.target.files[0]);
     };
 
@@ -69,8 +68,6 @@ export const NewCuisine = () => {
     const handleUploadCuisine = (e) => {
         e.preventDefault()
 
-        console.log(locationGeometry)
-
         const formData = new FormData()
         formData.append('name', name)
         formData.append('description', description)
@@ -94,8 +91,6 @@ export const NewCuisine = () => {
             }
         })
         .catch((error) => {
-          console.group(error)
-            console.log("An error occured, new cuisine")
             ToastMessage("error", error.message || error.response.error.detail)
         });
     }

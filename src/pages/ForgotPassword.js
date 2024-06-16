@@ -10,9 +10,6 @@ export const ForgotPassword = () => {
   const url = window.location.href;
   const base_url = url.split(window.location.pathname)[0];
   const [loading, setLoading] = useState(false)
-  useEffect(() => {
-    console.log(base_url)
-  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

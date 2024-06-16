@@ -31,12 +31,9 @@ export const Account = () => {
       };
       ApiCall('auth/logout/', 'post', token, refresh, setToken, setRefresh, data)
         .then(function (response) {
-          if (response.status === 205) {
-            console.log('Token blacklisted');
-          }
         })
         .catch((error) => {
-          console.log('An error occurred during logout');
+          
         })
         .finally(() => {
           ToastMessage('success', 'Logout Successful');
@@ -66,11 +63,11 @@ export const Account = () => {
                 setLoading(false)
             }
             else{
-                console.log(response)
+                throw new Error(response.data.error)
             }
         })
         .catch((error) => {
-            ToastMessage("error", "An error occured")
+            ToastMessage("error", error.message? error.message : "An error occured")
         })
     }
 

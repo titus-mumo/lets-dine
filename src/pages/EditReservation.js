@@ -13,9 +13,6 @@ import { LockClock } from '@mui/icons-material';
 export const EditReservation = () => {
 
     const location = useLocation()
-    useEffect(() => {
-        console.log(location)
-    })
     const {reservation}= location.state
 
     const {reservation_id, cuisine, total_seats, time } = reservation
@@ -60,12 +57,13 @@ export const EditReservation = () => {
         .then(function(response){
             const {status, data} = response
             if(status === 200){
-                ToastMessage("success", "Reservation update successfully")
+                ToastMessage("success", "Reservation updated successfully")
                 setTimeout(() => {
                     navigate('/reservations')
                 }, 2000)
+                return
             }
-            return
+            throw new Error(response.data.error)
         })
         .catch((error) => {
             ToastMessage(error.message? error.message: "An error occured")

@@ -42,8 +42,6 @@ export const MealCard = ({meal, confirmDelete, setConfirmDelete, id, deleteMealN
     const navigate = useNavigate()
 
     const handleEdit = () => {
-      //e.preventDefault()
-      console.log(`/cuisine-owner/${cuisine}/edit`)
       navigate(`/cuisine-owner/cuisine/${cuisine}/edit`, {state: {meal : meal, cuisine_id : cuisine}} )
     }
 

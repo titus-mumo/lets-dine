@@ -62,13 +62,11 @@ export const Register = () => {
                 role: role
             })
             .then(function(response){
-                console.log(response)
                 ToastMessage("success" , "Account Registration successful")
                 setTimeout(() => navigate('/login'), 3000);
     
             })
             .catch(function(error){
-                console.log(error)
                 return ToastMessage('error', error.message? error.response.data['error'] : "An error occured" )
             });
 

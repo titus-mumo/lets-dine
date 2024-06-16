@@ -12,7 +12,7 @@ function App() {
       <AuthProvider>
         <UserPreferenceProvider>
           <ToastContainer  
-          style={{ fontSize: "14px", zIndex: 10000000, Padding: "2px" }}
+          style={{ fontSize: "14px", zIndex: 100000000, Padding: "2px" }}
           />
           <AllRoutes />
         </UserPreferenceProvider>

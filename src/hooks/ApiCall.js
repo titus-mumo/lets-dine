@@ -31,7 +31,6 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
         } else if(method === 'put'){
             res = await api.put(endpoint, data)
         }
-        console.log(res)
         return res;
     } catch (error) {
         if (error.response && error.response.status === 401) {
@@ -66,8 +65,6 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
                     ToastMessage("error", "You are not authorized to perform this function");
                 }
             } catch (refreshError) {
-                console.log("Failed to refresh token:", refreshError.message);
-                //TODO
                 ToastMessage("error", "Session expired. Please login again")
             }
         } else {

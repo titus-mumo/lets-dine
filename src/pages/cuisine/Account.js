@@ -31,9 +31,7 @@ export const Account = () => {
       };
       ApiCall('auth/logout/', 'post', token, refresh, setToken, setRefresh, data)
         .then(function (response) {
-          if (response.status === 205) {
-            console.log('Token blacklisted');
-          }
+          
         })
         .catch((error) => {
           

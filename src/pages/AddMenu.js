@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const AddMenu = () => {
     const params = useParams();
-    console.log(params)
     const [mealName, setMelName] = useState('')
     const [price, setPrice] = useState(1)
     const [category, setCategory] = useState('')
@@ -18,8 +17,6 @@ export const AddMenu = () => {
     const {token, refresh, setToken, setRefresh} = userAuth
 
     const handleImageChange = (e) => {
-
-        console.log(e.target.files)
         setImage(e.target.files[0]);
       };
 
@@ -36,7 +33,6 @@ export const AddMenu = () => {
 
         ApiCall('meals/', 'post', token, refresh, setToken, setRefresh, formData, {}, true)
         .then((response) => {
-            console.log(response)
             if(response.status === 201){
                 return ToastMessage("success", "Item added successfully")
             } else{

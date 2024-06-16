@@ -24,8 +24,6 @@ export const EditMenu = () => {
   const {token, refresh, setToken, setRefresh} = userAuth
 
   const handleImageChange = (e) => {
-
-      console.log(e.target.files)
       setImage(e.target.files[0]);
     };
 

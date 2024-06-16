@@ -40,7 +40,6 @@ export const AddReview = ({name, setAddReview}) => {
             }
         })
         .catch((error) => {
-            console.log(error)
             ToastMessage("error", error.message? error.message : "An error occured")
         }
         )

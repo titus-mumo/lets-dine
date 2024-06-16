@@ -59,7 +59,7 @@ export const ChangePassword = () => {
 
         })
         .catch((error) => {
-            console.log(error.message? error.message : "An error occured, can't change password")
+            return ToastMessage("error", error.message? error.message : "An error occured, can't change password")
         });
 
     }

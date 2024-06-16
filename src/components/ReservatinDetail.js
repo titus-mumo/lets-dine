@@ -6,37 +6,8 @@ import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 
 export const ReservatinDetail = ({reservation, setReservationId, setConfirmDelete, reservationId}) => {
-    const {reservation_id, cuisine, total_seats, time } = reservation
+    const {reservation_id, cuisineName, total_seats, time } = reservation
     const standardTime = moment(time).format('MMMM Do YYYY, h:mm a');
-    const user = useAuth()
-
-    const [cuisineName, setCuisineName] = useState('')
-
-    const {token, refresh, setToken, setRefresh} = user
-
-    if(!token) return ToastMessage("error", "Ooops! You are not logged in")
-
-    const fetchCuisineDetail = () => {
-        ApiCall(`cuisines/${cuisine}`, 'get', token, refresh, setToken, setRefresh)
-        .then(function(response){
-            const {data, status} = response
-            if(status === 200){
-                const {name} = data
-                setCuisineName(name)
-                return;
-            }
-
-            throw new Error(response.data.error)
-
-        })
-        .catch((error) => {
-            return ToastMessage("error", error.message? error.message : "An error occured")
-        })
-    }
-
-    useEffect(() => {
-        fetchCuisineDetail()
-    }, [cuisine])
 
     const navigate = useNavigate()
 

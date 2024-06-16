@@ -11,36 +11,65 @@ import LoadingSpinner from './LandingPage';
 
 export const ViewReservations = () => {
 
-    const [userReservations, setUserReservations] = useState([])
-    const [loading, setLoading] = useState(true)
+    const [userReservations, setUserReservations] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [confirmDelete, setConfirmDelete] = useState(false);
+    const [reservationId, setReservationId] = useState('');
 
-    const [confirmDelete, setConfirmDelete] = useState(false)
+    const user = useAuth();
+    const { token, refresh, setToken, setRefresh } = user;
 
-    const [reservationId, setReservationId] = useState('')
-
-    const user = useAuth()
-    const {token, refresh, setToken, setRefresh} = user
-
-    if(!token) return ToastMessage("error", "Ooops! You are not logged in")
+    if (!token) return ToastMessage("error", "Ooops! You are not logged in");
 
     const fetchUserSpecificReservations = () => {
         ApiCall('reservation/user', 'get', token, refresh, setToken, setRefresh)
-        .then(function(response){
-            const {status, data} = response
-            if(status === 200){
-                console.log(data)
-                setUserReservations(data)
-                setLoading(false)
+            .then(response => {
+                const { status, data } = response;
+                if (status === 200) {
+                    const reservationsGroupedByCuisine = groupReservationsByCuisine(data);
+                    fetchCuisineNames(reservationsGroupedByCuisine);
+                }
+            })
+            .catch(error => {
+                return error.message ? error.message : "An error occurred";
+            });
+    };
+
+    const groupReservationsByCuisine = (reservations) => {
+        return reservations.reduce((acc, reservation) => {
+            const { cuisine } = reservation;
+            if (!acc[cuisine]) {
+                acc[cuisine] = [];
             }
-        })
-        .catch((error) => {
-            return (error.message? error.message: "An error occured")
-        })
-    }
+            acc[cuisine].push(reservation);
+            return acc;
+        }, {});
+    };
+
+    const fetchCuisineNames = (reservationsGroupedByCuisine) => {
+        const cuisineIds = Object.keys(reservationsGroupedByCuisine);
+        Promise.all(cuisineIds.map(cuisineId => ApiCall(`cuisines/${cuisineId}`, 'get', token, refresh, setToken, setRefresh)))
+            .then(responses => {
+                responses.forEach((response, index) => {
+                    const { status, data } = response;
+                    if (status === 200) {
+                        const cuisineName = data.name;
+                        reservationsGroupedByCuisine[cuisineIds[index]].forEach(reservation => {
+                            reservation.cuisineName = cuisineName;
+                        });
+                    }
+                });
+                setUserReservations(Object.values(reservationsGroupedByCuisine).flat());
+                setLoading(false);
+            })
+            .catch(error => {
+                return ToastMessage("error", error.message ? error.message : "An error occurred");
+            });
+    };
 
     useEffect(() => {
-        fetchUserSpecificReservations()
-    }, [])
+        fetchUserSpecificReservations();
+    }, []);
 
   return (
         <div className='flex flex-col justify-center self-start w-full mt-10 lg:mt-0 pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 '>

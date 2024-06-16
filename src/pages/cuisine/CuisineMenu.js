@@ -125,10 +125,13 @@ const DeletePopUp = ({confirmDelete, setConfirmDelete, deleteMealName, setDelete
                 setTimeout(() =>{
                     window.location.reload()
                 }, 1000)
+                return
             }
+            throw new Error(responsedata.error)
+
         })
         .catch((error) => {
-            console.log("an error occured", error)
+            ToastMessage("error", error.message? error.message: "An error occured")
         })
 
     }

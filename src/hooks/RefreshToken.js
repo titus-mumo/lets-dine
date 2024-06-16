@@ -18,8 +18,6 @@ export const refreshAccessToken = async (refreshToken) => {
         data = response.data
         return data;
     } catch (error) {
-        console.log(error)
-        console.log("Failed to refresh token:", error.response.data.detail || error.message);
         return null
     }
 };

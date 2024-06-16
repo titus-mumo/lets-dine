@@ -22,7 +22,6 @@ const AuthProvider = ({ children }) => {
         body: JSON.stringify(data),
       });
       const res = await response.json();
-      console.log(res)
       if (res.access) {
         setUser({"email": res.email, "username":res.username});
         setToken(res.access)
@@ -38,7 +37,6 @@ const AuthProvider = ({ children }) => {
         return data;
       }
       else{
-        console.log("an error occured")
         const data = {
           error: "Invalid credentials"
         }

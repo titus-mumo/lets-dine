@@ -10,7 +10,6 @@ require('dotenv').config();
 
 const MapContainer = (props) => {
   const { location, locations } = props;
-  console.log(locations)
 
   return (
     <div className='w-full'>
@@ -64,14 +63,6 @@ const CurrentLocation = ({ setLocation }) => {
     };
 
     getLocation();
-
-    // Logging the location after 3 seconds
-    const timeoutId = setTimeout(() => {
-      console.log(location);
-    }, 3000);
-
-    // Clear timeout if the component unmounts
-    return () => clearTimeout(timeoutId);
 
   }, [setLocation]);
 };

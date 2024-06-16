@@ -20,12 +20,12 @@ const CuisineOwnerSidebarItems = [
     title: "Home",
     link: "/cuisine-owner/home",
     icon: <HomeIcon />
+    //TODO: Make a cuisine page
   },
   {
     title: "My Cuisines",
     link: "/cuisine-owner/cuisines",
     icon: <StorefrontIcon />
-    //TODO: Make a cuisine page
   },
   
   {

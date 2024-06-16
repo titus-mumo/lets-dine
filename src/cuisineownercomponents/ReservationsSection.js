@@ -38,7 +38,6 @@ export const ReservationsSection = ({cuisine_id}) => {
   }
 
   useEffect(() => {
-    console.log(cuisine_id)
     handleFetchCuisineSpecificReservations()
   }, [cuisine_id])
   return (

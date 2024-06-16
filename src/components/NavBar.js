@@ -12,7 +12,7 @@ export const NavBar = ({divRefs}) => {
         if (targetDiv) {
           targetDiv.scrollIntoView({ behavior: 'smooth' });
         } else {
-          console.error(`Div with ID "${targetDivId}" not found!`);
+          //console.error(`Div with ID "${targetDivId}" not found!`);
         }
 
     }
