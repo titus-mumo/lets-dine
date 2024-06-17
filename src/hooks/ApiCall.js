@@ -2,6 +2,7 @@ import React from "react";
 import { ToastMessage } from "../utils";
 import axios from "axios";
 import { refreshAccessToken } from "./RefreshToken.js";
+import { redirect, useNavigate } from "react-router-dom";
 
 require('dotenv').config();
 
@@ -37,7 +38,15 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
             // Token has expired, attempt to refresh it
             try {
                 let refetchedData;
+                const navigate = useNavigate();
                 const refreshLocal = localStorage.getItem("refresh")
+                if(refreshLocal.length === 0 || refreshLocal === undefined){
+                    ToastMessage("error", "Session expired, please login again")
+                    setTimeout(() => {
+                        navigate('/login')
+                    }, 2000)
+                    return
+                }
                 let response = await refreshAccessToken(refreshLocal);
                 if (response === null){
                     return ToastMessage("Ooops", "An error occured")
@@ -65,7 +74,10 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
                     ToastMessage("error", "You are not authorized to perform this function");
                 }
             } catch (refreshError) {
+                
                 ToastMessage("error", "Session expired. Please login again")
+                redirect('/login')
+                return
             }
         } else {
             return error.response

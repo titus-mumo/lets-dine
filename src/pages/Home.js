@@ -12,10 +12,11 @@ require('dotenv').config();
 
 export const Home = () => {
     const [meals, setMeals] = useState([]);
-    const [menuTab, setMenuTab] = useState('Appetizers')
+    const [menuTab, setMenuTab] = useState(sessionStorage.getItem("menutab") || 'Appetizers')
     const [loading, setLoading] = useState(true)
     const handleMenuTabs = (type) => {
         setMenuTab(type)
+        sessionStorage.setItem("menutab", type)
     }
 
     const userAuth = useAuth()
@@ -41,6 +42,10 @@ export const Home = () => {
         fetchMeals()
     }, []);
 
+    const [rateFood, setRateFood] = useState('')
+    const [rateNumber, setRateNumber] = useState('')
+    const [clickedId, setClickedId] = useState('') 
+
     return (
         <section className='flex flex-col justify-center w-full mt-2 lg:mt-0  pt-2 lg:pt-0 px-2 w-full md:px-3 lg:px-4 '>
                
@@ -55,12 +60,13 @@ export const Home = () => {
                     <p className={menuTab === 'Desserts' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Desserts')}>Desserts</p>
                     <p className={menuTab === 'Beverages' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Beverages')}>Beverages</p>
                 </div>
+                <RateContainer rateFood={rateFood} setRateFood={setRateFood} clickedId={clickedId} setClickedId={setClickedId} rateNumber={rateNumber} setRateNumber={setRateNumber}  />
                 </div>
                 <div className='flex flex-wrap mt-12 lg:mt-12 justify-around w-full'>
                 {
             meals.filter((item) => menuTab !== ''? menuTab === item.category: item).length === 0? "No items under this category yet":
             meals.filter((item) => menuTab !== ''? menuTab === item.category: item).map((item) => (
-                <MealCard key={item.meal_id} meal={item} />
+                <MealCard key={item.meal_id} meal={item} setRateFood={setRateFood} setRateNumber={setRateNumber} setClickedId={setClickedId} />
             ))
                 }
                 </div>
@@ -70,3 +76,55 @@ export const Home = () => {
         </section>
     );
 };
+
+
+
+const RateContainer = ({rateFood, setRateFood, clickedId, setClickedId, rateNumber, setRateNumber}) => {
+    const userAuth = useAuth()
+    const {token, refresh,setToken, setRefresh} = userAuth
+    const handleYes = (e) => {
+      e.preventDefault()
+      const data = {
+        meal_id: clickedId,
+        rating: rateNumber,
+      }
+
+      ApiCall('rate/', 'post', token, refresh, setToken, setRefresh, data)
+      .then((response) => {
+        console.log(response)
+        if(response.status  !== undefined && response.status === 200){
+            ToastMessage("success", "Rating has been recorded")
+            return
+        }
+        console.log(response)
+        throw new Error(response.data.error)
+      })
+      .catch((error) => {
+        ToastMessage("error", error.message? error.message: "An error occured")
+      })
+      .finally(() => {
+        setClickedId('')
+        setRateFood('')
+        setRateNumber('')
+      })
+    }
+    const handleNo = (e) => {
+      e.preventDefault()
+      setClickedId('')
+      setRateFood('')
+      setRateNumber('')
+  
+    }
+  
+    return(
+      <div className={`z-100000 fixed centered-d centered-div ${clickedId? "block": "hidden"} bg-gray-900 text-white px-2 py-1 rounded-md`}>
+        <p>Give {rateFood} a rating of {rateNumber}?</p>
+        <div className='flex justify-around'>
+          <p onClick={(e) => handleYes(e)}>Yes</p>
+          <p onClick={(e) => handleNo(e)}>No</p>
+        </div>
+      </div>
+    )
+  
+  }
+

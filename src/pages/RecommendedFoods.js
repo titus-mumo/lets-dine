@@ -31,39 +31,26 @@ export const RecommendedFoods = ({setItem}) => {
     const fetchHighlyRatedFoods = () => {
       ApiCall('rated-foods/', 'get', token, refresh, setToken, setRefresh)
       .then((response) => {
+        console.log(response)
         response.status === 200? setRatedFoods(response.data) : '';
       })
       .catch((error) => {
         
       })
     }
-    const data = [
-      {
-        "cuisine_id":15,
-        "meal_name":"Fries",
-        "category": "Fast Food",
-        "price": "10 usd",
-        "rationale": "Trending",
-        
-      }
-    ]
     return(
-      <div>
-      <div className='flex flex-wrap w-full self-center justify-center'>
-       {
-          data.map((meal, index) => <FoodContainer meal={meal} key={index} />)
-       }
+      <div className="w-full">
+      <div className="flex justify-around w-full">
+        {
+          ratedFoods.map((meal, index) => <FoodContainer meal={meal} key={index} />)
+        }
       </div>
       <div>
         {
             trendingFoods.length === 0? <p>Trending foods will appear here</p> : trendingFoods.map((meal, index) => <p key={index}>{meal}</p>)
         }
       </div>
-      <div>
-        {
-          ratedFoods.map((meal, index) => <p key={index}>{meal}</p>)
-        }
-      </div>
+
     </div>
     )
   }
@@ -77,7 +64,7 @@ const FoodContainer = ({meal}) => {
     const {cuisine_id, meal_name, category, price, rationale} = meal
     let url;
     if(meal.meal_pic) {
-      url = process.env.BASE_IMAGES + meal.meal_pic
+      url = meal.meal_pic.startsWith('/')? process.env.BASE_IMAGES + meal.meal_pic : process.env.BASE_URL + 'media/' +meal.meal_pic
     }
     const foodType = category
 
@@ -107,7 +94,11 @@ const FoodContainer = ({meal}) => {
 
     }
 
-    useEffect(() => {getCuisineName()}, [cuisine_id])
+    useEffect(() => {
+      getCuisineName()
+      console.log(meal.meal_pic)
+      console.log(url)
+    }, [cuisine_id])
 
 
 
@@ -121,7 +112,6 @@ const FoodContainer = ({meal}) => {
               <h1 className="text-gray-900 poppins text-sm text-center">{meal_name}</h1>
               <div className="w-full flex justify-between items-center px-2">
                   <div className="flex flex-row items-center">
-                      {/* <p className="text-gray-500 poppins text-xs text-center mr-2">Cuisine: </p> */}
                       <Link to={`/cuisine/${cuisine_id}/menu`} className="text-blue-400 text-sm">
                           {loading ? 'Loading...' : cuisineName.includes(' ') ? `${cuisineName.split(' ')[0]}.. ` : cuisineName.length > 10 ? `${cuisineName.slice(0, 9)}..` : cuisineName}
                       </Link>

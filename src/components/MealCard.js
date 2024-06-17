@@ -8,7 +8,7 @@ import { ToastMessage } from '../utils'
 
 require('dotenv').config()
 
-export const MealCard = ({meal}) => {
+export const MealCard = ({meal, setRateFood, setRateNumber, setClickedId}) => {
 
     const {cuisine, meal_id, meal_name, category, rating} = meal
     let url;
@@ -24,11 +24,8 @@ export const MealCard = ({meal}) => {
 
     const {token, refresh, setToken, setRefresh} = userAuth
 
-    const handleRating = (rate) => {
-      setRating(rate)
-    }
-
     const [cuisineName, setCuisineName] = useState('')
+    
 
     const getCuisineName = () => {
       ApiCall(`cuisines/${cuisine}/`, 'get', token, refresh, setToken, setRefresh)
@@ -53,8 +50,13 @@ export const MealCard = ({meal}) => {
     }
 
     useEffect(() => {getCuisineName()}, [cuisine])
+    const [filled, setFilled] = useState(3)
 
-    const [filled, setFilled] = useState(rating)
+    const handleFilled = (filled, id) => {
+      setRateFood(meal_name)
+      setRateNumber(filled)
+      setClickedId(id)
+    }
 
 
   return (
@@ -77,13 +79,15 @@ export const MealCard = ({meal}) => {
           </div>
           <div className='w-fit'>
           <Rating>
-            <Rating.Star className={`${filled >=1? 'text-green-700': ''}`} onClick={() => setFilled(1)}/>
-            <Rating.Star className={`${filled >=2? 'text-green-700': ''}`} onClick={() => setFilled(2)}/>
-            <Rating.Star className={`${filled >=3? 'text-green-700': ''}`} onClick={() => setFilled(3)} />
-            <Rating.Star className={`${filled >=4? 'text-green-700': ''}`} onClick={() =>setFilled(4)}/>
-            <Rating.Star className={`${filled >=5? 'text-green-700': ''}`} onClick={() => setFilled(5)} />
+            <Rating.Star className={`${filled >=1? 'text-green-700': ''}`} onClick={() => handleFilled(1, meal_id)}/>
+            <Rating.Star className={`${filled >=2? 'text-green-700': ''}`} onClick={() => handleFilled(2, meal_id)}/>
+            <Rating.Star className={`${filled >=3? 'text-green-700': ''}`} onClick={() => handleFilled(3, meal_id)} />
+            <Rating.Star className={`${filled >=4? 'text-green-700': ''}`} onClick={() => handleFilled(4, meal_id)}/>
+            <Rating.Star className={`${filled >=5? 'text-green-700': ''}`} onClick={() => handleFilled(5, meal_id)} />
           </Rating>
           </div>
       </div>
   )
 }
+
+

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link, useLocation, useNavigate } from 'react-router-dom'
 import { ToastMessage } from '../utils';
-  ;
-import 'react-toastify/dist/ReactToastify.css';
 import { MealCard, SeeReviewCard } from '../components';
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
@@ -63,6 +61,12 @@ export const CuisineDetail = () => {
         e.preventDefault()
         setAddReview(true)
     }
+
+
+    const [rateFood, setRateFood] = useState('')
+    const [rateNumber, setRateNumber] = useState('')
+    const [clickedId, setClickedId] = useState('') 
+
   return (
     <div className='mt-10 lg:mt-0 flex flex-col justify-center w-full self-center'>
         {
@@ -86,6 +90,8 @@ export const CuisineDetail = () => {
                     </div>
                 </div>
 
+                <RateContainer rateFood={rateFood} setRateFood={setRateFood} clickedId={clickedId} setClickedId={setClickedId} rateNumber={rateNumber} setRateNumber={setRateNumber}  />
+
             </div>
             <div className='flex justify-around w-full'>
             <Link to={`/cuisine/${cuisine_id}/menu/add`} className='mx-1 px-3 py-1 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-2 rounded-lg transition duration-300 poppins text-md'>Add Item</Link>
@@ -94,7 +100,7 @@ export const CuisineDetail = () => {
             <div className='mt-3'>
                 <div className='flex flex-wrap justify-start md:justify-around'>
                 {
-                    cuisineMenu.length === 0? <p className='text-sm md:text-md'>No items on the menu yet</p>:cuisineMenu.map(item => <MealCard key={item.meal_id} meal={item}/>)
+                    cuisineMenu.length === 0? <p className='text-sm md:text-md'>No items on the menu yet</p>:cuisineMenu.map(item => <MealCard key={item.meal_id} meal={item} setRateFood={setRateFood} setRateNumber={setRateNumber} setClickedId={setClickedId}/>)
                 }
                 </div>
             </div>
@@ -113,3 +119,52 @@ export const CuisineDetail = () => {
     </div>
   )
 }
+
+
+const RateContainer = ({rateFood, setRateFood, clickedId, setClickedId, rateNumber, setRateNumber}) => {
+    const userAuth = useAuth()
+    const {token, refresh,setToken, setRefresh} = userAuth
+    const handleYes = (e) => {
+      e.preventDefault()
+      const data = {
+        meal_id: clickedId,
+        rating: rateNumber,
+      }
+
+      ApiCall('rate/', 'post', token, refresh, setToken, setRefresh, data)
+      .then((response) => {
+        console.log(response)
+        if(response.status === 200){
+            ToastMessage("success", "Rating has been recorded")
+            return
+        }
+        throw new Error(response.data.error)
+      })
+      .catch((error) => {
+        ToastMessage("error", error.message? error.message: "An error occured")
+      })
+      .finally(() => {
+        setClickedId('')
+        setRateFood('')
+        setRateNumber('')
+      })
+    }
+    const handleNo = (e) => {
+      e.preventDefault()
+      setClickedId('')
+      setRateFood('')
+      setRateNumber('')
+  
+    }
+  
+    return(
+      <div className={`z-100000 fixed centered-d centered-div ${clickedId? "block": "hidden"} bg-gray-900 text-white px-2 py-1 rounded-md`}>
+        <p>Give {rateFood} a rating of {rateNumber}?</p>
+        <div className='flex justify-around'>
+          <p onClick={(e) => handleYes(e)}>Yes</p>
+          <p onClick={(e) => handleNo(e)}>No</p>
+        </div>
+      </div>
+    )
+  
+  }
