@@ -38,19 +38,15 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
             // Token has expired, attempt to refresh it
             try {
                 let refetchedData;
-                const navigate = useNavigate();
                 const refreshLocal = localStorage.getItem("refresh")
-                if(refreshLocal.length === 0 || refreshLocal === undefined){
-                    ToastMessage("error", "Session expired, please login again")
-                    setTimeout(() => {
-                        navigate('/login')
-                    }, 2000)
-                    return
-                }
+                // if(refreshLocal.length === 0 || refreshLocal === undefined){
+                //     ToastMessage("error", "Session expired, please login again")
+                //     setTimeout(() => {
+                //         navigate('/login')
+                //     }, 2000)
+                //     return
+                // }
                 let response = await refreshAccessToken(refreshLocal);
-                if (response === null){
-                    return ToastMessage("Ooops", "An error occured")
-                }
                 const {access, refresh} = response
                 if (access) {
                     setToken(access);
@@ -74,9 +70,7 @@ export const ApiCall = async (endpoint, method, token, refreshToken, setToken, s
                     ToastMessage("error", "You are not authorized to perform this function");
                 }
             } catch (refreshError) {
-                
-                ToastMessage("error", "Session expired. Please login again")
-                redirect('/login')
+            
                 return
             }
         } else {

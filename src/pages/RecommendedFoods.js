@@ -12,18 +12,18 @@ export const RecommendedFoods = ({setItem}) => {
     const userAuth = useAuth()
     const {token, refresh, setToken, setRefresh} = userAuth
 
-    useEffect(() => {
-      fetchHighlyRatedFoods();
-        ApiCall('gemini/trending-foods/', 'get', token, refresh, setToken, setRefresh)
-        .then((response) => {
-            setTrendingFoods(response.data)
-            setItem(1)
-        })
-        .catch((error) => {
-            ToastMessage("error", "Error fetching trending foods")
-        })
+    // useEffect(() => {
+    //   fetchHighlyRatedFoods();
+    //     ApiCall('gemini/trending-foods/', 'get', token, refresh, setToken, setRefresh)
+    //     .then((response) => {
+    //         setTrendingFoods(response.data)
+    //         setItem(1)
+    //     })
+    //     .catch((error) => {
+    //         ToastMessage("error", "Error fetching trending foods")
+    //     })
         
-    }, [])
+    // }, [])
 
 
     //TODO
@@ -38,16 +38,16 @@ export const RecommendedFoods = ({setItem}) => {
         
       })
     }
+
+    useEffect(() => {
+      fetchHighlyRatedFoods()
+
+    }, [])
     return(
       <div className="w-full">
       <div className="flex justify-around w-full">
         {
           ratedFoods.map((meal, index) => <FoodContainer meal={meal} key={index} />)
-        }
-      </div>
-      <div>
-        {
-            trendingFoods.length === 0? <p>Trending foods will appear here</p> : trendingFoods.map((meal, index) => <p key={index}>{meal}</p>)
         }
       </div>
 
