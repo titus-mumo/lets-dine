@@ -182,17 +182,20 @@ code {
 .terms-container {
   margin: 5px;
   padding: 5px;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
 }
 
-.terms-container h1, .terms-container h2 {
-  color: #333;
+.terms-container h1 {
+  font-size: larger;
+  font-weight: 900;
 }
+
+.terms-container h2 {
+  font-size: medium;
+  font-weight: 700;
+}
+
 
 .terms-container p, .terms-container ul {
-  color: #666;
   line-height: 1.6;
 }
 

@@ -71,36 +71,37 @@ const Home = ({divRefs}) => {
 const AboutUs = ({divRefs}) => {
   return(
     <div ref={(el) => (divRefs.current['about-us'] = el)} id='about-us' className='about-us w-full p-3 py-5 md:py-20 lg:py-24 bg-gradient-to-b from-zinc-900 to-zinc-700'>
-      <h1 className='w-full text-center text-2xl font-bold mt-4 mb-2 text-white'>ABOUT US</h1>
-      <p className='w-full text-center text-md md:text-lg font-medium mb-4 text-white'>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p>
-      <div className='flex justify-center items-center lg:justify-around flex-col md:flex-row'>
-      <div className='lg:basis-1/5 items-center h-full mb-3 md:mb-0'>
-        <div className='w-full h-full self-center flex justify-center'>
-          <img src={AboutSectionImage} alt='about image' className='w-2/3 md:w-full rotate self-center'></img>
+      <h1 className='w-full text-centre text-2xl font-bold mt-4 mb-2 text-white'>ABOUT US</h1>
+      <p className='w-full text-centre text-md md:text-lg font-medium mb-4 text-white'>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p>
+      <div className='flex justify-centre items-centre lg:justify-around flex-col md:flex-row'>
+      <div className='lg:basis-1/5 items-centre h-full mb-3 md:mb-0'>
+        <div className='w-full h-full self-centre flex justify-centre'>
+          <img src={AboutSectionImage} alt='about image' className='w-2/3 md:w-full rotate self-centre'></img>
         </div>
       </div>
       <div className='flex flex-col lg:grid lg:grid-cols-2 w-full justify-around lg:w-2/3 lg:ml-3'>
-          <div className='w-full md:w-2/3 self-center mb-2'>
-            <h1 className='text-center text-white text-md font-semibold'>Personalised Recommendations</h1>
-            <p className='text-sm text-base text-center text-white'>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
+          <div className='w-full md:w-2/3 self-centre mb-2'>
+            <h1 className='text-centre text-white text-md font-semibold'>Personalised Recommendations</h1>
+            <p className='text-sm text-base text-centre text-white'>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
           </div>
-          <div className='w-full md:w-2/3 self-center mb-2'>
-            <h1 className='text-center text-white mb-2 text-md font-semibold'>Social Media Integration</h1>
-            <p className='text-sm text-base text-center text-white'>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
+          <div className='w-full md:w-2/3 self-centre mb-2'>
+            <h1 className='text-centre text-white mb-2 text-md font-semibold'>Social Media Integration</h1>
+            <p className='text-sm text-base text-centre text-white'>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
           </div>
-          <div className='w-full md:w-2/3 self-center mb-2'>
-            <h1 className='text-center text-white text-md font-semibold'>User Reviews and Ratings</h1>
-            <p  className='text-sm text-base text-center text-white'>Our platform aggregates and analyzes reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
+          <div className='w-full md:w-2/3 self-centre mb-2'>
+            <h1 className='text-centre text-white text-md font-semibold'>User Reviews and Ratings</h1>
+            <p  className='text-sm text-base text-centre text-white'>Our platform aggregates and analyses reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
           </div>
-          <div className='w-full md:w-2/3 self-center mb-2'>
-            <h1  className='text-center text-white text-md font-semibold'>Community Engagement</h1>
-            <p  className='text-sm text-base text-center text-white'>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
+          <div className='w-full md:w-2/3 self-centre mb-2'>
+            <h1  className='text-centre text-white text-md font-semibold'>Community Engagement</h1>
+            <p  className='text-sm text-base text-centre text-white'>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
           </div>
         </div>
         </div>
         </div>
   )
 }
+
 
 
 const Contact = ({divRefs}) => {
@@ -190,31 +191,32 @@ const Contact = ({divRefs}) => {
 
 
 const ethnicEatsData = [
-    {
-      question: "How does EthnicEats use AI and machine learning to personalize recommendations?",
-      answer: "EthnicEats uses AI and machine learning to analyze your dining history, social media trends, user reviews, and photo content. It learns from your interactions to provide personalized restaurant and cuisine recommendations that adapt to your tastes."
-    },
-    {
-      question: "Can I see why a particular restaurant was recommended to me?",
-      answer: "Yes, EthnicEats includes a feature that allows you to view the rationale behind each recommendation. This can include the popularity of the restaurant on social media, positive user reviews, and how it matches your stated preferences and past behavior."
-    },
-    {
-      question: "How frequently is the data updated on EthnicEats?",
-      answer: "The platform updates its data in real-time, continually scraping social media and review sites for the latest information. This ensures that recommendations and restaurant details are always current and relevant."
-    },
-    {
-      question: "What are some tips for writing helpful reviews on EthnicEats?",
-      answer: "When writing reviews, consider including details about the ambiance, service, and specific dishes you enjoyed. Photos are highly encouraged, as they help other users get a better sense of the dining experience. Be honest and constructive in your feedback to help others make informed decisions."
-    },
-    {
-      question: "How does EthnicEats handle negative reviews or conflicts within the community?",
-      answer: "EthnicEats has content moderation tools powered by AI to detect and manage inappropriate content or conflicts. Users can report issues, and our moderation team reviews these reports promptly. We strive to maintain a respectful and supportive community environment."
-    },
-    {
-      question: "How does the interactive culinary map work?",
-      answer: "The interactive culinary map utilizes your device's GPS to show nearby ethnic restaurants. You can filter the map by cuisine type, user ratings, and other preferences. Clicking on a restaurant pin provides detailed information, reviews, and booking options."
-    }
-  ]
+  {
+    question: "How does EthnicEats use AI and machine learning to personalise recommendations?",
+    answer: "EthnicEats uses AI and machine learning to analyse your dining history, social media trends, user reviews, and photo content. It learns from your interactions to provide personalised restaurant and cuisine recommendations that adapt to your tastes."
+  },
+  {
+    question: "Can I see why a particular restaurant was recommended to me?",
+    answer: "Yes, EthnicEats includes a feature that allows you to view the rationale behind each recommendation. This can include the popularity of the restaurant on social media, positive user reviews, and how it matches your stated preferences and past behaviour."
+  },
+  {
+    question: "How frequently is the data updated on EthnicEats?",
+    answer: "The platform updates its data in real-time, continually scraping social media and review sites for the latest information. This ensures that recommendations and restaurant details are always current and relevant."
+  },
+  {
+    question: "What are some tips for writing helpful reviews on EthnicEats?",
+    answer: "When writing reviews, consider including details about the ambience, service, and specific dishes you enjoyed. Photos are highly encouraged, as they help other users get a better sense of the dining experience. Be honest and constructive in your feedback to help others make informed decisions."
+  },
+  {
+    question: "How does EthnicEats handle negative reviews or conflicts within the community?",
+    answer: "EthnicEats has content moderation tools powered by AI to detect and manage inappropriate content or conflicts. Users can report issues, and our moderation team reviews these reports promptly. We strive to maintain a respectful and supportive community environment."
+  },
+  {
+    question: "How does the interactive culinary map work?",
+    answer: "The interactive culinary map utilises your device's GPS to show nearby ethnic restaurants. You can filter the map by cuisine type, user ratings, and other preferences. Clicking on a restaurant pin provides detailed information, reviews, and booking options."
+  }
+]
+
 
 const FAQs = ({divRefs}) => {
   const [active, setActive] = useState('')
@@ -258,7 +260,7 @@ const testimonials = [
   {
     names: 'Alex Turner',
     location: 'London',
-    testimonial: "EthnicEats transformed my dining adventures! The personalized recommendations are spot on. I’ve discovered so many hidden gems!"
+    testimonial: "EthnicEats transformed my dining adventures! The personalised recommendations are spot on. I’ve discovered so many hidden gems!"
   },
   {
     names: 'Maria Smith',
@@ -281,6 +283,7 @@ const testimonials = [
     testimonial: "Being part of the EthnicEats community is a joy. Sharing photos and experiences with fellow food lovers makes every meal an adventure."
   }
 ];
+
 
 
 const WhyUs = ({divRefs}) => {
@@ -320,7 +323,7 @@ const WhyUs = ({divRefs}) => {
   return (
     <div ref={(el) => (divRefs.current['whyus'] = el)} id='whyus' className='whyus flex justify-center w-full pb-6 md:py-10 lg:py-14 bg-gradient-to-b from-teal-300 to-teal-400 px-4 md:pb-16 lg:pb-20'>
     <div className='flex flex-col justify-around w-full self-center'>
-    <h1 className='text-center text-2xl font-bold my-4'>WHY CHOOSE US</h1>
+    <h1 className='text-center text-2xl font-bold my-4'>TESTIMONIALS</h1>
       <div className='w-8/9 md:w-2/3 lg:w-700px flex justify-center self-center '>
       <TestimonialCard testimonial={testimonials[activeIndex]} />
       </div>
@@ -390,9 +393,9 @@ const Footer = ({divRefs}) => {
           <div>
             <h1 className='text-xl font-bold mb-2 text-center'>LEGAL</h1>
             <div className='flex flex-col space-y-1'>
-              <Link to='terms_and_conditions'>Terms and conditions</Link>
-              <Link to='privacy_policy'>Privacy Policy</Link>
-              <Link to='acceptable_use_notice'>Acceptable Use Notice</Link>
+              <Link to='terms_and_conditions/'>Terms and conditions</Link>
+              <Link to='privacy_policy/'>Privacy Policy</Link>
+              <Link to='acceptable_use_notice/'>Acceptable Use Notice</Link>
             </div>
           </div>
           <div className='basis-1/3 self-center'>

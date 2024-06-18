@@ -27,10 +27,10 @@ export const NavBar = ({divRefs}) => {
       <div className='flex justify-end lg:justify-between flex-row items-center basis-2/3'>
         <div className='hidden md:flex justify-around basis-3/5'>
           <p onClick={() => handleScrollClick('about-us')}  to="about-us" id='about-us'  className='text-white text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>About</p>
-          <p onClick={() => handleScrollClick('contact')}  to="contact" className='text-white text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Contact</p>
           <p onClick={() => handleScrollClick('faqs')}  to="faqs"  className='text-white text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>FAQs</p>
           <p onClick={() => handleScrollClick('pricing')} to="pricing"  className='text-white text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Pricing</p>
           <p onClick={() => handleScrollClick('whyus')}  to="whyus"  className='text-white text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Testimonials</p>
+          <p onClick={() => handleScrollClick('contact')}  to="contact" className='text-white text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Contact</p>
         </div>
         <div className="flex items-center justify-end space-x-6 pr-2 basis-2/5">
             <button className="px-3 lg:px-4 py-0.5 lg:py-1 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-pink-700 hover:border-pink-700 border-2" onClick={() => navigate('/login')}>Login</button>

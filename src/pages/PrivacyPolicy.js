@@ -1,9 +1,12 @@
-import React from 'react';
+import React , {useEffect}from 'react';
 import { Footer, Header } from './AcceptableUseNotice';
 
 function PrivacyPolicy() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
   return (
-    <div className="terms-container flex flex-col min-h-screen justify-between items-stretch min-w-screen">
+    <div className="terms-container">
         <div>
             <Header />
       <h1>Privacy Policy</h1>
