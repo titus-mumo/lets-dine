@@ -138,37 +138,48 @@ export const CuisineAnalytics = () => {
         plugins: {
             legend: {
                 display: true,
-                position: 'top'
+                position: 'top',
+                labels: {
+                    color: 'white' // Set legend text color to white
+                }
             },
             title: {
                 display: true,
-                text: 'Reservations by Date'
+                text: 'Reservations by Date',
+                color: 'white' // Set title color to white
             },
             tooltip: {
                 backgroundColor: 'rgba(0,0,0,0.8)',
-                titleFont: { size: 16 },
-                bodyFont: { size: 14 }
+                titleFont: { size: 16, color: 'white' }, // Set tooltip title font color to white
+                bodyFont: { size: 14, color: 'white' } // Set tooltip body font color to white
             }
         },
         scales: {
             y: {
                 beginAtZero: true,
                 ticks: {
-                    precision: 0
+                    precision: 0,
+                    color: 'white' // Set y-axis ticks color to white
                 },
                 grid: {
                     color: 'rgba(200,200,200,0.3)'
                 }
             },
             x: {
+                ticks: {
+                    color: 'white',
+                    callback: function(value) {
+                        let label = this.getLabelForValue(value);
+                        return label.split(' ').join('\n'); // Break words on space
+                    }// Set x-axis ticks color to white
+                },
                 grid: {
                     color: 'rgba(200,200,200,0.3)'
                 }
             }
         },
         animation: {
-            duration: 1000,
-            easing: 'easeInOutBounce'
+            duration: 2000,
         },
         elements: {
             bar: {
@@ -184,37 +195,48 @@ export const CuisineAnalytics = () => {
         plugins: {
             legend: {
                 display: true,
-                position: 'top'
+                position: 'top',
+                labels: {
+                    color: 'white' // Set legend text color to white
+                }
             },
             title: {
                 display: true,
-                text: 'Distribution of Review Sentiments'
+                text: 'Distribution of Review Sentiments',
+                color: 'white' // Set title color to white
             },
             tooltip: {
                 backgroundColor: 'rgba(0,0,0,0.8)',
-                titleFont: { size: 16 },
-                bodyFont: { size: 14 }
+                titleFont: { size: 16, color: 'white' }, // Set tooltip title font color to white
+                bodyFont: { size: 14, color: 'white' } // Set tooltip body font color to white
             }
         },
         scales: {
             y: {
                 beginAtZero: true,
                 ticks: {
-                    precision: 0
+                    precision: 0,
+                    color: 'white' // Set y-axis ticks color to white
                 },
                 grid: {
                     color: 'rgba(200,200,200,0.3)'
                 }
             },
             x: {
+                ticks: {
+                    color: 'white',
+                    callback: function(value) {
+                        let label = this.getLabelForValue(value);
+                        return label.split(' ').join('\n'); // Break words on space
+                    } // Set x-axis ticks color to white
+                },
                 grid: {
                     color: 'rgba(200,200,200,0.3)'
                 }
             }
         },
         animation: {
-            duration: 1000,
-            easing: 'easeInOutBounce'
+            duration: 2000,
         },
         elements: {
             bar: {
@@ -226,10 +248,11 @@ export const CuisineAnalytics = () => {
     };
 
     return (
-<div className="w-full h-full flex justify-around flex-col p-2 lg:pt-0 lg:pl-6">
+<div className="w-full h-full flex justify-around flex-col md:m-2 lg:mt-0 lg:ml-6">
             {
                 loading ? <LoadingSpinner /> :
                 <>
+                    <div className='w-full bg-cyan-400 my-2 rounded-md'>
                     <div className='flex justify-center w-full'>
                         <p className="text-2xl font-bold mt-4 mb-6">Reservation Analytics</p>
                     </div>
@@ -247,14 +270,16 @@ export const CuisineAnalytics = () => {
                             };
 
                             return (
-                                <div key={cuisine.cuisineId} className='w-full md:w-3/4 lg:w-1/2 h-96 mb-6'>
-                                    <Bar data={chartData} options={chartOptions} />
+                                <div key={cuisine.cuisineId} className='w-full lg:w-2/5 h-96 mb-6 border-1 shadow-sm border-gray-300 bg-gray-700 rounded-md mx-2 p-1'>
+                                    <Bar data={chartData} options={chartOptions} className='border-1 border-gray-900' />
                                 </div>
                             );
                         })}
                     </div>
-                    <div className='flex justify-center w-full'>
-                        <p className="text-2xl font-bold mt-4 mb-6">Reviews Analytics</p>
+                    </div>
+                    <div className='w-full bg-gray-300 my-2 rounded-md'>
+                    <div className='flex justify-center w-full '>
+                        <p className="text-2xl font-bold mt-4 mb-4">Reviews Analytics</p>
                     </div>
                     <div className="w-full flex justify-around flex-wrap">
                         {reviewsData.map((cuisine, index) => {
@@ -270,11 +295,12 @@ export const CuisineAnalytics = () => {
                             };
 
                             return (
-                                <div key={cuisine.cuisineId} className='w-full md:w-3/4 lg:w-1/2 h-96 mb-6'>
+                                <div key={cuisine.cuisineId} className='w-full lg:w-2/5 h-96 my-2 border-1 shadow-sm border-gray-300 bg-gray-700 rounded-md md:mx-2 p-1'>
                                     <Bar data={chartData} options={chartOptionsReviews} />
                                 </div>
                             );
                         })}
+                    </div>
                     </div>
                 </>
             }

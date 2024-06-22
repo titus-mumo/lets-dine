@@ -45,11 +45,11 @@ export const CuisineHome = () => {
         return <LoadingSpinner />
       }
   return (
-    <div className='w-full flex justify-around flex-col  pt-2 lg:pt-0 lg:pl-6'>
-        <div className='w-auto my-1 flex w-full justify-center'>
+    <div className='w-full flex justify-around flex-col  mt-2 lg:mt-0 lg:pl-6 bg-cyan-200'>
+        <div className='w-auto mt-2 flex w-full justify-center'>
             <Link to='/cuisine-owner/new' className='m-1 mb-0 poppins px-3 py-2 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-2 rounded-lg transition duration-300'>Add another Cuisine</Link>
         </div>
-        <div className= 'flex flex-rol flex-wrap my-1 justify-start md:justify-around'>
+        <div className= 'flex flex-rol flex-wrap my-1 justify-center md:justify-around'>
             {
                 ownedCuisine.map((item, index) => <CuisineCard key={item.cuisine_id} cuisine={item}  />)
             }

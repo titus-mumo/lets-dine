@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import { useAuth } from '../hooks/AuthProvider';
-import { ToastMessage } from '../utils';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 export const UniversalSideBar = ({showMenu, setShowMenu, sidebarItems}) => {

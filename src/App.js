@@ -8,7 +8,7 @@ import UserPreferenceProvider from './hooks/UserPreferenceProvider';
 
 function App() {
   return (
-    <main className="App w-full scroll-smooth overflow-x-hidden">
+    <main className="App w-full scroll-smooth overflow-x-hidden bg-gray-100">
       <AuthProvider>
         <UserPreferenceProvider>
           <ToastContainer  

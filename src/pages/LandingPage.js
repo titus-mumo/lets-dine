@@ -5,28 +5,28 @@ import AboutSectionImage from '../assets/about-modified.png'
 import { LocationOn } from '@mui/icons-material'
 import { Email } from '@mui/icons-material'
 import { Call } from '@mui/icons-material'
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Add} from '@mui/icons-material'
 import moment from 'moment/moment'
 import HomeImage from '../assets/BOSQ.jpg'
 import axios from 'axios'
 import { ToastMessage } from '../utils'
+import { Rating } from 'flowbite-react'
 
 require('dotenv').config()
 
 
 export const LandingPage = () => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const divRefs = useRef({})
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 3000)
-  }, [])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false)
+  //   }, 3000)
+  // }, [])
 
   return (
-    <div className='relative flex flex-col w-screen justify-center h-full bg-gray-900'>
+    <div className='relative flex flex-col w-screen justify-center h-full bg-gray-200'>
       {
         loading? <LoadingSpinner /> :
         <>
@@ -51,13 +51,13 @@ export const LandingPage = () => {
 
 const Home = ({divRefs}) => {
   return(
-    <div className='home flex flex-col lg:flex-row justify-between items-center w-full bg-gradient-to-r from-zinc-800 to-sky-900 py-10 md:py-16 lg:py-36'>
+    <div className='home flex flex-col lg:flex-row justify-between items-center w-full py-10 md:py-16 lg:py-36 bg-white'>
       <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row'>
         <div className='flex flex-col justify-center w-full basis-3/5'>
-          <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center text-white'>EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.</h2>
-          <p className='text-lg lg:text-xl mb-6 text-center text-white'>Enjoy authentic dishes from around the globe. Discover new flavors and savor the richness of different cultures.</p>
+          <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center  '>EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.</h2>
+          <p className='text-lg lg:text-xl mb-6 text-center  '>Enjoy authentic dishes from around the globe. Discover new flavors and savor the richness of different cultures.</p>
           <div className='flex justify-center'>
-            <Link to='/login' className="font-medium w-auto px-6 py-3 text-white rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105">GET STARTED</Link>
+            <Link to='/login' className="font-medium w-auto px-6 py-3   rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105">GET STARTED</Link>
           </div>
         </div>
         <div className='self-center basis-2/5 px-5 py-10 md:px-20 md:pb-5 md:pt-0 lg:p-16'>
@@ -70,9 +70,9 @@ const Home = ({divRefs}) => {
 
 const AboutUs = ({divRefs}) => {
   return(
-    <div ref={(el) => (divRefs.current['about-us'] = el)} id='about-us' className='about-us w-full p-3 py-5 md:py-20 lg:py-24 bg-gradient-to-b from-zinc-900 to-zinc-700'>
-      <h1 className='w-full text-centre text-2xl font-bold mt-4 mb-2 text-white'>ABOUT US</h1>
-      <p className='w-full text-centre text-md md:text-lg font-medium mb-4 text-white'>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p>
+    <div ref={(el) => (divRefs.current['about-us'] = el)} id='about-us' className='about-us w-full p-3 py-5 md:py-20 lg:py-24'>
+      <h1 className='w-full text-centre text-2xl font-bold mt-4 mb-2  '>ABOUT US</h1>
+      <p className='w-full text-centre text-md md:text-lg font-medium mb-4  '>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p>
       <div className='flex justify-centre items-centre lg:justify-around flex-col md:flex-row'>
       <div className='lg:basis-1/5 items-centre h-full mb-3 md:mb-0'>
         <div className='w-full h-full self-centre flex justify-centre'>
@@ -81,20 +81,20 @@ const AboutUs = ({divRefs}) => {
       </div>
       <div className='flex flex-col lg:grid lg:grid-cols-2 w-full justify-around lg:w-2/3 lg:ml-3'>
           <div className='w-full md:w-2/3 self-centre mb-2'>
-            <h1 className='text-centre text-white text-md font-semibold'>Personalised Recommendations</h1>
-            <p className='text-sm text-base text-centre text-white'>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
+            <h1 className='text-centre   text-md font-semibold'>Personalised Recommendations</h1>
+            <p className='text-sm text-base text-centre  '>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
           </div>
           <div className='w-full md:w-2/3 self-centre mb-2'>
-            <h1 className='text-centre text-white mb-2 text-md font-semibold'>Social Media Integration</h1>
-            <p className='text-sm text-base text-centre text-white'>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
+            <h1 className='text-centre   mb-2 text-md font-semibold'>Social Media Integration</h1>
+            <p className='text-sm text-base text-centre  '>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
           </div>
           <div className='w-full md:w-2/3 self-centre mb-2'>
-            <h1 className='text-centre text-white text-md font-semibold'>User Reviews and Ratings</h1>
-            <p  className='text-sm text-base text-centre text-white'>Our platform aggregates and analyses reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
+            <h1 className='text-centre   text-md font-semibold'>User Reviews and Ratings</h1>
+            <p  className='text-sm text-base text-centre  '>Our platform aggregates and analyses reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
           </div>
           <div className='w-full md:w-2/3 self-centre mb-2'>
-            <h1  className='text-centre text-white text-md font-semibold'>Community Engagement</h1>
-            <p  className='text-sm text-base text-centre text-white'>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
+            <h1  className='text-centre   text-md font-semibold'>Community Engagement</h1>
+            <p  className='text-sm text-base text-centre  '>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
           </div>
         </div>
         </div>
@@ -140,7 +140,7 @@ const Contact = ({divRefs}) => {
     
   }
   return(
-    <div ref={(el) => (divRefs.current['contact'] = el)} id='contact' className='contact w-full py-5 md:py-20 lg:py-24  bg-gradient-to-b from-teal-400 to-teal-900'>
+    <div ref={(el) => (divRefs.current['contact'] = el)} id='contact' className='contact w-full py-5 md:py-20 lg:py-24'>
       <h1 className='text-center text-2xl font-bold my-4'>CONTACT</h1>
       <div className='flex flex-col lg:flex-row-reverse w-full justify-center items-start lg:items-center'>
         <div className='basis-full lg:basis-1/2 self-center p-4'>
@@ -154,7 +154,7 @@ const Contact = ({divRefs}) => {
             <input placeholder='Subject*' type='text' className='mt-3 p-2 border rounded-lg w-full floating-input' value={subject} onChange={(e) => setSubject(e.target.value)} required /><br />
             <textarea placeholder='Message*' className='mt-3 p-2 border rounded-lg h-32 w-full' value={message} onChange={(e) => setMessage(e.target.value)} required></textarea><br />
             <div className='w-full flex justify-center'>
-              <button type='submit' className='text-center bg-slate-900 py-2 text-white rounded-md shadow-md px-3 my-2'>Send Message</button>
+              <button type='submit' className='text-center bg-slate-900 py-2   rounded-md shadow-md px-3 my-2'>Send Message</button>
             </div>
           </form>
         </div>
@@ -228,24 +228,26 @@ const FAQs = ({divRefs}) => {
       }
   }
   return(
-    <div ref={(el) => (divRefs.current['faqs'] = el)} id='faqs' className='faqs w-full flex justify-center self-center items-center bg-gradient-to-b from-zinc-700 to-stone-700 pt-10 pb-13 md:py-20 lg:py-24'>
+    <div ref={(el) => (divRefs.current['faqs'] = el)} id='faqs' className='faqs w-full flex justify-center self-center items-center pt-10 pb-13 md:py-20 lg:py-24'>
     <div className='overflow-x-hidden overflow-y-hidden w-700px h-800px p-2'>
     <div className='w-full flex flex-col justify-center self-center'>
-      <h1 className='text-center text-2xl font-bold my-4 text-white'>FAQs</h1>
-      <h1 className='text-center text-white'>Frequently Asked Questions</h1>
+      <h1 className='text-center text-2xl font-bold my-4  '>FAQs</h1>
+      <h1 className='text-center  '>Get Every Answer</h1>
       <div className='w-full'>
       {ethnicEatsData.map((qa, index) => (
-        <div key={index} className={`w-full flex flex-col my-2 p-4 border-2 transition-transformation duration-1000 rounded ${active === index? 'border-pink-700': ''}`}>
-          <div className='flex justify-between items-center'>
-            <p className='break-words w-11/12 text-white text-sm md:text-base'>{qa.question}</p>
-            <div onClick={() => handleClick(index)} className='hover:cursor-pointer transition-transform duration-1000'>
-              {active === index ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        <div key={index} className={`w-full flex flex-row items-start my-2 p-4 border-2 transition-transformation duration-1000 rounded bg-white ${active === index? 'border-pink-700': ''}`}>
+          <div className='flex justify-between items-start'>
+          <div onClick={() => handleClick(index)} className='hover:cursor-pointer transition-transform duration-1000'>
+              {active === index ? <Add className='font-bold' /> : <Add />}
             </div>
           </div>
-          <div
-            className={`overflow-hidden  transition-max-height duration-1000 ease-in-out ${active === index ? 'max-h-40' : 'max-h-0'}`}
-          >
-            <p className='mt-2 break-words w-full text-left text-white text-sm md:text-base'>{qa.answer}</p>
+          <div>
+              <p className='break-words w-11/12   text-sm md:text-base'>{qa.question}</p>
+              <div
+                className={`overflow-hidden  transition-max-height duration-1000 ease-in-out ${active === index ? 'max-h-40' : 'max-h-0'}`}
+              >
+                <p className='mt-2 break-words w-full text-left   text-sm md:text-base'>{qa.answer}</p>
+              </div>
           </div>
         </div>
       ))}
@@ -321,7 +323,7 @@ const WhyUs = ({divRefs}) => {
   
 
   return (
-    <div ref={(el) => (divRefs.current['whyus'] = el)} id='whyus' className='whyus flex justify-center w-full pb-6 md:py-10 lg:py-14 bg-gradient-to-b from-teal-300 to-teal-400 px-4 md:pb-16 lg:pb-20'>
+    <div ref={(el) => (divRefs.current['whyus'] = el)} id='whyus' className='whyus flex justify-center w-full pb-6 md:py-10 lg:py-14 px-4 md:pb-16 lg:pb-20'>
     <div className='flex flex-col justify-around w-full self-center'>
     <h1 className='text-center text-2xl font-bold my-4'>TESTIMONIALS</h1>
       <div className='w-8/9 md:w-2/3 lg:w-700px flex justify-center self-center '>
@@ -342,15 +344,25 @@ const WhyUs = ({divRefs}) => {
 };
 
 const TestimonialCard = ({ testimonial }) => {
+  const filled = 5
   return (
-    <div className="testimonial-card-container bg-slate-900 p-4 rounded-md shadow-md h-52 py-5">
-      <div className='testimonial-card-content'>
-      <div className='h-32'>
-        <p className="md:text-lg text-center text-white">{testimonial.testimonial}</p>
+    <div className="testimonial-card p-4 rounded-md shadow-md my-5">
+      <div className='m-1.5 md:m-2 border-2 border-white p-1'>
+        <p className="text-sm text-gray-600 mt-2 text-center  ">{testimonial.names}</p>
+        <p className="text-xs text-gray-100 uppercase text-center font-md text-md">{testimonial.location.toUpperCase()}, UK</p>
+        <div className='h-24'>
+          <p className="text-sm md:text-base text-center text-white ">{testimonial.testimonial}</p>
+        </div>
+        <div className='flex w-full justify-center'>
+          <Rating>
+            <Rating.Star className={`${filled >=1? 'text-yellow-700': ''}`} onClick={() => handleFilled(1, meal_id)}/>
+            <Rating.Star className={`${filled >=2? 'text-yellow-700': ''}`} onClick={() => handleFilled(2, meal_id)}/>
+            <Rating.Star className={`${filled >=3? 'text-yellow-700': ''}`} onClick={() => handleFilled(3, meal_id)} />
+            <Rating.Star className={`${filled >=4? 'text-yellow-700': ''}`} onClick={() => handleFilled(4, meal_id)}/>
+            <Rating.Star className={`${filled >=5? 'text-yellow-700': ''}`} onClick={() => handleFilled(5, meal_id)} />
+          </Rating>
+        </div>
       </div>
-      <p className="text-sm text-gray-600 mt-2 text-center text-white">{testimonial.names}</p>
-      <p className="text-xs text-gray-100 uppercase text-center font-md text-md">{testimonial.location.toUpperCase()}, UK</p>
-    </div>
     </div>
   );
 };
@@ -370,8 +382,8 @@ const Footer = ({divRefs}) => {
 
   let year = moment(new Date()).format('YYYY')
   return(
-    <div className='bg-slate-900 w-full flex flex-col justify-center pb-5 pl-3'>
-      <div className='w-full h-full flex justify-center items-center bg-gray-900 text-white py-10'>
+    <div className='w-full flex flex-col justify-center pb-5 pl-3'>
+      <div className='w-full h-full flex justify-center items-center bg-gray-900   py-10'>
         <div className='w-full flex justify-around flex-col md:flex-row'>
           <div className='basis-1/3 self-center'>
 
@@ -425,7 +437,7 @@ const Footer = ({divRefs}) => {
           </div>
         </div>
       </div>
-      <p className='text-white w-full text-center'>Copyright (c) {year} EthnicEats Ltd. All right reserved</p>
+      <p className='  w-full text-center'>Copyright (c) {year} EthnicEats Ltd. All right reserved</p>
     </div>
   )
 }
@@ -446,21 +458,12 @@ const Pricing = ({divRefs}) => {
   const [role, setRole] = useState('User');
 
   return (
-    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing h-450px flex flex-col py-3 bg-gradient-to-b from-stone-700 to-stine-700 py-5 md:py-20 lg:py-24">
+    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing h-450px flex flex-col py-3 py-5 md:py-20 lg:py-24">
       <h1 className='text-center txt-white text-2xl font-bold my-4'>OUR PACKAGES</h1>
-      <div className="flex justify-center ml-2 mb-10">
-        <select
-          name="role"
-          id="role"
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="poppins bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          required
-          style={{ width: '150px'}} // Add this line for width adjustment
-        >
-          <option value="User" className='p-1 rounded-md'>User</option>
-          <option value="Cuisine Owner" className='p-1 rounded-md'>Cuisine Owner</option>
-        </select>
+      <div className='w-full flex justify-center'>
+        <p className='text-lg font-semibold basis-1/2 text-end hover:cursor-pointer' onClick={() => setRole('User')}>User</p>
+        <p>|</p>
+        <p className='text-lg font-semibold basis-1/2 text-start hover:cursor-pointer' onClick={() => setRole('Cuisine Owner')}>Cuisine Owner</p>
       </div>
       <div>
         {role === 'User' ? <UserPricing /> : <CuisineOwnerPricing />}
@@ -494,12 +497,11 @@ const CuisineOwnerPricing = () => {
 const PricingComponent = ({link, name, price, features}) => {
   
   return(
-    <div className=''>
-      <div className='w-300px h-400px bg-white border-2 border-slate-900 rounded-lg shadow-md tansition:transformation duration-1000 hover:scale-105 hover:cursor-pointer hover:bg-slate-900 hover:text-white p-3 my-4'>
+    <div className='bg-white'>
+      <div className='w-300px h-400px  p-3 my-4'>
         <p className='font-semibold text-md'>{name}</p>
         <p>
-          <span className='font-bold text-3xl'>£ {price}</span><br></br>
-          <span className='text-gray-700'>per month</span>
+          <span className='font-bold text-3xl'>£ {price}/</span> <span className='text-gray-700'>per month</span>
         </p>
         <div>
           <p className='font-medium text-md'>Featues</p>

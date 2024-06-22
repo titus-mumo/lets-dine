@@ -9,8 +9,6 @@ export const ReservationDetail = ({reservation}) => {
     const standardTime = moment(time).format('MMMM Do YYYY, h:mm a');
     const user = useAuth()
 
-    const [cuisineName, setCuisineName] = useState('')
-
     const {token, refresh, setToken, setRefresh} = user
 
     if(!token) return ToastMessage("error", "Ooops! You are not logged in")
@@ -21,7 +19,6 @@ export const ReservationDetail = ({reservation}) => {
             const {data, status} = response
             if(status === 200){
                 const {name} = data
-                setCuisineName(name)
                 return;
             }
         })
@@ -39,8 +36,8 @@ export const ReservationDetail = ({reservation}) => {
     <div className='flex w-full items-center justify-around shadow-md p-2 m-2 rounded-md'>
         <div className='m-auto'>
             {/* <p className='poppins text-lg font-semibold'>{cuisineName}</p> */}
-            <p className='poppins text-sm'>{standardTime}</p>
-            <p className='poppins text-sm'>Reserved seats: {total_seats}</p>
+            <p className='poppins text-sm md:text-base'>{standardTime}</p>
+            <p className='poppins text-sm md:text-base'>Reserved seats: {total_seats}</p>
         </div>
     </div>
   )

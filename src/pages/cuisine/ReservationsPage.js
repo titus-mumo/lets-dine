@@ -56,15 +56,21 @@ export const ReservationsPage = () => {
             loading? <LoadingSpinner />:(  
             <div className='flex w-full flex-col'>
             <div className='flex flex-row w-full justify-around mx-2'>
-                <div className='basis-1/5'>
-                    {loading ? <LoadingSpinner /> : sideBarNames.map((cuisineName, index) => (
-                        <p key={index} onClick={() => handleClick(cuisineIds[index], index)} className={active === index? 'poppins text-sm text-blue-500 hover:cursor-pointer':'text-sm hover:cursor-pointer poppins'}>
+            <div className='basis-1/5 flex flex-col'>
+                {loading ? <LoadingSpinner /> : sideBarNames.map((cuisineName, index) => (
+                    <div key={index} className='tooltip flex flex-col'>
+                        <p 
+                            onClick={() => handleClick(cuisineIds[index], index)} 
+                            className={active === index ? 'poppins text-sm text-blue-500 hover:cursor-pointer' : 'text-sm hover:cursor-pointer poppins'}
+                        >
                             {cuisineName.includes(' ') ? `${cuisineName.split(' ')[0]}.. ` : cuisineName.length > 10 ? `${cuisineName.slice(0, 9)}..` : cuisineName}
                         </p>
-                    ))}
-                </div>
+                        <span className="tooltiptext text-sm">{cuisineName}</span>
+                    </div>
+                ))}
+            </div>
                 <div className='basis-4/5 lg:ml-2 flex flex-col justify-start'>
-                    <p className='ml-3 text-left text-sm'>Reservations for {sideBarNames[active]}</p>
+                    <p className='ml-3 text-left text-base'>Reservations for {sideBarNames[active]}</p>
                     <div className='overflow-y-auto overflow-x-auto lg:h-600px lg:w-500px' >
                         <ReservationsSection cuisine_id={currentId} />
                     </div>
