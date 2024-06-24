@@ -32,7 +32,7 @@ export const CuisineCard = ({cuisine}) => {
         <p className='poppins text-xs border-1 border-green-500 bg-green-200 text-green-700 font-medium rounded-md shadow-sm w-fit p-0.5'>{time.format("hh:mm A")} - {moment(time_close, "HH:mm:ss").format("hh:mm A")}</p>
         </div>
         <div className='flex justify-center w-full'>
-          <button className= 'my-1 mx-4 px-4 py-2 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300 poppins text-sm' onClick={(e) => handleViewMenu(e)}>View Menu</button>
+          <button className= 'mb-4 mx-4 px-4 py-2 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300 poppins text-sm' onClick={(e) => handleViewMenu(e)}>View Menu</button>
         </div>
     </div>
   )
