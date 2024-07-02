@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../hooks/AuthProvider'
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -11,6 +11,7 @@ import { Close } from '@mui/icons-material';
 export const NavBar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredCuisines, setFilteredCuisines] = useState([]);
@@ -62,7 +63,9 @@ export const NavBar = () => {
 
 
     useEffect(() => {
-    }, [filteredCuisines])
+      setFilteredCuisines([])
+      setSearchQuery('')
+    }, [location])
 
     const userAuth = useAuth()
     const {token, refresh, setToken, setRefresh, logOut} = userAuth

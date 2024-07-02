@@ -74,13 +74,13 @@ export const GeneralForums = () => {
           setMessages(prevMessages => [...prevMessages, data]);
       };
   
-      // ws.current.onclose = (e) => {
-      //     console.log("WebSocket closed:", e);
-      // };
+      ws.current.onclose = (e) => {
+          console.log("WebSocket closed:", e);
+      };
   
-      // ws.current.onerror = (e) => {
-      //     console.error("WebSocket error:", e);
-      // };
+      ws.current.onerror = (e) => {
+          console.error("WebSocket error:", e);
+      };
   };
 
     const sendMessage = () => {

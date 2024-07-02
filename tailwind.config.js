@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {
       width: {
+        '150px': '150px',
         '200px': '200px',
         '250px': '250px',
         '300px':'300px',
@@ -20,6 +21,7 @@ module.exports = {
         "30px":"7rem",
       },
       height: {
+        '50px': '50px',
         '80px': '80px',
         '100px':'100px',
         '200px':'200px',

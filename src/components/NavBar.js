@@ -6,9 +6,12 @@ import { Menu, Close, FoodBankOutlined, Fastfood } from '@mui/icons-material'
 export const NavBar = ({divRefs}) => {
 
     const navigate = useNavigate()
+    const [now, setNow] = useState('init')
     
 
     const handleScrollClick = (targetDivId) => {
+      setNow(targetDiv)
+
         const targetDiv = divRefs.current[targetDivId];
         if (targetDiv) {
           targetDiv.scrollIntoView({ behavior: 'smooth' });
@@ -23,7 +26,7 @@ export const NavBar = ({divRefs}) => {
 
 
   return (
-    <header className='z-10 top-0 flex fixed flex-col justify-start shadow-md p-2 w-full items-center pb-3 bg-white border-bottom-1 border-gray-900' >
+    <header className={`z-10 top-0 flex fixed flex-col justify-start shadow-md p-2 w-full items-center pb-3 border-bottom-1 border-gray-900 ${now === 'init'? 'bg-white' :'bg-white'}`}>
       <div className='flex flex-row justify-between w-full'>
         <div className='flex justify-between basis-2/5 items-center'>
           <p onClick={() => handleScrollClick('init')}  to="init" id='init' className='poppins text-lg md:text-2xl font-bold hover:cursor-pointer hover:text-blue-500'>EthnicEats</p>

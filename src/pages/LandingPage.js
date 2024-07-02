@@ -20,13 +20,17 @@ import cover4 from '../assets/cover4.webp'
 import cover5 from '../assets/cover5.webp'
 import cover6 from '../assets/cover6.webp'
 import cover7 from '../assets/cover7.webp'
-import cover8 from '../assets/cover8.webp'
+import cover9 from '../assets/cover9.webp'
+import cover10 from '../assets/cover10.webp'
+import cover11 from '../assets/cover11.jpg'
 import restaurant from '../assets/restaurant.webp'
 
 import burito from '../assets/burito.png'
 import burger from '../assets/burger.jpeg'
 import bg from '../assets/bg.jpg'
 import fries from '../assets/fries.webp'
+
+import { ArrowForward } from '@mui/icons-material'
 
 
 require('dotenv').config()
@@ -48,14 +52,14 @@ export const LandingPage = () => {
         loading? <LoadingSpinner /> :
         <>
           <NavBar divRefs={divRefs} />
-          <div className='h-80px'></div>
+          <div className='h-50px'></div>
           <Home divRefs={divRefs} />
           <OurStorySection divRefs={divRefs}/>
           <Features divRefs={divRefs} />
           <FAQs divRefs={divRefs} />
           <Pricing divRefs={divRefs} />
           <WhyUs divRefs={divRefs} />
-          <RestaurantReservationForm divRefs={divRefs} />
+          {/* <RestaurantReservationForm divRefs={divRefs} /> */}
           <Contact divRefs={divRefs} />
           <Footer divRefs={divRefs}/>
         </>
@@ -67,63 +71,76 @@ export const LandingPage = () => {
 }
 
 
-const Home = ({divRefs}) => {
-  return(
-    <div className='h-screen flex justify-center items-center' style={{
-      backgroundImage: `url(${cover8})`,
-      backgroundSize: 'cover', // Adjust background size as needed
-      backgroundPosition: 'center', // Adjust background position as needed
-
-    }}>
-    <div ref={(el) => (divRefs.current['init'] = el)} id='init' className='home flex flex-col lg:flex-row justify-between items-center w-full py-10 md:py-16 lg:py-36'>
-      <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row'>
-        <div className='flex flex-col justify-center w-full h-full basis-3/5 items-center'>
-          <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center  text-white'>EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.</h2>
-          <p className='text-lg lg:text-xl mb-6 text-center  text-white'>Enjoy authentic dishes from around the globe. Discover new flavors and savor the richness of different cultures.</p>
-          <div className='flex justify-center'>
-            <Link to='/login' className="font-medium w-auto px-6 py-3   rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105 text-white">GET STARTED</Link>
+const Home = ({ divRefs }) => {
+  return (
+    <div
+      className='h-screen flex justify-center items-center'
+      style={{
+        backgroundImage: `url(${cover9})`,
+        backgroundSize: 'cover', // Ensure the image covers the entire area
+        backgroundPosition: 'center', // Center the image
+        backgroundRepeat: 'no-repeat', // Avoid image repetition
+        backgroundAttachment: 'fixed' // Optional: Keep the background fixed while scrolling
+      }}
+    >
+      <div ref={(el) => (divRefs.current['init'] = el)} id='init' className='home flex flex-col lg:flex-row justify-between items-center w-full py-10 md:py-16 lg:py-36'>
+        <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row'>
+          <div className='flex flex-col justify-center w-full h-full basis-3/5 items-center'>
+            <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center text-white'>
+              EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.
+            </h2>
+            <p className='text-lg lg:text-xl mb-6 text-center text-white'>
+              Enjoy authentic dishes from around the globe. Discover new flavors and savor the richness of different cultures.
+            </p>
+            <div className='flex justify-center'>
+              <Link
+                to='/login'
+                className='font-medium w-auto px-6 py-3 rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105 text-white'
+              >
+                GET STARTED
+              </Link>
+            </div>
           </div>
         </div>
-        {/* <div className='self-center basis-2/5 px-5 py-10 md:px-20 md:pb-5 md:pt-0 lg:p-16'>
-          <img src={burito} className='rounded-md hover:shadow-md ease-in-out duration-1000 hover:shadow-gray-600'></img>
-        </div> */}
       </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
 const Features = ({divRefs}) => {
   return(
-    <div  className='about-us w-full p-3 py-5 md:py-20 lg:py-24'>
-      <h1 className='w-full text-center text-2xl font-bold mt-4 mb-2 self-center '>Features</h1>
-      {/* <p className='w-full text-center text-md md:text-lg font-medium mb-4  '>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p> */}
-      <div className='flex justify-center items-center lg:justify-around flex-col md:flex-row'>
-      <div className='lg:basis-1/5 items-center h-full mb-3 md:mb-0'>
-        <div className='w-full h-full self-center flex justify-center'>
-          <img src={AboutSectionImage} alt='about image' className='w-200px md:w-300px rotate self-center'></img>
+      <div className='about-us w-full p-3 py-5 md:py-20 lg:py-24'>
+        {/* <p className='w-full text-center text-md md:text-lg font-medium mb-4  '>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p> */}
+        <div className='flex justify-center items-center lg:justify-around flex-col md:flex-row'>
+          <div className='lg:basis-1/5 items-center h-full mb-3 md:mb-0'>
+            <div className='w-full h-full self-center flex justify-center'>
+              <img src={AboutSectionImage} alt='about image' className='w-200px md:w-300px rotate self-center'></img>
+            </div>
+          </div>
+          <div className='self-center flex flex-col justify-center w-full'>
+            <h1 className='w-full text-center text-2xl font-bold mt-4 mb-2 lg:mb-4 self-center'>Features</h1>
+            <div className='self-center content-center justify-around flex flex-col lg:grid lg:grid-cols-2 w-full lg:w-5/6 lg:p-3'>
+              <div className='w-full md:w-2/3 self-center mb-3'>
+                <h1 className='text-center text-md font-semibold'>Personalised Recommendations</h1>
+                <p className='text-sm leading-relaxed text-left'>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
+              </div>
+              <div className='w-full md:w-2/3 self-center mb-3'>
+                <h1 className='text-center mb-2 text-md font-semibold'>Social Media Integration</h1>
+                <p className='text-sm leading-relaxed'>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
+              </div>
+              <div className='w-full md:w-2/3 self-center mb-3'>
+                <h1 className='text-center text-md font-semibold'>User Reviews and Ratings</h1>
+                <p className='text-sm leading-relaxed'>Our platform aggregates and analyses reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
+              </div>
+              <div className='w-full md:w-2/3 self-center mb-3'>
+                <h1 className='text-center text-md font-semibold'>Community Engagement</h1>
+                <p className='text-sm leading-relaxed'>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div className='flex flex-col lg:grid lg:grid-cols-2 w-full justify-around lg:w-2/3 lg:ml-3 '>
-          <div className='w-full md:w-2/3 self-center mb-2'>
-            <h1 className='text-center   text-md font-semibold'>Personalised Recommendations</h1>
-            <p className='text-sm text-base text-center  '>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
-          </div>
-          <div className='w-full md:w-2/3 self-center mb-2'>
-            <h1 className='text-center   mb-2 text-md font-semibold'>Social Media Integration</h1>
-            <p className='text-sm text-base text-center  '>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
-          </div>
-          <div className='w-full md:w-2/3 self-center mb-2'>
-            <h1 className='text-center   text-md font-semibold'>User Reviews and Ratings</h1>
-            <p  className='text-sm text-base text-center  '>Our platform aggregates and analyses reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
-          </div>
-          <div className='w-full md:w-2/3 self-center mb-2'>
-            <h1  className='text-center   text-md font-semibold'>Community Engagement</h1>
-            <p  className='text-sm text-base text-center  '>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
-          </div>
-        </div>
-        </div>
-        </div>
+
   )
 }
 
@@ -167,7 +184,7 @@ const Contact = ({divRefs}) => {
   return(
     <div ref={(el) => (divRefs.current['contact'] = el)} id='contact' className='contact w-full py-5 md:py-20 lg:py-24'>
       <h1 className='text-center text-2xl font-bold my-4'>CONTACT</h1>
-      <div className='flex flex-col lg:flex-row-reverse w-full justify-center items-start lg:items-center'>
+      <div className='flex flex-col lg:flex-row-reverse w-full justify-center items-start'>
         <div className='basis-full lg:basis-1/2 self-center p-4'>
           <h2 className='text-xl font-semibold'>TALK TO US</h2>
           <p className='my-2'>Fill the form below, and we will get back to you as soon as possible</p>
@@ -258,7 +275,7 @@ const FAQs = ({divRefs}) => {
     <div className='w-full flex flex-col justify-center self-center'>
       <h1 className='text-center text-2xl font-bold my-4  '>FAQs</h1>
       <h1 className='text-center  '>Get Every Answer</h1>
-      <div className='w-full flex flex-col lg:flex-row-reverse p-2 justify-center lg:justify-between lg:items-start'>
+      <div className='w-full flex flex-col lg:flex-row-reverse p-2 justify-center lg:justify-between lg:items-center'>
       <img src={faqs} alt='faqs' className='w-auto lg:h-300px'></img>
       <div className='w-full md:w-500px lg:w-700px flex flex-col justify-center self-center mt-5 lg:mt-0 lg:mr-10'>
       {ethnicEatsData.map((qa, index) => (
@@ -353,14 +370,14 @@ const WhyUs = ({divRefs}) => {
   return (
     <div ref={(el) => (divRefs.current['whyus'] = el)} id='whyus' className='whyus flex self-center justify-center w-full pb-6 md:py-10 lg:py-14 px-4 md:pb-16 lg:pb-20'
      style={{   
-      backgroundImage: `url(${cover2})`,
+      backgroundImage: `url(${cover4})`,
       backgroundSize: 'cover', 
       backgroundPosition: 'center', 
 
     }}
   >
     <div className='flex flex-col justify-around w-full self-center'>
-    <h1 className='text-center text-2xl font-bold my-4'>TESTIMONIALS</h1>
+    <h1 className='text-center text-2xl font-bold my-4 text-white'>TESTIMONIALS</h1>
       <div className='w-8/9 md:w-2/3 lg:w-700px flex justify-center self-center '>
       <TestimonialCard testimonial={testimonials[activeIndex]} />
       </div>
@@ -424,52 +441,52 @@ const Footer = ({divRefs}) => {
 
   let year = moment(new Date()).format('YYYY')
   return(
-      <div className='w-full flex flex-col justify-center pb-5 pl-3'>
-        <div className='w-full lg:w-3/4 h-full flex justify-between items-center py-10 self-center'>
-          <div className='w-full flex flex-col md:flex-row justify-between'>
-            <div className='flex flex-col lg:flex-row basis-1/2'>
-            <div className='basis-1/2'>
+      <div className='bg-white w-full flex flex-col justify-center pb-5 pl-3'>
+        <div className='w-full h-full flex justify-between items-center py-10 self-center'>
+          <div className='w-full flex flex-col md:flex-row justify-around px-4 md:px-0'>
+            <div className='flex flex-col lg:flex-row basis-1/2 justify-center'>
+            <div className='basis-1/2 '>
               <h1 className='text-xl font-bold mb-2'>Get Started</h1>
               <div>
-                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('about-us')}>Features</p>
-                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('pricing')}>Pricing</p>
-                <Link to='/register' className='mb-1'>Sign Up</Link>
-                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('faqs')}>FAQs</p>
+                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('about-us')}><ArrowForward /> Features</p>
+                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('pricing')}><ArrowForward /> Pricing</p>
+                <Link to='/register' className='mb-1'><ArrowForward /> Sign Up</Link>
+                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('faqs')}><ArrowForward /> FAQs</p>
               </div>
             </div>
            
-            <div className='basis-1/2'>
+            <div className='basis-1/2 '>
               <h1 className='text-xl font-bold mb-2'>About Us</h1>
-              <p>Interested in a face-to-face discussion? We welcome you to schedule a meeting with us. Please email or phone to arrange a convenient time to visit our office.</p>
+              <p className='w-4/5'>Interested in a face-to-face discussion? We welcome you to schedule a meeting with us. Please email or phone to arrange a convenient time to visit our office.</p>
             </div>
             </div>
-            <div className='flex flex-col lg:flex-row basis-1/2'>
-              <div className='basis-1/2'>
+            <div className='flex flex-col lg:flex-row basis-1/2 justify-center'>
+              <div className='basis-1/2 '>
                 <h1 className='text-xl font-bold mb-2'>Legal</h1>
                 <div className='flex flex-col space-y-1'>
-                  <Link to='terms_and_conditions/'>Terms and conditions</Link>
-                  <Link to='privacy_policy/'>Privacy Policy</Link>
-                  <Link to='acceptable_use_notice/'>Acceptable Use Notice</Link>
+                  <Link to='terms_and_conditions/'><ArrowForward /> Terms and conditions</Link>
+                  <Link to='privacy_policy/'><ArrowForward /> Privacy Policy</Link>
+                  <Link to='acceptable_use_notice/'><ArrowForward /> Acceptable Use Notice</Link>
                 </div>
               </div>
               <div className='basis-1/2'>
                 <h1 className='text-xl font-bold mb-2'>Newsletter</h1>
-                <p className=''>Subscribe to our newsletter to get our latest updates & news</p>
-                <form onSubmit={(e) => handleNewsletter(e)} className='mt-2'>
+                <p className='w-4/5'>Subscribe to our newsletter to get our latest updates & news</p>
+                <form onSubmit={(e) => handleNewsletter(e)} className='mt-2 bg-stone-900 rounded-full w-fit flex'>
                   <input
                     type='email'
                     placeholder='Email address'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className='border border-gray-300 rounded px-2 py-1'
+                    className=' rounded-full px-1 py-2 text-white bg-stone-900 w-fit border-1 border-stone-900 '
                   />
-                  <button></button>
+                  <button className='bg-orange-600 rounded-full p-2.5'><ArrowForward /></button>
                 </form>
               </div>
             </div>
           </div>
         </div>
-        <p className='w-full text-center'>Copyright (c) {year} EthnicEats Ltd. All rights reserved</p>
+        <p className='w-full text-center mb-3'>Copyright (c) {year} EthnicEats Ltd. All rights reserved</p>
       </div>
   )
 }
@@ -498,10 +515,10 @@ const Pricing = ({divRefs}) => {
   }
 
   const activeClass = 'bg-gray-200 text-blue-500 text-sm font-semibold px-2 py-2 text-center'
-  const notActiveClass = 'bg-white text-sm px-2 py-2 text-center'
+  const notActiveClass = 'bg-white text-sm px-2 py-2 text-center font-semibold'
 
   return (
-    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing w-full flex flex-col py-3 py-5 md:py-20 lg:py-24">
+    <div ref={(el) => (divRefs.current['pricing'] = el)} id='pricing' className="pricing w-full flex flex-col py-3 py-5 md:py-20 lg:pt-24 lg:pb-36">
       <h1 className='text-center text-2xl font-bold my-4'>Pricing Plans For Everyone</h1>
       <p className='self-center flex justify-center p-1 items-center bg-white rounded-md'>
         <span className={`w-32 hover:cursor-pointer rounded-md ${active === 'User'? activeClass: notActiveClass}`} onClick={() => handleClick('User')}>User</span>
@@ -517,9 +534,9 @@ const Pricing = ({divRefs}) => {
 const UserPricing = () => {
 
   return(
-    <div className='flex flex-col lg:flex-row justify-center lg:justify-around w-full self-center'>
-        <PricingComponent name='Basic' price='0' features={['Add Menu', 'Forums', 'Add Reservations', 'Navigation', 'With Adds']} theme='blue'/>
-        <PricingComponent link='https://buy.stripe.com/test_aEUdRq1N4gzB4Xm5kk' name='Standard' price='9.99' features={['Add Cuisine', 'Forums', 'Add Menu','Recommend Meals', 'Recommend Cuisines']} theme='green'/>
+    <div className='flex flex-col lg:flex-row justify-center w-full self-center'>
+        <PricingComponent type='Basic'name='Basic' price='0' features={['Personalised recommendations','Add Menu', 'Forums', 'Add Reservations', 'Navigation', 'With Adds']} theme='blue'/>
+        <PricingComponent type='Popular' link='https://buy.stripe.com/test_aEUdRq1N4gzB4Xm5kk' name='Standard' price='9.99' features={['Personalised recommendations','Add Menu', 'Forums', 'Add Reservations', 'Navigation', 'Without Adds']} theme='green'/>
     </div>
   )
 
@@ -528,32 +545,31 @@ const UserPricing = () => {
 const CuisineOwnerPricing = () => {
 
   return(
-    <div className='flex flex-col lg:flex-row justify-center lg:justify-around w-full self-center'>
-        <PricingComponent link='https://buy.stripe.com/test_aEUdRq1N4gzB4Xm5kk' name='Standard' price='9.99' features={['Add Cuisine', 'Add Menu'] } theme='pink'/>
-        <PricingComponent link='https://buy.stripe.com/test_bIYeVu8bs6Z175u3cd' name='Professional' price='14.99' features={['Add Cuisine', 'Add Menu',' Data Analytics']} theme='blue'/>
-        <PricingComponent link='https://buy.stripe.com/test_7sI00A77ofvx2Pe3ce' name='Elite' price='20.99' features={['Add Cuisine', 'Add Menu', 'Data Analytics', 'Free Adverts']} theme='green'/>
+    <div className='flex flex-col lg:flex-row justify-center w-full self-center'>
+        <PricingComponent type='Basic' link='https://buy.stripe.com/test_aEUdRq1N4gzB4Xm5kk' name='Standard' price='9.99' features={['Add Cuisine', 'Add Menu', 'Data Analytics', ] } theme='pink'/>
+        <PricingComponent type='Popular' link='https://buy.stripe.com/test_bIYeVu8bs6Z175u3cd' name='Professional' price='14.99' features={['Add Cuisine', 'Add Menu',' Data Analytics', 'See Reviews']} theme='blue'/>
+        <PricingComponent type='Bundle' link='https://buy.stripe.com/test_7sI00A77ofvx2Pe3ce' name='Elite' price='20.99' features={['Add Cuisine', 'Add Menu', 'Data Analytics', 'See Reviews','Free Adverts']} theme='green'/>
     </div>
   )
 }
 
-const PricingComponent = ({link, name, price, features, theme}) => {
-
+const PricingComponent = ({type, link, name, price, features, theme}) => {
   const navigate = useNavigate()
   
   return(
-    <div className='bg-white mb-5 lg:mb-0 w-300px h-450px self-center flex flex-col justify-between'>
-      <div className='pb-3 mb-4 w-full'>
-        <div className={`h-40 flex flex-col justify-center items-center w-full mb-3 ${theme === 'pink'? 'bg-pink-600': theme === 'blue'? 'bg-blue-600': 'bg-green-600'}`}>
+    <div className='bg-white mb-5 lg:mx-2 lg:mb-0 rounded-md w-300px h-450px self-center flex flex-col justify-between'>
+      <div className='pb-3 mb-4 w-full rounded-md'>
+        <div className={`h-40 flex flex-col rounded-t-md justify-center items-center w-full mb-3 ${theme === 'pink'? 'bg-pink-600': theme === 'blue'? 'bg-blue-600': 'bg-green-600'}`}>
+        <span className={`bg-white rounded-lg text-sm px-2 inline-block self-center mb-3 ${theme === 'pink'? 'text-pink-600': theme === 'blue'? 'text-blue-600': 'text-green-600'}`}>{type}</span>
         <p className='font-semibold text-md text-white'>{name}</p>
         <p>
           <span className='font-bold text-3xl text-white'>£ {price}/</span> <span className='text-white'>per month</span>
         </p>
         </div>
         <div className='p-1'>
-          <p className='font-medium text-md'>Featues</p>
           <ul className='pl-5'>
             {
-              features.map((feature, index) => <li key={index} className='list-disc'>{feature}</li>)
+              features.map((feature, index) => <li key={index} className='list-none'>{feature}</li>)
             }
           </ul>
         </div>
@@ -570,22 +586,24 @@ const PricingComponent = ({link, name, price, features, theme}) => {
 
 const OurStorySection = ({divRefs}) => {
   return (
-    <div ref={(el) => (divRefs.current['about-us'] = el)} id='about-us'  className="w-full flex justify-center py-12 bg-white px-5 flex-col">
+    <div ref={(el) => (divRefs.current['about-us'] = el)} id='about-us'  className="w-full flex justify-center py-12 px-5 flex-col bg-gray-200">
       <div className='h-100px lg:h-200px'></div>
-      <div className="flex flex-col lg:flex-row max-w-5xl self-center">
+      <div className="flex flex-col lg:flex-row lg:w-5/6 self-center">
         <div className="flex-1 mb-8 lg:mb-0 lg:mr-12 flex flex-col">
           <div>
             <div className="bg-gray-100 py-1 px-3 rounded inline-block text-sm mb-4">
               Our Story
             </div>
             <h2 className="text-4xl mb-6">
-              A joyous eatery inspired by the culture of Italian cuisine
+             A joyous eatery inspired by the culture of ethnic cuisines
             </h2>
             <p className="text-lg leading-relaxed mb-6">
-              The time has come to bring those ideas and plans to life. This is
-              where we really begin to visualize your napkin sketches and make
-              them into beautiful pixels. Now that your brand is all dressed up and
-              ready to party.
+                EthnicEats is a cutting-edge digital platform that harnesses 
+                the power of AI and machine learning to offer personalized ethnic 
+                restaurant recommendations. By analyzing social media trends and 
+                user reviews, EthnicEats ensures food enthusiasts and travelers 
+                discover diverse, authentic dining experiences, making every meal 
+                an adventure.
             </p>
             <div className="flex items-center">
               <img
@@ -600,8 +618,8 @@ const OurStorySection = ({divRefs}) => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-3 lg:grid-cols-2 lg:gap-3 self-center">
-          <div className='flex flex-col justify-end items-end'>
+        <div className="grid grid-cols-2 gap-1 lg:grid-cols-2 lg:gap-3 self-center">
+          <div className='self-center flex flex-col justify-center lg:justify-end items-end'>
             <img
               src={burger}
               alt="Dining setup"
@@ -617,23 +635,29 @@ const OurStorySection = ({divRefs}) => {
             <img
               src={fries}
               alt="Meal and wine"
-              className="rounded-lg w-200px mb-3"
+              className="rounded-lg w-250px mb-3"
             />
             <img
               src={faqs}
               alt="Gourmet dish"
-              className="rounded-lg w-250px"
+              className="rounded-lg w-300px"
             />
           </div>
         </div>
       </div>
-      <div className='h-100px lg:h-200px'></div>
+      <div className='h-100px lg:h-250px'></div>
     </div>
   );
 };
 
 
 function RestaurantReservationForm({divRefs}) {
+  const [name, setName] = useState('')
+  const [persons, setPersons] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
   return (
     <div ref={(el) => (divRefs.current['book-table'] = el)} id='book-table'>
       <div className='h-100px lg:h-200px'></div>
@@ -642,14 +666,16 @@ function RestaurantReservationForm({divRefs}) {
       <form className='w-full lg:w-2/3 self-center lg:pb-6'>
       <div className='flex flex-col md:flex-row justify-center'>
       <div className="mb-4 basis-1/2 self-start mr-4">
-          <label htmlFor="persons" className="block text-sm font-medium mb-2">
+          <label htmlFor="name" className="block text-sm font-medium mb-2">
             Name
           </label>
           <input
             type="text"
-            id="persons"
+            id="name"
             className="block w-full px-3 py-2 rounded-md shadow-sm border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
@@ -662,6 +688,8 @@ function RestaurantReservationForm({divRefs}) {
             id="email"
             className="block w-full px-3 py-2 rounded-md shadow-sm border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="your@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -676,6 +704,8 @@ function RestaurantReservationForm({divRefs}) {
             id="phone"
             className="block w-full px-3 py-2 rounded-md shadow-sm border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="000-000-0000"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
             required
           />
         </div>
@@ -688,18 +718,20 @@ function RestaurantReservationForm({divRefs}) {
             id="persons"
             className="block w-full px-3 py-2 rounded-md shadow-sm border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Number of Guests"
+            value={persons}
+            onChange={(e) => setPersons(e.target.value)}
             required
           />
         </div>
         </div>
         <div className='flex flex-col md:flex-row justify-center'>
           <div className="mb-4 basis-1/2 self-start mr-4">
-            <label htmlFor="persons" className="block text-sm font-medium mb-2">
+            <label htmlFor="date" className="block text-sm font-medium mb-2">
               Date
             </label>
             <input
               type="date"
-              id="persons"
+              id="date"
               className="block w-full px-3 py-2 rounded-md shadow-sm border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="(ex. mm/dd/yyyy)"
               required
@@ -711,7 +743,7 @@ function RestaurantReservationForm({divRefs}) {
             </label>
             <input
               type="time"
-              id="persons"
+              id="time"
               className="block w-full px-3 py-2 rounded-md shadow-sm border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
               placeholder="ex: 7:00pm"
               required

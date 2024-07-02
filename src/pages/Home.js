@@ -117,7 +117,7 @@ const RateContainer = ({rateFood, setRateFood, clickedId, setClickedId, rateNumb
     }
   
     return(
-      <div className={`z-100000 fixedcentered-dcentered-div ${clickedId? "block": "hidden"} bg-gray-900 text-white px-2 py-1 rounded-md`}>
+      <div className={`z-100000 fixed centered-d centered-div ${clickedId? "block": "hidden"} bg-gray-900 text-white px-2 py-1 rounded-md`}>
         <p>Give {rateFood} a rating of {rateNumber}?</p>
         <div className='flex justify-around'>
           <p onClick={(e) => handleYes(e)}>Yes</p>
