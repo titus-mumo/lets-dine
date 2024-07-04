@@ -1,6 +1,7 @@
 import React , {useEffect}from 'react';
 import { Footer, Header } from './AcceptableUseNotice';
 
+//TODO: header
 function PrivacyPolicy() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { ToastMessage } from '../utils';
 import LoadingSpinner from './LandingPage';
 
+
+//TODO: spacing and just styling
 export const Login = () => {
 
     const [username, setUsername] = useState('')

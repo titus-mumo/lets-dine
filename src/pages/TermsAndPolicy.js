@@ -2,8 +2,13 @@ import React from 'react';
 import { Footer, Header } from './AcceptableUseNotice';
 import { Link } from 'react-router-dom';
 import ScrollToTop from "react-scroll-to-top";
+import { useEffect } from 'react';
 
 const TermsAndConditions = () => {
+  //TODO: Header
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
 
   return (

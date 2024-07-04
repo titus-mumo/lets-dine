@@ -37,20 +37,21 @@ require('dotenv').config()
 
 
 export const LandingPage = () => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const divRefs = useRef({})
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false)
-  //   }, 3000)
-  // }, [])
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [])
 
   return (
     <div className='relative flex flex-col w-screen justify-center h-full bg-gray-200'>
       {
         loading? <LoadingSpinner /> :
         <>
+          
           <NavBar divRefs={divRefs} />
           <div className='h-50px'></div>
           <Home divRefs={divRefs} />
@@ -69,7 +70,10 @@ export const LandingPage = () => {
     </div>
   )
 }
+//TODO: background images navbar/ header and home , animation
 
+
+//TODO: bACKGROUND IMAGE DIFFERENT, clear, proper wordings --> nb, alternating images, animation
 
 const Home = ({ divRefs }) => {
   return (
@@ -106,6 +110,8 @@ const Home = ({ divRefs }) => {
     </div>
   );
 };
+
+//TODO proper alignment
 
 const Features = ({divRefs}) => {
   return(
@@ -145,7 +151,8 @@ const Features = ({divRefs}) => {
 }
 
 
-
+//TODO : Side image comment locationand cotact details -> if you see fit
+//TODO: add background image
 const Contact = ({divRefs}) => {
   const base_url = process.env.BASE_URL
 
@@ -331,7 +338,7 @@ const testimonials = [
   }
 ];
 
-
+//TODO: background image extra: animation
 
 const WhyUs = ({divRefs}) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -419,7 +426,7 @@ const TestimonialCard = ({ testimonial }) => {
   );
 };
 
-
+//TODO: make it distinct
 const Footer = ({divRefs}) => {
 
   const handleScrollClick = (targetDivId) => {
@@ -583,7 +590,7 @@ const PricingComponent = ({type, link, name, price, features, theme}) => {
   )
 }
 
-
+//TODO: change our story
 const OurStorySection = ({divRefs}) => {
   return (
     <div ref={(el) => (divRefs.current['about-us'] = el)} id='about-us'  className="w-full flex justify-center py-12 px-5 flex-col bg-gray-200">

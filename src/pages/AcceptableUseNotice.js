@@ -71,8 +71,8 @@ export const Footer = () => {
 }
 
 export default AcceptableUseNotice;
-
-
+//TODO: remember the navigation feature like the position of the page in te screen -> scrool to top
+//TODO: header for the pages in the footer
 export const Header = () => {
     const navigate = useNavigate()
     return(

@@ -10,6 +10,8 @@ import LoadingSpinner from './LandingPage';
 
 require('dotenv').config()
 
+//TODO: spacing and just styling
+
 export const Register = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
