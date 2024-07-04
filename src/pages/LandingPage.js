@@ -445,7 +445,7 @@ const Footer = ({divRefs}) => {
         <div className='w-full h-full flex justify-between items-center py-10 self-center'>
           <div className='w-full flex flex-col md:flex-row justify-around px-4 md:px-0'>
             <div className='flex flex-col lg:flex-row basis-1/2 justify-center'>
-            <div className='basis-1/2 '>
+            <div className='basis-1/2'>
               <h1 className='text-xl font-bold mb-2'>Get Started</h1>
               <div>
                 <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('about-us')}><ArrowForward /> Features</p>
@@ -455,7 +455,7 @@ const Footer = ({divRefs}) => {
               </div>
             </div>
            
-            <div className='basis-1/2 '>
+            <div className='basis-1/2 justify-center'>
               <h1 className='text-xl font-bold mb-2'>About Us</h1>
               <p className='w-4/5'>Interested in a face-to-face discussion? We welcome you to schedule a meeting with us. Please email or phone to arrange a convenient time to visit our office.</p>
             </div>
