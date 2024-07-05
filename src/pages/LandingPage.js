@@ -29,9 +29,11 @@ import burito from '../assets/burito.png'
 import burger from '../assets/burger.jpeg'
 import bg from '../assets/bg.jpg'
 import fries from '../assets/fries.webp'
-
+import home1 from '../assets/home1.jpg';
+import home2 from '../assets/home2.jpg';
 import { ArrowForward } from '@mui/icons-material'
 
+const images = [home1, home2];
 
 require('dotenv').config()
 
@@ -39,6 +41,7 @@ require('dotenv').config()
 export const LandingPage = () => {
   const [loading, setLoading] = useState(true)
   const divRefs = useRef({})
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
   useEffect(() => {
     setTimeout(() => {
@@ -46,23 +49,45 @@ export const LandingPage = () => {
     }, 1000)
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImgIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
   return (
     <div className='relative flex flex-col w-screen justify-center h-full bg-gray-200'>
       {
         loading? <LoadingSpinner /> :
         <>
-          
-          <NavBar divRefs={divRefs} />
-          <div className='h-50px'></div>
-          <Home divRefs={divRefs} />
-          <OurStorySection divRefs={divRefs}/>
-          <Features divRefs={divRefs} />
-          <FAQs divRefs={divRefs} />
-          <Pricing divRefs={divRefs} />
-          <WhyUs divRefs={divRefs} />
-          {/* <RestaurantReservationForm divRefs={divRefs} /> */}
-          <Contact divRefs={divRefs} />
-          <Footer divRefs={divRefs}/>
+        <div className='relative'>
+          <div
+            className='absolute inset-0'
+            style={{
+              backgroundImage: `url(${images[currentImgIndex]})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundAttachment: 'fixed',
+              filter: 'brightness(0.6)',
+              transition: 'all 0.5s ease-in-out',
+            }}
+          ></div>
+            <NavBar divRefs={divRefs} />
+            <div className='h-50px'></div>
+            <Home divRefs={divRefs} />
+        </div>
+        <OurStorySection divRefs={divRefs}/>
+        <Features divRefs={divRefs} />
+        <FAQs divRefs={divRefs} />
+        <Pricing divRefs={divRefs} />
+        <WhyUs divRefs={divRefs} />
+        {/* <RestaurantReservationForm divRefs={divRefs} /> */}
+        <Contact divRefs={divRefs} />
+        <Footer divRefs={divRefs}/>
         </>
 
       }
@@ -79,16 +104,16 @@ const Home = ({ divRefs }) => {
   return (
     <div
       className='h-screen flex justify-center items-center'
-      style={{
-        backgroundImage: `url(${cover9})`,
-        backgroundSize: 'cover', // Ensure the image covers the entire area
-        backgroundPosition: 'center', // Center the image
-        backgroundRepeat: 'no-repeat', // Avoid image repetition
-        backgroundAttachment: 'fixed' // Optional: Keep the background fixed while scrolling
-      }}
+      // style={{
+        // backgroundImage: `url(${cover9})`,
+        // backgroundSize: 'cover', // Ensure the image covers the entire area
+        // backgroundPosition: 'center', // Center the image
+        // backgroundRepeat: 'no-repeat', // Avoid image repetition
+        // backgroundAttachment: 'fixed', // Optional: Keep the background fixed while scrolling
+      // }}
     >
       <div ref={(el) => (divRefs.current['init'] = el)} id='init' className='home flex flex-col lg:flex-row justify-between items-center w-full py-10 md:py-16 lg:py-36'>
-        <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row'>
+        <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row absolute'>
           <div className='flex flex-col justify-center w-full h-full basis-3/5 items-center'>
             <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center text-white'>
               EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.
@@ -99,7 +124,7 @@ const Home = ({ divRefs }) => {
             <div className='flex justify-center'>
               <Link
                 to='/login'
-                className='font-medium w-auto px-6 py-3 rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105 text-white'
+                className='font-medium w-auto px-6 py-3 rounded-lg bg-pink-700 hover:bg-pink-800 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary hover:scale-105 text-white'
               >
                 GET STARTED
               </Link>
