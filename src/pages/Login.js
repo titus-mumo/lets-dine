@@ -21,14 +21,21 @@ export const Login = () => {
 
     const {setToken, setRefresh, logOut, role} = auth
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
         }, 1500)
-        if(role) return logOut()
+        const userRole = localStorage.getItem("role")
+        if(userRole){
+            console.log("hello")
+            ToastMessage("info", "You are already logged in!")
+            navigate('/home')
+        }
     }, [])
 
-    const navigate = useNavigate();
+    
 
     const handleLogin = async(e) => {
         e.preventDefault()

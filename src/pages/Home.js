@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/AuthProvider';
 import { ApiCall } from '../hooks/ApiCall';
 import LoadingSpinner from './LandingPage';
+import { usePreferenceList } from '../hooks/UserPreferenceProvider';
 
 require('dotenv').config();
 
@@ -14,6 +15,16 @@ export const Home = () => {
     const [meals, setMeals] = useState([]);
     const [menuTab, setMenuTab] = useState(sessionStorage.getItem("menutab") || 'Appetizers')
     const [loading, setLoading] = useState(true)
+    useEffect(() => {
+
+      let key = foodType.indexOf(menuTab)
+      if(filterList[key] === false || filterList[key] === 'false'){
+        key = 0
+        const trueId = []
+        filterList.map((item, index) => item === true? trueId.push(index): '')
+        handleMenuTabs(foodType[trueId[0]])
+      }
+    },[])
     const handleMenuTabs = (type) => {
         setMenuTab(type)
         sessionStorage.setItem("menutab", type)
@@ -42,6 +53,20 @@ export const Home = () => {
         fetchMeals()
     }, []);
 
+
+    const usePreferences = usePreferenceList()
+    const {
+      appetizers,
+      mainCourses,
+      sideDishes,
+      desserts,
+      beverages,
+    } = usePreferences
+
+    const filterList = [appetizers, mainCourses, sideDishes,desserts, beverages]
+
+    const foodType = ['Appetizers', 'Main Courses', 'Side Dishes', 'Desserts', 'Beverages']
+
     const [rateFood, setRateFood] = useState('')
     const [rateNumber, setRateNumber] = useState('')
     const [clickedId, setClickedId] = useState('') 
@@ -54,11 +79,11 @@ export const Home = () => {
             <div className='w-full h-full'>
                 <div className=' w-full justify-around flex'>
                 <div className="z-10000 fixed lg:relative flex items-center justify-center py-1 md:py-2 w-full lg:w-2/3 top-10 lg:top-0 bg-stone-700">
-                    <p className={menuTab === 'Appetizers' ? "active_menu_tab text-xs md:text-base poppins bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins "} onClick={() => handleMenuTabs('Appetizers')}>Appetizers</p>
+                    <p className={appetizers === false || appetizers === 'false'? 'hidden': menuTab === 'Appetizers' ? "active_menu_tab text-xs md:text-base poppins bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins "} onClick={() => handleMenuTabs('Appetizers')}>Appetizers</p>
                     <p className={menuTab === 'Main Courses' ? "active_menu_tab text-xs md:text-base poppins bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins "} onClick={() => handleMenuTabs('Main Courses')}>Main Courses</p>
-                    <p className={menuTab === 'Side Dishes' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Side Dishes')}>Side Dishes</p>
-                    <p className={menuTab === 'Desserts' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Desserts')}>Desserts</p>
-                    <p className={menuTab === 'Beverages' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Beverages')}>Beverages</p>
+                    <p className={sideDishes === false || sideDishes === 'false'? 'hidden': menuTab === 'Side Dishes' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Side Dishes')}>Side Dishes</p>
+                    <p className={desserts === false || desserts === 'false'? 'hidden': menuTab === 'Desserts' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Desserts')}>Desserts</p>
+                    <p className={beverages === false || beverages === 'false'? 'hidden': menuTab === 'Beverages' ? "active_menu_tab poppins text-xs md:text-base bg-blue-500 px-1 py-1" : "menu_tab text-xs md:text-sm px-1 py-1 poppins"} onClick={() => handleMenuTabs('Beverages')}>Beverages</p>
                 </div>
                 <RateContainer rateFood={rateFood} setRateFood={setRateFood} clickedId={clickedId} setClickedId={setClickedId} rateNumber={rateNumber} setRateNumber={setRateNumber}  />
                 </div>

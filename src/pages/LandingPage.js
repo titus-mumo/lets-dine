@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { NavBar } from '../components'
 import { Link, useNavigate } from 'react-router-dom'
 import AboutSectionImage from '../assets/about-modified.png'
-import { LocationOn } from '@mui/icons-material'
+import { LocationOn, Minimize, Remove } from '@mui/icons-material'
 import { Email } from '@mui/icons-material'
 import { Call } from '@mui/icons-material'
 import { Add} from '@mui/icons-material'
@@ -288,8 +288,8 @@ const FAQs = ({divRefs}) => {
       {ethnicEatsData.map((qa, index) => (
         <div key={index} className={`w-full flex flex-row items-start my-2 p-4 border-2 transition-transformation duration-1000 rounded bg-white ${active === index? 'border-pink-700': ''}`}>
           <div className='flex justify-between items-center'>
-          <div onClick={() => handleClick(index)} className='pr-2 hover:cursor-pointer transition-transform duration-1000 text-bold'>
-              {active === index ? <Add className='font-bold' /> : <Add />}
+          <div onClick={() => handleClick(index)} className='p-1 mr-2 hover:cursor-pointer transition-transform duration-1000 text-bold bg-orange-600 rounded-full'>
+              {active === index ? <Remove /> :<Add />}
             </div>
           </div>
           <div>
@@ -443,7 +443,29 @@ const Footer = ({divRefs}) => {
 
   const handleNewsletter = (e) => {
     e.preventDefault()
-    //TODO
+    const base_url = process.env.BASE_URL
+    if(email.length === 0){
+      return ToastMessage("info", "Please enter email address")
+    }
+    if(!email.includes('@')){
+      return ToastMessage("warning", "Invalid email address")
+    }
+    const data = {email}
+    axios.post(base_url + 'subscribe/', data)
+    .then(function(response){
+      setEmail('')
+      if(response.status === 201){
+        
+        return ToastMessage("success", response.data.message)
+      } else if(response.status === 200){
+        return ToastMessage("info", response.data.message)
+      }
+
+      throw new Error(response.data)
+    })
+    .catch((error) => {
+      ToastMessage("error", error.message? error.message : "Something went wrong")
+    });
   }
 
   let year = moment(new Date()).format('YYYY')
