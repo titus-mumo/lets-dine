@@ -531,7 +531,7 @@ const Footer = ({divRefs}) => {
               placeholder='Email address'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className='rounded-lg px-1 py-2 text-white bg-white w-fit border-1 border-stone-900'
+              className='rounded-lg px-1 py-2 bg-white w-fit border-1 border-stone-900'
             />
             <button className='bg-pink-700 rounded-full p-2.5'><ArrowForward /></button>
           </form>
