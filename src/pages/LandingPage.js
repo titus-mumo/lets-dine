@@ -29,9 +29,12 @@ import burito from '../assets/burito.png'
 import burger from '../assets/burger.jpeg'
 import bg from '../assets/bg.jpg'
 import fries from '../assets/fries.webp'
-
+import home1 from '../assets/home1.jpg';
+import home2 from '../assets/home2.jpg';
+import testimonial from '../assets/testimonial.jpg'
 import { ArrowForward } from '@mui/icons-material'
 
+const images = [home1, home2];
 
 require('dotenv').config()
 
@@ -39,6 +42,7 @@ require('dotenv').config()
 export const LandingPage = () => {
   const [loading, setLoading] = useState(true)
   const divRefs = useRef({})
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
 
   useEffect(() => {
     setTimeout(() => {
@@ -46,23 +50,45 @@ export const LandingPage = () => {
     }, 1000)
   }, [])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImgIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
   return (
     <div className='relative flex flex-col w-screen justify-center h-full bg-gray-200'>
       {
         loading? <LoadingSpinner /> :
         <>
-          
-          <NavBar divRefs={divRefs} />
-          <div className='h-50px'></div>
-          <Home divRefs={divRefs} />
-          <OurStorySection divRefs={divRefs}/>
-          <Features divRefs={divRefs} />
-          <FAQs divRefs={divRefs} />
-          <Pricing divRefs={divRefs} />
-          <WhyUs divRefs={divRefs} />
-          {/* <RestaurantReservationForm divRefs={divRefs} /> */}
-          <Contact divRefs={divRefs} />
-          <Footer divRefs={divRefs}/>
+        <div className='relative'>
+          <div
+            className='absolute inset-0'
+            style={{
+              backgroundImage: `url(${images[currentImgIndex]})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat',
+              backgroundAttachment: 'fixed',
+              filter: 'brightness(0.6)',
+              transition: 'all 0.5s ease-in-out',
+            }}
+          ></div>
+            <NavBar divRefs={divRefs} />
+            <div className='h-50px'></div>
+            <Home divRefs={divRefs} />
+        </div>
+        <OurStorySection divRefs={divRefs}/>
+        <Features divRefs={divRefs} />
+        <FAQs divRefs={divRefs} />
+        <Pricing divRefs={divRefs} />
+        <WhyUs divRefs={divRefs} />
+        {/* <RestaurantReservationForm divRefs={divRefs} /> */}
+        <Contact divRefs={divRefs} />
+        <Footer divRefs={divRefs}/>
         </>
 
       }
@@ -79,16 +105,16 @@ const Home = ({ divRefs }) => {
   return (
     <div
       className='h-screen flex justify-center items-center'
-      style={{
-        backgroundImage: `url(${cover9})`,
-        backgroundSize: 'cover', // Ensure the image covers the entire area
-        backgroundPosition: 'center', // Center the image
-        backgroundRepeat: 'no-repeat', // Avoid image repetition
-        backgroundAttachment: 'fixed' // Optional: Keep the background fixed while scrolling
-      }}
+      // style={{
+        // backgroundImage: `url(${cover9})`,
+        // backgroundSize: 'cover', // Ensure the image covers the entire area
+        // backgroundPosition: 'center', // Center the image
+        // backgroundRepeat: 'no-repeat', // Avoid image repetition
+        // backgroundAttachment: 'fixed', // Optional: Keep the background fixed while scrolling
+      // }}
     >
       <div ref={(el) => (divRefs.current['init'] = el)} id='init' className='home flex flex-col lg:flex-row justify-between items-center w-full py-10 md:py-16 lg:py-36'>
-        <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row'>
+        <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row absolute'>
           <div className='flex flex-col justify-center w-full h-full basis-3/5 items-center'>
             <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center text-white'>
               EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.
@@ -99,7 +125,7 @@ const Home = ({ divRefs }) => {
             <div className='flex justify-center'>
               <Link
                 to='/login'
-                className='font-medium w-auto px-6 py-3 rounded-lg hover:bg-pink-700 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary border-2 hover:border-pink-700 hover:scale-105 text-white'
+                className='font-medium w-auto px-6 py-3 rounded-lg bg-pink-700 hover:bg-pink-800 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary hover:scale-105 text-white'
               >
                 GET STARTED
               </Link>
@@ -115,38 +141,37 @@ const Home = ({ divRefs }) => {
 
 const Features = ({divRefs}) => {
   return(
-      <div className='about-us w-full p-3 py-5 md:py-20 lg:py-24'>
+      <div className='about-us bg-white w-full py-10 px-2 md:py-20 lg:py-24'>
         {/* <p className='w-full text-center text-md md:text-lg font-medium mb-4  '>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p> */}
-        <div className='flex justify-center items-center lg:justify-around flex-col md:flex-row'>
-          <div className='lg:basis-1/5 items-center h-full mb-3 md:mb-0'>
+        <div className='flex justify-center items-center gap-4 flex-col md:flex-row'>
+          <div className='lg:basis-1/5 flex items-center justify-center h-full mb-3 w-1/3 md:mb-0'>
             <div className='w-full h-full self-center flex justify-center'>
               <img src={AboutSectionImage} alt='about image' className='w-200px md:w-300px rotate self-center'></img>
             </div>
           </div>
-          <div className='self-center flex flex-col justify-center w-full'>
+          <div className='flex flex-col lg:w-2/3 w-full px-2'>
             <h1 className='w-full text-center text-2xl font-bold mt-4 mb-2 lg:mb-4 self-center'>Features</h1>
-            <div className='self-center content-center justify-around flex flex-col lg:grid lg:grid-cols-2 w-full lg:w-5/6 lg:p-3'>
-              <div className='w-full md:w-2/3 self-center mb-3'>
-                <h1 className='text-center text-md font-semibold'>Personalised Recommendations</h1>
-                <p className='text-sm leading-relaxed text-left'>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
+            <div className='w-full p-2 gap-4 flex items-center justify-center flex-col lg:grid lg:grid-cols-2'>
+              <div className='h-full'>
+                <h1 className='text-center text-lg font-semibold mb-1'>Personalised Recommendations</h1>
+                <p className='leading-relaxed text-left'>Using advanced AI and machine learning algorithms, EthnicEats tailors its recommendations to your unique tastes and preferences. Say goodbye to generic suggestions and hello to a feed that knows your palate better than you do.</p>
               </div>
-              <div className='w-full md:w-2/3 self-center mb-3'>
-                <h1 className='text-center mb-2 text-md font-semibold'>Social Media Integration</h1>
-                <p className='text-sm leading-relaxed'>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
+              <div className='h-full'>
+                <h1 className='text-center text-lg font-semibold mb-1'>Social Media Integration</h1>
+                <p className='leading-relaxed'>Stay ahead of the trends with our real-time analysis of social media buzz. We scour platforms like Instagram, Twitter, and Facebook to bring you the latest in ethnic dining hotspots, ensuring you’re always in the know.</p>
               </div>
-              <div className='w-full md:w-2/3 self-center mb-3'>
-                <h1 className='text-center text-md font-semibold'>User Reviews and Ratings</h1>
-                <p className='text-sm leading-relaxed'>Our platform aggregates and analyses reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
+              <div className='h-full'>
+                <h1 className='text-center text-lg font-semibold mb-1'>User Reviews and Ratings</h1>
+                <p className='leading-relaxed'>Our platform aggregates and analyses reviews from various sources, providing you with a comprehensive view of what others are saying. This helps you make informed dining decisions based on collective experiences.</p>
               </div>
-              <div className='w-full md:w-2/3 self-center mb-3'>
-                <h1 className='text-center text-md font-semibold'>Community Engagement</h1>
-                <p className='text-sm leading-relaxed'>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
+              <div className='h-full'>
+                <h1 className='text-center text-lg font-semibold mb-1'>Community Engagement</h1>
+                <p className='leading-relaxed'>Join our vibrant community forums to discuss your dining experiences, share photos, and connect with fellow food lovers. EthnicEats fosters a sense of community among users who share a passion for ethnic cuisines.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-
   )
 }
 
@@ -189,48 +214,48 @@ const Contact = ({divRefs}) => {
     
   }
   return(
-    <div ref={(el) => (divRefs.current['contact'] = el)} id='contact' className='contact w-full py-5 md:py-20 lg:py-24'>
+    <div ref={(el) => (divRefs.current['contact'] = el)} id='contact' className='contact w-full md:py-20 py-24 flex flex-col items-center justify-center'>
       <h1 className='text-center text-2xl font-bold my-4'>CONTACT</h1>
-      <div className='flex flex-col lg:flex-row-reverse w-full justify-center items-start'>
-        <div className='basis-full lg:basis-1/2 self-center p-4'>
-          <h2 className='text-xl font-semibold'>TALK TO US</h2>
+      <div style={{ width: '80%' }} className='flex flex-col lg:flex-row-reverse justify-center items-center lg:h-500px'>
+        <div className='px-8 py-8 bg-white h-full flex flex-col items-center justify-center lg:w-2/3 w-full'>
+          <h2 className='text-xl font-semibold'>Talk to Us</h2>
           <p className='my-2'>Fill the form below, and we will get back to you as soon as possible</p>
-          <form onSubmit={(e) => handleContactForm(e)} className='w-full lg:w-2/3'>
+          <form onSubmit={(e) => handleContactForm(e)} className='w-full'>
             <div className='flex flex-col lg:flex-row lg:space-x-2 w-full'>
               <input placeholder='Name*' type='text' className='mt-3 basis-1/2 p-2 border rounded-lg' value={name} onChange={(e) => setName(e.target.value)} required />
               <input placeholder='Email*' type='email' className='mt-3 basis-1/2 p-2 border rounded-lg' value={email} onChange={(e) => setEmail(e.target.value)} required />
             </div>
             <input placeholder='Subject*' type='text' className='mt-3 p-2 border rounded-lg w-full floating-input' value={subject} onChange={(e) => setSubject(e.target.value)} required /><br />
-            <textarea placeholder='Message*' className='mt-3 p-2 border rounded-lg h-32 w-full' value={message} onChange={(e) => setMessage(e.target.value)} required></textarea><br />
+            <textarea style={{ resize: 'none' }} placeholder='Message*' className='mt-3 p-2 border rounded-lg h-32 w-full' value={message} onChange={(e) => setMessage(e.target.value)} required></textarea><br />
             <div className='w-full flex justify-center'>
-              <button type='submit' className='text-center bg-slate-900 py-2 text-white rounded-md shadow-md px-3 my-2'>Send Message</button>
+              <button type='submit' className='text-center bg-slate-900 py-2 text-white rounded-md shadow-md px-3 mt-2'>Send Message</button>
             </div>
           </form>
         </div>
-        <div className='lg:mt-4 lg:h-full flex flex-col lg:flex-col items-center w-full lg:basis-1/2 p-4'>
-          <div>
-          <div className='flex items-center my-2'>
-            <LocationOn className='mr-2' />
-            <div>
-              <h2 className='text-lg font-semibold'>Location</h2>
-              <p>Unit 4, Durham Workspace</p>
-              <p>Abbey Road, Durham DH1 5JZ</p>
+        <div className='flex flex-col lg:flex-col items-center justify-center px-4 py-8 bg-gray-50 h-full lg:w-1/3 w-full'>
+          <div className='flex flex-col lg:gap-12 gap-8'>
+            <div className='flex items-center'>
+              <LocationOn className='mr-2' />
+              <div>
+                <h2 className='text-lg font-semibold'>Location</h2>
+                <p>Unit 4, Durham Workspace</p>
+                <p>Abbey Road, Durham DH1 5JZ</p>
+              </div>
             </div>
-          </div>
-          <div className='flex items-center my-2'>
-            <Email className='mr-2' />
-            <div>
-              <h2 className='text-lg font-semibold'>Email</h2>
-              <a href="mailto:hello@ethniceats.co.uk" className='text-gray-800'>hello@ethniceats.co.uk</a>
+            <div className='flex items-center'>
+              <Email className='mr-2' />
+              <div>
+                <h2 className='text-lg font-semibold'>Email</h2>
+                <a href="mailto:hello@ethniceats.co.uk" className='text-gray-800'>hello@ethniceats.co.uk</a>
+              </div>
             </div>
-          </div>
-          <div className='flex items-center my-2'>
-            <Call className='mr-2' />
-            <div>
-              <h2 className='text-lg font-semibold'>Call</h2>
-              <p>0044(0)3331886566</p>
+            <div className='flex items-center'>
+              <Call className='mr-2' />
+              <div>
+                <h2 className='text-lg font-semibold'>Call</h2>
+                <p>0044(0)3331886566</p>
+              </div>
             </div>
-          </div>
           </div>
         </div>
       </div>
@@ -377,10 +402,9 @@ const WhyUs = ({divRefs}) => {
   return (
     <div ref={(el) => (divRefs.current['whyus'] = el)} id='whyus' className='whyus flex self-center justify-center w-full pb-6 md:py-10 lg:py-14 px-4 md:pb-16 lg:pb-20'
      style={{   
-      backgroundImage: `url(${cover4})`,
+      backgroundImage: `url(${testimonial})`,
       backgroundSize: 'cover', 
       backgroundPosition: 'center', 
-
     }}
   >
     <div className='flex flex-col justify-around w-full self-center'>
@@ -393,7 +417,7 @@ const WhyUs = ({divRefs}) => {
           <button
             key={index}
             onClick={() => handleDotClick(index)}
-            className={`mx-1 w-3 h-3 rounded-full ${index === activeIndex ? 'bg-gray-800' : 'bg-gray-300'}`}
+            className={`mx-1 w-3 h-3 rounded-full ${index === activeIndex ? 'bg-pink-700' : 'bg-gray-800'}`}
           />
         ))}
       </div>
@@ -407,7 +431,7 @@ const TestimonialCard = ({ testimonial }) => {
   return (
     <div className="testimonial-card p-2 md:p-4 rounded-md shadow-md my-5">
       <div className='m-1.5 md:m-2 border-2 border-white p-1'>
-        <p className="text-sm text-gray-600 mt-2 text-center  ">{testimonial.names}</p>
+        <p className="text-sm text-gray-600 mt-2 text-center">{testimonial.names}</p>
         <p className="text-xs text-gray-100 uppercase text-center font-md text-md">{testimonial.location.toUpperCase()}, UK</p>
         <div className='h-20'>
           <p className="text-sm md:text-base text-center text-white ">{testimonial.testimonial}</p>
@@ -448,53 +472,53 @@ const Footer = ({divRefs}) => {
 
   let year = moment(new Date()).format('YYYY')
   return(
-      <div className='bg-white w-full flex flex-col justify-center pb-5 pl-3'>
-        <div className='w-full h-full flex justify-between items-center py-10 self-center'>
-          <div className='w-full flex flex-col md:flex-row justify-around px-4 md:px-0'>
-            <div className='flex flex-col lg:flex-row basis-1/2 justify-center'>
-            <div className='basis-1/2'>
-              <h1 className='text-xl font-bold mb-2'>Get Started</h1>
-              <div>
-                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('about-us')}><ArrowForward /> Features</p>
-                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('pricing')}><ArrowForward /> Pricing</p>
-                <Link to='/register' className='mb-1'><ArrowForward /> Sign Up</Link>
-                <p className='mb-1 hover:cursor-pointer' onClick={() => handleScrollClick('faqs')}><ArrowForward /> FAQs</p>
-              </div>
-            </div>
-           
-            <div className='basis-1/2 justify-center'>
-              <h1 className='text-xl font-bold mb-2'>About Us</h1>
-              <p className='w-4/5'>Interested in a face-to-face discussion? We welcome you to schedule a meeting with us. Please email or phone to arrange a convenient time to visit our office.</p>
-            </div>
-            </div>
-            <div className='flex flex-col lg:flex-row basis-1/2 justify-center'>
-              <div className='basis-1/2 '>
-                <h1 className='text-xl font-bold mb-2'>Legal</h1>
-                <div className='flex flex-col space-y-1'>
-                  <Link to='terms_and_conditions/'><ArrowForward /> Terms and conditions</Link>
-                  <Link to='privacy_policy/'><ArrowForward /> Privacy Policy</Link>
-                  <Link to='acceptable_use_notice/'><ArrowForward /> Acceptable Use Notice</Link>
-                </div>
-              </div>
-              <div className='basis-1/2'>
-                <h1 className='text-xl font-bold mb-2'>Newsletter</h1>
-                <p className='w-4/5'>Subscribe to our newsletter to get our latest updates & news</p>
-                <form onSubmit={(e) => handleNewsletter(e)} className='mt-2 bg-stone-900 rounded-full w-fit flex'>
-                  <input
-                    type='email'
-                    placeholder='Email address'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className=' rounded-full px-1 py-2 text-white bg-stone-900 w-fit border-1 border-stone-900 '
-                  />
-                  <button className='bg-orange-600 rounded-full p-2.5'><ArrowForward /></button>
-                </form>
-              </div>
-            </div>
+    <div className='text-neutral-400 bg-neutral-900 w-full flex flex-col justify-center items-center'>
+      <div className='h-full flex lg:flex-col justify-center items-center my-4 p-2 w-5/6 py-10'>
+      <div className='grid gap-5 lg:grid-cols-4 md:grid-cols-2 grid-cols-1'>
+
+        <div className='flex flex-col gap-3'>
+          <h1 className='text-base font-bold text-white'>Get Started</h1>
+          <div>
+            <p className='hover:cursor-pointer' onClick={() => handleScrollClick('about-us')}><ArrowForward /> Features</p>
+            <p className='hover:cursor-pointer' onClick={() => handleScrollClick('pricing')}><ArrowForward /> Pricing</p>
+            <Link to='/register' className='mb-1'><ArrowForward /> Sign Up</Link>
+            <p className='hover:cursor-pointer' onClick={() => handleScrollClick('faqs')}><ArrowForward /> FAQs</p>
           </div>
         </div>
-        <p className='w-full text-center mb-3'>Copyright (c) {year} EthnicEats Ltd. All rights reserved</p>
+        
+        <div className='flex flex-col gap-3'>
+          <h1 className='text-base font-bold text-white'>About Us</h1>
+          <p>Interested in a face-to-face discussion? We welcome you to schedule a meeting with us. Please email or phone to arrange a convenient time to visit our office.</p>
+        </div>
+  
+        <div className='flex flex-col gap-3'>
+          <h1 className='text-base font-bold text-white'>Legal</h1>
+          <div className='flex flex-col space-y-1'>
+            <Link to='terms_and_conditions/'><ArrowForward /> Terms and conditions</Link>
+            <Link to='privacy_policy/'><ArrowForward /> Privacy Policy</Link>
+            <Link to='acceptable_use_notice/'><ArrowForward /> Acceptable Use Notice</Link>
+          </div>
+        </div>
+  
+        <div className='flex flex-col gap-3'>
+          <h1 className='text-base font-bold text-white'>Newsletter</h1>
+          <p>Subscribe to our newsletter to get our latest updates & news</p>
+          <form onSubmit={(e) => handleNewsletter(e)} className='mt-2 bg-stone-900 rounded-full w-fit flex'>
+            <input
+              type='email'
+              placeholder='Email address'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className='rounded-lg px-1 py-2 text-white bg-white w-fit border-1 border-stone-900'
+            />
+            <button className='bg-pink-700 rounded-full p-2.5'><ArrowForward /></button>
+          </form>
+        </div>
       </div>
+    </div>
+    <p className='w-full text-center text-sm border-t-1 border-neutral-400 py-3'>Copyright (c) {year}  EthnicEats Ltd.  All rights reserved</p>
+  </div>
+  
   )
 }
 

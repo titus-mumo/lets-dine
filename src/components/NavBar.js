@@ -23,10 +23,10 @@ export const NavBar = ({divRefs}) => {
 
 
   return (
-    <header className='z-10 top-0 flex fixed flex-col justify-start shadow-md p-2 w-full items-center pb-3 bg-white border-bottom-1 border-gray-900' >
+    <header className='z-10 top-0 flex fixed flex-col justify-start shadow-md px-4 w-full items-center py-3 bg-gray-50'>
       <div className='flex flex-row justify-between w-full'>
-        <div className='flex justify-between basis-2/5 items-center'>
-          <p onClick={() => handleScrollClick('init')}  to="init" id='init' className='poppins text-lg md:text-2xl font-bold hover:cursor-pointer hover:text-blue-500'>EthnicEats</p>
+        <div className='flex justify-between basis-2/5 items-center gap-4'>
+          <p onClick={() => handleScrollClick('init')}  to="init" id='init' className='poppins text-lg md:text-2xl font-bold hover:cursor-pointer hover:text-blue-500 mr-4'>EthnicEats</p>
           <p onClick={() => handleScrollClick('about-us')}  to="about-us" id='about-us'  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>About</p>
           <p className='hidden lg:block'>~</p>
           <p onClick={() => handleScrollClick('faqs')}  to="faqs"  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>FAQs</p>
@@ -48,7 +48,7 @@ export const NavBar = ({divRefs}) => {
             {/* <div className='hover:cursor-pointer' onClick={() => handleScrollClick('book-table')}  to="book-table" id='book-table'>
               <Fastfood />
             </div> */}
-            <button className="ml-5 hidden lg:block px-3 lg:px-4 py-0.5 lg:py-1 poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-pink-700 hover:border-pink-700 border-2" onClick={() => navigate('/login')}>Login</button>
+            <button className="ml-5 hidden lg:block px-3 lg:px-4 py-0.5 lg:py-1 poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 bg-pink-700 hover:bg-pink-800 hover:border-pink-700 border-1 border-pink-700 mr-4 text-white" onClick={() => navigate('/login')}>Login</button>
           </div>
         </div>
       </div>
