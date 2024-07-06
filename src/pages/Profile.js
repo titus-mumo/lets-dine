@@ -155,17 +155,28 @@ export const Account = () => {
       setBeverages
     } = usePreferences
 
+    const names = ['appetizers', 'mainCourses', 'sideDishes', 'desserts', 'beverages']
+
     const dishes = [appetizers, mainCourses, sideDishes, desserts, beverages]
     const setDishes = [setAppetizers, setMainCourses, setSideDishes, setDesserts, setBeverages]
   
     const handleCheckboxChange = (id) => {
-      setDishes[id]((prevCheck) => !prevCheck);
+      let x;
+      sessionStorage.getItem(names[id]) === null? x = 1 : x = 0
+      const existing = sessionStorage.getItem(names[id]) === "true" ? true: false
+      sessionStorage.setItem(names[id], x === 1?  false: existing === true? false: true)
+      let check;
+      x === 1? check =  false: existing === true? check = false: check = true
+      // console.log(check)
+      setDishes[id](check);
+      dishes[id]
+      console.log(dishes[id])
     };
   
     return (
       <div className='preference-item'>
         <p className='text-sm'>{category}</p>
-        <input type='checkbox' checked={dishes[id]} onChange={() => handleCheckboxChange(id)} />
+        <input type="checkbox" checked={typeof(dishes[id]) === 'string'? dishes[id] === 'true': dishes[id]} onChange={() => handleCheckboxChange(id)} />
       </div>
     );
   };

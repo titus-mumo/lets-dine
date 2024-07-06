@@ -5,11 +5,13 @@ import React from "react";
 const UserPreferenceContext  = createContext()
 
 const UserPreferenceProvider = ({children}) => {
-    const [appetizers, setAppetizers] = useState(true)
-    const [mainCourses, setMainCourses] = useState(true)
-    const [sideDishes, setSideDishes] = useState(true)
-    const [desserts, setDesserts] = useState(true)
-    const [beverages, setBeverages] = useState(true)
+
+
+    const [appetizers, setAppetizers] = useState(sessionStorage.getItem('appetizers') || true)
+    const [mainCourses, setMainCourses] = useState(sessionStorage.getItem('mainCourses') || true)
+    const [sideDishes, setSideDishes] = useState(sessionStorage.getItem('sideDishes') || true)
+    const [desserts, setDesserts] = useState(sessionStorage.getItem('desserts') || true)
+    const [beverages, setBeverages] = useState(sessionStorage.getItem('beverages') || true)
 
     const preferences = {
         appetizers,
