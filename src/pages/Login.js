@@ -72,12 +72,12 @@ export const Login = () => {
         return;
     };
   return (
-    <section className="w-full bg-gray-900 min-h-screen flex items-center justify-center relative">
+    <section className="w-full min-h-screen flex items-center justify-center relative">
         {loading ? (
             <LoadingSpinner />
         ) : (
-            <div className="flex flex-col items-center justify-center w-full">
-                <a href="/" className="flex md:text-white text-gray-900 items-center mb-3 text-2xl md:text-xl font-semibold z-10">
+            <div className="flex flex-col bg-gray-50 items-center justify-center w-full">
+                <a href="/" className="flex text-gray-900 items-center mb-3 text-2xl md:text-xl font-semibold z-10">
                     EthnicEats
                 </a>
                 <div className='flex flex-col md:flex-row w-3/4 relative'>

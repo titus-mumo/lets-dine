@@ -3,13 +3,9 @@ import { Footer, Header } from './AcceptableUseNotice';
 import { Link } from 'react-router-dom';
 import ScrollToTop from "react-scroll-to-top";
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const TermsAndConditions = () => {
-  //TODO: Header
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
-
 
   return (
     <div className="terms-container">
@@ -20,7 +16,6 @@ const TermsAndConditions = () => {
         <AdditionalSections />
       </div>
       <Footer />
-      <ScrollToTop smooth />
     </div>
   );
 };

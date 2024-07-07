@@ -31,9 +31,9 @@ export const NavBar = ({divRefs}) => {
           <p className='hidden lg:block'>~</p>
           <p onClick={() => handleScrollClick('faqs')}  to="faqs"  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>FAQs</p>
           <p className='hidden lg:block'>~</p>
-          <p onClick={() => handleScrollClick('pricing')} to="pricing"  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Pricing</p>
-          <p className='hidden lg:block'>~</p>
           <p onClick={() => handleScrollClick('whyus')}  to="whyus"  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Testimonials</p>
+          <p className='hidden lg:block'>~</p>
+          <p onClick={() => handleScrollClick('pricing')} to="pricing"  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Pricing</p>
           <p className='hidden lg:block'>~</p>
           <p onClick={() => handleScrollClick('contact')}  to="contact" className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Contact</p>
         </div>
@@ -52,8 +52,8 @@ export const NavBar = ({divRefs}) => {
       <div className={`w-full flex-col justify-start ${showMenuLandingPage? 'flex': 'hidden'} pl-3`}>
         <p onClick={() => handleScrollClick('about-us')}  to="about-us" id='about-us'  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>About</p>
         <p onClick={() => handleScrollClick('faqs')}  to="faqs"  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>FAQs</p>
-        <p onClick={() => handleScrollClick('pricing')} to="pricing"  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>Pricing</p>
         <p onClick={() => handleScrollClick('whyus')}  to="whyus"  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>Testimonials</p>
+        <p onClick={() => handleScrollClick('pricing')} to="pricing"  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>Pricing</p>
         <p onClick={() => handleScrollClick('contact')}  to="contact" className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>Contact</p>
       </div>
     </header>
