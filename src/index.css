@@ -166,23 +166,29 @@ code {
 }
 
 .terms-container {
-  margin: 5px;
-  padding: 5px;
+  /* margin: 5px;
+  padding: 5px; */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh
 }
 
 .terms-container h1 {
   font-size: larger;
   font-weight: 900;
+  margin-bottom: 10px;
 }
 
 .terms-container h2 {
   font-size: medium;
   font-weight: 700;
+  margin-bottom: 2px;
 }
 
 
 .terms-container p, .terms-container ul {
   line-height: 1.6;
+  margin-bottom: 12px;
 }
 
 .terms-container ul {

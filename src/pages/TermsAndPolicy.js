@@ -14,9 +14,11 @@ const TermsAndConditions = () => {
   return (
     <div className="terms-container">
       <Header />
-      <Introduction />
-      <LegalSections />
-      <AdditionalSections />
+      <div className='p-8'>
+        <Introduction />
+        <LegalSections />
+        <AdditionalSections />
+      </div>
       <Footer />
       <ScrollToTop smooth />
     </div>

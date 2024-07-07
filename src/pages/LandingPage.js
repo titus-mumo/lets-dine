@@ -84,8 +84,8 @@ export const LandingPage = () => {
         <OurStorySection divRefs={divRefs}/>
         <Features divRefs={divRefs} />
         <FAQs divRefs={divRefs} />
-        <Pricing divRefs={divRefs} />
         <WhyUs divRefs={divRefs} />
+        <Pricing divRefs={divRefs} />
         {/* <RestaurantReservationForm divRefs={divRefs} /> */}
         <Contact divRefs={divRefs} />
         <Footer divRefs={divRefs}/>
@@ -214,8 +214,19 @@ const Contact = ({divRefs}) => {
     
   }
   return(
-    <div ref={(el) => (divRefs.current['contact'] = el)} id='contact' className='contact w-full md:py-20 py-24 flex flex-col items-center justify-center'>
-      <h1 className='text-center text-2xl font-bold my-4'>CONTACT</h1>
+    <div 
+      ref={(el) => (divRefs.current['contact'] = el)} 
+      id='contact' 
+      className='contact w-full md:py-20 py-24 flex flex-col items-center justify-center'
+      style={{ 
+          backgroundImage: `url(${home2})`, 
+          backgroundSize: 'cover', 
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed', 
+        }}
+    >
+      <h1 className='text-center text-2xl font-bold my-4 text-white'>CONTACT</h1>
       <div style={{ width: '80%' }} className='flex flex-col lg:flex-row-reverse justify-center items-center lg:h-500px'>
         <div className='px-8 py-8 bg-white h-full flex flex-col items-center justify-center lg:w-2/3 w-full'>
           <h2 className='text-xl font-semibold'>Talk to Us</h2>
