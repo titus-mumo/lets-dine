@@ -3,13 +3,16 @@ import { Footer, Header } from './AcceptableUseNotice';
 
 //TODO: header
 function PrivacyPolicy() {
+  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
+  
   return (
     <div className="terms-container">
         <div>
             <Header />
+        <div className='p-8'>
       <h1>Privacy Policy</h1>
       <p>
         EthnicEats ("we", "us", or "our") is committed to protecting the privacy of
@@ -101,6 +104,7 @@ function PrivacyPolicy() {
         <li>Email: hello@ethniceats.co.uk</li>
       </ul>
       </div>
+    </div>
       <Footer />
     </div>
   );
