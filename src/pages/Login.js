@@ -29,7 +29,6 @@ export const Login = () => {
         }, 1500)
         const userRole = localStorage.getItem("role")
         if(userRole){
-            console.log("hello")
             ToastMessage("info", "You are already logged in!")
             navigate('/home')
         }

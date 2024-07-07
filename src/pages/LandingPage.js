@@ -104,7 +104,7 @@ export const LandingPage = () => {
 const Home = ({ divRefs }) => {
   return (
     <div
-      className='h-screen flex justify-center items-center'
+      className='h-screen flex justify-center items-center' ref={(el) => (divRefs.current['init'] = el)} id='init' 
       // style={{
         // backgroundImage: `url(${cover9})`,
         // backgroundSize: 'cover', // Ensure the image covers the entire area
@@ -113,7 +113,7 @@ const Home = ({ divRefs }) => {
         // backgroundAttachment: 'fixed', // Optional: Keep the background fixed while scrolling
       // }}
     >
-      <div ref={(el) => (divRefs.current['init'] = el)} id='init' className='home flex flex-col lg:flex-row justify-between items-center w-full py-10 md:py-16 lg:py-36'>
+      <div className='home flex flex-col lg:flex-row justify-between items-center w-full py-10 md:py-16 lg:py-36'>
         <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row absolute'>
           <div className='flex flex-col justify-center w-full h-full basis-3/5 items-center'>
             <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center text-white'>

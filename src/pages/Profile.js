@@ -167,10 +167,8 @@ export const Account = () => {
       sessionStorage.setItem(names[id], x === 1?  false: existing === true? false: true)
       let check;
       x === 1? check =  false: existing === true? check = false: check = true
-      // console.log(check)
       setDishes[id](check);
       dishes[id]
-      console.log(dishes[id])
     };
   
     return (

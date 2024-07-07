@@ -133,7 +133,6 @@ const RateContainer = ({rateFood, setRateFood, clickedId, setClickedId, rateNumb
 
       ApiCall('rate/', 'post', token, refresh, setToken, setRefresh, data)
       .then((response) => {
-        console.log(response)
         if(response.status === 200){
             ToastMessage("success", "Rating has been recorded")
             return

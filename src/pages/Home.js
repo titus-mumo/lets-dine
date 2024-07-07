@@ -19,7 +19,6 @@ export const Home = () => {
 
       let key = foodType.indexOf(menuTab)
       if(filterList[key] === false || filterList[key] === 'false'){
-        key = 0
         const trueId = []
         filterList.map((item, index) => item === true? trueId.push(index): '')
         handleMenuTabs(foodType[trueId[0]])
@@ -116,12 +115,10 @@ const RateContainer = ({rateFood, setRateFood, clickedId, setClickedId, rateNumb
 
       ApiCall('rate/', 'post', token, refresh, setToken, setRefresh, data)
       .then((response) => {
-        console.log(response)
         if(response.status  !== undefined && response.status === 200){
             ToastMessage("success", "Rating has been recorded")
             return
         }
-        console.log(response)
         throw new Error(response.data.error)
       })
       .catch((error) => {
