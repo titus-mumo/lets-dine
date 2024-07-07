@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/AuthProvider'
 import { ApiCall } from '../hooks/ApiCall'
 import { Link } from 'react-router-dom'
 import { ToastMessage } from "../utils"
+import { Rating } from 'flowbite-react'
 
 export const RecommendedFoods = ({setItem}) => {
     const [trendingFoods, setTrendingFoods] = useState([])
@@ -31,7 +32,6 @@ export const RecommendedFoods = ({setItem}) => {
     const fetchHighlyRatedFoods = () => {
       ApiCall('rated-foods/', 'get', token, refresh, setToken, setRefresh)
       .then((response) => {
-        console.log(response)
         response.status === 200? setRatedFoods(response.data) : '';
       })
       .catch((error) => {
@@ -45,7 +45,7 @@ export const RecommendedFoods = ({setItem}) => {
     }, [])
     return(
       <div className="w-full">
-      <div className="flex justify-around w-full">
+      <div className="flex justify-around w-full flex-wrap">
         {
           ratedFoods.map((meal, index) => <FoodContainer meal={meal} key={index} />)
         }
@@ -61,7 +61,9 @@ export const RecommendedFoods = ({setItem}) => {
 require('dotenv').config()
 
 const FoodContainer = ({meal}) => {
-    const {cuisine_id, meal_name, category, price, rationale} = meal
+    const {cuisine_id, meal_name, category, price, rationale, avg_rating} = meal
+
+    const [filled, setFilled] = useState(Math.round(avg_rating) || 3)
     let url;
     if(meal.meal_pic) {
       url = meal.meal_pic.startsWith('/')? process.env.BASE_IMAGES + meal.meal_pic : process.env.BASE_URL + 'media/' +meal.meal_pic
@@ -96,8 +98,6 @@ const FoodContainer = ({meal}) => {
 
     useEffect(() => {
       getCuisineName()
-      console.log(meal.meal_pic)
-      console.log(url)
     }, [cuisine_id])
 
 
@@ -118,6 +118,15 @@ const FoodContainer = ({meal}) => {
                   </div>
                   <h2 className="text-gray-900 poppins text-md font-bold text-end">£{price}</h2>
               </div>
+          </div>
+          <div className='w-fit'>
+          <Rating>
+            <Rating.Star className={`${filled >=1? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=2? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=3? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=4? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=5? 'text-green-700': ''}`} />
+          </Rating>
           </div>
       </div>
   )

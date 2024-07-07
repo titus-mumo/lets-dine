@@ -4,11 +4,12 @@ import { useAuth } from '../hooks/AuthProvider'
 import { ApiCall } from '../hooks/ApiCall'
 import { Link, useNavigate } from 'react-router-dom'
 import { ToastMessage } from '../utils'
+import { Rating } from 'flowbite-react'
 
 require('dotenv').config()
 
 export const MealCard = ({meal, confirmDelete, setConfirmDelete, id, deleteMealName, setDeleteMealName, setDeleteMealId}) => {
-    const {cuisine, meal_id, meal_name, category} = meal
+    const {cuisine, meal_id, meal_name, category, average_rating} = meal
     let url;
     if(meal.meal_pic) {
       url = process.env.BASE_IMAGES + meal.meal_pic
@@ -53,6 +54,8 @@ export const MealCard = ({meal, confirmDelete, setConfirmDelete, id, deleteMealN
       }
     }
 
+    const [filled, setFilled] = useState(Math.round(average_rating) || 3)
+
 
 
 
@@ -73,6 +76,15 @@ export const MealCard = ({meal, confirmDelete, setConfirmDelete, id, deleteMealN
                   </div>
                   <h2 className="text-gray-900 poppins text-md font-bold text-end">£{price}</h2>
               </div>
+          </div>
+          <div className='w-fit'>
+          <Rating>
+            <Rating.Star className={`${filled >=1? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=2? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=3? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=4? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=5? 'text-green-700': ''}`} />
+          </Rating>
           </div>
           <div className='flex justify-between w-full'>
             <p className='p-1 text-green-700 text-sm hover:cursor-pointer transition duration-300' onClick={() => handleEdit()}>Edit</p>
