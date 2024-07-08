@@ -24,7 +24,6 @@ export const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        logOut()
         setTimeout(() => {
             setLoading(false)
         }, 1500)
