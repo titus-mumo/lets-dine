@@ -24,15 +24,10 @@ export const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        logOut()
         setTimeout(() => {
             setLoading(false)
         }, 1500)
-        const userRole = localStorage.getItem("refresh")
-        if(userRole){
-            console.log("hello")
-            ToastMessage("info", "You are already logged in!")
-            navigate('/home')
-        }
     }, [])
 
     
