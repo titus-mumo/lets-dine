@@ -28,12 +28,12 @@ export const Login = () => {
         setTimeout(() => {
             setLoading(false)
         }, 1500)
-        const userRole = localStorage.getItem("role")
-        if(userRole){
-            console.log("hello")
-            ToastMessage("info", "You are already logged in!")
-            navigate('/home')
-        }
+        // const userRole = localStorage.getItem("role")
+        // if(userRole){
+        //     console.log("hello")
+        //     ToastMessage("info", "You are already logged in!")
+        //     navigate('/home')
+        // }
     }, [])
 
     
@@ -73,12 +73,12 @@ export const Login = () => {
         return;
     };
   return (
-    <section className="w-full bg-gray-900 min-h-screen flex items-center justify-center relative">
+    <section className="w-full bg-white min-h-screen flex items-center justify-center relative">
         {loading ? (
             <LoadingSpinner />
         ) : (
             <div className="flex flex-col items-center justify-center w-full">
-                <a href="/" className="flex md:text-white text-gray-900 items-center mb-3 text-2xl md:text-xl font-semibold z-10">
+                <a href="/" className="flex text-gray-900 items-center mb-3 text-2xl md:text-xl font-semibold z-10">
                     EthnicEats
                 </a>
                 <div className='flex flex-col md:flex-row w-3/4 relative'>

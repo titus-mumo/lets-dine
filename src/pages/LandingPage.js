@@ -104,7 +104,7 @@ export const LandingPage = () => {
 const Home = ({ divRefs }) => {
   return (
     <div
-      className='h-screen flex justify-center items-center'
+      className='h-screen flex justify-center items-center' ref={(el) => (divRefs.current['init'] = el)} id='init' 
       // style={{
         // backgroundImage: `url(${cover9})`,
         // backgroundSize: 'cover', // Ensure the image covers the entire area
@@ -113,9 +113,8 @@ const Home = ({ divRefs }) => {
         // backgroundAttachment: 'fixed', // Optional: Keep the background fixed while scrolling
       // }}
     >
-      <div ref={(el) => (divRefs.current['init'] = el)} id='init' className='home flex flex-col lg:flex-row justify-between items-center w-full py-10 md:py-16 lg:py-36'>
         <div className='w-full flex justify-center p-4 flex-col-reverse lg:flex-row absolute'>
-          <div className='flex flex-col justify-center w-full h-full basis-3/5 items-center'>
+          <div className='flex flex-col justify-center w-full basis-2/5 items-center'>
             <h2 className='text-2xl lg:text-3xl xl:text-4xl font-bold mb-4 text-center text-white'>
               EXPLORE. DISCOVER. <span className='text-pink-700'>DINE. </span> SHARE.
             </h2>
@@ -132,7 +131,6 @@ const Home = ({ divRefs }) => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };
@@ -324,8 +322,8 @@ const FAQs = ({divRefs}) => {
       {ethnicEatsData.map((qa, index) => (
         <div key={index} className={`w-full flex flex-row items-start my-2 p-4 border-2 transition-transformation duration-1000 rounded bg-white ${active === index? 'border-pink-700': ''}`}>
           <div className='flex justify-between items-center'>
-          <div onClick={() => handleClick(index)} className='p-1 mr-2 hover:cursor-pointer transition-transform duration-1000 text-bold bg-orange-600 rounded-full'>
-              {active === index ? <Remove /> :<Add />}
+          <div onClick={() => handleClick(index)} className='p-0.5 mr-2 hover:cursor-pointer transition-transform duration-1000 text-bold bg-pink-700 rounded-full'>
+              {active === index ? <Remove className='text-gray-300'/> :<Add className='text-gray-300'/>}
             </div>
           </div>
           <div>
@@ -505,7 +503,7 @@ const Footer = ({divRefs}) => {
 
   let year = moment(new Date()).format('YYYY')
   return(
-    <div className='text-neutral-400 bg-neutral-900 w-full flex flex-col justify-center items-center'>
+    <div id='footer' className='text-neutral-400 bg-neutral-900 w-full flex flex-col justify-center items-center'>
       <div className='h-full flex lg:flex-col justify-center items-center my-4 p-2 w-5/6 py-10'>
       <div className='grid gap-5 lg:grid-cols-4 md:grid-cols-2 grid-cols-1'>
 
@@ -527,7 +525,7 @@ const Footer = ({divRefs}) => {
         <div className='flex flex-col gap-3'>
           <h1 className='text-base font-bold text-white'>Legal</h1>
           <div className='flex flex-col space-y-1'>
-            <Link to='terms_and_conditions/'><ArrowForward /> Terms and conditions</Link>
+            <Link to='/terms_and_conditions/'><ArrowForward /> Terms and conditions</Link>
             <Link to='privacy_policy/'><ArrowForward /> Privacy Policy</Link>
             <Link to='acceptable_use_notice/'><ArrowForward /> Acceptable Use Notice</Link>
           </div>
@@ -702,7 +700,7 @@ const OurStorySection = ({divRefs}) => {
               className="rounded-lg w-250px mb-3"
             />
             <img
-              src={faqs}
+              src={cover2}
               alt="Gourmet dish"
               className="rounded-lg w-300px"
             />

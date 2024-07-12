@@ -10,7 +10,7 @@ require('dotenv').config()
 
 export const MealCard = ({meal, setRateFood, setRateNumber, setClickedId}) => {
 
-    const {cuisine, meal_id, meal_name, category, rating} = meal
+    const {cuisine, meal_id, meal_name, category, average_rating} = meal
     let url;
     if(meal.meal_pic) {
       url = process.env.BASE_IMAGES + meal.meal_pic
@@ -50,7 +50,7 @@ export const MealCard = ({meal, setRateFood, setRateNumber, setClickedId}) => {
     }
 
     useEffect(() => {getCuisineName()}, [cuisine])
-    const [filled, setFilled] = useState(3)
+    const [filled, setFilled] = useState(Math.round(average_rating) || 3)
 
     const handleFilled = (filled, id) => {
       setRateFood(meal_name)
