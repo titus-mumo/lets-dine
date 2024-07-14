@@ -25,7 +25,11 @@ export const CuisineDetail = () => {
     const {cuisine_id, contact, description,name, time_open, time_close} = cuisineInfo
 
     const fetchCuisineMenu = async() => {
-        ApiCall(`cuisines/${params.cuisine_id}/menu`, 'get', token, refresh, setToken, setRefresh)
+        let diateryPreference = localStorage.getItem("diatery preference")
+        if(diateryPreference === null || diateryPreference.length === 0){
+          diateryPreference = 'all'
+        }
+        ApiCall(`cuisines/${params.cuisine_id}/menu?diateryPreference=${diateryPreference}`, 'get', token, refresh, setToken, setRefresh)
         .then(function(response){
             const {status, data} = response
             if(status === 200){

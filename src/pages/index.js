@@ -22,6 +22,7 @@ export {GeneralForums} from './GeneralForums'
 
 
 export {CuisineHome} from './cuisine/CuisineHome'
+export {HomeHome}  from './cuisine/HomeHome'
 export {NewCuisine} from './cuisine/NewCuisine'
 export {CuisineMenu} from './cuisine/CuisineMenu'
 export {CuisineOwnerMenuAdd} from './cuisine/CusisineOwnerMenuAdd'

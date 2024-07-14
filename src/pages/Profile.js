@@ -10,11 +10,13 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import moment from 'moment';
 import LoadingSpinner from './LandingPage';
 import { usePreferenceList } from '../hooks/UserPreferenceProvider';
+import { useForkRef } from '@mui/material';
 
 export const Account = () => {
     const userAuth = useAuth();
     const { token, refresh, setToken, setRefresh, logOut } = userAuth;
     const [seePreferences, setSeePreferences] = useState(false);
+    const [seeDiateryPreferences, setSeeDiateryPreferences] = useState(false);
     const [seeAccountInfo, setSeeAccountInfo] = useState(false)
     const [email, setEmail] = useState('')
     const [username, setUsername] = useState('')
@@ -22,6 +24,13 @@ export const Account = () => {
     const [loading, setLoading] = useState(true)
   
     const navigate = useNavigate();
+
+    const diateryPreferences = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Nut-Free']
+    const [storedPreference, setStoredPrefrence] = useState('')
+  
+    useEffect(() => {
+      setStoredPrefrence(localStorage.getItem('diatery preference'))
+    })
     
   
     const handleLogout = (e) => {
@@ -46,11 +55,19 @@ export const Account = () => {
     const handleSeePreferences = () => {
         setSeePreferences((seePreferences) => !seePreferences)
         setSeeAccountInfo(false)
+        setSeeDiateryPreferences(false)
     }
+
+    const handleSeeDiateryPreferences = () => {
+      setSeeDiateryPreferences((seeDiateryPreferences) => !seeDiateryPreferences)
+      setSeeAccountInfo(false)
+      setSeePreferences(false)
+  }
 
     const handleSeeAccountInfo = () => {
         setSeeAccountInfo((seeAccountInfo) => !seeAccountInfo)
         setSeePreferences(false)
+        setSeeDiateryPreferences(false)
     }
 
     const fetchUserInfo = () => {
@@ -94,6 +111,22 @@ export const Account = () => {
           <div className={`preferences-content ${seePreferences ? 'show' : 'hide'} ml-3`}>
             {preferenceList.map((category, index) => (
               <DisplayPreference category={category} key={index} id={index} />
+            ))}
+          </div>
+        </div>
+        <div className='preferences-section'>
+          <div className='preferences-header'>
+            <p>Diatery Preferences</p>
+            <div
+              onClick={() => handleSeeDiateryPreferences()}
+              className='toggle-icon'
+            >
+              {seeDiateryPreferences ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </div>
+          </div>
+          <div className={`preferences-content ${seeDiateryPreferences ? 'show' : 'hide'} ml-3`}>
+          {diateryPreferences.map((item, index) => (
+              <PreferenceComponent key={index} item={item} storedPreference={storedPreference} setStoredPreference={setStoredPrefrence} />
             ))}
           </div>
         </div>
@@ -178,3 +211,28 @@ export const Account = () => {
       </div>
     );
   };
+
+
+const PreferenceComponent = ({item, storedPreference, setStoredPreference}) => {
+  const handleChangePreference = (preference) => {
+    if(storedPreference.includes(preference)){
+
+      setStoredPreference(storedPreference.replace(preference, ''))
+      const item = localStorage.getItem('diatery preference')
+      const itemNew = item.replace(preference, '')
+      localStorage.setItem('diatery preference', itemNew)
+
+    }else{
+      setStoredPreference(storedPreference+preference)
+      localStorage.setItem('diatery preference', storedPreference + preference)
+    }
+
+  }
+
+  return(
+    <div className='preference-item'>
+      <p className='text-sm'>{item}</p>
+      <input type="checkbox" checked={storedPreference.includes(item)} onChange={() => handleChangePreference(item)} />
+    </div>
+  )
+}
