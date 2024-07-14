@@ -26,11 +26,7 @@ export const Account = () => {
     const navigate = useNavigate();
 
     const diateryPreferences = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Nut-Free']
-    const [storedPreference, setStoredPrefrence] = useState('')
-  
-    useEffect(() => {
-      setStoredPrefrence(localStorage.getItem('diatery preference'))
-    })
+    const [storedPreference, setStoredPrefrence] = useState(localStorage.getItem('diatery preference') || '')
     
   
     const handleLogout = (e) => {
@@ -232,7 +228,7 @@ const PreferenceComponent = ({item, storedPreference, setStoredPreference}) => {
   return(
     <div className='preference-item'>
       <p className='text-sm'>{item}</p>
-      <input type="checkbox" checked={storedPreference.includes(item)} onChange={() => handleChangePreference(item)} />
+      <input type="checkbox" checked={storedPreference !== undefined & storedPreference.includes(item)} onChange={() => handleChangePreference(item)} />
     </div>
   )
 }
