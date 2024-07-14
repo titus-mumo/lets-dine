@@ -13,24 +13,30 @@ export const RecommendedFoods = ({setItem}) => {
     const userAuth = useAuth()
     const {token, refresh, setToken, setRefresh} = userAuth
 
-    // useEffect(() => {
-    //   fetchHighlyRatedFoods();
-    //     ApiCall('gemini/trending-foods/', 'get', token, refresh, setToken, setRefresh)
-    //     .then((response) => {
-    //         setTrendingFoods(response.data)
-    //         setItem(1)
-    //     })
-    //     .catch((error) => {
-    //         ToastMessage("error", "Error fetching trending foods")
-    //     })
-        
-    // }, [])
+    const trendingFoodsOnSocialMedia = () => {
+      ApiCall('gemini/trending-foods/', 'get', token, refresh, setToken, setRefresh)
+      .then((response) => {
+          setTrendingFoods(response.data)
+          setItem(1)
+      })
+      .catch((error) => {
+          ToastMessage("error", "Error fetching trending foods")
+      })
+    }
+
+    useEffect(() => {
+      fetchHighlyRatedFoods();
+    }, [])
 
 
     //TODO
 
     const fetchHighlyRatedFoods = () => {
-      ApiCall('rated-foods/', 'get', token, refresh, setToken, setRefresh)
+      let diateryPreference = localStorage.getItem("diatery preference")
+      if(diateryPreference === null || diateryPreference.length === 0){
+        diateryPreference = 'all'
+      }
+      ApiCall(`rated-foods?diateryPreference=${diateryPreference}`, 'get', token, refresh, setToken, setRefresh)
       .then((response) => {
         response.status === 200? setRatedFoods(response.data) : '';
       })
@@ -41,13 +47,15 @@ export const RecommendedFoods = ({setItem}) => {
 
     useEffect(() => {
       fetchHighlyRatedFoods()
+      trendingFoodsOnSocialMedia()
 
     }, [])
     return(
       <div className="w-full">
       <div className="flex justify-around w-full flex-wrap">
+
         {
-          ratedFoods.map((meal, index) => <FoodContainer meal={meal} key={index} />)
+          ratedFoods.length > 0? ratedFoods.map((meal, index) => <FoodContainer meal={meal} key={index} />): <p className="text-sm mt-5">Recommended dishes will appear here</p>
         }
       </div>
 
@@ -61,9 +69,8 @@ export const RecommendedFoods = ({setItem}) => {
 require('dotenv').config()
 
 const FoodContainer = ({meal}) => {
-    const {cuisine_id, meal_name, category, price, rationale, avg_rating} = meal
-
-    const [filled, setFilled] = useState(Math.round(avg_rating) || 3)
+    const {cuisine, meal_name, category, price, rationale, average_rating} = meal
+    const [filled, setFilled] = useState(Math.round(average_rating) || 3)
     let url;
     if(meal.meal_pic) {
       url = meal.meal_pic.startsWith('/')? process.env.BASE_IMAGES + meal.meal_pic : process.env.BASE_URL + 'media/' +meal.meal_pic
@@ -79,7 +86,7 @@ const FoodContainer = ({meal}) => {
     const [cuisineName, setCuisineName] = useState('')
 
     const getCuisineName = () => {
-      ApiCall(`cuisines/${cuisine_id}/`, 'get', token, refresh, setToken, setRefresh)
+      ApiCall(`cuisines/${cuisine}/`, 'get', token, refresh, setToken, setRefresh)
       .then(function(response){
         const {data, status} = response
         if(status === 200){
@@ -98,7 +105,7 @@ const FoodContainer = ({meal}) => {
 
     useEffect(() => {
       getCuisineName()
-    }, [cuisine_id])
+    }, [cuisine])
 
 
 
@@ -112,7 +119,7 @@ const FoodContainer = ({meal}) => {
               <h1 className="text-gray-900 poppins text-sm text-center">{meal_name}</h1>
               <div className="w-full flex justify-between items-center px-2">
                   <div className="flex flex-row items-center">
-                      <Link to={`/cuisine/${cuisine_id}/menu`} className="text-blue-400 text-sm">
+                      <Link to={`/cuisine/${cuisine}/menu`} className="text-blue-400 text-sm">
                           {loading ? 'Loading...' : cuisineName.includes(' ') ? `${cuisineName.split(' ')[0]}.. ` : cuisineName.length > 10 ? `${cuisineName.slice(0, 9)}..` : cuisineName}
                       </Link>
                   </div>
