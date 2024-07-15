@@ -139,7 +139,7 @@ const Home = ({ divRefs }) => {
 
 const Features = ({divRefs}) => {
   return(
-      <div className='about-us bg-white w-full py-10 px-2 md:py-20 lg:py-24'>
+      <div ref={(el) => (divRefs.current['features'] = el)} id='features' className='features bg-white w-full py-10 px-2 md:py-20 lg:py-24'>
         {/* <p className='w-full text-center text-md md:text-lg font-medium mb-4  '>Our mission is to connect food lovers with authentic ethnic cuisines, fostering cultural appreciation and community engagement.</p> */}
         <div className='flex justify-center items-center gap-4 flex-col md:flex-row'>
           <div className='lg:basis-1/5 flex items-center justify-center h-full mb-3 w-1/3 md:mb-0'>

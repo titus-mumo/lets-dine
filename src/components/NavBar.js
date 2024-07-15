@@ -29,6 +29,8 @@ export const NavBar = ({divRefs}) => {
           <p onClick={() => handleScrollClick('init')}  to="init" id='init' className='poppins text-lg md:text-2xl font-bold hover:cursor-pointer hover:text-blue-500 mr-4'>EthnicEats</p>
           <p onClick={() => handleScrollClick('about-us')}  to="about-us" id='about-us'  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>About</p>
           <p className='hidden lg:block'>~</p>
+          <p onClick={() => handleScrollClick('features')}  to="features" id='features'  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Features</p>
+          <p className='hidden lg:block'>~</p>
           <p onClick={() => handleScrollClick('faqs')}  to="faqs"  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>FAQs</p>
           <p className='hidden lg:block'>~</p>
           <p onClick={() => handleScrollClick('whyus')}  to="whyus"  className='hidden lg:block text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500'>Testimonials</p>
@@ -52,6 +54,7 @@ export const NavBar = ({divRefs}) => {
       </div>
       <div className={`w-full flex-col justify-start ${showMenuLandingPage? 'flex': 'hidden'} pl-3`}>
         <p onClick={() => handleScrollClick('about-us')}  to="about-us" id='about-us'  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>About</p>
+        <p onClick={() => handleScrollClick('features')}  to="features" id='features'  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>Features</p>
         <p onClick={() => handleScrollClick('faqs')}  to="faqs"  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>FAQs</p>
         <p onClick={() => handleScrollClick('whyus')}  to="whyus"  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>Testimonials</p>
         <p onClick={() => handleScrollClick('pricing')} to="pricing"  className='block lg:hidden text-sm hover:text-pink-600 hover:cursor-pointer hover:duration-500 py-2'>Pricing</p>
