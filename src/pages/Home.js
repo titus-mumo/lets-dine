@@ -90,7 +90,7 @@ export const Home = () => {
                 </div>
                 <RateContainer rateFood={rateFood} setRateFood={setRateFood} clickedId={clickedId} setClickedId={setClickedId} rateNumber={rateNumber} setRateNumber={setRateNumber}  />
                 </div>
-                <div className='flex flex-wrap mt-12 lg:mt-12 justify-around w-full'>
+                <div className='flex flex-wrap mt-12 lg:mt-2 justify-around w-full'>
                 {
             meals.filter((item) => menuTab !== ''? menuTab === item.category: item).length === 0? <p className='text-sm text-center mt-10'>No items under this category yet. <br></br> Kindly check your preset diatery preference under profile</p>:
             meals.filter((item) => menuTab !== ''? menuTab === item.category: item).map((item) => (
