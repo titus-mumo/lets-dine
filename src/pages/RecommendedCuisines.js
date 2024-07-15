@@ -13,6 +13,7 @@ export const RecommendedCuisines = ({setItem}) => {
     const [cuisineLocation, setCuisineLocation] = useState([])
     const [latitude, setLatitude] = useState(null)
     const [longitude, setLongitude] = useState(null)
+    const [radius, setRadius] = useState(6000)
 
     const [recommendedCuisine, setRecommendedCuisine] = useState([])
     
@@ -32,14 +33,14 @@ export const RecommendedCuisines = ({setItem}) => {
         );
       };
 
-    const fetchCuisinesBasedOnLocation = () => {
+    const fetchCuisinesBasedOnLocation = (distance) => {
 
       const data = {
         latitude: parseFloat(sessionStorage.getItem('latitude')),
         longitude: parseFloat(sessionStorage.getItem('longitude'))
       }
 
-      ApiCall(`cuisines_location?latitude=${data.latitude}&longitude=${data.longitude}`, 'get', token, refresh, setToken, setRefresh, data)
+      ApiCall(`cuisines_location?latitude=${data.latitude}&longitude=${data.longitude}&radius=${distance}`, 'get', token, refresh, setToken, setRefresh, data)
       .then((response) => {
         if(response.status = 200){
           const cuisinesBasedOnLocation = response.data.map(item => ({
@@ -83,14 +84,14 @@ export const RecommendedCuisines = ({setItem}) => {
       }
     };
 
-    const fetchRecommendation = async() => {
+    const fetchRecommendation = async(k) => {
       await fetchReviews(token, refresh, setToken, setRefresh, setReviews);
-      fetchCuisinesBasedOnLocation()
+      fetchCuisinesBasedOnLocation(k)
     }
 
       useEffect(() => {
         getLocation()
-        fetchRecommendation()
+        fetchRecommendation(radius)
       }, []);
 
 
@@ -113,10 +114,25 @@ export const RecommendedCuisines = ({setItem}) => {
         // console.log(array)
         return array;
     };
+
+    const handleRdiusChange = (e) => {
+      e.preventDefault()
+      const newRadius = e.target.value > 0? e.target.value: radius
+      setRadius(e.target.value)
+      setCuisineLocation([])
+      setReviews([])
+      setRecommendedCuisine([])
+      getLocation()
+      fetchRecommendation(newRadius)
+    }
     
 
   return(
-    <div>
+    <div className='w-full'>
+      <div className='hidden md:flex my-2 self-center w-full'>
+        <p className='mr-5'>Location radius in KM</p>
+        <input type='number' id='radius' name='radius' value={radius} onChange={(e) => handleRdiusChange(e)}></input>
+      </div>
     <div className='flex flex-wrap w-full self-center justify-center'>
     {
         shuffleArray([...recommendedCuisine]).map((review, index) => (
@@ -124,8 +140,6 @@ export const RecommendedCuisines = ({setItem}) => {
       ))
     }
     </div>
-
-
   </div>
   )
 }
