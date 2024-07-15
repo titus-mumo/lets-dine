@@ -5,6 +5,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import LoadingSpinner from './LandingPage'
 import { ToastMessage } from '../utils'
+import { Link } from 'react-router-dom'
 
 export const RecommendedCuisines = ({setItem}) => {
     const [reviews, setReviews] = useState([])
@@ -181,7 +182,7 @@ const RecommendedCuisine = ({cuisineProp}) => {
     }, [])
   
   
-    const {name, tag, location, contact, cuisine_pic} = cuisineProp
+    const {name, tag, location, contact, cuisine_pic, cuisine_id} = cuisineProp
 
     useEffect(() => {
     setLoading(false)
@@ -195,7 +196,7 @@ const RecommendedCuisine = ({cuisineProp}) => {
               !loading? 
               <>
               <div className='flex justify-between w-full items-center'>
-              <p className="text-gray-900 poppins text-md ml-1">{name}</p>
+              <Link to={`/cuisine/${cuisine_id}/menu`} className="text-gray-900 poppins text-md ml-1">{name}</Link>
               <p className={`${open? 'bg-green-200  border border-green-500 rounded-full text-green-900' : 'bg-red-100 border border-red-500 rounded-full text-primary'} text-xs md:text-sm poppins px-2 md:px-3 md:py-1 inline-block mb-2 mr-3 `}>{open? 'Open': 'Closed'}</p>
               <p className={`bg-blue-100 border border-blue-600 rounded-full text-blue-800 text-xs md:text-sm poppins px-2 md:px-3 md:py-1 inline-block mb-2 mr-3 `}>{tag}</p>
               </div>
