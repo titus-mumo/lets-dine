@@ -46,6 +46,7 @@ export const NavBar = ({divRefs}) => {
           </div>
           <div className='flex flex-row items-center'>
             <button className="ml-5 hidden lg:block px-3 lg:px-4 py-0.5 lg:py-1 poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 bg-pink-700 hover:bg-pink-800 hover:border-pink-700 border-1 border-pink-700 mr-4 text-white" onClick={() => navigate('/login')}>Login</button>
+            <button className="ml-5 hidden lg:block  bg-primary px-4 py-1 text-white poppins rounded-md ring-red-300 focus:outline-none focus:ring-4 transform transition duration-700 hover:scale-105 hover:bg-emerald-700 hidden lg:block" onClick={() => navigate('/register')}>Sign Up</button>
           </div>
         </div>
       </div>
