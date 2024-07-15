@@ -17,16 +17,16 @@ import { CuisineTabs } from '../cuisineownercomponents';
 
 const CuisineOwnerSidebarItems = [
   {
-    title: "Home",
+    title: "My Cuisines",
     link: "/cuisine-owner/home",
     icon: <HomeIcon />
     //TODO: Make a cuisine page
   },
-  {
-    title: "My Cuisines",
-    link: "/cuisine-owner/cuisines",
-    icon: <StorefrontIcon />
-  },
+  // {
+  //   title: "My Cuisines",
+  //   link: "/cuisine-owner/cuisines",
+  //   icon: <StorefrontIcon />
+  // },
   
   {
     title: "Reservations",

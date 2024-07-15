@@ -235,3 +235,9 @@ code {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+  object-fit: contain; /* 'contain' will maintain aspect ratio while fitting within the container */
+}

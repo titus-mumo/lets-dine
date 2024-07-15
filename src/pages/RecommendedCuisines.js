@@ -13,7 +13,7 @@ export const RecommendedCuisines = ({setItem}) => {
     const [cuisineLocation, setCuisineLocation] = useState([])
     const [latitude, setLatitude] = useState(null)
     const [longitude, setLongitude] = useState(null)
-    const [radius, setRadius] = useState(6000)
+    const [radius, setRadius] = useState(50)
 
     const [recommendedCuisine, setRecommendedCuisine] = useState([])
     
@@ -130,8 +130,8 @@ export const RecommendedCuisines = ({setItem}) => {
   return(
     <div className='w-full'>
       <div className='hidden md:flex my-2 self-center w-full'>
-        <p className='mr-5'>Location radius in KM</p>
-        <input type='number' id='radius' name='radius' value={radius} onChange={(e) => handleRdiusChange(e)}></input>
+        <p className='mr-5 '>Location radius in KM</p>
+        <input className='border-gray-800 border-1border-gray-800 border-1 rounded-md px-2' type='number' id='radius' name='radius' value={radius} onChange={(e) => handleRdiusChange(e)}></input>
       </div>
     <div className='flex flex-wrap w-full self-center justify-center'>
     {

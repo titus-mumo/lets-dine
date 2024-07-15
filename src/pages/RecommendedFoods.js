@@ -28,9 +28,6 @@ export const RecommendedFoods = ({setItem}) => {
       fetchHighlyRatedFoods();
     }, [])
 
-
-    //TODO
-
     const fetchHighlyRatedFoods = () => {
       let diateryPreference = localStorage.getItem("diatery preference")
       if(diateryPreference === null || diateryPreference.length === 0){
@@ -47,7 +44,7 @@ export const RecommendedFoods = ({setItem}) => {
 
     useEffect(() => {
       fetchHighlyRatedFoods()
-      trendingFoodsOnSocialMedia()
+      //TODO: trending foods on social media
 
     }, [])
     return(
