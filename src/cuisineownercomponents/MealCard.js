@@ -61,7 +61,7 @@ export const MealCard = ({meal, confirmDelete, setConfirmDelete, id, deleteMealN
 
   return (
       <div className="hover:cursor-pointer bg-white border border-gray-100 transition transform duration-700 hover:shadow-xl px-1 rounded-lg relative flex flex-col mb-1 w-40 items-start justify-start">
-          <span className="bg-red-100 border border-red-500 rounded-full text-primary text-sm poppins px-4 md:pt-1  inline-block self-center mb-1">{foodType}</span>
+          <span className="bg-red-100 border border-red-500 rounded-full text-primary text-sm poppins px-4 inline-block self-center mb-1">{foodType}</span>
           <div className="flex-grow flex justify-center">
               <img className="img-responsive transform transition duration-300" src={meal.meal_pic ? url : burger} alt="" />
           </div>
