@@ -54,7 +54,7 @@ export const MealCard = ({meal, confirmDelete, setConfirmDelete, id, deleteMealN
       }
     }
 
-    const [filled, setFilled] = useState(Math.round(average_rating) || 3)
+    const [filled, setFilled] = useState(Math.round(average_rating) || 0)
 
 
 

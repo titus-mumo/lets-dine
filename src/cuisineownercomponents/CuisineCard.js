@@ -18,12 +18,17 @@ export const CuisineCard = ({cuisine}) => {
         e.preventDefault()
         setTimeout(() => navigate(`/cuisine-owner/cuisine/${cuisine_id}/menu`), 100)
     }
+
+    const handleViewLocation = (e) => {
+      e.preventDefault()
+      setTimeout(() => navigate(`/cuisine-owner/cuisine_location/${cuisine_id}`), 100)
+    }
   return (
     <div className='flex flex-col m-1  justify-around shadow-md px-1.5 p-1 bg-white w-400px h-500px hover:cursor-pointer hover:shadow-lg hover:bg-gray-200 transition-transformation duration-300'>
         <img src={url? url : restaurantImage} alt='cuisine image' className='m-auto h-56 rounded-md'></img>
         <div>
         <p className='poppins text-md font-medium'>{name}</p>
-        <p className='text-sm'>{location}</p>
+        <p className='text-sm text-blue-600 hover:cursor-pointer' onClick={(e) => handleViewLocation(e)}>{location}</p>
         <div className='flex items-center'>
           <Call />
           <p className='poppins text-sm ml-3'>{contact}</p>

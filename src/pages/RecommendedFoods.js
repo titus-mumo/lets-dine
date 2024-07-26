@@ -67,7 +67,7 @@ require('dotenv').config()
 
 const FoodContainer = ({meal}) => {
     const {cuisine, meal_name, category, price, rationale, average_rating} = meal
-    const [filled, setFilled] = useState(Math.round(average_rating) || 3)
+    const [filled, setFilled] = useState(Math.round(average_rating) || 0)
     let url;
     if(meal.meal_pic) {
       url = meal.meal_pic.startsWith('/')? process.env.BASE_IMAGES + meal.meal_pic : process.env.BASE_URL + 'media/' +meal.meal_pic

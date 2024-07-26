@@ -50,7 +50,7 @@ export const MealCard = ({meal, setRateFood, setRateNumber, setClickedId}) => {
     }
 
     useEffect(() => {getCuisineName()}, [cuisine])
-    const [filled, setFilled] = useState(Math.round(average_rating) || 3)
+    const [filled, setFilled] = useState(Math.round(average_rating) || 0)
 
     const handleFilled = (filled, id) => {
       setRateFood(meal_name)

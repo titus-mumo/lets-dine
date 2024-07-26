@@ -66,10 +66,16 @@ export const CuisineDetail = () => {
         setAddReview(true)
     }
 
-
     const [rateFood, setRateFood] = useState('')
     const [rateNumber, setRateNumber] = useState('')
     const [clickedId, setClickedId] = useState('') 
+
+    const navigate = useNavigate()
+
+    const handleViewCuisineLocation = (e) => {
+        e.preventDefault()
+        navigate(`/cuisine-location/${cuisine_id}`)
+    }
 
   return (
     <div className='mt-10 lg:mt-0 flex flex-col justify-center w-full self-center'>
@@ -82,7 +88,7 @@ export const CuisineDetail = () => {
                 <div className='flex flex-col justify-start self-center w-250px md:w-300px'>
                     <div className='flex items-center'>
                         <LocationOnOutlined />
-                        <p className='popins text-center ml-3 text-sm'>{cuisineInfo.location}</p>
+                        <p className='popins text-center ml-3 text-sm text-blue-600 hover:cursor-pointer' onClick={(e) => handleViewCuisineLocation(e)}>{cuisineInfo.location}</p>
                     </div>
                     <div className='flex items-center'>
                         <Call />

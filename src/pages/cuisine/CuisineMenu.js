@@ -64,6 +64,13 @@ export const CuisineMenu = () => {
         fetchCuisineInfo()
     }, [params.cuisine_id])
 
+    const navigate = useNavigate()
+    
+    const handleViewLocation = (e) => {
+        e.preventDefault()
+        setTimeout(() => navigate(`/cuisine-owner/cuisine_location/${cuisine_id}`), 100)
+      }
+
   return (
     <div className={`mt-10 lg:mt-0 flex flex-col justify-center w-full self-center ${confirmDelete? '':''}`}>
         {
@@ -75,7 +82,7 @@ export const CuisineMenu = () => {
                 <div className='flex flex-col justify-start self-center w-250px md:w-300px'>
                     <div className='flex items-center'>
                         <LocationOnOutlined />
-                        <p className='popins text-center ml-3 text-sm'>{cuisineInfo.location}</p>
+                        <p className='text-blue-600 hover:cursor-pointer text-center ml-3 text-sm' onClick={(e) => handleViewLocation(e)}>{cuisineInfo.location}</p>
                     </div>
                     <div className='flex items-center'>
                         <Call />

@@ -9,9 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { ToastMessage } from '../utils';
 import LoadingSpinner from './LandingPage';
 import home2 from '../assets/home2.jpg';
-
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 //TODO: spacing and just styling
+
 export const Login = () => {
 
     const [username, setUsername] = useState('')
@@ -72,6 +74,8 @@ export const Login = () => {
         }
         return;
     };
+
+    const [visiblePassword, setVisiblePassword] = useState(false)
   return (
     <section className="w-full bg-white min-h-screen flex items-center justify-center relative">
         {loading ? (
@@ -107,16 +111,21 @@ export const Login = () => {
                                     <label htmlFor="password" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white">
                                         Password
                                     </label>
+                                    <div className='flex items-center'>
                                     <input 
                                         onChange={(e) => setPassword(e.target.value)} 
                                         value={password} 
-                                        type="password" 
+                                        type={visiblePassword? "text":"password"}
                                         name="password" 
                                         id="password" 
                                         placeholder="••••••••" 
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                         required 
                                     />
+                                    <div className='mx-3'>
+                                        {visiblePassword? <VisibilityIcon className='text-white hover:cursor-pointer' onClick={() => setVisiblePassword((prevCheck) => (!prevCheck))} />: <VisibilityOffIcon className='text-white hover:cursor-pointer' onClick={() => setVisiblePassword((prevCheck) => (!prevCheck))} />}
+                                    </div>
+                                    </div>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <div className="flex items-start">

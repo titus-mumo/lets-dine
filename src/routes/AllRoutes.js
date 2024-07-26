@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { ResetPassword, ForgotPassword, Reccomendations, GeneralForums, Account, PageNotFound, Map, AddReview, ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, UserProfile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register, MapUser, EditMenu, EditReservation, HomeHome } from "../pages";
+import { ResetPassword, ForgotPassword, Reccomendations, GeneralForums, Account, PageNotFound, Map, AddReview, ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, UserProfile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register, MapUser, EditMenu, EditReservation, HomeHome, EditProfile, CuisineLocation, EditEmail, EditCuisineOwnerEmail, EditCuisineOwnerProfile } from "../pages";
 import PrivateRoute from "./protectRoutes";
 import ProtectUserRoutes from "./ProtectUserRoutes";
 import ProtectCuisineOwnerRoutes from "./ProtectCuisineOwnerRoutes";
@@ -38,6 +38,9 @@ export const AllRoutes = () => {
             <Route path='/recommendations' element={<Reccomendations />} />
             <Route path='/account' element={<UserProfile />} />
             <Route path='/reservation/edit' element={<EditReservation />} />
+            <Route path='/edit-username' element={<EditProfile />} />
+            <Route path='/edit-email' element={<EditEmail />} />
+            <Route path='/cuisine-location/:cuisine_id' element={<CuisineLocation />}/>
             <Route path='*' element={<PageNotFound />} />
           </Route>
         </Route>
@@ -53,7 +56,10 @@ export const AllRoutes = () => {
             <Route path='/cuisine-owner/reservations' element={<ReservationsPage />} />
             <Route path='/cuisine-owner/map' element={<Map />} />
             <Route path='/cuisine-owner/account' element={<Account />} />
+            <Route path='/cuisine-owner/edit-username' element={<EditCuisineOwnerProfile />} />
+            <Route path='/cuisine-owner/edit-email' element={<EditCuisineOwnerEmail />} />
             <Route path='/cuisine-owner/forums' element={<GeneralForums />} />
+            <Route path='/cuisine-owner/cuisine_location/:cuisine_id' element={<CuisineLocation />} />
             <Route path='/cuisine-owner/cuisine/:cuisine_id/menu/add' element={<AddMenu />} />
             <Route path='*' element={<PageNotFound />} />
           </Route>

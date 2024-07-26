@@ -13,6 +13,9 @@ require('dotenv').config()
 
 //TODO: spacing and just styling
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+
 export const Register = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -83,7 +86,8 @@ export const Register = () => {
         }, 1500)
     }, [])
 
-
+    const [visiblePassword, setVisiblePassword] = useState(false)
+    const [visibleConfirmPassword, setVisibleConfirmPassword] = useState(false)
   return (
         <section className="w-full bg-white min-h-screen flex items-center justify-center relative">
                
@@ -145,8 +149,9 @@ export const Register = () => {
                                 </div>
                                 <div>
                                     <label htmlFor="password" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white poppins">Password</label>
+                                    <div className='flex items-center'>
                                     <input 
-                                        type="password" 
+                                        type={visiblePassword? "text":"password"}
                                         name="password" 
                                         id="password" 
                                         placeholder="••••••••" 
@@ -155,11 +160,16 @@ export const Register = () => {
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
                                         required
                                     />
+                                    <div className='mx-3'>
+                                        {visiblePassword? <VisibilityIcon className='text-white hover:cursor-pointer' onClick={() => setVisiblePassword((prevCheck) => (!prevCheck))} />: <VisibilityOffIcon className='text-white hover:cursor-pointer' onClick={() => setVisiblePassword((prevCheck) => (!prevCheck))} />}
+                                    </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <label htmlFor="confirm-password" className="block mb-1 text-xs md:text-sm font-medium text-gray-900 dark:text-white poppins">Confirm password</label>
+                                    <div className='flex items-center'>
                                     <input 
-                                        type="password" 
+                                        type={visibleConfirmPassword? "text":"password"}
                                         name="confirm-password" 
                                         id="confirm-password" 
                                         placeholder="••••••••"  
@@ -168,6 +178,10 @@ export const Register = () => {
                                         className="bg-gray-50 border border-gray-300 text-gray-900 text-xs md:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 poppins" 
                                         required
                                     />
+                                    <div className='mx-3'>
+                                        {visibleConfirmPassword? <VisibilityIcon className='text-white hover:cursor-pointer' onClick={() => setVisibleConfirmPassword((prevCheck) => (!prevCheck))} />: <VisibilityOffIcon className='text-white hover:cursor-pointer' onClick={() => setVisibleConfirmPassword((prevCheck) => (!prevCheck))} />}
+                                    </div>
+                                    </div>
                                 </div>
                                 <div className="flex items-start">
                                     <div className="flex items-center h-5">

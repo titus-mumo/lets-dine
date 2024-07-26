@@ -10,7 +10,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import moment from 'moment';
 import LoadingSpinner from './LandingPage';
 import { usePreferenceList } from '../hooks/UserPreferenceProvider';
-import { useForkRef } from '@mui/material';
+import { Edit } from '@mui/icons-material';
 
 export const Account = () => {
     const userAuth = useAuth();
@@ -87,6 +87,17 @@ export const Account = () => {
     useEffect(() => {
       fetchUserInfo()
     }, [])
+
+
+    const handleEditUsername = (e) => {
+      e.preventDefault()
+      navigate('/edit-username', { state: { username } })
+  }
+
+  const handleEditEmail = (e) => {
+    e.preventDefault()
+    navigate('/edit-email', { state: { email } })
+}
   
     return (
       <div className='account-container'> 
@@ -150,6 +161,11 @@ export const Account = () => {
                   <p className='text-sm'>Date joined:</p>
                   <p className='text-end text-sm'>{dateJoined}</p>
               </div>
+              <div className='flex flex-around w-full'>
+                <button className= 'mb-4 mx-2 px-2 py-1 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300 poppins text-sm' onClick={(e) => handleEditUsername(e)}>Edit Username</button>
+                <button className= 'mb-4 mx-2 px-2 py-1 bg-blue-500 text-white ring-blue-400 focus:outline-none focus:ring-4 rounded-lg transition duration-300 poppins text-sm' onClick={(e) => handleEditEmail(e)}>Edit Email</button>
+              </div>
+              
             </div>
           </div>
         </div>
