@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { ResetPassword, ForgotPassword, Reccomendations, GeneralForums, Account, PageNotFound, Map, AddReview, ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, UserProfile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register, MapUser, EditMenu, EditReservation } from "../pages";
+import { ResetPassword, ForgotPassword, Reccomendations, GeneralForums, Account, PageNotFound, Map, AddReview, ReservationsPage, CuisineAnalytics, CuisineOwnerMenuAdd, CuisineMenu, CuisineHome, NewCuisine, ChangePassword, UserProfile, AddMenu, ViewReservations, Reservation, CuisineDetail, Cuisines, LandingPage, Home, Login, Register, MapUser, EditMenu, EditReservation, HomeHome } from "../pages";
 import PrivateRoute from "./protectRoutes";
 import ProtectUserRoutes from "./ProtectUserRoutes";
 import ProtectCuisineOwnerRoutes from "./ProtectCuisineOwnerRoutes";
@@ -43,7 +43,7 @@ export const AllRoutes = () => {
         </Route>
         <Route element={<CuisineLayout />}>
           <Route element={<ProtectCuisineOwnerRoutes />} >
-            <Route path='/cuisine-owner/home' element={<CuisineHome />} />
+            <Route path='/cuisine-owner/home' element={<HomeHome />} />
             <Route path='/cuisine-owner/cuisines' element={<CuisineHome />} />
             <Route path='/cuisine-owner/new' element={<NewCuisine />} />
             <Route path='/cuisine-owner/cuisine/:cuisine_id/menu' element={<CuisineMenu />} />

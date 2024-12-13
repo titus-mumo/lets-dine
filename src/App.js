@@ -10,12 +10,12 @@ function App() {
   return (
     <main className="App w-full scroll-smooth overflow-x-hidden bg-gray-100">
       <AuthProvider>
-        <UserPreferenceProvider>
-          <ToastContainer  
-          style={{ fontSize: "14px", zIndex: 100000000, Padding: "2px" }}
-          />
-          <AllRoutes />
-        </UserPreferenceProvider>
+          <UserPreferenceProvider>
+            <ToastContainer  
+            style={{ fontSize: "14px", zIndex: 100000000, Padding: "2px" }}
+            />
+            <AllRoutes />
+          </UserPreferenceProvider>
       </AuthProvider>
     </main>
   );

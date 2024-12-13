@@ -31,7 +31,7 @@ export const AddMenu = () => {
         formData.append('meal_pic', image);
 
 
-        ApiCall('meals/', 'post', token, refresh, setToken, setRefresh, formData, {}, true)
+        ApiCall('miv/', 'post', token, refresh, setToken, setRefresh, formData, {}, true)
         .then((response) => {
             if(response.status === 201){
                 return ToastMessage("success", "Item added successfully")

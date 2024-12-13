@@ -19,9 +19,8 @@ export const Home = () => {
 
       let key = foodType.indexOf(menuTab)
       if(filterList[key] === false || filterList[key] === 'false'){
-        key = 0
         const trueId = []
-        filterList.map((item, index) => item === true? trueId.push(index): '')
+        filterList.map((item, index) => item === true? trueId.push(index): index === 1? trueId.push(index) :'')
         handleMenuTabs(foodType[trueId[0]])
       }
     },[])
@@ -34,7 +33,11 @@ export const Home = () => {
     const {token, refresh, setToken, setRefresh} = userAuth
 
     const fetchMeals = async () => {
-        ApiCall('meals', 'get', token, refresh, setToken, setRefresh)
+      let diateryPreference = localStorage.getItem("diatery preference")
+      if(diateryPreference === null || diateryPreference.length === 0){
+        diateryPreference = 'all'
+      }
+        ApiCall(`miv?diateryPreference=${diateryPreference}`, 'get', token, refresh, setToken, setRefresh)
         .then(function(response){
             const {status, data} = response
             if(status === 200){
@@ -89,7 +92,7 @@ export const Home = () => {
                 </div>
                 <div className='flex flex-wrap mt-12 lg:mt-12 justify-around w-full'>
                 {
-            meals.filter((item) => menuTab !== ''? menuTab === item.category: item).length === 0? "No items under this category yet":
+            meals.filter((item) => menuTab !== ''? menuTab === item.category: item).length === 0? <p className='text-sm text-center mt-10'>No items under this category yet. <br></br> Kindly check your preset diatery preference under profile</p>:
             meals.filter((item) => menuTab !== ''? menuTab === item.category: item).map((item) => (
                 <MealCard key={item.meal_id} meal={item} setRateFood={setRateFood} setRateNumber={setRateNumber} setClickedId={setClickedId} />
             ))
@@ -116,12 +119,10 @@ const RateContainer = ({rateFood, setRateFood, clickedId, setClickedId, rateNumb
 
       ApiCall('rate/', 'post', token, refresh, setToken, setRefresh, data)
       .then((response) => {
-        console.log(response)
         if(response.status  !== undefined && response.status === 200){
             ToastMessage("success", "Rating has been recorded")
             return
         }
-        console.log(response)
         throw new Error(response.data.error)
       })
       .catch((error) => {

@@ -25,7 +25,11 @@ export const CuisineDetail = () => {
     const {cuisine_id, contact, description,name, time_open, time_close} = cuisineInfo
 
     const fetchCuisineMenu = async() => {
-        ApiCall(`cuisines/${params.cuisine_id}/menu`, 'get', token, refresh, setToken, setRefresh)
+        let diateryPreference = localStorage.getItem("diatery preference")
+        if(diateryPreference === null || diateryPreference.length === 0){
+          diateryPreference = 'all'
+        }
+        ApiCall(`cuisines/${params.cuisine_id}/menu?diateryPreference=${diateryPreference}`, 'get', token, refresh, setToken, setRefresh)
         .then(function(response){
             const {status, data} = response
             if(status === 200){
@@ -100,7 +104,7 @@ export const CuisineDetail = () => {
             <div className='mt-3'>
                 <div className='flex flex-wrap justify-start md:justify-around'>
                 {
-                    cuisineMenu.length === 0? <p className='text-sm md:text-md'>No items on the menu yet</p>:cuisineMenu.map(item => <MealCard key={item.meal_id} meal={item} setRateFood={setRateFood} setRateNumber={setRateNumber} setClickedId={setClickedId}/>)
+                    cuisineMenu.length === 0? <p className='text-sm md:text-md text-center'>No items on the menu yet<br></br>Try turning your diatery preferences under profile section</p>:cuisineMenu.map(item => <MealCard key={item.meal_id} meal={item} setRateFood={setRateFood} setRateNumber={setRateNumber} setClickedId={setClickedId}/>)
                 }
                 </div>
             </div>
@@ -133,7 +137,6 @@ const RateContainer = ({rateFood, setRateFood, clickedId, setClickedId, rateNumb
 
       ApiCall('rate/', 'post', token, refresh, setToken, setRefresh, data)
       .then((response) => {
-        console.log(response)
         if(response.status === 200){
             ToastMessage("success", "Rating has been recorded")
             return

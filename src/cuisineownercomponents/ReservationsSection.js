@@ -16,13 +16,11 @@ export const ReservationsSection = ({cuisine_id}) => {
     ApiCall(`reservation/cuisine/${cuisine_id}`, 'get', token, refresh, setToken, setRefresh)
     .then(function(response){
       if(response.status === 200 && response.data.length > 0){
-        console.log(response.data)
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const sortedData = response.data
         .filter(item => new Date(item.time) >= today)
         .sort((a, b) => new Date(a.time) - new Date(b.time));
-        console.log(sortedData)
         setReservationList(sortedData)
         setLoading(false)
         return

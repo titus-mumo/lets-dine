@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/AuthProvider'
 import { ApiCall } from '../hooks/ApiCall'
 import { Link } from 'react-router-dom'
 import { ToastMessage } from "../utils"
+import { Rating } from 'flowbite-react'
 
 export const RecommendedFoods = ({setItem}) => {
     const [trendingFoods, setTrendingFoods] = useState([])
@@ -12,26 +13,28 @@ export const RecommendedFoods = ({setItem}) => {
     const userAuth = useAuth()
     const {token, refresh, setToken, setRefresh} = userAuth
 
-    // useEffect(() => {
-    //   fetchHighlyRatedFoods();
-    //     ApiCall('gemini/trending-foods/', 'get', token, refresh, setToken, setRefresh)
-    //     .then((response) => {
-    //         setTrendingFoods(response.data)
-    //         setItem(1)
-    //     })
-    //     .catch((error) => {
-    //         ToastMessage("error", "Error fetching trending foods")
-    //     })
-        
-    // }, [])
+    const trendingFoodsOnSocialMedia = () => {
+      ApiCall('gemini/trending-foods/', 'get', token, refresh, setToken, setRefresh)
+      .then((response) => {
+          setTrendingFoods(response.data)
+          setItem(1)
+      })
+      .catch((error) => {
+          ToastMessage("error", "Error fetching trending foods")
+      })
+    }
 
-
-    //TODO
+    useEffect(() => {
+      fetchHighlyRatedFoods();
+    }, [])
 
     const fetchHighlyRatedFoods = () => {
-      ApiCall('rated-foods/', 'get', token, refresh, setToken, setRefresh)
+      let diateryPreference = localStorage.getItem("diatery preference")
+      if(diateryPreference === null || diateryPreference.length === 0){
+        diateryPreference = 'all'
+      }
+      ApiCall(`rated-foods?diateryPreference=${diateryPreference}`, 'get', token, refresh, setToken, setRefresh)
       .then((response) => {
-        console.log(response)
         response.status === 200? setRatedFoods(response.data) : '';
       })
       .catch((error) => {
@@ -41,13 +44,15 @@ export const RecommendedFoods = ({setItem}) => {
 
     useEffect(() => {
       fetchHighlyRatedFoods()
+      //TODO: trending foods on social media
 
     }, [])
     return(
       <div className="w-full">
-      <div className="flex justify-around w-full">
+      <div className="flex justify-around w-full flex-wrap">
+
         {
-          ratedFoods.map((meal, index) => <FoodContainer meal={meal} key={index} />)
+          ratedFoods.length > 0? ratedFoods.map((meal, index) => <FoodContainer meal={meal} key={index} />): <p className="text-sm mt-5">Recommended dishes will appear here</p>
         }
       </div>
 
@@ -61,7 +66,8 @@ export const RecommendedFoods = ({setItem}) => {
 require('dotenv').config()
 
 const FoodContainer = ({meal}) => {
-    const {cuisine_id, meal_name, category, price, rationale} = meal
+    const {cuisine, meal_name, category, price, rationale, average_rating} = meal
+    const [filled, setFilled] = useState(Math.round(average_rating) || 3)
     let url;
     if(meal.meal_pic) {
       url = meal.meal_pic.startsWith('/')? process.env.BASE_IMAGES + meal.meal_pic : process.env.BASE_URL + 'media/' +meal.meal_pic
@@ -77,7 +83,7 @@ const FoodContainer = ({meal}) => {
     const [cuisineName, setCuisineName] = useState('')
 
     const getCuisineName = () => {
-      ApiCall(`cuisines/${cuisine_id}/`, 'get', token, refresh, setToken, setRefresh)
+      ApiCall(`cuisines/${cuisine}/`, 'get', token, refresh, setToken, setRefresh)
       .then(function(response){
         const {data, status} = response
         if(status === 200){
@@ -96,9 +102,7 @@ const FoodContainer = ({meal}) => {
 
     useEffect(() => {
       getCuisineName()
-      console.log(meal.meal_pic)
-      console.log(url)
-    }, [cuisine_id])
+    }, [cuisine])
 
 
 
@@ -112,12 +116,21 @@ const FoodContainer = ({meal}) => {
               <h1 className="text-gray-900 poppins text-sm text-center">{meal_name}</h1>
               <div className="w-full flex justify-between items-center px-2">
                   <div className="flex flex-row items-center">
-                      <Link to={`/cuisine/${cuisine_id}/menu`} className="text-blue-400 text-sm">
+                      <Link to={`/cuisine/${cuisine}/menu`} className="text-blue-400 text-sm">
                           {loading ? 'Loading...' : cuisineName.includes(' ') ? `${cuisineName.split(' ')[0]}.. ` : cuisineName.length > 10 ? `${cuisineName.slice(0, 9)}..` : cuisineName}
                       </Link>
                   </div>
                   <h2 className="text-gray-900 poppins text-md font-bold text-end">£{price}</h2>
               </div>
+          </div>
+          <div className='w-fit'>
+          <Rating>
+            <Rating.Star className={`${filled >=1? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=2? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=3? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=4? 'text-green-700': ''}`} />
+            <Rating.Star className={`${filled >=5? 'text-green-700': ''}`} />
+          </Rating>
           </div>
       </div>
   )

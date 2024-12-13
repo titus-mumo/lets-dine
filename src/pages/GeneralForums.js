@@ -74,13 +74,6 @@ export const GeneralForums = () => {
           setMessages(prevMessages => [...prevMessages, data]);
       };
   
-      ws.current.onclose = (e) => {
-          console.log("WebSocket closed:", e);
-      };
-  
-      ws.current.onerror = (e) => {
-          console.error("WebSocket error:", e);
-      };
   };
 
     const sendMessage = () => {
@@ -153,8 +146,8 @@ export const GeneralForums = () => {
                           <div className='text-md font-medium text-center mb-0.5'>{date}</div>
                           <div className={`flex flex-col w-full`}>
                           {groupedMessages[date].map((msg, index) => (
-                            <div className={`${msg.user === user.username? 'self-end justify-end pl-6': 'self-end justify-start pr-6'} m-auto flex w-full`}>
-                            <div key={index} className={`flex flex-col w-auto ${msg.user === user.username? 'bg-blue-500': 'bg-gray-200'} p-0.5 mx-1 mt-1 rounded-lg w-2/3`}>
+                            <div key={index}  className={`${msg.user === user.username? 'self-end justify-end pl-6': 'self-end justify-start pr-6'} m-auto flex w-full`}>
+                            <div className={`flex flex-col w-auto ${msg.user === user.username? 'bg-blue-500': 'bg-gray-200'} p-0.5 mx-1 mt-1 rounded-lg w-2/3`}>
                               <p className={`${msg.user === user.username? 'hidden': 'text-xs'}`}>{msg.user}</p>
                               <div className='flex items-end p-0.5 md:p-1 mx-2'>
                               <p className='text-sm md:text-md break-normal whitespace-normal mr-1 max-basis-2/3'>{msg.message}</p>
